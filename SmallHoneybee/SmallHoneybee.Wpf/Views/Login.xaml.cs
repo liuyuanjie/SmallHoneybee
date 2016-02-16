@@ -84,7 +84,7 @@ namespace SmallHoneybee.Wpf.Views
 
         private void Cancel_OnClick(object sender, RoutedEventArgs e)
         {
-            Close();
+            Application.Current.Shutdown();
         }
 
         private void CommandBinding_LoginButton_CanExecute(object sender, CanExecuteRoutedEventArgs e)

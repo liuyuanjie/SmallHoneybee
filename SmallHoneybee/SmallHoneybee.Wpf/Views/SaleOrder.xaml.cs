@@ -89,6 +89,11 @@ namespace SmallHoneybee.Wpf.Views
 
             _saleOrders.Clear();
             IQueryable<DataModel.Model.SaleOrder> saleOrders = _saleOrderRepository.Query();
+            if (ResourcesHelper.CurrentUser.UserType < (byte) DataType.UserType.FactoryPriceManger)
+            {
+                saleOrders =
+                    saleOrders.Where(x => x.OriginUserUser.UserType < (byte) DataType.UserType.FactoryPriceManger);
+            }
 
             DateTime? startDate = DateStartDate.SelectedDate;
             DateTime? endDate = DateEndDate.SelectedDate;
@@ -234,20 +239,25 @@ namespace SmallHoneybee.Wpf.Views
     public class SOProduceDomainModel : INotifyPropertyChanged
     {
         public SOProduce SOProduce { get; set; }
+
+        private float? _costPerUnit;
         public float? CostPerUnit
         {
-            get { return SOProduce.CostPerUnit; }
+            get { return _costPerUnit; }
             set
             {
+                _costPerUnit = value;
                 NotifyPropertyChange("CostPerUnit");
             }
         }
 
+        private float _soProduceTotal;
         public float SOProduceTotal
         {
-            get { return (SOProduce.Quantity ?? 0) * (SOProduce.CostPerUnit ?? 0); }
+            get { return _soProduceTotal; }
             set
             {
+                _soProduceTotal = value;
                 NotifyPropertyChange("SOProduceTotal");
             }
         }

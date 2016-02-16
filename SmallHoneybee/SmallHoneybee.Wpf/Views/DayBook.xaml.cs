@@ -185,7 +185,7 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
-        private void TextHowManey_OnKeyDown(object sender, KeyEventArgs e)
+        private void TextSettlementMen_OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {

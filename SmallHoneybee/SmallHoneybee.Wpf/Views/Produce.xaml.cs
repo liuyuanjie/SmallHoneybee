@@ -89,7 +89,7 @@ namespace SmallHoneybee.Wpf.Views
                 ResourcesHelper.CurrentUserRolePermission,
             };
 
-            if (!ResourcesHelper.CurrentUserRolePermission.ProduceFactoryPriceEdit)
+            if (ResourcesHelper.CurrentUserRolePermission.ProduceFactoryPriceEdit)
             {
                 DataGridColumn deletedColumn = null;
                 gridProduces.Columns.ForEach(x =>
@@ -99,7 +99,9 @@ namespace SmallHoneybee.Wpf.Views
                         deletedColumn = x;
                     }
                 });
-                gridProduces.Columns.Remove(deletedColumn);
+                deletedColumn.Visibility = Visibility.Visible;
+                gridProduces.CanUserAddRows = true;
+                gridProduces.IsReadOnly = false;
             }
         }
 
@@ -132,6 +134,8 @@ namespace SmallHoneybee.Wpf.Views
                     x.Name.Contains(TxtSearchBox.Text))
                 .ToList()
                 .ForEach(x => _produces.Add(x));
+
+            InitBlankRow();
         }
 
         private void CommandBinding_ClearSearchText_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -163,11 +167,11 @@ namespace SmallHoneybee.Wpf.Views
                     {
                         x.BarCode = string.IsNullOrEmpty(x.BarCode) ? null : x.BarCode;
                         x.ProduceNo = string.IsNullOrEmpty(x.ProduceNo) ? null : x.ProduceNo;
-                        //if (x.ProduceId > 0)
-                        //{
-                        //    //CommonHelper.UpdateModifiedOnAndDate(ResourcesHelper.CurrentUser, _produces);
-                        //    _produceRepository.Update(x);
-                        //}
+                        if (x.ProduceId == 0)
+                        {
+                            CommonHelper.AddCreatedOnAndDate(ResourcesHelper.CurrentUser, _produces);
+                            _produceRepository.Create(x);
+                        }
                     });
                 var duBarCodes = _produces.Where(x=>x.BarCode!=null).GroupBy(x => x.BarCode).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
                 var duProduceNos = _produces.Where(x => x.ProduceNo != null).GroupBy(x => x.ProduceNo).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
@@ -239,6 +243,50 @@ namespace SmallHoneybee.Wpf.Views
             _unitOfWork = UnityInit.UnitOfWork;
             _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
             _produceRepository = _unitOfWork.GetRepository<ProduceRepository>();
+        }
+
+        private void TextName_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                InitBlankRow();
+            }
+        }
+
+        private void TextBarCode_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                InitBlankRow();
+            }
+        }
+
+        private void TextProduceNo_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                InitBlankRow();
+            }
+        }
+
+        private void InitBlankRow()
+        {
+            if (ResourcesHelper.CurrentUserRolePermission.ProduceFactoryPriceEdit)
+            {
+                _produces.Add(new DataModel.Model.Produce
+                {
+                    CategoryId = 1,
+                    Enable = true,
+                    DiscountRate = 1,
+                    RetailPrice = 0,
+                    FactoryPrice = 0,
+                    LastOrderDate = DateTime.Now,
+                    CreatedBy = ResourcesHelper.CurrentUser.Name,
+                    CreatedOn = DateTime.Now,
+                    LastModifiedBy = ResourcesHelper.CurrentUser.Name,
+                    LastModifiedOn = DateTime.Now,
+                });
+            }
         }
     }
 }

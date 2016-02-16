@@ -78,7 +78,9 @@ namespace SmallHoneybee.Wpf.Views
                     .Single(x => x.SaleOrderId == saleOrder.SaleOrderId);
                 _saleOrder.SOProduces.ForEach(x => _soProduceDomainModels.Add(new SOProduceDomainModel
                 {
-                    SOProduce = x
+                    SOProduce = x,
+                    CostPerUnit = x.CostPerUnit,
+                    SOProduceTotal = (x.CostPerUnit ?? 0) * x.Quantity ?? 0
                 }));
             }
             else
@@ -97,7 +99,7 @@ namespace SmallHoneybee.Wpf.Views
             {
                 SaleOrder = _saleOrder,
                 SOProduceDomainModels,
-                ResourcesHelper.CurrentUserRolePermission,
+                CurrentUserRolePermission = ResourcesHelper.CurrentUserRolePermission,
                 BalanceDomainModel = _balanceDomainModel,
             };
             TxtDiscount.Text = _balanceDomainModel.DiscountPrice.ToString();
@@ -148,7 +150,7 @@ namespace SmallHoneybee.Wpf.Views
             _soProduceDomainModels.ForEach(
                 x =>
                 {
-                    x.SOProduce.CostPerUnit = x.SOProduce.DiscountRate * x.SOProduce.Produce.RetailPrice;
+                    //x.SOProduce.CostPerUnit = x.SOProduce.DiscountRate * x.SOProduce.Produce.RetailPrice;
                     x.SOProduce.RetailPrice = x.SOProduce.Produce.RetailPrice;
                     x.SOProduce.SOProduceStatusCategory = (sbyte)saleOrderStatus;
                 });
@@ -242,16 +244,38 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
+        private void TxtCostPerUnit_OnLostFocus(object sender, RoutedEventArgs e)
+        {
+            var soProduceDomainModel = GridSOProduces.SelectedItem as SOProduceDomainModel;
+            if (soProduceDomainModel != null)
+            {
+                soProduceDomainModel.SOProduce.CostPerUnit = soProduceDomainModel.CostPerUnit;
+                soProduceDomainModel.SOProduceTotal = (soProduceDomainModel.SOProduce.Quantity ?? 0) *
+                                                      (soProduceDomainModel.SOProduce.CostPerUnit ?? 0);
+
+                SetTotalNameberText();
+            }
+        }
+
         private void SetTotalNameberText()
         {
             _saleOrder.TotalCost = (_saleOrder.OtherCost ?? 0) +
                 (_soProduceDomainModels.Where(x => x.SOProduce != null)
                     .Sum(x => x.SOProduce.Quantity * x.SOProduce.CostPerUnit) ?? 0);
 
-            TextTotalNumber.Text = string.Format("共 {0} 件，总计 {1}",
-                    (_soProduceDomainModels.Where(x => x.SOProduce != null)
-                        .Sum(x => x.SOProduce.Quantity) ?? 0).ToString("F2"),
-                    (_saleOrder.TotalCost ?? 0).ToString("F2"));
+            _saleOrder.ProduceTotalCount = _soProduceDomainModels.Where(x => x.SOProduce != null)
+                        .Sum(x => x.SOProduce.Quantity ?? 0);
+
+            _saleOrder.ProduceTotalOriginal = _soProduceDomainModels.Where(x => x.SOProduce != null)
+                .Sum(x => x.SOProduce.Quantity * x.SOProduce.RetailPrice ?? 0);
+
+            _saleOrder.ProduceTotalDiscount = _soProduceDomainModels.Where(x => x.SOProduce != null)
+                .Sum(x => x.SOProduce.Quantity * (x.SOProduce.RetailPrice * (1 - x.SOProduce.DiscountRate)) ?? 0);
+
+            TextTotalCount.Text = string.Format("数量： {0}，", (_saleOrder.ProduceTotalCount ?? 0).ToString("F2"));
+            TextTotalOriginal.Text = string.Format("原价总计： {0}，", (_saleOrder.ProduceTotalOriginal ?? 0).ToString("F2"));
+            TextTotalDiscount.Text = string.Format("折让金额： {0}，", (_saleOrder.ProduceTotalDiscount ?? 0).ToString("F2"));
+            TextTotalNumber.Text = string.Format("折后合计： {0}", (_saleOrder.TotalCost ?? 0).ToString("F2"));
 
             UpdateBalanceData();
         }
@@ -299,8 +323,11 @@ namespace SmallHoneybee.Wpf.Views
                                     CostPerUnit = produce.RetailPrice * produce.DiscountRate,
                                     SaleOrder = _saleOrder,
                                     SaleOrderId = _saleOrder.SaleOrderId,
+                                    RetailPrice = produce.RetailPrice,
                                     DiscountRate = produce.DiscountRate
-                                }
+                                },
+                                CostPerUnit = produce.RetailPrice * produce.DiscountRate,
+                                SOProduceTotal = produce.RetailPrice * produce.DiscountRate * 1,
                             };
                             _soProduceDomainModels.Add(soProduceDomainModel);
                         }

@@ -28,6 +28,7 @@
     <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
     <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="SettlementMen" Type="varchar" MaxLength="20" />
   </EntityType>
   <EntityType Name="POItem">
     <Key>
@@ -140,6 +141,9 @@
     <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
     <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="ProduceTotalCount" Type="float" />
+    <Property Name="ProduceTotalOriginal" Type="float" />
+    <Property Name="ProduceTotalDiscount" Type="float" />
   </EntityType>
   <EntityType Name="SOLog">
     <Key>
@@ -215,6 +219,9 @@
     <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
     <Property Name="LastModifiedBy" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
+    <Property Name="Sex" Type="tinyint" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" Precision="0" />
+    <Property Name="MemberType" Type="tinyint" />
   </EntityType>
   <EntityType Name="Userlog">
     <Key>

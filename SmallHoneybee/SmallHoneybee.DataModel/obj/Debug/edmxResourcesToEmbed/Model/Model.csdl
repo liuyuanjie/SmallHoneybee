@@ -29,6 +29,7 @@
     <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
     <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="SettlementMen" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="POItem">
     <Key>
@@ -150,6 +151,9 @@
     <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
     <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="ProduceTotalCount" Type="Single" />
+    <Property Name="ProduceTotalOriginal" Type="Single" />
+    <Property Name="ProduceTotalDiscount" Type="Single" />
     <NavigationProperty Name="OriginUserUser" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="SaleOrder" ToRole="User" />
     <NavigationProperty Name="PrucahseOrderUserUser" Relationship="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" FromRole="SaleOrder" ToRole="User" />
     <NavigationProperty Name="SOLogs" Relationship="Self.FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId" FromRole="SaleOrder" ToRole="SOLog" />
@@ -232,6 +236,9 @@
     <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
     <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="Sex" Type="SByte" Nullable="false" />
+    <Property Name="DateOfBirth" Type="DateTime" />
+    <Property Name="MemberType" Type="SByte" />
     <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_PurchaseOrder_User_OriginatorId_UserId" FromRole="User" ToRole="PurchaseOrder" />
     <NavigationProperty Name="SaleOrdersOriginUser" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="User" ToRole="SaleOrder" />
     <NavigationProperty Name="SaleOrdersPurchaseOrderUser" Relationship="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" FromRole="User" ToRole="SaleOrder" />

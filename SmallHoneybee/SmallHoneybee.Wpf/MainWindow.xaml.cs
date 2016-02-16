@@ -110,5 +110,10 @@ namespace SmallHoneybee.Wpf
             var menuItem = (MenuItem)sender;
             menuItem.IsChecked = true;
         }
+
+        private void ButExit_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Application.Current.Shutdown();
+        }
     }
 }

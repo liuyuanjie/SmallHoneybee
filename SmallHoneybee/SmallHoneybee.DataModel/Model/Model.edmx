@@ -33,6 +33,7 @@
           <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="SettlementMen" Type="varchar" MaxLength="20" />
         </EntityType>
         <EntityType Name="POItem">
           <Key>
@@ -145,6 +146,9 @@
           <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="ProduceTotalCount" Type="float" />
+          <Property Name="ProduceTotalOriginal" Type="float" />
+          <Property Name="ProduceTotalDiscount" Type="float" />
         </EntityType>
         <EntityType Name="SOLog">
           <Key>
@@ -220,6 +224,9 @@
           <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="LastModifiedBy" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="Sex" Type="tinyint" Nullable="false" />
+          <Property Name="DateOfBirth" Type="datetime" Precision="0" />
+          <Property Name="MemberType" Type="tinyint" />
         </EntityType>
         <EntityType Name="Userlog">
           <Key>
@@ -467,6 +474,7 @@
           <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SettlementMen" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="POItem">
           <Key>
@@ -588,6 +596,9 @@
           <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ProduceTotalCount" Type="Single" />
+          <Property Name="ProduceTotalOriginal" Type="Single" />
+          <Property Name="ProduceTotalDiscount" Type="Single" />
           <NavigationProperty Name="OriginUserUser" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="SaleOrder" ToRole="User" />
           <NavigationProperty Name="PrucahseOrderUserUser" Relationship="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" FromRole="SaleOrder" ToRole="User" />
           <NavigationProperty Name="SOLogs" Relationship="Self.FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId" FromRole="SaleOrder" ToRole="SOLog" />
@@ -670,6 +681,9 @@
           <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Sex" Type="SByte" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" />
+          <Property Name="MemberType" Type="SByte" />
           <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_PurchaseOrder_User_OriginatorId_UserId" FromRole="User" ToRole="PurchaseOrder" />
           <NavigationProperty Name="SaleOrdersOriginUser" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="User" ToRole="SaleOrder" />
           <NavigationProperty Name="SaleOrdersPurchaseOrderUser" Relationship="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" FromRole="User" ToRole="SaleOrder" />
@@ -922,6 +936,7 @@
                 <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="SettlementMen" ColumnName="SettlementMen" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1039,6 +1054,9 @@
                 <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="ProduceTotalCount" ColumnName="ProduceTotalCount" />
+                <ScalarProperty Name="ProduceTotalOriginal" ColumnName="ProduceTotalOriginal" />
+                <ScalarProperty Name="ProduceTotalDiscount" ColumnName="ProduceTotalDiscount" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1118,6 +1136,9 @@
                 <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="MemberType" ColumnName="MemberType" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

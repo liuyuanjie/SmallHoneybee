@@ -63,12 +63,40 @@ namespace SmallHoneybee.Common
                     SystemSettingDelete = false;
                     break;
 
+                case DataType.UserType.FactoryPriceManger:
+                    SaleOrderView = true;
+                    SaleOrderEdit = true;
+                    SaleOrderDelete = true;
+                    SaleOrderFavorableCost = true;
+                    SaleOrderFactoryPriceCost = true;
+
+                    ProduceView = true;
+                    ProduceEdit = true;
+                    ProduceHeightEdit = true;
+                    ProduceFactoryPriceEdit = false;
+                    ProduceDelete = true;
+                    PurchaseOrderView = false;
+                    PurchaseOrderEdit = false;
+                    PurchaseOrderDelete = false;
+                    ProduceFactoryPriceEdit = false;
+                    UserView = true;
+                    UserEdit = true;
+                    UserDelete = true;
+                    DayBookView = true;
+                    DayBookEdit = true;
+                    DayBookDelete = false;
+                    SystemSettingView = false;
+                    SystemSettingEdit = false;
+                    SystemSettingDelete = false;
+                    break;
+
                 case DataType.UserType.Admin:
                     SaleOrderView = true;
                     SaleOrderEdit = true;
                     SaleOrderDelete = true;
                     SaleOrderDelete = true;
                     SaleOrderFavorableCost = true;
+                    SaleOrderFactoryPriceCost = true;
 
                     ProduceView = true;
                     ProduceEdit = true;
@@ -94,6 +122,8 @@ namespace SmallHoneybee.Common
                     break;
             }
         }
+
+        public bool SaleOrderFactoryPriceCost { get; set; }
 
         public bool SaleOrderFavorableLimitCost { get; set; }
 

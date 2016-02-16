@@ -39,6 +39,9 @@ namespace SmallHoneybee.DataModel.Model
         public System.DateTime LastModifiedOn { get; set; }
         public string LastModifiedBy { get; set; }
         public System.DateTime RowVersion { get; set; }
+        public Nullable<float> ProduceTotalCount { get; set; }
+        public Nullable<float> ProduceTotalOriginal { get; set; }
+        public Nullable<float> ProduceTotalDiscount { get; set; }
     
         public virtual User OriginUserUser { get; set; }
         public virtual User PrucahseOrderUserUser { get; set; }

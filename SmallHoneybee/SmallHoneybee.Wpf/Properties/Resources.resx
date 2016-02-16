@@ -198,4 +198,16 @@
   <data name="WeiChat" xml:space="preserve">
     <value>WeiChat</value>
   </data>
+  <data name="Higher" xml:space="preserve">
+    <value>Higher</value>
+  </data>
+  <data name="Junior" xml:space="preserve">
+    <value>Junior</value>
+  </data>
+  <data name="Middle" xml:space="preserve">
+    <value>Middle</value>
+  </data>
+  <data name="Top" xml:space="preserve">
+    <value>Top</value>
+  </data>
 </root>

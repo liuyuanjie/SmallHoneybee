@@ -79,11 +79,11 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="标题" Width="250">
+                <DataGridTemplateColumn Header="办理人" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                      ></TextBox>
+                            <TextBox Text="{Binding SettlementMen, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                      KeyDown="TextSettlementMen_OnKeyDown"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -116,8 +116,16 @@
                 <DataGridTemplateColumn Header="金额" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding HowManey, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                 KeyDown="TextHowManey_OnKeyDown"></TextBox>
+                            <TextBox Text="{Binding HowManey, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay,StringFormat=F2}"
+                                 ></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="备注" Width="250">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                      ></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

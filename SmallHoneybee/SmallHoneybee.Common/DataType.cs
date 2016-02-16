@@ -12,8 +12,9 @@ namespace SmallHoneybee.Common
         {
             Coustom,
             GeneralManger,
-            HightManger,
-            Admin
+            HightManger = 30,
+            FactoryPriceManger = 60,
+            Admin = 88
         }
 
         public enum DayBookType
@@ -36,6 +37,14 @@ namespace SmallHoneybee.Common
             Branch,
             Case,
             Bag
+        }
+
+        public enum MemberType
+        {
+            Junior,
+            Higher = 10,
+            Middle = 20,
+            Top = 30
         }
 
         public enum ProduceField

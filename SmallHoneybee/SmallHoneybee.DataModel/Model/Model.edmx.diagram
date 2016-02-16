@@ -4,19 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="040358e4a0e74965885dc19bed01ec07" Name="Diagram1" ZoomLevel="69">
-        <EntityTypeShape EntityType="SmallHoneybeeModel.Category" Width="1.5" PointX="0.75" PointY="20.875" IsExpanded="true" />
+      <Diagram DiagramId="2c9823a8e2064744911c6b0ceb564e9b" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="SmallHoneybeeModel.Category" Width="1.5" PointX="0.75" PointY="20.625" IsExpanded="true" />
         <EntityTypeShape EntityType="SmallHoneybeeModel.DayBook" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.POItem" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.Produce" Width="1.5" PointX="3" PointY="18.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.Producelog" Width="1.5" PointX="5.25" PointY="21.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.PurchaseOrder" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.SaleOrder" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.POItem" Width="1.5" PointX="5.25" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.Produce" Width="1.5" PointX="3" PointY="18.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.Producelog" Width="1.5" PointX="5.25" PointY="20.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.PurchaseOrder" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.SaleOrder" Width="1.5" PointX="3" PointY="8.375" IsExpanded="true" />
         <EntityTypeShape EntityType="SmallHoneybeeModel.SOLog" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="SmallHoneybeeModel.SOProduce" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
         <EntityTypeShape EntityType="SmallHoneybeeModel.SystemSetting" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.User" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.Userlog" Width="1.5" PointX="3" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.User" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.Userlog" Width="1.5" PointX="3" PointY="15.125" IsExpanded="true" />
         <AssociationConnector Association="SmallHoneybeeModel.FK_Produce_Category_CategoryId_CategoryId" ManuallyRouted="false" />
         <AssociationConnector Association="SmallHoneybeeModel.FK_POItem_Produce_ProduceId_ProduceId" ManuallyRouted="false" />
         <AssociationConnector Association="SmallHoneybeeModel.FK_POItem_PurchaseOrder_PurchaseOrderId_PurchaseOrderId" ManuallyRouted="false" />

@@ -22,6 +22,12 @@ namespace SmallHoneybee.Wpf.Common
                 new KeyValuePair<bool, string>(false, "不可用" )
         };
 
+        public static IEnumerable<KeyValuePair<sbyte, string>> SexTexts = new List<KeyValuePair<sbyte, string>>
+        {
+                new KeyValuePair<sbyte, string>(0, "女" ),
+                new KeyValuePair<sbyte, string>(1, "男" )
+        };
+
         public static void AddCreatedOnAndDate<T>(User user, T dataModel) where T : class
         {
             PropertyInfo createBy = typeof(T).GetProperty("CreatedBy");

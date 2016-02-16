@@ -169,6 +169,15 @@ namespace SmallHoneybee.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Higher.
+        /// </summary>
+        public static string Higher {
+            get {
+                return ResourceManager.GetString("Higher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import.
         /// </summary>
         public static string Import {
@@ -187,11 +196,29 @@ namespace SmallHoneybee.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Junior.
+        /// </summary>
+        public static string Junior {
+            get {
+                return ResourceManager.GetString("Junior", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to MemberCard.
         /// </summary>
         public static string MemberCard {
             get {
                 return ResourceManager.GetString("MemberCard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Middle.
+        /// </summary>
+        public static string Middle {
+            get {
+                return ResourceManager.GetString("Middle", resourceCulture);
             }
         }
         
@@ -273,6 +300,15 @@ namespace SmallHoneybee.Wpf.Properties {
         public static string SystemName {
             get {
                 return ResourceManager.GetString("SystemName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Top.
+        /// </summary>
+        public static string Top {
+            get {
+                return ResourceManager.GetString("Top", resourceCulture);
             }
         }
         

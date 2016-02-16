@@ -45,6 +45,9 @@ namespace SmallHoneybee.DataModel.Model
         public System.DateTime LastModifiedOn { get; set; }
         public string LastModifiedBy { get; set; }
         public System.DateTime RowVersion { get; set; }
+        public sbyte Sex { get; set; }
+        public Nullable<System.DateTime> DateOfBirth { get; set; }
+        public Nullable<sbyte> MemberType { get; set; }
     
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         public virtual ICollection<SaleOrder> SaleOrdersOriginUser { get; set; }

@@ -64,13 +64,21 @@ namespace SmallHoneybee.Wpf.Views
             var userTypes = new List<KeyValuePair<sbyte, string>>();
             userTypes.AddRange(CommonHelper.Enumerate<DataType.UserType>().Select(x => new KeyValuePair<sbyte, string>((sbyte)x.Key, x.Value)));
 
+            var sexTexts = new List<KeyValuePair<sbyte, string>>();
+            sexTexts.AddRange(CommonHelper.SexTexts.Select(x => new KeyValuePair<sbyte, string>(x.Key, x.Value)));
+
+            var memberTypeTexts = new List<KeyValuePair<sbyte?, string>> { new KeyValuePair<sbyte?, string>(null, string.Empty) };
+            memberTypeTexts.AddRange(CommonHelper.Enumerate<DataType.MemberType>().Select(x => new KeyValuePair<sbyte?, string>((sbyte)x.Key, x.Value)));
+
             ExecuteSearchText();
 
             DataContext = new
             {
                 UserTypes = userTypes,
                 Users,
-                EnableTexts = enableTxets
+                EnableTexts = enableTxets,
+                SexTexts = sexTexts,
+                MemberTypeTexts = memberTypeTexts
             };
         }
 

@@ -32,11 +32,12 @@
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1000*"/>
+                <ColumnDefinition Width="750*"/>
                 <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Grid.Row="0">
-                <Menu x:Name="SamllHoneybeeMenu" Height="40" FontSize="20" Margin="10,5" Background="#FFC9CBD3">
+            <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,5,0,5" >
+                <Menu x:Name="SamllHoneybeeMenu" Height="40" FontSize="20" Margin="5,5,0,5" Background="#FFC9CBD3">
                     <MenuItem x:Name="SamllHoneybeeSaleOrderMenu" Header="零售管理" 
                           Visibility="{Binding Path=CurrentUserRolePermission.SaleOrderView,Converter={StaticResource VisibilityConverter}}"
                           Click="RTReportMenuNavigation_Click">
@@ -57,13 +58,14 @@
                           Visibility="{Binding Path=CurrentUserRolePermission.DayBookView,Converter={StaticResource VisibilityConverter}}"
                           Click="SamllHoneybeeDayBookMenu_OnClick" >
                     </MenuItem>
-                    <MenuItem x:Name="SamllHoneybeeSystemSettingMenu" Header="系统设置" 
+                    <!--<MenuItem x:Name="SamllHoneybeeSystemSettingMenu" Header="系统设置" 
                           Visibility="{Binding Path=CurrentUserRolePermission.SystemSettingView,Converter={StaticResource VisibilityConverter}}"
                           Click="SamllHoneybeeSystemSettingMenu_OnClick" >
-                    </MenuItem>
+                    </MenuItem>-->
                 </Menu>
             </StackPanel>
-            <TextBlock Grid.Column="1" Grid.Row="0" Height="40" FontSize="18" Name="TxtCurrentUser" Background="#FFC1F396" VerticalAlignment="Center" FontWeight="Bold" Padding="5,8" Foreground="#FFFFFF"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="0"  Margin="0,5,0,5" Height="40" FontSize="18" Name="TxtCurrentUser" Background="#FFC1F396" VerticalAlignment="Center" FontWeight="Bold" Padding="5,8" Foreground="#FFFFFF"></TextBlock>
+            <Label Grid.Column="2" Grid.Row="0" Margin="0,5,5,5" Cursor="Hand"  Height="40" FontSize="18" Name="ButExit"  Background="#F62D2D" VerticalAlignment="Center" FontWeight="Bold" Padding="10,8" Foreground="#FFFFFF" MouseDown="ButExit_MouseDown">退出</Label>
         </Grid>
             
         <Viewbox Grid.Column="0" Grid.Row="2" Stretch="Fill"/>

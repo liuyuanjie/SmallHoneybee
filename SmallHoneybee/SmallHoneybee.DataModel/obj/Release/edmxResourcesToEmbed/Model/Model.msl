@@ -29,6 +29,7 @@
           <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
           <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
           <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="SettlementMen" ColumnName="SettlementMen" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -146,6 +147,9 @@
           <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
           <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
           <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="ProduceTotalCount" ColumnName="ProduceTotalCount" />
+          <ScalarProperty Name="ProduceTotalOriginal" ColumnName="ProduceTotalOriginal" />
+          <ScalarProperty Name="ProduceTotalDiscount" ColumnName="ProduceTotalDiscount" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -225,6 +229,9 @@
           <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
           <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
           <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="Sex" ColumnName="Sex" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="MemberType" ColumnName="MemberType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

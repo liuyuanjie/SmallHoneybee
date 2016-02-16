@@ -98,28 +98,42 @@
                         </Style>
                     </DataGridComboBoxColumn.ElementStyle>
                 </DataGridComboBoxColumn>
-                <DataGridTextColumn Header="商品金额" Binding="{Binding ProduceCost, StringFormat=F2}">
+                <DataGridTextColumn Header="商品数量" Binding="{Binding ProduceTotalCount, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="(-)合计打折金额" Binding="{Binding FavorableCost, StringFormat=F2}">
+                <DataGridTextColumn Header="商品原价金额" Binding="{Binding ProduceTotalOriginal, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="(+)其他费用" Binding="{Binding OtherCost, StringFormat=F2}">
+                <DataGridTextColumn Header="商品折让金额" Binding="{Binding ProduceTotalDiscount, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="(=)合计金额" Binding="{Binding TotalCost, StringFormat=F2}">
+                <DataGridTextColumn Header="商品折后合计金额" Binding="{Binding ProduceCost, StringFormat=F2}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                              <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="(-)商品优惠金额" Binding="{Binding FavorableCost, StringFormat=F2}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="商品实收合计金额" Binding="{Binding TotalCost, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="FontWeight" Value="Bold"></Setter>

@@ -57,6 +57,9 @@
                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextStyle}" >
                     <Setter Property="Margin" Value="1" />
                 </Style>
+                <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource CommonDatePickerStyle}" >
+                    <Setter Property="Margin" Value="1" />
+                </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTemplateColumn  Width="30">
@@ -79,17 +82,51 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="会员名称" Width="90">
+                <DataGridTemplateColumn Header="姓名" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" KeyDown="TextName_OnKeyDown"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="会员电话" Width="90">
+                <DataGridTemplateColumn Header="会员电话" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="性别" Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox 
+                                SelectedValue="{Binding Sex, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                SelectedValuePath="Key" 
+                                DisplayMemberPath="Value" 
+                                ItemsSource="{Binding Path=DataContext.SexTexts,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
+                                IsReadOnly="True"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="出生年月" Width="160" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker Name="DateOfBirth"
+                                    SelectedDate="{Binding DateOfBirth,StringFormat='yyyy-MM-dd', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="会员卡类别" Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ComboBox 
+                                SelectedValue="{Binding MemberType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                SelectedValuePath="Key" 
+                                DisplayMemberPath="Value" 
+                                ItemsSource="{Binding Path=DataContext.MemberTypeTexts,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
+                                IsReadOnly="True"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

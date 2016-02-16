@@ -114,12 +114,12 @@
                 <DataGridTemplateColumn Header="购买数额"  Width="80" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding SOProduce.Quantity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                            <TextBox Text="{Binding SOProduce.Quantity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=F2}"
                                     Name="TxtQuantity" LostFocus="TxtQuantity_OnLostFocus"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="零售单价" Binding="{Binding SOProduce.Produce.RetailPrice, StringFormat=F2}">
+                <DataGridTextColumn Header="零售单价" IsReadOnly="True"  Binding="{Binding SOProduce.Produce.RetailPrice, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -130,18 +130,21 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding SOProduce.DiscountRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,
-                                    StringFormat={}{0:N}}" Name="TxtDiscountRate" LostFocus="TxtDiscountRate_OnLostFocus"></TextBox>
+                                    StringFormat=F2}" Name="TxtDiscountRate"
+                                    LostFocus="TxtDiscountRate_OnLostFocus"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="实际单价" IsReadOnly="True"  Binding="{Binding CostPerUnit,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=F2}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Right"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="小计金额" IsReadOnly="True"  Binding="{Binding SOProduceTotal,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=F2}" FontWeight="Bold">
+                <DataGridTemplateColumn Header="折后单价">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding CostPerUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=F2}" Name="TxtCostPerUnit" 
+                                    IsEnabled ="{Binding Path=DataContext.CurrentUserRolePermission.SaleOrderFactoryPriceCost,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                                    LostFocus="TxtCostPerUnit_OnLostFocus"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="小计金额" IsReadOnly="True"  Binding="{Binding SOProduceTotal,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=F2}" FontWeight="Bold">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -165,13 +168,18 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <TextBlock Grid.Row="3" FontWeight="Bold" HorizontalAlignment="Right" Foreground="Red" FontSize="18" VerticalAlignment="Center" Name="TextTotalNumber" Margin="0,0,20,0">共 0 件，总计 0.00</TextBlock>
+        <StackPanel  Grid.Row="3" HorizontalAlignment="Right" Orientation="Horizontal" >
+            <TextBlock FontWeight="Bold"  Foreground="#26CE25" FontSize="16" VerticalAlignment="Center" Name="TextTotalCount" Margin="0,0,2,0">数量： 0.00，</TextBlock>
+            <TextBlock FontWeight="Bold"  Foreground="#FF5454" FontSize="16" VerticalAlignment="Center" Name="TextTotalOriginal" Margin="0,0,2,0">原价小计： 0.00，</TextBlock>
+            <TextBlock FontWeight="Bold"  Foreground="#FF5454" FontSize="16" VerticalAlignment="Center" Name="TextTotalDiscount" Margin="0,0,2,0">优惠小计： 0.00，</TextBlock>
+            <TextBlock FontWeight="Bold"  Foreground="#FF0303" FontSize="20" VerticalAlignment="Center" Name="TextTotalNumber" Margin="0,0,10,0">折后小计： 0.00</TextBlock>
+        </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal" Background="#FFE8F5C4" Visibility="{Binding Path=CurrentUserRolePermission.SaleOrderFavorableCost,Converter={StaticResource VisibilityConverter}}">
             <TextBlock Text="商品小计金额：" VerticalAlignment="Center"></TextBlock>
             <TextBox MinWidth="150" IsEnabled="false" Text="{Binding Path=DataContext.BalanceDomainModel.TotalPrice,StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
             <TextBlock Text="优惠金额：" VerticalAlignment="Center"></TextBlock>
             <TextBox MinWidth="150" Text="{Binding Path=DataContext.BalanceDomainModel.DiscountPrice,StringFormat=F2,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
-                     Name="TxtDiscount" KeyDown="TxtDiscount_OnKeyDown" ></TextBox>
+                     Name="TxtDiscount" KeyDown="TxtDiscount_OnKeyDown"></TextBox>
             <TextBlock  Text="应收金额：" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
             <TextBox MinWidth="150" IsEnabled="false" Style="{StaticResource MarkedTextStyle}"
                 Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
