@@ -21,7 +21,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1000*"/>
@@ -40,7 +40,7 @@
             <ColumnDefinition Width="200"/>
             <ColumnDefinition Width="260"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="积分/合计：" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="合计/积分：" HorizontalAlignment="Right"/>
         <TextBox Grid.Column="1" Grid.Row="0" 
             Name="TxtMemberPointsRate" Text="{Binding Path=DataContext.SystemSetting.MemberPointsRate,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
         <TextBlock Grid.Column="2" Grid.Row="0" Text="允许普通操作员最大合价优惠金额：" HorizontalAlignment="Right"/>

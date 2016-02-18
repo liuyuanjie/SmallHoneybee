@@ -44,17 +44,10 @@ namespace SmallHoneybee.EF.Data.Repository.Impl
                         }
                         break;
 
-                    case DataType.POStatusCategory.Received:
-                        if (!x.DateReceived.HasValue)
-                        {
-                            x.DateOriginated = DateTime.Now;
-                        }
-                        break;
-
                     case DataType.POStatusCategory.Completed:
                         if (!x.DateCompleted.HasValue)
                         {
-                            x.DateOriginated = DateTime.Now;
+                            x.DateCompleted = DateTime.Now;
                         }
                         break;
                 }

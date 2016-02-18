@@ -9,26 +9,6 @@
 )
 VALUES
 	(
-		'1000',
-		'2016.03.04.1',
-		1,
-		'admin',
-		NOW(),
-		'admin',
-		NOW()
-	);
-
-INSERT INTO systemsetting (
-	SettingCode,
-	SettingValue,
-	IsEnable,
-	CreatedBy,
-	CreatedOn,
-	LastModifiedBy,
-	LastModifiedOn
-)
-VALUES
-	(
 		'1001',
 		'10',
 		1,
@@ -137,3 +117,4 @@ VALUES
 		'admin',
 		NOW()
 	);
+UPDATE `systemsetting` SET SettingValue='2016.03.04.1' WHERE SettingCode='1000';

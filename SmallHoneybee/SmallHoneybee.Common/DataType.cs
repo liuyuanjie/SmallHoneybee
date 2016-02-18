@@ -68,9 +68,7 @@ namespace SmallHoneybee.Common
         public enum POStatusCategory
         {
             Ordered,
-            Received,
-            Completed,
-            Archived
+            Completed
         }
 
         public enum SaleOrderStatus

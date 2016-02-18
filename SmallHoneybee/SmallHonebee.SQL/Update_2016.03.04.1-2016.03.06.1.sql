@@ -1,6 +1,5 @@
 ﻿ALTER TABLE `saleorder` ADD UserRealPrice float(10,2) NOT NULL, ADD UserReturnedPrice float(10,2) NOT NULL;
 
-DROP TABLE IF EXISTS `membercard`;
 CREATE TABLE `membercard` (
   `MemberCardId` int(11) NOT NULL,
   `MemberCardNo` varchar(20) NOT NULL,
@@ -23,7 +22,6 @@ CREATE TABLE `membercard` (
   PRIMARY KEY (`MemberCardId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `usermembercard`;
 CREATE TABLE `usermembercard` (
   `UserMemberCardId` int(11) NOT NULL,
   `UserId` int(11) NOT NULL,
@@ -77,3 +75,4 @@ VALUES
 
 UPDATE `systemsetting` SET SettingValue=1 WHERE SettingCode='1001';
 UPDATE `user` SET MemberPoints=MemberPoints/10;
+UPDATE `systemsetting` SET SettingValue='2016.03.06.1' WHERE SettingCode='1000';
