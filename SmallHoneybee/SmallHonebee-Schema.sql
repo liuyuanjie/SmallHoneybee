@@ -1,0 +1,1 @@
+/* init the mysql userid=root;psw=12345;*/

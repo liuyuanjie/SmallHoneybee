@@ -1,0 +1,974 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SmallHoneybeeModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.5" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CategoryNo" Type="varchar" MaxLength="20" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="poitem">
+          <Key>
+            <PropertyRef Name="POItemId" />
+          </Key>
+          <Property Name="POItemId" Type="int" Nullable="false" />
+          <Property Name="PurchaseOrderId" Type="int" Nullable="false" />
+          <Property Name="ProduceId" Type="int" Nullable="false" />
+          <Property Name="PriceOrdered" Type="float" />
+          <Property Name="PriceReceived" Type="float" />
+          <Property Name="QuantityOrdered" Type="float" />
+          <Property Name="QuantityReceived" Type="float" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="produce">
+          <Key>
+            <PropertyRef Name="ProduceId" />
+          </Key>
+          <Property Name="ProduceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProduceNo" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="BarCode" Type="varchar" MaxLength="20" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Alias" Type="varchar" MaxLength="100" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="PackSize" Type="varchar" MaxLength="30" />
+          <Property Name="RetailPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="FactoryPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="OrderSize" Type="varchar" MaxLength="30" />
+          <Property Name="PackFee" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="ProcessFee" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Quantity" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+          <Property Name="HowUsed" Type="tinyint" />
+          <Property Name="HowPurchased" Type="tinyint" />
+          <Property Name="PurchasedUsedRatio" Type="float" />
+          <Property Name="LastOrderDate" Type="datetime" Precision="0" />
+          <Property Name="ExpirationDate" Type="float" />
+          <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="producelog">
+          <Key>
+            <PropertyRef Name="ProduceLogId" />
+          </Key>
+          <Property Name="ProduceLogId" Type="bigint" Nullable="false" />
+          <Property Name="ProduceId" Type="int" Nullable="false" />
+          <Property Name="OldValue" Type="text" />
+          <Property Name="NewValue" Type="text" />
+          <Property Name="DateChanged" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="ChangedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="purchaseorder">
+          <Key>
+            <PropertyRef Name="PurchaseOrderId" />
+          </Key>
+          <Property Name="PurchaseOrderId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="PurchaseOrderNo" Type="varchar" MaxLength="20" />
+          <Property Name="OriginatorId" Type="int" Nullable="false" />
+          <Property Name="POStatus" Type="tinyint" />
+          <Property Name="DateOriginated" Type="date" />
+          <Property Name="DateReceived" Type="date" />
+          <Property Name="DateCompleted" Type="date" Nullable="false" />
+          <Property Name="TotalAmount" Type="float" Nullable="false" />
+          <Property Name="TotalTax" Type="float" />
+          <Property Name="TotalShipping" Type="float" />
+          <Property Name="TotalOther" Type="float" />
+          <Property Name="GrandTotal" Type="float" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="saleorder">
+          <Key>
+            <PropertyRef Name="SaleOrderId" />
+          </Key>
+          <Property Name="SaleOrderId" Type="int" Nullable="false" />
+          <Property Name="SaleOrderNo" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="SaleOrderStatus" Type="tinyint" Nullable="false" />
+          <Property Name="OriginUserId" Type="int" Nullable="false" />
+          <Property Name="DateOriginated" Type="datetime" Precision="0" />
+          <Property Name="DateCompleted" Type="datetime" Precision="0" />
+          <Property Name="ProduceCost" Type="float" />
+          <Property Name="OtherCost" Type="float" />
+          <Property Name="TotalCost" Type="float" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="solog">
+          <Key>
+            <PropertyRef Name="SOLogId" />
+          </Key>
+          <Property Name="SOLogId" Type="bigint" Nullable="false" />
+          <Property Name="SaleOrderId" Type="int" Nullable="false" />
+          <Property Name="OldValue" Type="text" />
+          <Property Name="NewValue" Type="text" />
+          <Property Name="DateChanged" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="ChangedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="soproduce">
+          <Key>
+            <PropertyRef Name="SOProduceId" />
+          </Key>
+          <Property Name="SOProduceId" Type="int" Nullable="false" />
+          <Property Name="SaleOrderId" Type="int" Nullable="false" />
+          <Property Name="ProduceId" Type="int" />
+          <Property Name="DateSaled" Type="datetime" Precision="0" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="CostPerUnit" Type="float" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserType" Type="tinyint" Nullable="false" />
+          <Property Name="UserNo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PasswordSalt" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PasswordHash" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="CashBalance" Type="float" Nullable="false" />
+          <Property Name="Phone" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+          <Property Name="Weichat" Type="varchar" MaxLength="50" />
+          <Property Name="QqNo" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Enable" Type="bit" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="userlog">
+          <Key>
+            <PropertyRef Name="UserLogId" />
+          </Key>
+          <Property Name="UserLogId" Type="bigint" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="OldValue" Type="text" />
+          <Property Name="NewValue" Type="text" />
+          <Property Name="DateChanged" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="ChangedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_POItem_Produce_ProduceId_ProduceId">
+          <End Role="produce" Type="Self.produce" Multiplicity="1" />
+          <End Role="poitem" Type="Self.poitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produce">
+              <PropertyRef Name="ProduceId" />
+            </Principal>
+            <Dependent Role="poitem">
+              <PropertyRef Name="ProduceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POItem_PurchaseOrder_PurchaseOrderId_PurchaseOrderId">
+          <End Role="purchaseorder" Type="Self.purchaseorder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="poitem" Type="Self.poitem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="purchaseorder">
+              <PropertyRef Name="PurchaseOrderId" />
+            </Principal>
+            <Dependent Role="poitem">
+              <PropertyRef Name="PurchaseOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produce_Category_CategoryId_categoryId">
+          <End Role="category" Type="Self.category" Multiplicity="1" />
+          <End Role="produce" Type="Self.produce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="produce">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produce_SaleOrder_OriginUserId_UserId">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="saleorder" Type="Self.saleorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="saleorder">
+              <PropertyRef Name="OriginUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProduceLog_Produce_ProduceId_produceId">
+          <End Role="produce" Type="Self.produce" Multiplicity="1" />
+          <End Role="producelog" Type="Self.producelog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produce">
+              <PropertyRef Name="ProduceId" />
+            </Principal>
+            <Dependent Role="producelog">
+              <PropertyRef Name="ProduceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_User_OriginatorId_UserId">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="purchaseorder" Type="Self.purchaseorder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="purchaseorder">
+              <PropertyRef Name="OriginatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId">
+          <End Role="saleorder" Type="Self.saleorder" Multiplicity="1" />
+          <End Role="solog" Type="Self.solog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="saleorder">
+              <PropertyRef Name="SaleOrderId" />
+            </Principal>
+            <Dependent Role="solog">
+              <PropertyRef Name="SaleOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOProduce_Produce_ProduceId_ProduceId">
+          <End Role="produce" Type="Self.produce" Multiplicity="0..1" />
+          <End Role="soproduce" Type="Self.soproduce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produce">
+              <PropertyRef Name="ProduceId" />
+            </Principal>
+            <Dependent Role="soproduce">
+              <PropertyRef Name="ProduceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId">
+          <End Role="saleorder" Type="Self.saleorder" Multiplicity="1" />
+          <End Role="soproduce" Type="Self.soproduce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="saleorder">
+              <PropertyRef Name="SaleOrderId" />
+            </Principal>
+            <Dependent Role="soproduce">
+              <PropertyRef Name="SaleOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLog_User_UserId_UserId">
+          <End Role="user" Type="Self.user" Multiplicity="1" />
+          <End Role="userlog" Type="Self.userlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="userlog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmallHoneybeeModelStoreContainer">
+          <EntitySet Name="category" EntityType="Self.category" Schema="smallhoneybee" store:Type="Tables" />
+          <EntitySet Name="poitem" EntityType="Self.poitem" Schema="smallhoneybee" store:Type="Tables" />
+          <EntitySet Name="produce" EntityType="Self.produce" Schema="smallhoneybee" store:Type="Tables" />
+          <EntitySet Name="producelog" EntityType="Self.producelog" Schema="smallhoneybee" store:Type="Tables" />
+          <EntitySet Name="purchaseorder" EntityType="Self.purchaseorder" Schema="smallhoneybee" store:Type="Tables" />
+          <EntitySet Name="saleorder" EntityType="Self.saleorder" Schema="smallhoneybee" store:Type="Tables" />
+          <EntitySet Name="solog" EntityType="Self.solog" Schema="smallhoneybee" store:Type="Tables" />
+          <EntitySet Name="soproduce" EntityType="Self.soproduce" Schema="smallhoneybee" store:Type="Tables" />
+          <EntitySet Name="user" EntityType="Self.user" Schema="smallhoneybee" store:Type="Tables" />
+          <EntitySet Name="userlog" EntityType="Self.userlog" Schema="smallhoneybee" store:Type="Tables" />
+          <AssociationSet Name="FK_POItem_Produce_ProduceId_ProduceId" Association="Self.FK_POItem_Produce_ProduceId_ProduceId">
+            <End Role="produce" EntitySet="produce" />
+            <End Role="poitem" EntitySet="poitem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POItem_PurchaseOrder_PurchaseOrderId_PurchaseOrderId" Association="Self.FK_POItem_PurchaseOrder_PurchaseOrderId_PurchaseOrderId">
+            <End Role="purchaseorder" EntitySet="purchaseorder" />
+            <End Role="poitem" EntitySet="poitem" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produce_Category_CategoryId_categoryId" Association="Self.FK_Produce_Category_CategoryId_categoryId">
+            <End Role="category" EntitySet="category" />
+            <End Role="produce" EntitySet="produce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produce_SaleOrder_OriginUserId_UserId" Association="Self.FK_Produce_SaleOrder_OriginUserId_UserId">
+            <End Role="user" EntitySet="user" />
+            <End Role="saleorder" EntitySet="saleorder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProduceLog_Produce_ProduceId_produceId" Association="Self.FK_ProduceLog_Produce_ProduceId_produceId">
+            <End Role="produce" EntitySet="produce" />
+            <End Role="producelog" EntitySet="producelog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_User_OriginatorId_UserId" Association="Self.FK_PurchaseOrder_User_OriginatorId_UserId">
+            <End Role="user" EntitySet="user" />
+            <End Role="purchaseorder" EntitySet="purchaseorder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId" Association="Self.FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId">
+            <End Role="saleorder" EntitySet="saleorder" />
+            <End Role="solog" EntitySet="solog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOProduce_Produce_ProduceId_ProduceId" Association="Self.FK_SOProduce_Produce_ProduceId_ProduceId">
+            <End Role="produce" EntitySet="produce" />
+            <End Role="soproduce" EntitySet="soproduce" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId" Association="Self.Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId">
+            <End Role="saleorder" EntitySet="saleorder" />
+            <End Role="soproduce" EntitySet="soproduce" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLog_User_UserId_UserId" Association="Self.FK_UserLog_User_UserId_UserId">
+            <End Role="user" EntitySet="user" />
+            <End Role="userlog" EntitySet="userlog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SmallHoneybeeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CategoryNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowVersion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="produces" Relationship="Self.FK_Produce_Category_CategoryId_categoryId" FromRole="category" ToRole="produce" />
+        </EntityType>
+        <EntityType Name="POItem">
+          <Key>
+            <PropertyRef Name="POItemId" />
+          </Key>
+          <Property Name="POItemId" Type="Int32" Nullable="false" />
+          <Property Name="PurchaseOrderId" Type="Int32" Nullable="false" />
+          <Property Name="ProduceId" Type="Int32" Nullable="false" />
+          <Property Name="PriceOrdered" Type="Single" />
+          <Property Name="PriceReceived" Type="Single" />
+          <Property Name="QuantityOrdered" Type="Single" />
+          <Property Name="QuantityReceived" Type="Single" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowVersion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="produce" Relationship="Self.FK_POItem_Produce_ProduceId_ProduceId" FromRole="poitem" ToRole="produce" />
+          <NavigationProperty Name="purchaseorder" Relationship="Self.FK_POItem_PurchaseOrder_PurchaseOrderId_PurchaseOrderId" FromRole="poitem" ToRole="purchaseorder" />
+        </EntityType>
+        <EntityType Name="Produce">
+          <Key>
+            <PropertyRef Name="ProduceId" />
+          </Key>
+          <Property Name="ProduceId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProduceNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BarCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="PackSize" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="RetailPrice" Type="Decimal" Nullable="false" />
+          <Property Name="FactoryPrice" Type="Decimal" Nullable="false" />
+          <Property Name="OrderSize" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PackFee" Type="Decimal" />
+          <Property Name="ProcessFee" Type="Decimal" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Quantity" Type="Decimal" Nullable="false" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <Property Name="HowUsed" Type="SByte" />
+          <Property Name="HowPurchased" Type="SByte" />
+          <Property Name="PurchasedUsedRatio" Type="Single" />
+          <Property Name="LastOrderDate" Type="DateTime" />
+          <Property Name="ExpirationDate" Type="Single" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowVersion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="category" Relationship="Self.FK_Produce_Category_CategoryId_categoryId" FromRole="produce" ToRole="category" />
+          <NavigationProperty Name="poitems" Relationship="Self.FK_POItem_Produce_ProduceId_ProduceId" FromRole="produce" ToRole="poitem" />
+          <NavigationProperty Name="producelogs" Relationship="Self.FK_ProduceLog_Produce_ProduceId_produceId" FromRole="produce" ToRole="producelog" />
+          <NavigationProperty Name="soproduces" Relationship="Self.FK_SOProduce_Produce_ProduceId_ProduceId" FromRole="produce" ToRole="soproduce" />
+        </EntityType>
+        <EntityType Name="ProduceLog">
+          <Key>
+            <PropertyRef Name="ProduceLogId" />
+          </Key>
+          <Property Name="ProduceLogId" Type="Int64" Nullable="false" />
+          <Property Name="ProduceId" Type="Int32" Nullable="false" />
+          <Property Name="OldValue" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="NewValue" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="DateChanged" Type="DateTime" Nullable="false" />
+          <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowVersion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="produce" Relationship="Self.FK_ProduceLog_Produce_ProduceId_produceId" FromRole="producelog" ToRole="produce" />
+        </EntityType>
+        <EntityType Name="PurchaseOrder">
+          <Key>
+            <PropertyRef Name="PurchaseOrderId" />
+          </Key>
+          <Property Name="PurchaseOrderId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PurchaseOrderNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="OriginatorId" Type="Int32" Nullable="false" />
+          <Property Name="POStatus" Type="SByte" />
+          <Property Name="DateOriginated" Type="DateTime" />
+          <Property Name="DateReceived" Type="DateTime" />
+          <Property Name="DateCompleted" Type="DateTime" Nullable="false" />
+          <Property Name="TotalAmount" Type="Single" Nullable="false" />
+          <Property Name="TotalTax" Type="Single" />
+          <Property Name="TotalShipping" Type="Single" />
+          <Property Name="TotalOther" Type="Single" />
+          <Property Name="GrandTotal" Type="Single" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowVersion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="poitems" Relationship="Self.FK_POItem_PurchaseOrder_PurchaseOrderId_PurchaseOrderId" FromRole="purchaseorder" ToRole="poitem" />
+          <NavigationProperty Name="user" Relationship="Self.FK_PurchaseOrder_User_OriginatorId_UserId" FromRole="purchaseorder" ToRole="user" />
+        </EntityType>
+        <EntityType Name="SaleOrder">
+          <Key>
+            <PropertyRef Name="SaleOrderId" />
+          </Key>
+          <Property Name="SaleOrderId" Type="Int32" Nullable="false" />
+          <Property Name="SaleOrderNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SaleOrderStatus" Type="SByte" Nullable="false" />
+          <Property Name="OriginUserId" Type="Int32" Nullable="false" />
+          <Property Name="DateOriginated" Type="DateTime" />
+          <Property Name="DateCompleted" Type="DateTime" />
+          <Property Name="ProduceCost" Type="Single" />
+          <Property Name="OtherCost" Type="Single" />
+          <Property Name="TotalCost" Type="Single" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowVersion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="saleorder" ToRole="user" />
+          <NavigationProperty Name="sologs" Relationship="Self.FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId" FromRole="saleorder" ToRole="solog" />
+          <NavigationProperty Name="soproduces" Relationship="Self.Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId" FromRole="saleorder" ToRole="soproduce" />
+        </EntityType>
+        <EntityType Name="SOLog">
+          <Key>
+            <PropertyRef Name="SOLogId" />
+          </Key>
+          <Property Name="SOLogId" Type="Int64" Nullable="false" />
+          <Property Name="SaleOrderId" Type="Int32" Nullable="false" />
+          <Property Name="OldValue" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="NewValue" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="DateChanged" Type="DateTime" Nullable="false" />
+          <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowVersion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="saleorder" Relationship="Self.FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId" FromRole="solog" ToRole="saleorder" />
+        </EntityType>
+        <EntityType Name="SOProduce">
+          <Key>
+            <PropertyRef Name="SOProduceId" />
+          </Key>
+          <Property Name="SOProduceId" Type="Int32" Nullable="false" />
+          <Property Name="SaleOrderId" Type="Int32" Nullable="false" />
+          <Property Name="ProduceId" Type="Int32" />
+          <Property Name="DateSaled" Type="DateTime" />
+          <Property Name="Quantity" Type="Single" />
+          <Property Name="CostPerUnit" Type="Single" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowVersion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="produce" Relationship="Self.FK_SOProduce_Produce_ProduceId_ProduceId" FromRole="soproduce" ToRole="produce" />
+          <NavigationProperty Name="saleorder" Relationship="Self.Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId" FromRole="soproduce" ToRole="saleorder" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserType" Type="SByte" Nullable="false" />
+          <Property Name="UserNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CashBalance" Type="Single" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Weichat" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="QqNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Enable" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowVersion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="purchaseorders" Relationship="Self.FK_PurchaseOrder_User_OriginatorId_UserId" FromRole="user" ToRole="purchaseorder" />
+          <NavigationProperty Name="saleorders" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="user" ToRole="saleorder" />
+          <NavigationProperty Name="userlogs" Relationship="Self.FK_UserLog_User_UserId_UserId" FromRole="user" ToRole="userlog" />
+        </EntityType>
+        <EntityType Name="Userlog">
+          <Key>
+            <PropertyRef Name="UserLogId" />
+          </Key>
+          <Property Name="UserLogId" Type="Int64" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="OldValue" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="NewValue" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+          <Property Name="DateChanged" Type="DateTime" Nullable="false" />
+          <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RowVersion" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_UserLog_User_UserId_UserId" FromRole="userlog" ToRole="user" />
+        </EntityType>
+        <Association Name="FK_Produce_Category_CategoryId_categoryId">
+          <End Role="category" Type="SmallHoneybeeModel.Category" Multiplicity="1" />
+          <End Role="produce" Type="SmallHoneybeeModel.Produce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="produce">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POItem_Produce_ProduceId_ProduceId">
+          <End Role="produce" Type="SmallHoneybeeModel.Produce" Multiplicity="1" />
+          <End Role="poitem" Type="SmallHoneybeeModel.POItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produce">
+              <PropertyRef Name="ProduceId" />
+            </Principal>
+            <Dependent Role="poitem">
+              <PropertyRef Name="ProduceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_POItem_PurchaseOrder_PurchaseOrderId_PurchaseOrderId">
+          <End Role="purchaseorder" Type="SmallHoneybeeModel.PurchaseOrder" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="poitem" Type="SmallHoneybeeModel.POItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="purchaseorder">
+              <PropertyRef Name="PurchaseOrderId" />
+            </Principal>
+            <Dependent Role="poitem">
+              <PropertyRef Name="PurchaseOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProduceLog_Produce_ProduceId_produceId">
+          <End Role="produce" Type="SmallHoneybeeModel.Produce" Multiplicity="1" />
+          <End Role="producelog" Type="SmallHoneybeeModel.ProduceLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produce">
+              <PropertyRef Name="ProduceId" />
+            </Principal>
+            <Dependent Role="producelog">
+              <PropertyRef Name="ProduceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SOProduce_Produce_ProduceId_ProduceId">
+          <End Role="produce" Type="SmallHoneybeeModel.Produce" Multiplicity="0..1" />
+          <End Role="soproduce" Type="SmallHoneybeeModel.SOProduce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="produce">
+              <PropertyRef Name="ProduceId" />
+            </Principal>
+            <Dependent Role="soproduce">
+              <PropertyRef Name="ProduceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PurchaseOrder_User_OriginatorId_UserId">
+          <End Role="user" Type="SmallHoneybeeModel.User" Multiplicity="1" />
+          <End Role="purchaseorder" Type="SmallHoneybeeModel.PurchaseOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="purchaseorder">
+              <PropertyRef Name="OriginatorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Produce_SaleOrder_OriginUserId_UserId">
+          <End Role="user" Type="SmallHoneybeeModel.User" Multiplicity="1" />
+          <End Role="saleorder" Type="SmallHoneybeeModel.SaleOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="saleorder">
+              <PropertyRef Name="OriginUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId">
+          <End Role="saleorder" Type="SmallHoneybeeModel.SaleOrder" Multiplicity="1" />
+          <End Role="solog" Type="SmallHoneybeeModel.SOLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="saleorder">
+              <PropertyRef Name="SaleOrderId" />
+            </Principal>
+            <Dependent Role="solog">
+              <PropertyRef Name="SaleOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId">
+          <End Role="saleorder" Type="SmallHoneybeeModel.SaleOrder" Multiplicity="1" />
+          <End Role="soproduce" Type="SmallHoneybeeModel.SOProduce" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="saleorder">
+              <PropertyRef Name="SaleOrderId" />
+            </Principal>
+            <Dependent Role="soproduce">
+              <PropertyRef Name="SaleOrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserLog_User_UserId_UserId">
+          <End Role="user" Type="SmallHoneybeeModel.User" Multiplicity="1" />
+          <End Role="userlog" Type="SmallHoneybeeModel.Userlog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="user">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="userlog">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SmallHoneybeeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="SmallHoneybeeModel.Category" />
+          <EntitySet Name="POItems" EntityType="SmallHoneybeeModel.POItem" />
+          <EntitySet Name="Produces" EntityType="SmallHoneybeeModel.Produce" />
+          <EntitySet Name="ProduceLogs" EntityType="SmallHoneybeeModel.ProduceLog" />
+          <EntitySet Name="PurchaseOrders" EntityType="SmallHoneybeeModel.PurchaseOrder" />
+          <EntitySet Name="SaleOrders" EntityType="SmallHoneybeeModel.SaleOrder" />
+          <EntitySet Name="SOLogs" EntityType="SmallHoneybeeModel.SOLog" />
+          <EntitySet Name="SOProduces" EntityType="SmallHoneybeeModel.SOProduce" />
+          <EntitySet Name="Users" EntityType="SmallHoneybeeModel.User" />
+          <EntitySet Name="Userlogs" EntityType="SmallHoneybeeModel.Userlog" />
+          <AssociationSet Name="FK_Produce_Category_CategoryId_categoryId" Association="Self.FK_Produce_Category_CategoryId_categoryId">
+            <End Role="category" EntitySet="Categories" />
+            <End Role="produce" EntitySet="Produces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POItem_Produce_ProduceId_ProduceId" Association="Self.FK_POItem_Produce_ProduceId_ProduceId">
+            <End Role="produce" EntitySet="Produces" />
+            <End Role="poitem" EntitySet="POItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_POItem_PurchaseOrder_PurchaseOrderId_PurchaseOrderId" Association="Self.FK_POItem_PurchaseOrder_PurchaseOrderId_PurchaseOrderId">
+            <End Role="purchaseorder" EntitySet="PurchaseOrders" />
+            <End Role="poitem" EntitySet="POItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProduceLog_Produce_ProduceId_produceId" Association="Self.FK_ProduceLog_Produce_ProduceId_produceId">
+            <End Role="produce" EntitySet="Produces" />
+            <End Role="producelog" EntitySet="ProduceLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SOProduce_Produce_ProduceId_ProduceId" Association="Self.FK_SOProduce_Produce_ProduceId_ProduceId">
+            <End Role="produce" EntitySet="Produces" />
+            <End Role="soproduce" EntitySet="SOProduces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PurchaseOrder_User_OriginatorId_UserId" Association="Self.FK_PurchaseOrder_User_OriginatorId_UserId">
+            <End Role="user" EntitySet="Users" />
+            <End Role="purchaseorder" EntitySet="PurchaseOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produce_SaleOrder_OriginUserId_UserId" Association="Self.FK_Produce_SaleOrder_OriginUserId_UserId">
+            <End Role="user" EntitySet="Users" />
+            <End Role="saleorder" EntitySet="SaleOrders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId" Association="Self.FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId">
+            <End Role="saleorder" EntitySet="SaleOrders" />
+            <End Role="solog" EntitySet="SOLogs" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId" Association="Self.Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId">
+            <End Role="saleorder" EntitySet="SaleOrders" />
+            <End Role="soproduce" EntitySet="SOProduces" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserLog_User_UserId_UserId" Association="Self.FK_UserLog_User_UserId_UserId">
+            <End Role="user" EntitySet="Users" />
+            <End Role="userlog" EntitySet="Userlogs" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SmallHoneybeeModelStoreContainer" CdmEntityContainer="SmallHoneybeeEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="SmallHoneybeeModel.Category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CategoryNo" ColumnName="CategoryNo" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="POItems">
+            <EntityTypeMapping TypeName="SmallHoneybeeModel.POItem">
+              <MappingFragment StoreEntitySet="poitem">
+                <ScalarProperty Name="POItemId" ColumnName="POItemId" />
+                <ScalarProperty Name="PurchaseOrderId" ColumnName="PurchaseOrderId" />
+                <ScalarProperty Name="ProduceId" ColumnName="ProduceId" />
+                <ScalarProperty Name="PriceOrdered" ColumnName="PriceOrdered" />
+                <ScalarProperty Name="PriceReceived" ColumnName="PriceReceived" />
+                <ScalarProperty Name="QuantityOrdered" ColumnName="QuantityOrdered" />
+                <ScalarProperty Name="QuantityReceived" ColumnName="QuantityReceived" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Produces">
+            <EntityTypeMapping TypeName="SmallHoneybeeModel.Produce">
+              <MappingFragment StoreEntitySet="produce">
+                <ScalarProperty Name="ProduceId" ColumnName="ProduceId" />
+                <ScalarProperty Name="ProduceNo" ColumnName="ProduceNo" />
+                <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="PackSize" ColumnName="PackSize" />
+                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+                <ScalarProperty Name="FactoryPrice" ColumnName="FactoryPrice" />
+                <ScalarProperty Name="OrderSize" ColumnName="OrderSize" />
+                <ScalarProperty Name="PackFee" ColumnName="PackFee" />
+                <ScalarProperty Name="ProcessFee" ColumnName="ProcessFee" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="HowUsed" ColumnName="HowUsed" />
+                <ScalarProperty Name="HowPurchased" ColumnName="HowPurchased" />
+                <ScalarProperty Name="PurchasedUsedRatio" ColumnName="PurchasedUsedRatio" />
+                <ScalarProperty Name="LastOrderDate" ColumnName="LastOrderDate" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProduceLogs">
+            <EntityTypeMapping TypeName="SmallHoneybeeModel.ProduceLog">
+              <MappingFragment StoreEntitySet="producelog">
+                <ScalarProperty Name="ProduceLogId" ColumnName="ProduceLogId" />
+                <ScalarProperty Name="ProduceId" ColumnName="ProduceId" />
+                <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="DateChanged" ColumnName="DateChanged" />
+                <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PurchaseOrders">
+            <EntityTypeMapping TypeName="SmallHoneybeeModel.PurchaseOrder">
+              <MappingFragment StoreEntitySet="purchaseorder">
+                <ScalarProperty Name="PurchaseOrderId" ColumnName="PurchaseOrderId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PurchaseOrderNo" ColumnName="PurchaseOrderNo" />
+                <ScalarProperty Name="OriginatorId" ColumnName="OriginatorId" />
+                <ScalarProperty Name="POStatus" ColumnName="POStatus" />
+                <ScalarProperty Name="DateOriginated" ColumnName="DateOriginated" />
+                <ScalarProperty Name="DateReceived" ColumnName="DateReceived" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="TotalTax" ColumnName="TotalTax" />
+                <ScalarProperty Name="TotalShipping" ColumnName="TotalShipping" />
+                <ScalarProperty Name="TotalOther" ColumnName="TotalOther" />
+                <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SaleOrders">
+            <EntityTypeMapping TypeName="SmallHoneybeeModel.SaleOrder">
+              <MappingFragment StoreEntitySet="saleorder">
+                <ScalarProperty Name="SaleOrderId" ColumnName="SaleOrderId" />
+                <ScalarProperty Name="SaleOrderNo" ColumnName="SaleOrderNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SaleOrderStatus" ColumnName="SaleOrderStatus" />
+                <ScalarProperty Name="OriginUserId" ColumnName="OriginUserId" />
+                <ScalarProperty Name="DateOriginated" ColumnName="DateOriginated" />
+                <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
+                <ScalarProperty Name="ProduceCost" ColumnName="ProduceCost" />
+                <ScalarProperty Name="OtherCost" ColumnName="OtherCost" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOLogs">
+            <EntityTypeMapping TypeName="SmallHoneybeeModel.SOLog">
+              <MappingFragment StoreEntitySet="solog">
+                <ScalarProperty Name="SOLogId" ColumnName="SOLogId" />
+                <ScalarProperty Name="SaleOrderId" ColumnName="SaleOrderId" />
+                <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="DateChanged" ColumnName="DateChanged" />
+                <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SOProduces">
+            <EntityTypeMapping TypeName="SmallHoneybeeModel.SOProduce">
+              <MappingFragment StoreEntitySet="soproduce">
+                <ScalarProperty Name="SOProduceId" ColumnName="SOProduceId" />
+                <ScalarProperty Name="SaleOrderId" ColumnName="SaleOrderId" />
+                <ScalarProperty Name="ProduceId" ColumnName="ProduceId" />
+                <ScalarProperty Name="DateSaled" ColumnName="DateSaled" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="SmallHoneybeeModel.User">
+              <MappingFragment StoreEntitySet="user">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserNo" ColumnName="UserNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="CashBalance" ColumnName="CashBalance" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Weichat" ColumnName="Weichat" />
+                <ScalarProperty Name="QqNo" ColumnName="QqNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Enable" ColumnName="Enable" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Userlogs">
+            <EntityTypeMapping TypeName="SmallHoneybeeModel.Userlog">
+              <MappingFragment StoreEntitySet="userlog">
+                <ScalarProperty Name="UserLogId" ColumnName="UserLogId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+                <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+                <ScalarProperty Name="DateChanged" ColumnName="DateChanged" />
+                <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+                <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

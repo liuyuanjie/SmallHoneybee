@@ -1,0 +1,86 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using SmallHoneybee.DataModel.Model;
+using SmallHoneybee.Wpf.Views.Shared;
+using Produce = SmallHoneybee.Wpf.Views.Produce;
+using PurchaseOrder = SmallHoneybee.Wpf.Views.PurchaseOrder;
+using SaleOrder = SmallHoneybee.Wpf.Views.SaleOrder;
+
+namespace SmallHoneybee.Wpf
+{
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : Window
+    {
+        public MainWindow()
+        {
+            InitializeComponent();
+            frame_run.Content = new Views.SaleOrder();
+
+            SamllHoneybeeSaleOrderMenu.IsChecked = true;
+        }
+
+        private void RTReportMenuNavigation_Click(object sender, RoutedEventArgs e)
+        {
+            ClearMeunChecked();
+
+            frame_run.Content = new SaleOrder();
+            var menuItem = (MenuItem)sender;
+            menuItem.IsChecked = true;
+        }
+
+        private void HSReportMenuNavigation_Click(object sender, RoutedEventArgs e)
+        {
+            ClearMeunChecked();
+
+            frame_run.Content = new Produce();
+            var menuItem = (MenuItem)sender;
+            menuItem.IsChecked = true;
+        }
+
+        private void PollutePortMenuNavigation_Click(object sender, RoutedEventArgs e)
+        {
+            ClearMeunChecked();
+
+            frame_run.Content = new PurchaseOrder();
+            var menuItem = (MenuItem)sender;
+            menuItem.IsChecked = true;
+
+        }
+
+        private void ServiceCommMenuNavigation_Click(object sender, RoutedEventArgs e)
+        {
+            ClearMeunChecked();
+
+            frame_run.Content = new Views.User();
+            var menuItem = (MenuItem)sender;
+            menuItem.IsChecked = true;
+        }
+
+        private void ClearMeunChecked()
+        {
+            var menuItems = SamllHoneybeeMenu.Items.SourceCollection.GetEnumerator();
+            while (menuItems.MoveNext())
+            {
+                var item = (MenuItem)menuItems.Current;
+                if (item.IsChecked)
+                {
+                    item.IsChecked = false;
+                }
+            }
+        }
+    }
+}

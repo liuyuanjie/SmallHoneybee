@@ -1,0 +1,51 @@
+﻿<Window x:Class="SmallHoneybee.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:props="clr-namespace:SmallHoneybee.Wpf.Properties"
+        Title="{x:Static props:Resources.SystemName}"
+        Background="#FFC9CBD3" BorderBrush="#FF293955" WindowStartupLocation="CenterScreen" 
+        Icon="/SmallHoneybee.Wpf;component/images/ico_samllhoneybee.ico" MinWidth="1024"
+        MinHeight="760" FontWeight="Normal">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Background="#FFE7EAF3">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="0"></RowDefinition>
+            <RowDefinition Height="2" />
+            <RowDefinition Height="600*"/>
+            <RowDefinition Height="2" />
+            <RowDefinition Height="25" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1000*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+        </Grid>
+        <StackPanel Grid.Row="1">
+            <Menu x:Name="SamllHoneybeeMenu" Height="40" FontSize="20" Margin="10,5" Background="#FFC9CBD3">
+                <MenuItem x:Name="SamllHoneybeeSaleOrderMenu" Header="零售管理" Click="RTReportMenuNavigation_Click"/>
+                <MenuItem x:Name="SamllHoneybeeProduceMenu"  Header="商品管理" Click="HSReportMenuNavigation_Click" >
+                </MenuItem>
+                <MenuItem x:Name="SamllHoneybeePurchaseOrderMenu"  Header="订单管理"  Click="PollutePortMenuNavigation_Click">
+                </MenuItem>
+                <MenuItem x:Name="SamllHoneybeeUserMenu" Header="用户管理" Click="ServiceCommMenuNavigation_Click" >
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+        <Viewbox Grid.Column="0" Grid.Row="2" Stretch="Fill"/>
+        <GridSplitter HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="3" Margin="0,0,0,1" AllowDrop="False" />
+        <Grid Grid.Column="0" Grid.Row="4" Margin="15,5">
+            <Frame x:Name="frame_run" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" NavigationUIVisibility="Hidden">
+            </Frame>
+        </Grid>
+        <GridSplitter HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="5"/>
+        <TextBlock Grid.Row="6" Margin="1,0,1,1"></TextBlock>
+    </Grid>
+</Window>

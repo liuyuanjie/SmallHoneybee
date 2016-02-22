@@ -1,0 +1,9 @@
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.DomainModel\bin\Debug\SmallHoneybee.DomainModel.dll
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.DomainModel\bin\Debug\SmallHoneybee.DomainModel.pdb
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.DomainModel\obj\Debug\SmallHoneybee.DomainModel.dll
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.DomainModel\obj\Debug\SmallHoneybee.DomainModel.pdb
+d:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.DomainModel\obj\Debug\SmallHoneybee.DomainModel.csprojResolveAssemblyReference.cache
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\bin\Debug\SmallHoneybee.DomainModel.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\bin\Debug\SmallHoneybee.DomainModel.pdb
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\obj\Debug\SmallHoneybee.DomainModel.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\obj\Debug\SmallHoneybee.DomainModel.pdb

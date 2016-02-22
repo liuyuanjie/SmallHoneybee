@@ -1,0 +1,4 @@
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\bin\Release\SmallHoneybee.DomainModel.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\bin\Release\SmallHoneybee.DomainModel.pdb
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\obj\Release\SmallHoneybee.DomainModel.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\obj\Release\SmallHoneybee.DomainModel.pdb

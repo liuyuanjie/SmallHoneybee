@@ -1,0 +1,23 @@
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\SmallHoneybee.DataModel.dll.config
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\SmallHoneybee.DataModel.dll
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\SmallHoneybee.DataModel.pdb
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\EntityFramework.dll
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\EntityFramework.SqlServer.dll
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\MySql.Data.dll
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\MySql.Data.Entity.EF6.dll
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\EntityFramework.xml
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\EntityFramework.SqlServer.xml
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\obj\Debug\SmallHoneybee.DataModel.dll
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\obj\Debug\SmallHoneybee.DataModel.pdb
+D:\Documents\Visual Studio 2013\Projects\SmallHoneybee\SmallHoneybee.DataModel\obj\Debug\SmallHoneybee.DataModel.csprojResolveAssemblyReference.cache
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\SmallHoneybee.DataModel.dll.config
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\SmallHoneybee.DataModel.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\SmallHoneybee.DataModel.pdb
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\EntityFramework.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\EntityFramework.SqlServer.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\MySql.Data.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\MySql.Data.Entity.EF6.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\EntityFramework.xml
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\EntityFramework.SqlServer.xml
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\obj\Debug\SmallHoneybee.DataModel.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\obj\Debug\SmallHoneybee.DataModel.pdb

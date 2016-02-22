@@ -1,0 +1,44 @@
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.EF.Data.dll.config
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.EF.Data.dll
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.EF.Data.pdb
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\EntityFramework.dll
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.Common.dll
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.DataModel.dll
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.DomainModel.dll
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\log4net.dll
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\CsvHelper.dll
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.Common.pdb
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.DataModel.pdb
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.DomainModel.pdb
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\EntityFramework.xml
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\log4net.xml
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\CsvHelper.pdb
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\CsvHelper.xml
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\obj\Debug\SmallHoneybee.EF.Data.csprojResolveAssemblyReference.cache
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\obj\Debug\SmallHoneybee.EF.Data.dll
+D:\documents\visual studio 2013\Projects\SmallHoneybee\SmallHoneybee.EF.Data\obj\Debug\SmallHoneybee.EF.Data.pdb
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.EF.Data.dll.config
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.EF.Data.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.EF.Data.pdb
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\EntityFramework.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.Common.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.DataModel.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.DomainModel.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\log4net.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\CsvHelper.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.Common.pdb
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.DataModel.pdb
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\SmallHoneybee.DomainModel.pdb
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\EntityFramework.xml
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\log4net.xml
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\CsvHelper.pdb
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\CsvHelper.xml
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\obj\Debug\SmallHoneybee.EF.Data.csprojResolveAssemblyReference.cache
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\obj\Debug\SmallHoneybee.EF.Data.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\obj\Debug\SmallHoneybee.EF.Data.pdb
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\Microsoft.Practices.Unity.Configuration.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\Microsoft.Practices.Unity.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.dll
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\Microsoft.Practices.Unity.xml
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\Microsoft.Practices.Unity.Configuration.xml
+F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.EF.Data\bin\Debug\Microsoft.Practices.Unity.RegistrationByConvention.xml
