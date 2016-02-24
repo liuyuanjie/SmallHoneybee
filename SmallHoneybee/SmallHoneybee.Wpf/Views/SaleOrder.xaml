@@ -79,7 +79,7 @@
                 <DataGridTextColumn Header="单据编号" Binding="{Binding SaleOrderNo}"/>
                 <!--<DataGridTextColumn Header="名称" Binding="{Binding Name}"/>-->
                 <DataGridTextColumn Header="购买日期" Binding="{Binding DateOriginated, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
-                <DataGridTemplateColumn Header="状态">
+                <!--<DataGridTemplateColumn Header="状态">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox 
@@ -91,7 +91,27 @@
                                 IsReadOnly="True"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
+                </DataGridTemplateColumn>-->
+                <DataGridComboBoxColumn Header="状态">
+                    <!--<DataGridComboBoxColumn.EditingElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.SaleOrderStatusTexts,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" />
+                            <Setter Property="DisplayMemberPath" Value="Value" />
+                            <Setter Property="SelectedValuePath" Value="Key" />
+                            <Setter Property="SelectedValue" Value="{Binding SaleOrderStatus,UpdateSourceTrigger=PropertyChanged}" />
+                        </Style>
+                    </DataGridComboBoxColumn.EditingElementStyle>-->
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.SaleOrderStatusTexts,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" />
+                            <Setter Property="DisplayMemberPath" Value="Value" />
+                            <Setter Property="SelectedValuePath" Value="Key" />
+                            <Setter Property="SelectedValue" Value="{Binding SaleOrderStatus}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                </DataGridComboBoxColumn>
                 <DataGridTextColumn Header="商品金额" Binding="{Binding ProduceCost, StringFormat=F2}">
                     <DataGridTextColumn.CellStyle>
                         <Style>

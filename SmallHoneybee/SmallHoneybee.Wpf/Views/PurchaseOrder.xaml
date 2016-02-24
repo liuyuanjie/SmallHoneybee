@@ -16,7 +16,7 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Page.Resources>
-    <av:Grid>
+    <av:Grid  Resources="{StaticResource CommonStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
@@ -30,15 +30,14 @@
         <TextBlock Grid.Column="0" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0">||订单管理</TextBlock>
         <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="120"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="300"></ColumnDefinition>
-                <ColumnDefinition Width="120"></ColumnDefinition>
-                <ColumnDefinition Width="120"></ColumnDefinition>
-                <ColumnDefinition Width="120*"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
@@ -112,7 +111,7 @@
                 
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="4" Name="GridPOItems" AutoGenerateColumns="False" ItemsSource="{Binding Path=DataContext.POItemDomainModels,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" IsReadOnly="True" FontSize="16" FontWeight="Medium">
+        <DataGrid Grid.Row="4" Name="GridPOItems" AutoGenerateColumns="False" ItemsSource="{Binding Path=DataContext.POItemDomainModels,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" IsReadOnly="True" FontWeight="Medium">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="产品条形码" Binding="{Binding POItem.Produce.BarCode}"/>
                 <DataGridTextColumn Header="产品编号" Binding="{Binding POItem.Produce.ProduceNo}"/>

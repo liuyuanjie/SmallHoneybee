@@ -177,6 +177,11 @@ namespace SmallHoneybee.Wpf.Views
         }
     }
 
+    public class SaleOrderDoMainModel
+    {
+        public DataModel.Model.SaleOrder SaleOrder { get; set; }
+    }
+
     public class SOProduceDomainModel : INotifyPropertyChanged
     {
         public SOProduce SOProduce { get; set; }
