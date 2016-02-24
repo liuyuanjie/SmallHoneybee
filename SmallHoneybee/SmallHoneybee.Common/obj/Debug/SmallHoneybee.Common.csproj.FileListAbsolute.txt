@@ -18,3 +18,13 @@ F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.Common\bin\Debug\log4net.xml
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.Common\obj\Debug\SmallHoneybee.Common.dll
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.Common\obj\Debug\SmallHoneybee.Common.pdb
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.Common\obj\Debug\SmallHoneybee.Common.csprojResolveAssemblyReference.cache
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Debug\SmallHoneybee.Common.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Debug\SmallHoneybee.Common.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Debug\CsvHelper.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Debug\log4net.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Debug\CsvHelper.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Debug\CsvHelper.xml
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Debug\log4net.xml
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\obj\Debug\SmallHoneybee.Common.csprojResolveAssemblyReference.cache
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\obj\Debug\SmallHoneybee.Common.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\obj\Debug\SmallHoneybee.Common.pdb
