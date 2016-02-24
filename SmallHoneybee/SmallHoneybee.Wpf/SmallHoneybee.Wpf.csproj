@@ -37,7 +37,10 @@
     <StartupObject>SmallHoneybee.Wpf.MainClass</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>images\ico_samllhoneybee.ico</ApplicationIcon>
+    <ApplicationIcon>ico_samllhoneybeexxx.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CsvHelper">
@@ -359,6 +362,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\ico_samllhoneybee.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico_samllhoneybeexxx.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

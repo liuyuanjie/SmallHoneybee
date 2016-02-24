@@ -141,10 +141,6 @@
   <data name="Produce" xml:space="preserve">
     <value>Produce</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="Safari" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\images\Safari.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>

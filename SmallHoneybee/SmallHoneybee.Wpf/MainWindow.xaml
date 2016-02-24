@@ -30,7 +30,9 @@
         </Grid>
         <StackPanel Grid.Row="1">
             <Menu x:Name="SamllHoneybeeMenu" Height="40" FontSize="20" Margin="10,5" Background="#FFC9CBD3">
-                <MenuItem x:Name="SamllHoneybeeSaleOrderMenu" Header="零售管理" Click="RTReportMenuNavigation_Click"/>
+                <MenuItem x:Name="SamllHoneybeeSaleOrderMenu" Header="零售管理" Click="RTReportMenuNavigation_Click">
+                
+                </MenuItem>
                 <MenuItem x:Name="SamllHoneybeeProduceMenu"  Header="商品管理" Click="HSReportMenuNavigation_Click" >
                 </MenuItem>
                 <MenuItem x:Name="SamllHoneybeePurchaseOrderMenu"  Header="订单管理"  Click="PollutePortMenuNavigation_Click">

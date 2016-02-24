@@ -1,18 +1,25 @@
 ﻿<Window x:Class="SmallHoneybee.Wpf.Views.SaleOrderForm"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-Background="#FFC9CBD3" BorderBrush="#FF293955" WindowStartupLocation="CenterScreen" 
+        Background="#FFC9CBD3" BorderBrush="#FF293955"  WindowStartupLocation="CenterScreen" 
         Icon="/SmallHoneybee.Wpf;component/images/ico_samllhoneybee.ico"
         Title="零售表单" Height="600" Width="1024">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"></RowDefinition>
             <RowDefinition Height="110"></RowDefinition>
-            <RowDefinition Height="350"></RowDefinition>
+            <RowDefinition Height="350*"></RowDefinition>
             <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1010"/>
+            <ColumnDefinition Width="1010*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,10,0,0">||零售表单</TextBlock>
         <Grid Grid.Column="0" Grid.Row="1">
@@ -27,31 +34,24 @@ Background="#FFC9CBD3" BorderBrush="#FF293955" WindowStartupLocation="CenterScre
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="240"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="购买时间：" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16"></TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="0" FontSize="16" Height="30" 
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="购买时间：" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Column="1" Grid.Row="0" 
                        Name="TxtDateOriginated" Text="{Binding Path=DataContext.SaleOrder.DateOriginated,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}},
                             StringFormat='yyyy-MM-dd HH:mm:ss' }" ></TextBlock>
-            <TextBlock Grid.Column="2" Grid.Row="0" Text="购买人：" Height="30" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16"></TextBlock>
-            <TextBlock Grid.Column="3" Grid.Row="0" FontSize="16" Height="30" 
+            <TextBlock Grid.Column="2" Grid.Row="0" Text="购买人：" HorizontalAlignment="Right"/>
+            <TextBlock Grid.Column="3" Grid.Row="0" 
                        Name="TxtOriginUser" Text="{Binding Path=DataContext.SaleOrder.User.Name,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="1" Text="单据编号：" Height="30" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Right"/>
-            <TextBlock Grid.Column="1" Grid.Row="1" Height="30" FontSize="16" Name="TxtSaleOrderNo" Text="{Binding Path=DataContext.SaleOrder.SaleOrderNo,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ></TextBlock>
-            <!--<TextBlock Grid.Column="2" Grid.Row="0" Text="名称：" VerticalAlignment="Center" FontSize="16" HorizontalAlignment="Right"></TextBlock>
-            <TextBox Grid.Column="3" Grid.Row="0"  Height="30" FontSize="16" Name="TxtName" Text="{Binding Path=DataContext.SaleOrder.Name,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ></TextBox>
-            <TextBlock Grid.Column="0" Grid.Row="1" Text="购买时间：" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16"></TextBlock>
-            -->
-            <!--<TextBlock Grid.Column="1" Grid.Row="1" Height="30" FontSize="16" Name="TxtDateOriginated"></TextBlock>-->
-            <!--
-            <DatePicker  Grid.Column="1" Grid.Row="1" Height="30"  FontSize="16"  Name="DatDateOriginated" Text="{Binding Path=DataContext.SaleOrder.DateOriginated,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />-->
-            <TextBlock Grid.Column="2" Grid.Row="1" Text="其他金额：" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16"></TextBlock>
-            <TextBox Grid.Column="3" Grid.Row="1"  Height="30" FontSize="16" Name="TxtOtherCost" Text="{Binding Path=DataContext.SaleOrder.OtherCost,Mode=TwoWay, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+            <TextBlock Grid.Column="0" Grid.Row="1" Text="单据编号："  HorizontalAlignment="Right"/>
+            <TextBlock Grid.Column="1" Grid.Row="1" Height="30" Name="TxtSaleOrderNo" Text="{Binding Path=DataContext.SaleOrder.SaleOrderNo,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ></TextBlock>
+            <TextBlock Grid.Column="2" Grid.Row="1" Text="其他金额：" HorizontalAlignment="Right" />
+            <TextBox Grid.Column="3" Grid.Row="1"  Name="TxtOtherCost" Text="{Binding Path=DataContext.SaleOrder.OtherCost,Mode=TwoWay, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
                      KeyDown="TxtOtherCost_OnKeyDown" LostFocus="TxtOtherCost_OnLostFocus"/>
-            <TextBlock Grid.Column="0" Grid.Row="2" Text="备注：" HorizontalAlignment="Right" VerticalAlignment="Center" FontSize="16"></TextBlock>
-            <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Height="30" FontSize="16" Name="TxtDescription" Text="{Binding Path=DataContext.SaleOrder.Description, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ></TextBox>
+            <TextBlock Grid.Column="0" Grid.Row="2" Text="备注：" HorizontalAlignment="Right" />
+            <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Name="TxtDescription" Text="{Binding Path=DataContext.SaleOrder.Description, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ></TextBox>
         </Grid>
-        <DataGrid Grid.Row="2" Name="GridSOProduces" Width="1000" Height="350" AutoGenerateColumns="False"
+        <DataGrid Grid.Row="2" Name="GridSOProduces" Height="350" AutoGenerateColumns="False"
                   ItemsSource="{Binding Path=DataContext.SOProduceDomainModels,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
-             FontSize="16" FontWeight="Medium">
+             FontWeight="Medium">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
@@ -68,7 +68,7 @@ Background="#FFC9CBD3" BorderBrush="#FF293955" WindowStartupLocation="CenterScre
                 <DataGridTemplateColumn Header="产品条形码">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding SOProduce.Produce.BarCode}" Background="Azure" Name="TxtBarCode"
+                            <TextBox Width="80" Text="{Binding SOProduce.Produce.BarCode}" Background="Azure" Name="TxtBarCode"
                                    TextChanged="TxtBarCode_OnTextChanged" KeyDown="TxtBarCode_OnKeyDown"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -81,8 +81,8 @@ Background="#FFC9CBD3" BorderBrush="#FF293955" WindowStartupLocation="CenterScre
                 <DataGridTemplateColumn Header="购买数额">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding SOProduce.Quantity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=F2}" Background="Azure"
-                                     Name="TxtQuantity" LostFocus="TxtQuantity_OnLostFocus" ></TextBox>
+                            <TextBox Width="80"  HorizontalAlignment="Stretch"  Text="{Binding SOProduce.Quantity,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=F2}" Background="Azure"
+                                     Name="TxtQuantity" LostFocus="TxtQuantity_OnLostFocus"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -96,7 +96,7 @@ Background="#FFC9CBD3" BorderBrush="#FF293955" WindowStartupLocation="CenterScre
                 <DataGridTemplateColumn Header="优惠折扣">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding SOProduce.DiscountRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=F2}" Background="Azure"
+                            <TextBox Width="80"  HorizontalAlignment="Right"  Text="{Binding SOProduce.DiscountRate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=F2}" Background="Azure"
                                      Name="TxtDiscountRate" LostFocus="TxtDiscountRate_OnLostFocus"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -131,18 +131,11 @@ Background="#FFC9CBD3" BorderBrush="#FF293955" WindowStartupLocation="CenterScre
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Column="0" Grid.Row="3" Width="1000" Margin="5,10,0,5">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="700"/>
-                <ColumnDefinition Width="145"/>
-                <ColumnDefinition Width="100"/>
-                <ColumnDefinition Width="55"/>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Name="TextTotalNumber" Margin="0,0,20,0">共 0 件，总计 0.00</TextBlock>
-            <Button Grid.Column="2" Grid.Row="0" FontSize="16" FontWeight="Bold" Content="保存" Height="35" Margin="10,0,10,0" Name="ButSave" Click="ButSave_OnClick" ></Button>
-            <Button Grid.Column="1" Grid.Row="0" FontSize="16" FontWeight="Bold" Content="保存并结算" Height="35" Name="ButSaveAndBalance" Click="ButSaveAndBalance_OnClick"></Button>
-            <Button Grid.Column="3" Grid.Row="0" FontSize="16" FontWeight="Bold" Content="取消" Height="35" Margin="0,0,10,0" Name="ButCancel" Click="ButCancel_OnClick" ></Button>
-
-        </Grid>
+        <StackPanel   Grid.Column="0" Grid.Row="3" Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
+            <TextBlock FontWeight="Bold" HorizontalAlignment="Right" VerticalAlignment="Center" Name="TextTotalNumber" Margin="0,0,20,0">共 0 件，总计 0.00</TextBlock>
+            <Button FontWeight="Bold" Content="保存并结算" Width="120" Name="ButSaveAndBalance" Click="ButSaveAndBalance_OnClick"></Button>
+            <Button FontWeight="Bold" Content="保存" Width="90" Name="ButSave" Click="ButSave_OnClick" ></Button>
+            <Button FontWeight="Bold" Content="取消" Width="60" Name="ButCancel" Click="ButCancel_OnClick" ></Button>
+        </StackPanel>
     </Grid>
 </Window>

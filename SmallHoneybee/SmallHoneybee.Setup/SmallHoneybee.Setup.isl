@@ -1886,7 +1886,7 @@
 		<col def="S255">ISBuildSourcePath</col>
 		<col def="I4">ISAttributes</col>
 		<col def="S72">ISComponentSubFolder_</col>
-		<row><td>ico_samllhoneybee.ico</td><td>ISX_DEFAULTCOMPONENT</td><td>ICO_SA~1.ICO|ico_samllhoneybee.ico</td><td>0</td><td/><td/><td/><td>1</td><td>F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.Wpf\images\ico_samllhoneybee.ico</td><td>1</td><td/></row>
+		<row><td>ico_samllhoneybeell.ico</td><td>ISX_DEFAULTCOMPONENT</td><td>ICO_SA~1.ICO|ico_samllhoneybeell.ico</td><td>0</td><td/><td/><td/><td>1</td><td>F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.Wpf\images\ico_samllhoneybeell.ico</td><td>1</td><td/></row>
 		<row><td>smallhoneybee.wpf.localized_</td><td>SmallHoneybee.Wpf.Localized_resources</td><td>SmallHoneybee.Wpf.Localized resources</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;SmallHoneybee.Wpf&gt;|LocalizedResourceDlls</td><td>3</td><td/></row>
 		<row><td>smallhoneybee.wpf.primary_ou</td><td>SmallHoneybee.Wpf.Primary_output</td><td>SmallHoneybee.Wpf.Primary output</td><td>0</td><td/><td/><td/><td>1</td><td>&lt;SmallHoneybee.Wpf&gt;|Built</td><td>3</td><td/></row>
 	</table>
@@ -2344,8 +2344,8 @@
 		<col key="yes" def="s72">ISProductConfiguration_</col>
 		<col key="yes" def="s72">Property</col>
 		<col def="L255">Value</col>
-		<row><td>Express</td><td>MSIPackageFileName</td><td>SmallHoneybee.MSI</td></row>
-		<row><td>Express</td><td>SetupFileName</td><td>SmallHoneybee.Setup</td></row>
+		<row><td>Express</td><td>MSIPackageFileName</td><td>SmallHoneybee</td></row>
+		<row><td>Express</td><td>SetupFileName</td><td>SmallHoneybee</td></row>
 	</table>
 
 	<table name="ISRelease">

@@ -65,4 +65,8 @@
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontFamily" Value="Segoe UI" />
     </Style>
+    <Style TargetType="{x:Type DataGrid}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+    </Style>
 </ResourceDictionary> 
