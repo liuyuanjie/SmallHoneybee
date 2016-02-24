@@ -37,7 +37,8 @@
     <StartupObject>SmallHoneybee.Wpf.MainClass</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ico_samllhoneybeexxx.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -362,9 +363,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\ico_samllhoneybee.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="ico_samllhoneybeexxx.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

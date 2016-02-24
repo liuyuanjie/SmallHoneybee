@@ -7,7 +7,15 @@
       xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       mc:Ignorable="d" 
 	Title="订单">
-
+    <Page.Resources>
+        <RoutedUICommand x:Key="ClearSearchText" Text="Increase Font Size" />
+        <RoutedUICommand x:Key="ExecuteSearchText" Text="Decrease Font Size" />
+        <ResourceDictionary x:Key="CommonStyle">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <av:Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
@@ -34,16 +42,16 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="编号/名称：" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></TextBlock>
-            <TextBox Background="#FFE7F5F5" Grid.Column="1" Grid.Row="0" Width="380" Height="30" FontSize="16" Name="TxtSearchBox"></TextBox>
-            <Button  Grid.Column="2" Grid.Row="0" Width="100" Height="30" Content="{x:Static props:Resources.Search}"  FontSize="16" Click="BtnSearch_Click"/>
-            <Button  Grid.Column="3" Grid.Row="0" Width="100" Height="30" Content="清空"  FontSize="16" Click="BtnClear_Click" />
-            <Button  Grid.Column="4" Grid.Row="0" Width="100" Height="30" Content="{x:Static props:Resources.Import}"  FontSize="16" Click="BtnImport_Click" HorizontalAlignment="Left" VerticalAlignment="Center"></Button>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="编号/名称：" HorizontalAlignment="Center" VerticalAlignment="Center" ></TextBlock>
+            <TextBox Grid.Column="1" Grid.Row="0" Name="TxtSearchBox"></TextBox>
+            <Button  Grid.Column="2" Grid.Row="0" Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
+            <Button  Grid.Column="3" Grid.Row="0" Content="清空" Click="BtnClear_Click" />
+            <Button  Grid.Column="4" Grid.Row="0" Content="{x:Static props:Resources.Import}" Click="BtnImport_Click"></Button>
         </Grid>
         <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
         <DataGrid Grid.Row="3" Name="GridPurchaseOrders" AutoGenerateColumns="False" 
                   ItemsSource="{Binding Path=DataContext.PurchaseOrders,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
-                  IsReadOnly="True" FontSize="16" FontWeight="Medium" SelectionChanged="GridPurchaseOrders_OnSelectionChanged" SelectionMode="Single" SelectedIndex="0">
+                  IsReadOnly="True" FontWeight="Medium" SelectionChanged="GridPurchaseOrders_OnSelectionChanged" SelectionMode="Single" SelectedIndex="0">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="PurchaseOrderId" Binding="{Binding PurchaseOrderId}" Visibility="Hidden"/>
                 <DataGridTextColumn Header="订单编号" Binding="{Binding PurchaseOrderNo}"/>
@@ -169,10 +177,6 @@
             </DataGrid.Columns>
         </DataGrid>
     </av:Grid>
-    <Page.Resources>
-        <RoutedUICommand x:Key="ClearSearchText" Text="Increase Font Size" />
-        <RoutedUICommand x:Key="ExecuteSearchText" Text="Decrease Font Size" />
-    </Page.Resources>
     <Page.InputBindings>
         <KeyBinding Gesture="Esc" Command="{StaticResource ClearSearchText}"/>
         <KeyBinding Gesture="Enter" Command="{StaticResource ExecuteSearchText}"/>

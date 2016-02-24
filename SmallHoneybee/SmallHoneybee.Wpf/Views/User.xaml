@@ -6,7 +6,15 @@
       xmlns:props="clr-namespace:SmallHoneybee.Wpf.Properties"
       mc:Ignorable="d" 
 	 Title="用户管理">
-
+    <Page.Resources>
+        <RoutedUICommand x:Key="ClearSearchText" Text="Increase Font Size" />
+        <RoutedUICommand x:Key="ExecuteSearchText" Text="Decrease Font Size" />
+        <ResourceDictionary x:Key="CommonStyle">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
@@ -33,17 +41,17 @@
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" Text="会员编号/电话号码：" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="16"></TextBlock>
-            <TextBox Background="#FFE7F5F5" Grid.Column="1" Grid.Row="0" Width="380" Height="30" FontSize="16" Name="TxtSearchBox"></TextBox>
-            <Button  Grid.Column="2" Grid.Row="0" Width="100" Height="30" Content="{x:Static props:Resources.Search}"  FontSize="16" Click="BtnSearch_Click"/>
-            <Button  Grid.Column="3" Grid.Row="0" Width="100" Height="30" Content="清空"  FontSize="16" Click="BtnClear_Click" />
-            <Button  Grid.Column="4" Grid.Row="0" Width="100" Height="30" Content="保存"  FontSize="16" Click="BtnSave_Click" />
+            <TextBox Background="#FFE7F5F5" Grid.Column="1" Grid.Row="0" Name="TxtSearchBox"></TextBox>
+            <Button  Grid.Column="2" Grid.Row="0" Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
+            <Button  Grid.Column="3" Grid.Row="0" Content="清空" Click="BtnClear_Click" />
+            <Button  Grid.Column="4" Grid.Row="0" Content="保存" Click="BtnSave_Click" />
         </Grid>
         <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
         <DataGrid Grid.Row="3" Name="gridUsers"
                   CanUserAddRows="True"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding Path=DataContext.Users, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
-                  FontSize="16" FontWeight="Medium">
+                  FontWeight="Medium">
             <DataGrid.Columns>
                 <DataGridTemplateColumn  Width="30">
                     <DataGridTemplateColumn.CellTemplate>
@@ -134,10 +142,6 @@
             </DataGrid.Columns>
         </DataGrid>
     </Grid>
-    <Page.Resources>
-        <RoutedUICommand x:Key="ClearSearchText" Text="Clear Search Text" />
-        <RoutedUICommand x:Key="ExecuteSearchText" Text="Execute Search Text" />
-    </Page.Resources>
     <Page.InputBindings>
         <KeyBinding Gesture="Esc" Command="{StaticResource ClearSearchText}"/>
         <KeyBinding Gesture="Enter" Command="{StaticResource ExecuteSearchText}"/>
