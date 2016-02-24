@@ -5,7 +5,10 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media;
 using Microsoft.Practices.ObjectBuilder2;
 using SmallHoneybee.Common;
 using SmallHoneybee.DataModel.Model;
@@ -14,6 +17,8 @@ using SmallHoneybee.EF.Data.Repository;
 using SmallHoneybee.EF.Data.Repository.Impl;
 using SmallHoneybee.EF.Data.UntityContainer;
 using SmallHoneybee.Wpf.Common;
+using DataGrid = System.Windows.Controls.DataGrid;
+using MessageBox = System.Windows.MessageBox;
 
 namespace SmallHoneybee.Wpf.Views
 {
@@ -38,6 +43,8 @@ namespace SmallHoneybee.Wpf.Views
 
         private void SetInitData()
         {
+            DateStartDate.SelectedDate = DateTime.Today.AddDays(-(byte)DateTime.Today.DayOfWeek);
+            DateEndDate.SelectedDate = DateTime.Today.AddDays(7 - (byte)DateTime.Today.DayOfWeek - 1);
             ExecuteSearchText();
 
             var saleOrderStatuses = new List<KeyValuePair<sbyte?, string>> { new KeyValuePair<sbyte?, string>(null, string.Empty) };
@@ -76,13 +83,42 @@ namespace SmallHoneybee.Wpf.Views
             _saleOrderRepository = _unitOfWork.GetRepository<SaleOrderRepository>();
 
             _saleOrders.Clear();
-            _saleOrderRepository
-                .Query()
+            IQueryable<DataModel.Model.SaleOrder> saleOrders = _saleOrderRepository.Query();
+
+            if (DateStartDate.SelectedDate.HasValue && DateEndDate.SelectedDate.HasValue)
+            {
+                saleOrders = saleOrders.Where(x => x.DateOriginated >= DateStartDate.SelectedDate.Value &&
+                    x.DateOriginated < DateEndDate.SelectedDate.Value);
+            }
+            else if (DateStartDate.SelectedDate.HasValue)
+            {
+                saleOrders = saleOrders.Where(x => x.DateOriginated >= DateStartDate.SelectedDate.Value);
+            }
+            else if (DateEndDate.SelectedDate.HasValue)
+            {
+                saleOrders = saleOrders.Where(x => x.DateOriginated < DateEndDate.SelectedDate.Value);
+            }
+
+            saleOrders
                 .OrderByDescending(x => x.DateOriginated)
                 .Where(x => x.SaleOrderNo.Contains(TxtSearchBox.Text) ||
                     x.Name.Contains(TxtSearchBox.Text))
                 .ToList()
                 .ForEach(x => _saleOrders.Add(x));
+
+            var totalInfo = _saleOrders.Where(x => x.SaleOrderStatus == (byte)DataType.SaleOrderStatus.Balanced)
+                .Select(x => new { x, Group1 = 1 })
+                .GroupBy(x => x.Group1)
+                .Select(m => new
+                {
+                    TotalCount=m.Count(),
+                    TotalQuantity = m.Sum(y => y.x.SOProduces.Sum(s => s.Quantity)),
+                    TotalPrice = m.Sum(y=>y.x.TotalCost),
+                }).FirstOrDefault();
+            TxtTotalInfo.Text = string.Format("共计 {0} 条记录, 共计 {1} 件商品，总计 {2}",
+                totalInfo != null ? totalInfo.TotalCount : 0,
+                (totalInfo != null ? totalInfo.TotalQuantity ?? 0.0F : 0.0F).ToString("F2"),
+                (totalInfo != null ? totalInfo.TotalPrice ?? 0.0F : 0.0F).ToString("F2"));
         }
 
         private void CommandBinding_ClearSearchText_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -177,9 +213,12 @@ namespace SmallHoneybee.Wpf.Views
         }
     }
 
+
+
     public class SaleOrderDoMainModel
     {
         public DataModel.Model.SaleOrder SaleOrder { get; set; }
+        //public 
     }
 
     public class SOProduceDomainModel : INotifyPropertyChanged
@@ -212,4 +251,29 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
     }
+}
+
+namespace ConverterAndValidation
+{
+    [ValueConversion(typeof(sbyte), typeof(string))]
+    public class StatusConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            int id = int.Parse(value.ToString());
+            if (id == 0)
+            {
+                return "#00CC00";
+            }
+
+            return "#FF0000";
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+
+    }
+
 }

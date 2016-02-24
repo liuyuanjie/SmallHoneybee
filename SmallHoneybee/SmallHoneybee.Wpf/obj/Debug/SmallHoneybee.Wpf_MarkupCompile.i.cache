@@ -4,7 +4,7 @@
 winexe
 C#
 .cs
-E:\WorkDoc\Liuyj\HomeWork\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\
 SmallHoneybee.Wpf
 none
 false
@@ -12,8 +12,8 @@ DEBUG;TRACE
 
 37131443451
 
-231197065176
-32-1355494309
+231202406922
+32-1611580054
 MainWindow.xaml;Resources\button.xaml;Resources\checkbox.xaml;Resources\combobox.xaml;Resources\expander.xaml;Resources\frame.xaml;Resources\groupbox.xaml;Resources\label.xaml;Resources\listbox.xaml;Resources\listview.xaml;Resources\menu.xaml;Resources\navigationwindow.xaml;Resources\progressbar.xaml;Resources\radiobutton.xaml;Resources\resizegrip.xaml;Resources\scrollbar.xaml;Resources\scrollviewer.xaml;Resources\separator.xaml;Resources\shared.xaml;Resources\slider.xaml;Resources\statusbar.xaml;Resources\Style.xaml;Resources\tabcontrol.xaml;Resources\textbox.xaml;Resources\toolbar.xaml;Resources\tooltip.xaml;Resources\treeview.xaml;Resources\window.xaml;Views\BalanceFrom.xaml;Views\Login.xaml;Views\Produce.xaml;Views\PurchaseOrder.xaml;Views\SaleOrder.xaml;Views\SaleOrderForm.xaml;Views\Shared\ChooseMassagebox.xaml;Views\Shared\FileDialog.xaml;Views\User.xaml;
 
 True

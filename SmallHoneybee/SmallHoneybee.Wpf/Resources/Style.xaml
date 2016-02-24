@@ -22,7 +22,13 @@
         <Setter Property="Background" Value="#FFF0FDFC"/>
         <Setter Property="BorderBrush" Value="#FF9DCD19"/>
     </Style>
-    
+    <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource BaseStyle}">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="Background" Value="#FFF0FDFC"/>
+        <Setter Property="BorderBrush" Value="#FF9DCD19"/>
+    </Style>
+
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="FontSize" Value="14" />
         <Setter Property="FontFamily" Value="Segoe UI" />

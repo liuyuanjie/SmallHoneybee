@@ -7,3 +7,8 @@ F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\bin\Debug\SmallHon
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\bin\Debug\SmallHoneybee.DomainModel.pdb
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\obj\Debug\SmallHoneybee.DomainModel.dll
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\obj\Debug\SmallHoneybee.DomainModel.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\bin\Debug\SmallHoneybee.DomainModel.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\bin\Debug\SmallHoneybee.DomainModel.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\obj\Debug\SmallHoneybee.DomainModel.csprojResolveAssemblyReference.cache
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\obj\Debug\SmallHoneybee.DomainModel.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\obj\Debug\SmallHoneybee.DomainModel.pdb

@@ -98,3 +98,4 @@ F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Deb
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\zh-CN\SmallHoneybee.Wpf.resources.dll
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\SmallHoneybee.Wpf.exe
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\SmallHoneybee.Wpf.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\GeneratedInternalTypeHelper.g.cs
