@@ -165,7 +165,7 @@ namespace SmallHoneybee.Wpf.Views
                                 CostPerUnit = produce.RetailPrice,
                                 SaleOrder = _saleOrder,
                                 SaleOrderId = _saleOrder.SaleOrderId,
-                                DiscountRate = 1.00f
+                                DiscountRate = produce.DiscountRate
                             }
                         };
                         _soProduceDomainModels.Add(soProduceDomainModel);
@@ -224,7 +224,6 @@ namespace SmallHoneybee.Wpf.Views
         {
             Close();
         }
-
 
         private void TxtOtherCost_OnKeyDown(object sender, KeyEventArgs e)
         {

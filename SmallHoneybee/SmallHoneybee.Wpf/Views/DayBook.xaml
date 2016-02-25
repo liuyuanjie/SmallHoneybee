@@ -1,0 +1,118 @@
+﻿<Page x:Class="SmallHoneybee.Wpf.Views.DayBook"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:props="clr-namespace:SmallHoneybee.Wpf.Properties"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+	 Title="日常支出">
+    <Page.Resources>
+        <RoutedUICommand x:Key="ClearSearchText" Text="Increase Font Size" />
+        <RoutedUICommand x:Key="ExecuteSearchText" Text="Decrease Font Size" />
+        <ResourceDictionary x:Key="CommonStyle">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Resources="{StaticResource CommonStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="55"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1000*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0">||日常支出</TextBlock>
+        <Grid Grid.Column="0" Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
+                <TextBlock Text="时间范围：" VerticalAlignment="Center"></TextBlock>
+                <DatePicker Name="DateStartDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long"></DatePicker>
+                <TextBlock VerticalAlignment="Center">～</TextBlock>
+                <DatePicker Name="DateEndDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+            </StackPanel>
+            <Button  Grid.Column="1" Grid.Row="0" Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
+            <Button  Grid.Column="2" Grid.Row="0" Content="清空" Click="BtnClear_Click" />
+            <Button  Grid.Column="3" Grid.Row="0" Content="保存" Click="BtnSave_Click" />
+        </Grid>
+        <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
+        <DataGrid Grid.Row="3" Name="gridDayBooks"
+                  CanUserAddRows="True"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding Path=DataContext.DayBooks, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
+                  FontWeight="Medium">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn  Width="30">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Name="ButDeleteDayBook"
+                                   Cursor="Hand"
+                                    Width="16"
+                                   Height="16"
+                                   MouseDown="ButDeleteDayBook_Click" 
+                                   Source="/SmallHoneybee.Wpf;component/images/icoDelete.png">
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="时间" Width="160" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker Language="zh-CN"  SelectedDateFormat="Long" SelectedDate="{Binding DayBooKDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" KeyDown="TextUserNo_OnKeyDown" ></DatePicker>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="类型">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding DayBooKType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="金额">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding HowManey, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="备注" Width="250">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="DayBookId" Binding="{Binding DayBookId}" Visibility="Hidden"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+    <Page.InputBindings>
+        <KeyBinding Gesture="Esc" Command="{StaticResource ClearSearchText}"/>
+        <KeyBinding Gesture="Enter" Command="{StaticResource ExecuteSearchText}"/>
+    </Page.InputBindings>
+    <Page.CommandBindings>
+        <CommandBinding Command="{StaticResource ClearSearchText}"
+                    CanExecute="CommandBinding_ClearSearchText_CanExecute"
+                    Executed="CommandBinding_ClearSearchText_Executed"/>
+        <CommandBinding Command="{StaticResource ExecuteSearchText}"
+                    CanExecute="CommandBinding_ExecuteSearchText_CanExecute"
+                    Executed="CommandBinding_ExecuteSearchText_Executed"/>
+    </Page.CommandBindings>
+
+</Page>

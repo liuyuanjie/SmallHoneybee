@@ -15,6 +15,13 @@ namespace SmallHoneybee.Common
             Admin
         }
 
+        public enum DayBookType
+        {
+            None,
+            PayOut,
+            InCome
+        }
+
         public enum POItemStatusCategory
         {
             None,

@@ -99,3 +99,7 @@ F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Deb
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\SmallHoneybee.Wpf.exe
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\SmallHoneybee.Wpf.pdb
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\GeneratedInternalTypeHelper.g.cs
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\SystemSetting.baml
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\DayBook.g.cs
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\SystemSetting.g.cs
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\DayBook.baml

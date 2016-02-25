@@ -16,8 +16,9 @@ namespace SmallHoneybee.DataModel.Model
     {
         public User()
         {
-            this.PurchaseOrders = new HashSet<PurchaseOrder>();
-            this.SaleOrders = new HashSet<SaleOrder>();
+            this.SaleOrderPurchaseOrders = new HashSet<PurchaseOrder>();
+            this.SaleOrderOriginUsers = new HashSet<SaleOrder>();
+            this.SaleOrderPurchaseOrderUsers = new HashSet<SaleOrder>();
             this.Userlogs = new HashSet<Userlog>();
         }
     
@@ -45,8 +46,9 @@ namespace SmallHoneybee.DataModel.Model
         public string LastModifiedBy { get; set; }
         public System.DateTime RowVersion { get; set; }
     
-        public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
-        public virtual ICollection<SaleOrder> SaleOrders { get; set; }
+        public virtual ICollection<PurchaseOrder> SaleOrderPurchaseOrders { get; set; }
+        public virtual ICollection<SaleOrder> SaleOrderOriginUsers { get; set; }
+        public virtual ICollection<SaleOrder> SaleOrderPurchaseOrderUsers { get; set; }
         public virtual ICollection<Userlog> Userlogs { get; set; }
     }
 }

@@ -99,6 +99,13 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="零售折扣">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding DiscountRate, StringFormat=F2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="最近一次订购日期" Binding="{Binding LastOrderDate, StringFormat=yyyy-MM-dd}"/>
                 <DataGridTextColumn Header="别名" Binding="{Binding Name}"/>
                 <!--<DataGridTextColumn Header="包装规格" Binding="{Binding PackSize}"/>-->

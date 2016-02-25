@@ -4,17 +4,19 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="369d68052734437a884cbaaa4cac6a6d" Name="Diagram1" ZoomLevel="54">
-        <EntityTypeShape EntityType="SmallHoneybeeModel.Category" Width="1.5" PointX="0.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.POItem" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.Produce" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.Producelog" Width="1.5" PointX="5.25" PointY="12.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.PurchaseOrder" Width="1.5" PointX="3" PointY="15.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.SaleOrder" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.SOLog" Width="1.5" PointX="8.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.SOProduce" Width="1.5" PointX="8.25" PointY="7.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.User" Width="1.5" PointX="0.75" PointY="15.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="SmallHoneybeeModel.Userlog" Width="1.5" PointX="3" PointY="22.25" IsExpanded="true" />
+      <Diagram DiagramId="deeff73b5f01471c989d51bd1439004d" Name="Diagram1">
+        <EntityTypeShape EntityType="SmallHoneybeeModel.Category" Width="1.5" PointX="0.75" PointY="19.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.DayBook" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.POItem" Width="1.5" PointX="5.25" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.Produce" Width="1.5" PointX="3" PointY="17.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.Producelog" Width="1.5" PointX="5.25" PointY="20" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.PurchaseOrder" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.SaleOrder" Width="1.5" PointX="3" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.SOLog" Width="1.5" PointX="5.875" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.SOProduce" Width="1.5" PointX="8.25" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.SystemSetting" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.User" Width="1.5" PointX="0.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SmallHoneybeeModel.Userlog" Width="1.5" PointX="3" PointY="14.5" IsExpanded="true" />
         <AssociationConnector Association="SmallHoneybeeModel.FK_Produce_Category_CategoryId_CategoryId" ManuallyRouted="false" />
         <AssociationConnector Association="SmallHoneybeeModel.FK_POItem_Produce_ProduceId_ProduceId" ManuallyRouted="false" />
         <AssociationConnector Association="SmallHoneybeeModel.FK_POItem_PurchaseOrder_PurchaseOrderId_PurchaseOrderId" ManuallyRouted="false" />
@@ -22,6 +24,7 @@
         <AssociationConnector Association="SmallHoneybeeModel.FK_SOProduce_Produce_ProduceId_ProduceId" ManuallyRouted="false" />
         <AssociationConnector Association="SmallHoneybeeModel.FK_PurchaseOrder_User_OriginatorId_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SmallHoneybeeModel.FK_Produce_SaleOrder_OriginUserId_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="SmallHoneybeeModel.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" ManuallyRouted="false" />
         <AssociationConnector Association="SmallHoneybeeModel.FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId" ManuallyRouted="false" />
         <AssociationConnector Association="SmallHoneybeeModel.Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId" ManuallyRouted="false" />
         <AssociationConnector Association="SmallHoneybeeModel.FK_UserLog_User_UserId_UserId" ManuallyRouted="false" />

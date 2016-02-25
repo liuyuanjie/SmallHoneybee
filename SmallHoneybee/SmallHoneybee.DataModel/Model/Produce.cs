@@ -24,11 +24,12 @@ namespace SmallHoneybee.DataModel.Model
         public int ProduceId { get; set; }
         public string ProduceNo { get; set; }
         public string BarCode { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
         public string Alias { get; set; }
-        public int CategoryId { get; set; }
         public string PackSize { get; set; }
         public float RetailPrice { get; set; }
+        public float DiscountRate { get; set; }
         public float FactoryPrice { get; set; }
         public string OrderSize { get; set; }
         public Nullable<float> PackFee { get; set; }

@@ -58,6 +58,15 @@ namespace SmallHoneybee.Wpf.Views
             {
                 BalanceDomainModel = _balanceDomainModel,
             };
+
+            RadBanlanceModeCard.Click += (s, e) =>
+            {
+                TabItemCard.IsSelected = true;
+            };
+            RadBanlanceModeCash.Click += (s, e) =>
+            {
+                TabItemCash.IsSelected = true;
+            };
         }
 
         private void ButSure_OnClick(object sender, RoutedEventArgs e)
@@ -73,7 +82,7 @@ namespace SmallHoneybee.Wpf.Views
                 {
                     if (_user.UserId > 0)
                     {
-                        if (!(bool)RadBanlanceMode.IsChecked)
+                        if (RadBanlanceModeCard.IsChecked != null && (bool)RadBanlanceModeCard.IsChecked)
                         {
                             if (_balanceDomainModel.SurplusPrice < 0 ||
                                 _user.CashTotal - _balanceDomainModel.ReceivedPrice < 0)

@@ -49,7 +49,7 @@
             <TextBlock Grid.Column="0" Grid.Row="2" Text="备注：" HorizontalAlignment="Right" />
             <TextBox Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="3" Name="TxtDescription" Text="{Binding Path=DataContext.SaleOrder.Description, Mode=TwoWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" ></TextBox>
         </Grid>
-        <DataGrid Grid.Row="2" Name="GridSOProduces" Height="350" AutoGenerateColumns="False"
+        <DataGrid Grid.Row="2" Name="GridSOProduces" AutoGenerateColumns="False"
                   ItemsSource="{Binding Path=DataContext.SOProduceDomainModels,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" 
              FontWeight="Medium">
             <DataGrid.Columns>

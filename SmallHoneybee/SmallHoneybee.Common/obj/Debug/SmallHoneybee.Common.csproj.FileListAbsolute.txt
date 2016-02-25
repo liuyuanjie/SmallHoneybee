@@ -27,3 +27,4 @@ F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Debug\log4net.xml
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\obj\Debug\SmallHoneybee.Common.dll
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\obj\Debug\SmallHoneybee.Common.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\obj\Debug\SmallHoneybee.Common.csprojResolveAssemblyReference.cache

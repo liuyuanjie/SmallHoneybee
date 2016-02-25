@@ -82,5 +82,23 @@ namespace SmallHoneybee.Wpf
                 }
             }
         }
+
+        private void SamllHoneybeeSystemSettingMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            ClearMeunChecked();
+
+            frame_run.Content = new Views.SystemSetting();
+            var menuItem = (MenuItem)sender;
+            menuItem.IsChecked = true;
+        }
+
+        private void SamllHoneybeeDayBookMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            ClearMeunChecked();
+
+            frame_run.Content = new Views.DayBook();
+            var menuItem = (MenuItem)sender;
+            menuItem.IsChecked = true;
+        }
     }
 }

@@ -25,6 +25,7 @@ namespace SmallHoneybee.DataModel.Model
         public string Name { get; set; }
         public sbyte SaleOrderStatus { get; set; }
         public Nullable<int> OriginUserId { get; set; }
+        public Nullable<int> PurchaseOrderUserId { get; set; }
         public Nullable<System.DateTime> DateOriginated { get; set; }
         public Nullable<System.DateTime> DateCompleted { get; set; }
         public Nullable<float> ProduceCost { get; set; }
@@ -38,7 +39,8 @@ namespace SmallHoneybee.DataModel.Model
         public string LastModifiedBy { get; set; }
         public System.DateTime RowVersion { get; set; }
     
-        public virtual User User { get; set; }
+        public virtual User OriginUser { get; set; }
+        public virtual User PurchaseOrderUser { get; set; }
         public virtual ICollection<SOLog> SOLogs { get; set; }
         public virtual ICollection<SOProduce> SOProduces { get; set; }
     }

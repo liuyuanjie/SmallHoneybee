@@ -32,13 +32,13 @@
             <ColumnDefinition Width="1000*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0"  FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0">||零售管理</TextBlock>
-        <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="5">
+        <Grid Grid.Column="0" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40"></RowDefinition>
+                <RowDefinition Height="45"></RowDefinition>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
@@ -50,7 +50,7 @@
                 <TextBlock VerticalAlignment="Center">～</TextBlock>
                 <DatePicker Name="DateEndDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
             </StackPanel>
-            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Margin="5,0">
                 <Button Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
                 <Button Content="清空" Click="BtnClear_Click" />
                 <Button Content="新建" Click="Button_Click"></Button>
