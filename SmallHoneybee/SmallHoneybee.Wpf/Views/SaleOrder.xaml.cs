@@ -34,6 +34,7 @@ namespace SmallHoneybee.Wpf.Views
             = new ObservableCollection<DataModel.Model.SaleOrder>();
         private ObservableCollection<SOProduceDomainModel> _soProduceDomainModels
             = new ObservableCollection<SOProduceDomainModel>();
+
         public SaleOrder()
         {
             InitializeComponent();
@@ -251,29 +252,4 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
     }
-}
-
-namespace ConverterAndValidation
-{
-    [ValueConversion(typeof(sbyte), typeof(string))]
-    public class StatusConverter : IValueConverter
-    {
-        public object Convert(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            int id = int.Parse(value.ToString());
-            if (id == 0)
-            {
-                return "#00CC00";
-            }
-
-            return "#FF0000";
-        }
-
-        public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)
-        {
-            throw new NotImplementedException();
-        }
-
-    }
-
 }

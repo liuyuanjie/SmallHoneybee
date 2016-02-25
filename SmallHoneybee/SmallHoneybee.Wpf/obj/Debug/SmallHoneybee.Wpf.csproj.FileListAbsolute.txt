@@ -1,4 +1,3 @@
-E:\WorkDoc\Liuyj\HomeWork\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\SmallHoneybee.Wpf.exe.config
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\SmallHoneybee.Wpf.exe.config
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\SmallHoneybee.Wpf.exe
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\SmallHoneybee.Wpf.pdb
@@ -70,8 +69,10 @@ F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Deb
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\BalanceFrom.baml
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\Login.baml
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\SaleOrderForm.baml
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\SystemSetting.baml
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\MainWindow.g.cs
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\BalanceFrom.g.cs
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\DayBook.g.cs
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\Login.g.cs
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\Produce.g.cs
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\PurchaseOrder.g.cs
@@ -79,10 +80,13 @@ F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Deb
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\SaleOrderForm.g.cs
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\Shared\ChooseMassagebox.g.cs
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\Shared\FileDialog.g.cs
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\SystemSetting.g.cs
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\User.g.cs
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\GeneratedInternalTypeHelper.g.cs
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\SmallHoneybee.Wpf_MarkupCompile.cache
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\SmallHoneybee.Wpf_MarkupCompile.lref
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\MainWindow.baml
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\DayBook.baml
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\Produce.baml
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\PurchaseOrder.baml
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\SaleOrder.baml
@@ -98,8 +102,3 @@ F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Deb
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\zh-CN\SmallHoneybee.Wpf.resources.dll
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\SmallHoneybee.Wpf.exe
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\SmallHoneybee.Wpf.pdb
-F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\GeneratedInternalTypeHelper.g.cs
-F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\SystemSetting.baml
-F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\DayBook.g.cs
-F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\SystemSetting.g.cs
-F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\Views\DayBook.baml

@@ -2,3 +2,7 @@ F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\bin\Release\SmallH
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\bin\Release\SmallHoneybee.DomainModel.pdb
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\obj\Release\SmallHoneybee.DomainModel.dll
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DomainModel\obj\Release\SmallHoneybee.DomainModel.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\bin\Release\SmallHoneybee.DomainModel.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\bin\Release\SmallHoneybee.DomainModel.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\obj\Release\SmallHoneybee.DomainModel.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\obj\Release\SmallHoneybee.DomainModel.pdb

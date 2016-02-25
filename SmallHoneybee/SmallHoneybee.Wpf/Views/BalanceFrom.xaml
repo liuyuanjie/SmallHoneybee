@@ -48,7 +48,9 @@
             <TextBlock Text="商品小计金额：" VerticalAlignment="Center"></TextBlock>
             <TextBox MinWidth="120" IsEnabled="false" Text="{Binding Path=DataContext.BalanceDomainModel.TotalPrice,StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
             <TextBlock Text="优惠金额：" VerticalAlignment="Center"></TextBlock>
-            <TextBox MinWidth="120" Text="{Binding Path=DataContext.BalanceDomainModel.DiscountPrice,StringFormat=F2,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Name="TxtDiscount" KeyDown="TxtDiscount_OnKeyDown" ></TextBox>
+            <TextBox MinWidth="120" Text="{Binding Path=DataContext.BalanceDomainModel.DiscountPrice,StringFormat=F2,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                     IsEnabled="{Binding Path=DataContext.CurrentUserRolePermission.SaleOrderFavorableCost,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                     Name="TxtDiscount" KeyDown="TxtDiscount_OnKeyDown" ></TextBox>
             <TextBlock  Text="应收金额：" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
             <TextBox MinWidth="150" IsEnabled="false" Style="{StaticResource MarkedTextStyle}"
                 Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />

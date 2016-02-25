@@ -11,13 +11,13 @@ namespace SmallHoneybee.Common
         public enum UserType
         {
             Coustom,
-            Worker,
+            GeneralManger,
+            HightManger,
             Admin
         }
 
         public enum DayBookType
         {
-            None,
             PayOut,
             InCome
         }

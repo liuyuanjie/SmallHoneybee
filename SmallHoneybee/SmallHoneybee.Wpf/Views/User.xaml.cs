@@ -31,10 +31,8 @@ namespace SmallHoneybee.Wpf.Views
     /// </summary>
     public partial class User : Page, INotifyPropertyChanged
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IProduceRepository _produceRepository;
-        private readonly IUserRepository _userRepository;
+        private IUnitOfWork _unitOfWork;
+        private  IUserRepository _userRepository;
 
         private ObservableCollection<DataModel.Model.User> _users = new ObservableCollection<DataModel.Model.User>();
 
@@ -51,18 +49,8 @@ namespace SmallHoneybee.Wpf.Views
         public User()
         {
             InitializeComponent();
-            _unitOfWork = UnityInit.UnitOfWork;
-            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
-            _produceRepository = _unitOfWork.GetRepository<ProduceRepository>();
-            _userRepository = _unitOfWork.GetRepository<UserRepository>();
 
             SetInitData();
-        }
-
-        private void BtnImport_Click(object sender, RoutedEventArgs e)
-        {
-            FileDialog fileDialog = new FileDialog(DataType.ImporterType.Produce);
-            fileDialog.ShowDialog();
         }
 
         private void SetInitData()
@@ -80,8 +68,7 @@ namespace SmallHoneybee.Wpf.Views
 
             DataContext = new
             {
-                UserTypes = userTypes,
-                Users = Users,
+                UserTypes = userTypes, Users,
                 EnableTexts = enableTxets
             };
         }
@@ -103,6 +90,9 @@ namespace SmallHoneybee.Wpf.Views
 
         private void ExecuteSearchText()
         {
+            _unitOfWork = UnityInit.UnitOfWork;
+            _userRepository = _unitOfWork.GetRepository<UserRepository>();
+
             _users.Clear();
             _userRepository
                 .Query()

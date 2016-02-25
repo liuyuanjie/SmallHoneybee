@@ -82,7 +82,8 @@ namespace SmallHoneybee.Wpf.Views
             DataContext = new
             {
                 SaleOrder = _saleOrder,
-                SOProduceDomainModels
+                SOProduceDomainModels,
+                ResourcesHelper.CurrentUserRolePermission,
             };
 
             _soProduceDomainModels.CollectionChanged += (sender, e) => SetTotalNameberText();

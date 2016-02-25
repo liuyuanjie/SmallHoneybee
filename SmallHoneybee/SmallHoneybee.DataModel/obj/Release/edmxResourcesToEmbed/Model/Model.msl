@@ -16,6 +16,22 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="DayBooks">
+      <EntityTypeMapping TypeName="SmallHoneybeeModel.DayBook">
+        <MappingFragment StoreEntitySet="DayBook">
+          <ScalarProperty Name="DayBookId" ColumnName="DayBookId" />
+          <ScalarProperty Name="DayBookDate" ColumnName="DayBookDate" />
+          <ScalarProperty Name="DayBookType" ColumnName="DayBookType" />
+          <ScalarProperty Name="HowManey" ColumnName="HowManey" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+          <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="POItems">
       <EntityTypeMapping TypeName="SmallHoneybeeModel.POItem">
         <MappingFragment StoreEntitySet="POItem">
@@ -42,11 +58,12 @@
           <ScalarProperty Name="ProduceId" ColumnName="ProduceId" />
           <ScalarProperty Name="ProduceNo" ColumnName="ProduceNo" />
           <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Alias" ColumnName="Alias" />
-          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="PackSize" ColumnName="PackSize" />
           <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
+          <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
           <ScalarProperty Name="FactoryPrice" ColumnName="FactoryPrice" />
           <ScalarProperty Name="OrderSize" ColumnName="OrderSize" />
           <ScalarProperty Name="PackFee" ColumnName="PackFee" />
@@ -114,6 +131,7 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="SaleOrderStatus" ColumnName="SaleOrderStatus" />
           <ScalarProperty Name="OriginUserId" ColumnName="OriginUserId" />
+          <ScalarProperty Name="PurchaseOrderUserId" ColumnName="PurchaseOrderUserId" />
           <ScalarProperty Name="DateOriginated" ColumnName="DateOriginated" />
           <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
           <ScalarProperty Name="ProduceCost" ColumnName="ProduceCost" />
@@ -152,6 +170,22 @@
           <ScalarProperty Name="DateSaled" ColumnName="DateSaled" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+          <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SystemSettings">
+      <EntityTypeMapping TypeName="SmallHoneybeeModel.SystemSetting">
+        <MappingFragment StoreEntitySet="SystemSetting">
+          <ScalarProperty Name="SettingId" ColumnName="SettingId" />
+          <ScalarProperty Name="SettingCode" ColumnName="SettingCode" />
+          <ScalarProperty Name="SettingValue" ColumnName="SettingValue" />
+          <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

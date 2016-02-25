@@ -57,6 +57,7 @@ namespace SmallHoneybee.Wpf.Views
             DataContext = new
             {
                 BalanceDomainModel = _balanceDomainModel,
+                ResourcesHelper.CurrentUserRolePermission,
             };
 
             RadBanlanceModeCard.Click += (s, e) =>

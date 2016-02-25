@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text;
 using System.Threading;
 using System.Windows;
 using SmallHoneybee.Common;
@@ -33,6 +34,18 @@ namespace SmallHoneybee.Wpf
         static void RunProcess()
         {
             Application app = new Application();
+            app.DispatcherUnhandledException+= (s, e) =>
+            {
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.AppendFormat("应用程序出现了未捕获的异常，{0}/n", e.Exception.Message);
+                if (e.Exception.InnerException != null)
+                {
+                    stringBuilder.AppendFormat("/n {0}", e.Exception.InnerException.Message);
+                }
+                stringBuilder.AppendFormat("/n {0}", e.Exception.StackTrace);
+                MessageBox.Show(stringBuilder.ToString());
+                e.Handled = true;  
+            };
             Login mainWindow = new Login();
             app.Run(mainWindow);
         }
@@ -42,6 +55,7 @@ namespace SmallHoneybee.Wpf
             CultureInfo cultureInfo = new CultureInfo("zh-CN");
             Thread.CurrentThread.CurrentCulture = cultureInfo;
             Thread.CurrentThread.CurrentUICulture = cultureInfo;
+            cultureInfo.DateTimeFormat.LongDatePattern = "yyyy-MM-dd";
         }
     }
 }

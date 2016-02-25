@@ -12,7 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SmallHoneybee.Common;
 using SmallHoneybee.DataModel.Model;
+using SmallHoneybee.Wpf.Common;
 using SmallHoneybee.Wpf.Views.Shared;
 using Produce = SmallHoneybee.Wpf.Views.Produce;
 using PurchaseOrder = SmallHoneybee.Wpf.Views.PurchaseOrder;
@@ -31,6 +33,10 @@ namespace SmallHoneybee.Wpf
             frame_run.Content = new Views.SaleOrder();
 
             SamllHoneybeeSaleOrderMenu.IsChecked = true;
+            DataContext = new
+            {
+                ResourcesHelper.CurrentUserRolePermission
+            };
         }
 
         private void RTReportMenuNavigation_Click(object sender, RoutedEventArgs e)
@@ -40,6 +46,8 @@ namespace SmallHoneybee.Wpf
             frame_run.Content = new SaleOrder();
             var menuItem = (MenuItem)sender;
             menuItem.IsChecked = true;
+
+
         }
 
         private void HSReportMenuNavigation_Click(object sender, RoutedEventArgs e)

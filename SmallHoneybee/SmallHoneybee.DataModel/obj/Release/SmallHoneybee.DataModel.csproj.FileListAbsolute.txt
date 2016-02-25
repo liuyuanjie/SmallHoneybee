@@ -9,3 +9,15 @@ F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\EntityFr
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\EntityFramework.SqlServer.xml
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\obj\Release\SmallHoneybee.DataModel.dll
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.DataModel\obj\Release\SmallHoneybee.DataModel.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\SmallHoneybee.DataModel.dll.config
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\SmallHoneybee.DataModel.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\SmallHoneybee.DataModel.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\EntityFramework.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\EntityFramework.SqlServer.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\MySql.Data.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\MySql.Data.Entity.EF6.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\EntityFramework.xml
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Release\EntityFramework.SqlServer.xml
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\obj\Release\SmallHoneybee.DataModel.csprojResolveAssemblyReference.cache
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\obj\Release\SmallHoneybee.DataModel.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\obj\Release\SmallHoneybee.DataModel.pdb

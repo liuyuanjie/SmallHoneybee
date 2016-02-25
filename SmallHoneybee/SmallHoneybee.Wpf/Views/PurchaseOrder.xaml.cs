@@ -21,11 +21,9 @@ namespace SmallHoneybee.Wpf.Views
     /// </summary>
     public partial class PurchaseOrder : Page
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IPurchaseOrderRepository _purchaseOrderRepository;
-        private readonly IProduceRepository _produceRepository;
-        private readonly IPOItemRepository _poItemRepository;
+        private IUnitOfWork _unitOfWork;
+        private ICategoryRepository _categoryRepository;
+        private IPurchaseOrderRepository _purchaseOrderRepository;
 
         private ObservableCollection<DataModel.Model.PurchaseOrder> _purchaseOrders
             = new ObservableCollection<DataModel.Model.PurchaseOrder>();
@@ -34,13 +32,6 @@ namespace SmallHoneybee.Wpf.Views
         public PurchaseOrder()
         {
             InitializeComponent();
-
-            _unitOfWork = UnityInit.UnitOfWork;
-
-            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
-            _produceRepository = _unitOfWork.GetRepository<ProduceRepository>();
-            _purchaseOrderRepository = _unitOfWork.GetRepository<PurchaseOrderRepository>();
-            _poItemRepository = _unitOfWork.GetRepository<POItemRepository>();
 
             SetInitData();
         }
@@ -54,6 +45,10 @@ namespace SmallHoneybee.Wpf.Views
 
         private void SetInitData()
         {
+            _unitOfWork = UnityInit.UnitOfWork;
+            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
+            _purchaseOrderRepository = _unitOfWork.GetRepository<PurchaseOrderRepository>();
+
             var categories = new List<Category>();
             categories.AddRange(_categoryRepository.Query().OrderBy(x => x.Name));
 

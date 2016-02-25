@@ -51,6 +51,7 @@
     <Compile Include="ExceptionExtension\NotFindFileException.cs" />
     <Compile Include="Log4NetHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RolePermission.cs" />
     <Compile Include="SaltedHash.cs" />
   </ItemGroup>
   <ItemGroup>

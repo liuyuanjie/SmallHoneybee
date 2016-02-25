@@ -28,8 +28,8 @@ namespace SmallHoneybee.Wpf.Views
     /// </summary>
     public partial class DayBook : Page
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly EF.Data.Repository.IDayBookRepository _dayBookRepository;
+        private IUnitOfWork _unitOfWork;
+        private EF.Data.Repository.IDayBookRepository _dayBookRepository;
 
         private ObservableCollection<DataModel.Model.DayBook> _dayBooks = new ObservableCollection<DataModel.Model.DayBook>();
 
@@ -46,8 +46,6 @@ namespace SmallHoneybee.Wpf.Views
         public DayBook()
         {
             InitializeComponent();
-            _unitOfWork = UnityInit.UnitOfWork;
-            _dayBookRepository = _unitOfWork.GetRepository<DayBookRepository>();
 
             SetInitData();
         }
@@ -64,7 +62,7 @@ namespace SmallHoneybee.Wpf.Views
             DataContext = new
             {
                 DayBookTypes = dayBookTypes,
-                DayBooks = DayBooks,
+                DayBooks,
             };
         }
 
@@ -86,6 +84,9 @@ namespace SmallHoneybee.Wpf.Views
 
         private void ExecuteSearchText()
         {
+            _unitOfWork = UnityInit.UnitOfWork;
+            _dayBookRepository = _unitOfWork.GetRepository<DayBookRepository>();
+
             _dayBooks.Clear();
 
             IQueryable<DataModel.Model.DayBook> dayBooks = _dayBookRepository.Query();
@@ -147,7 +148,7 @@ namespace SmallHoneybee.Wpf.Views
         {
             try
             {
-                _dayBooks.Where(x => x.DayBookDate>DateTime.Today).ForEach(x =>
+                _dayBooks.Where(x => x.DayBookDate >= DateTime.Today && x.HowManey >= 0).ForEach(x =>
                 {
                     if (x.DayBookId > 0)
                     {
@@ -181,7 +182,7 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
-        private void TextUserNo_OnKeyDown(object sender, KeyEventArgs e)
+        private void TextHowManey_OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
@@ -193,7 +194,6 @@ namespace SmallHoneybee.Wpf.Views
                     CreatedOn = DateTime.Now,
                     LastModifiedBy = ResourcesHelper.CurrentUser.Name,
                     LastModifiedOn = DateTime.Now,
-
                 });
             }
         }

@@ -5,18 +5,20 @@
         Title="{x:Static props:Resources.SystemName}"
         Background="#FFC9CBD3" BorderBrush="#FF293955" WindowStartupLocation="CenterScreen" 
         Icon="/SmallHoneybee.Wpf;component/images/ico_samllhoneybee.ico" MinWidth="1024"
+        xmlns:convert="clr-namespace:SmallHoneybee.Wpf.Common.PropertyConvert"
         MinHeight="760" FontWeight="Normal">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <convert:VisibilityConverter x:Key="VisibilityConverter"></convert:VisibilityConverter>
         </ResourceDictionary>
     </Window.Resources>
     <Grid Background="#FFE7EAF3">
         <Grid.RowDefinitions>
             <RowDefinition Height="0"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
             <RowDefinition Height="0"></RowDefinition>
             <RowDefinition Height="2" />
             <RowDefinition Height="600*"/>
@@ -30,17 +32,29 @@
         </Grid>
         <StackPanel Grid.Row="1">
             <Menu x:Name="SamllHoneybeeMenu" Height="40" FontSize="20" Margin="10,5" Background="#FFC9CBD3">
-                <MenuItem x:Name="SamllHoneybeeSaleOrderMenu" Header="零售管理" Click="RTReportMenuNavigation_Click">
+                <MenuItem x:Name="SamllHoneybeeSaleOrderMenu" Header="零售管理" 
+                          Visibility="{Binding Path=CurrentUserRolePermission.SaleOrderView,Converter={StaticResource VisibilityConverter}}"
+                          Click="RTReportMenuNavigation_Click">
                 </MenuItem>
-                <MenuItem x:Name="SamllHoneybeeProduceMenu"  Header="商品管理" Click="HSReportMenuNavigation_Click" >
+                <MenuItem x:Name="SamllHoneybeeProduceMenu" Header="商品管理" 
+                          Visibility="{Binding Path=CurrentUserRolePermission.ProduceView,Converter={StaticResource VisibilityConverter}}"
+                          Click="HSReportMenuNavigation_Click" >
                 </MenuItem>
-                <MenuItem x:Name="SamllHoneybeePurchaseOrderMenu"  Header="订单管理"  Click="PollutePortMenuNavigation_Click">
+                <MenuItem Header="订货管理"  x:Name="SamllHoneybeePurchaseOrderMenu" 
+                          Visibility="{Binding Path=CurrentUserRolePermission.PurchaseOrderView,Converter={StaticResource VisibilityConverter}}"
+                          Click="PollutePortMenuNavigation_Click">
                 </MenuItem>
-                <MenuItem x:Name="SamllHoneybeeUserMenu" Header="用户管理" Click="ServiceCommMenuNavigation_Click" >
+                <MenuItem x:Name="SamllHoneybeeUserMenu" Header="会员管理" 
+                          Visibility="{Binding Path=CurrentUserRolePermission.UserView,Converter={StaticResource VisibilityConverter}}"
+                          Click="ServiceCommMenuNavigation_Click" >
                 </MenuItem>
-                <MenuItem x:Name="SamllHoneybeeDayBookMenu" Header="日常开支" Click="SamllHoneybeeDayBookMenu_OnClick" >
+                <MenuItem x:Name="SamllHoneybeeDayBookMenu" Header="日常开支" 
+                          Visibility="{Binding Path=CurrentUserRolePermission.DayBookView,Converter={StaticResource VisibilityConverter}}"
+                          Click="SamllHoneybeeDayBookMenu_OnClick" >
                 </MenuItem>
-                <MenuItem x:Name="SamllHoneybeeSystemSettingMenu" Header="系统设置" Click="SamllHoneybeeSystemSettingMenu_OnClick" >
+                <MenuItem x:Name="SamllHoneybeeSystemSettingMenu" Header="系统设置" 
+                          Visibility="{Binding Path=CurrentUserRolePermission.SystemSettingView,Converter={StaticResource VisibilityConverter}}"
+                          Click="SamllHoneybeeSystemSettingMenu_OnClick" >
                 </MenuItem>
             </Menu>
         </StackPanel>

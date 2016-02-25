@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:props="clr-namespace:SmallHoneybee.Wpf.Properties"
       mc:Ignorable="d" 
-	 Title="用户管理">
+	 Title="会员管理">
     <Page.Resources>
         <RoutedUICommand x:Key="ClearSearchText" Text="Increase Font Size" />
         <RoutedUICommand x:Key="ExecuteSearchText" Text="Decrease Font Size" />
@@ -52,6 +52,11 @@
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding Path=DataContext.Users, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
                   FontWeight="Medium">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextStyle}" >
+                    <Setter Property="Margin" Value="1" />
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTemplateColumn  Width="30">
                     <DataGridTemplateColumn.CellTemplate>
@@ -66,58 +71,70 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="会员编号">
+                <DataGridTemplateColumn Header="会员编号" Width="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding UserNo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" KeyDown="TextUserNo_OnKeyDown" ></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="会员名称">
+                <DataGridTemplateColumn Header="会员名称" Width="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="会员电话">
+                <DataGridTemplateColumn Header="会员电话" Width="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="会员卡余额" Binding="{Binding CashTotal, StringFormat=F2}"/>
-                <DataGridTextColumn Header="会员卡积分" Binding="{Binding MemberPoints, StringFormat=F2}"/>
-                <DataGridTemplateColumn Header="地址" >
+                <DataGridTextColumn Header="会员卡余额" Width="90"  IsReadOnly="True"  Binding="{Binding CashTotal, StringFormat=F2}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="会员卡积分" Width="90"  IsReadOnly="True" Binding="{Binding MemberPoints, StringFormat=F2}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="地址" Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Address, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="微信" >
+                <DataGridTemplateColumn Header="微信" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Weichat, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="QQ">
+                <DataGridTemplateColumn Header="QQ" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding QqNo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Email">
+                <DataGridTemplateColumn Header="Email" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Email, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="状态">
+                <DataGridTemplateColumn Header="状态" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox 
@@ -130,8 +147,8 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="创建时间" Binding="{Binding CreatedOn,StringFormat=yyyy-MM-dd}"/>
-                <DataGridTemplateColumn Header="备注">
+                <DataGridTextColumn Header="创建时间" IsReadOnly="True"  Binding="{Binding CreatedOn,StringFormat=yyyy-MM-dd}"/>
+                <DataGridTemplateColumn Header="备注" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" Background="Azure" ></TextBox>

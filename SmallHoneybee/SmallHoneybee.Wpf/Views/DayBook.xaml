@@ -19,7 +19,7 @@
     <Grid Resources="{StaticResource CommonStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
-            <RowDefinition Height="55"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="5"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -27,7 +27,7 @@
             <ColumnDefinition Width="1000*"/>
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Column="0" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0">||日常支出</TextBlock>
-        <Grid Grid.Column="0" Grid.Row="1" Margin="5">
+        <Grid Grid.Column="0" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -36,7 +36,7 @@
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
@@ -44,7 +44,7 @@
                 <TextBlock Text="时间范围：" VerticalAlignment="Center"></TextBlock>
                 <DatePicker Name="DateStartDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long"></DatePicker>
                 <TextBlock VerticalAlignment="Center">～</TextBlock>
-                <DatePicker Name="DateEndDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+                <DatePicker Name="DateEndDate" Width="160" Language="zh-CN"   SelectedDateFormat="Long"  SelectedDate="{x:Static sys:DateTime.Today}"/>
             </StackPanel>
             <Button  Grid.Column="1" Grid.Row="0" Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
             <Button  Grid.Column="2" Grid.Row="0" Content="清空" Click="BtnClear_Click" />
@@ -56,8 +56,16 @@
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding Path=DataContext.DayBooks, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
                   FontWeight="Medium">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextStyle}" >
+                    <Setter Property="Margin" Value="1" />
+                </Style>
+                <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource CommonDatePickerStyle}" >
+                    <Setter Property="Margin" Value="1" />
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTemplateColumn  Width="30">
+                <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Image Name="ButDeleteDayBook"
@@ -70,19 +78,32 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="时间" Width="160" >
+                <DataGridTemplateColumn Header="标题" Width="250">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <DatePicker Language="zh-CN"  SelectedDateFormat="Long" 
-                                    SelectedDate="{Binding DayBooKDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
+                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                      ></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="类型">
+                <DataGridTemplateColumn Header="时间" Width="160" >
+                    <!--<DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding DayBookDate,StringFormat='yyyy-MM-dd HH:mm:ss'}"></TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>-->
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker Name="DatePickerDayBookDate"
+                                    SelectedDate="{Binding DayBookDate,StringFormat='yyyy-MM-dd HH:mm:ss', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="类型" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox 
-                            SelectedValue="{Binding DayBooKType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            SelectedValue="{Binding DayBookType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                             SelectedValuePath="Key" 
                             DisplayMemberPath="Value" 
                             ItemsSource="{Binding Path=DataContext.DayBookTypes,
@@ -91,19 +112,11 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="金额">
+                <DataGridTemplateColumn Header="金额" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding HowManey, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                     ></TextBox>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="备注" Width="250">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                     ></TextBox>
+                            <TextBox Text="{Binding HowManey, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=F2}"
+                                 KeyDown="TextHowManey_OnKeyDown"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

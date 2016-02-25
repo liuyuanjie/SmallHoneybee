@@ -14,6 +14,21 @@
     <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
   </EntityType>
+  <EntityType Name="DayBook">
+    <Key>
+      <PropertyRef Name="DayBookId" />
+    </Key>
+    <Property Name="DayBookId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DayBookDate" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="DayBookType" Type="tinyint" Nullable="false" />
+    <Property Name="HowManey" Type="float" />
+    <Property Name="Description" Type="text" />
+    <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
+  </EntityType>
   <EntityType Name="POItem">
     <Key>
       <PropertyRef Name="POItemId" />
@@ -40,11 +55,12 @@
     <Property Name="ProduceId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ProduceNo" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="BarCode" Type="varchar" MaxLength="20" />
+    <Property Name="CategoryId" Type="int" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
     <Property Name="Alias" Type="varchar" MaxLength="100" />
-    <Property Name="CategoryId" Type="int" Nullable="false" />
     <Property Name="PackSize" Type="varchar" MaxLength="30" />
     <Property Name="RetailPrice" Type="float" Nullable="false" />
+    <Property Name="DiscountRate" Type="float" Nullable="false" />
     <Property Name="FactoryPrice" Type="float" Nullable="false" />
     <Property Name="OrderSize" Type="varchar" MaxLength="30" />
     <Property Name="PackFee" Type="float" />
@@ -109,6 +125,7 @@
     <Property Name="Name" Type="varchar" MaxLength="100" />
     <Property Name="SaleOrderStatus" Type="tinyint" Nullable="false" />
     <Property Name="OriginUserId" Type="int" />
+    <Property Name="PurchaseOrderUserId" Type="int" />
     <Property Name="DateOriginated" Type="datetime" Precision="0" />
     <Property Name="DateCompleted" Type="datetime" Precision="0" />
     <Property Name="ProduceCost" Type="float" />
@@ -146,6 +163,21 @@
     <Property Name="Quantity" Type="float" />
     <Property Name="CostPerUnit" Type="float" />
     <Property Name="Description" Type="varchar" MaxLength="255" />
+    <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="SystemSetting">
+    <Key>
+      <PropertyRef Name="SettingId" />
+    </Key>
+    <Property Name="SettingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SettingCode" Type="char" MaxLength="4" Nullable="false" />
+    <Property Name="SettingValue" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="IsEnable" Type="bit" Nullable="false" />
+    <Property Name="Description" Type="text" />
     <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
     <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
@@ -242,8 +274,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Produce_SaleOrder_PurchaseOrderUserId_UserId">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="SaleOrder" Type="Self.SaleOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="SaleOrder">
+        <PropertyRef Name="PurchaseOrderUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_ProduceLog_Produce_ProduceId_ProduceId">
-    <End Role="Produce" Type="Self.Produce" Multiplicity="1" />
+    <End Role="Produce" Type="Self.Produce" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Producelog" Type="Self.Producelog" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Produce">
@@ -267,7 +313,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId">
-    <End Role="SaleOrder" Type="Self.SaleOrder" Multiplicity="1" />
+    <End Role="SaleOrder" Type="Self.SaleOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="SOLog" Type="Self.SOLog" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SaleOrder">
@@ -291,7 +339,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId">
-    <End Role="SaleOrder" Type="Self.SaleOrder" Multiplicity="1" />
+    <End Role="SaleOrder" Type="Self.SaleOrder" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="SOProduce" Type="Self.SOProduce" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="SaleOrder">
@@ -303,7 +353,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_UserLog_User_UserId_UserId">
-    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Userlog" Type="Self.Userlog" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="User">
@@ -316,6 +368,7 @@
   </Association>
   <EntityContainer Name="SmallHoneybeeModelStoreContainer">
     <EntitySet Name="Category" EntityType="Self.Category" Schema="smallhoneybee" store:Type="Tables" />
+    <EntitySet Name="DayBook" EntityType="Self.DayBook" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="POItem" EntityType="Self.POItem" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="Produce" EntityType="Self.Produce" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="Producelog" EntityType="Self.Producelog" Schema="smallhoneybee" store:Type="Tables" />
@@ -323,6 +376,7 @@
     <EntitySet Name="SaleOrder" EntityType="Self.SaleOrder" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="SOLog" EntityType="Self.SOLog" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="SOProduce" EntityType="Self.SOProduce" Schema="smallhoneybee" store:Type="Tables" />
+    <EntitySet Name="SystemSetting" EntityType="Self.SystemSetting" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="Userlog" EntityType="Self.Userlog" Schema="smallhoneybee" store:Type="Tables" />
     <AssociationSet Name="FK_POItem_Produce_ProduceId_ProduceId" Association="Self.FK_POItem_Produce_ProduceId_ProduceId">
@@ -338,6 +392,10 @@
       <End Role="Produce" EntitySet="Produce" />
     </AssociationSet>
     <AssociationSet Name="FK_Produce_SaleOrder_OriginUserId_UserId" Association="Self.FK_Produce_SaleOrder_OriginUserId_UserId">
+      <End Role="User" EntitySet="User" />
+      <End Role="SaleOrder" EntitySet="SaleOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" Association="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId">
       <End Role="User" EntitySet="User" />
       <End Role="SaleOrder" EntitySet="SaleOrder" />
     </AssociationSet>

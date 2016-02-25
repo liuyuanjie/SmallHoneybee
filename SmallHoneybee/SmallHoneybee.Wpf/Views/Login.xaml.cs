@@ -63,6 +63,7 @@ namespace SmallHoneybee.Wpf.Views
             DataModel.Model.User user = _userRepository.Query().SingleOrDefault(x => x.Login == login);
             if (user != null && SaltedHash.Create(user.PasswordSalt, user.PasswordHash).Verify(password))
             {
+                ResourcesHelper.CurrentUserRolePermission = new RolePermission((DataType.UserType)user.UserType);
                 ResourcesHelper.CurrentUser = user;
                 if (CheckBoxLogin.IsChecked.HasValue &&
                     CheckBoxLogin.IsChecked.Value)

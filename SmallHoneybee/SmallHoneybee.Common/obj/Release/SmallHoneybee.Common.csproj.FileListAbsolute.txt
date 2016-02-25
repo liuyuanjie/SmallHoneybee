@@ -8,3 +8,13 @@ F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.Common\bin\Release\log4net.xml
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.Common\obj\Release\SmallHoneybee.Common.dll
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.Common\obj\Release\SmallHoneybee.Common.pdb
 F:\yuanjie\HomeOffice\SmallHoneybee\SmallHoneybee.Common\obj\Release\SmallHoneybee.Common.csprojResolveAssemblyReference.cache
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Release\SmallHoneybee.Common.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Release\SmallHoneybee.Common.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Release\CsvHelper.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Release\log4net.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Release\CsvHelper.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Release\CsvHelper.xml
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\bin\Release\log4net.xml
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\obj\Release\SmallHoneybee.Common.csprojResolveAssemblyReference.cache
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\obj\Release\SmallHoneybee.Common.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Common\obj\Release\SmallHoneybee.Common.pdb

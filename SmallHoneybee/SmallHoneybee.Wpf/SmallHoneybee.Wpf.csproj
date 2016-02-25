@@ -37,8 +37,7 @@
     <StartupObject>SmallHoneybee.Wpf.MainClass</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>ico_samllhoneybee.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
@@ -103,6 +102,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\CommonHelper.cs" />
+    <Compile Include="Common\PropertyConvert\VisibilityConverter.cs" />
+    <Compile Include="Common\PropertyConvert\StatusConverter.cs" />
     <Compile Include="Common\ResourcesHelper.cs" />
     <Compile Include="MainClass.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -377,6 +378,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\ico_samllhoneybee.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ico_samllhoneybee.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

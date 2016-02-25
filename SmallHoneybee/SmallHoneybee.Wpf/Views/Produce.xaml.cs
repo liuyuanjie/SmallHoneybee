@@ -31,17 +31,14 @@ namespace SmallHoneybee.Wpf.Views
     /// </summary>
     public partial class Produce : Page, INotifyPropertyChanged
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly ICategoryRepository _categoryRepository;
-        private readonly IProduceRepository _produceRepository;
+        private IUnitOfWork _unitOfWork;
+        private ICategoryRepository _categoryRepository;
+        private IProduceRepository _produceRepository;
         private ObservableCollection<DataModel.Model.Produce> _produces = new ObservableCollection<DataModel.Model.Produce>();
 
         public Produce()
         {
             InitializeComponent();
-            _unitOfWork = UnityInit.UnitOfWork;
-            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
-            _produceRepository = _unitOfWork.GetRepository<ProduceRepository>();
 
             SetInitData();
         }
@@ -64,6 +61,10 @@ namespace SmallHoneybee.Wpf.Views
 
         private void SetInitData()
         {
+            _unitOfWork = UnityInit.UnitOfWork;
+            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
+            _produceRepository = _unitOfWork.GetRepository<ProduceRepository>();
+
             List<Category> categories = new List<Category>();
             categories.AddRange(_categoryRepository.Query().OrderBy(x => x.Name));
 
@@ -80,8 +81,22 @@ namespace SmallHoneybee.Wpf.Views
                 Categories = categories,
                 Produces = _produces,
                 Units = units,
-                EnableTexts = enableTxets
+                EnableTexts = enableTxets,
+                ResourcesHelper.CurrentUserRolePermission,
             };
+
+            if (!ResourcesHelper.CurrentUserRolePermission.ProduceFactoryPriceEdit)
+            {
+                DataGridColumn deletedColumn = null;
+                gridProduces.Columns.ForEach(x =>
+                {
+                    if (x.Header.ToString() == "出厂价")
+                    {
+                        deletedColumn = x;
+                    }
+                });
+                gridProduces.Columns.Remove(deletedColumn);
+            }
         }
 
         private void BtnClear_Click(object sender, RoutedEventArgs e)
