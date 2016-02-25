@@ -180,4 +180,10 @@
   <data name="Worker" xml:space="preserve">
     <value>Worker</value>
   </data>
+  <data name="InCome" xml:space="preserve">
+    <value>InCome</value>
+  </data>
+  <data name="PayOut" xml:space="preserve">
+    <value>Pay Out</value>
+  </data>
 </root>

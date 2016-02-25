@@ -153,6 +153,9 @@
   <data name="Import" xml:space="preserve">
     <value>导入</value>
   </data>
+  <data name="InCome" xml:space="preserve">
+    <value>收纳</value>
+  </data>
   <data name="None" xml:space="preserve">
     <value>不详</value>
   </data>
@@ -161,6 +164,9 @@
   </data>
   <data name="Ordered" xml:space="preserve">
     <value>已订购</value>
+  </data>
+  <data name="PayOut" xml:space="preserve">
+    <value>支出</value>
   </data>
   <data name="Piece" xml:space="preserve">
     <value>块</value>

@@ -169,6 +169,15 @@ namespace SmallHoneybee.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to InCome.
+        /// </summary>
+        public static string InCome {
+            get {
+                return ResourceManager.GetString("InCome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to None.
         /// </summary>
         public static string None {
@@ -192,6 +201,15 @@ namespace SmallHoneybee.Wpf.Properties {
         public static string Ordered {
             get {
                 return ResourceManager.GetString("Ordered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pay Out.
+        /// </summary>
+        public static string PayOut {
+            get {
+                return ResourceManager.GetString("PayOut", resourceCulture);
             }
         }
         
