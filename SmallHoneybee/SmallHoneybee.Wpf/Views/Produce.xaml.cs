@@ -36,6 +36,8 @@ namespace SmallHoneybee.Wpf.Views
         private IProduceRepository _produceRepository;
         private ObservableCollection<DataModel.Model.Produce> _produces = new ObservableCollection<DataModel.Model.Produce>();
 
+        private List<Category> _categories = new List<Category>();
+
         public Produce()
         {
             InitializeComponent();
@@ -61,13 +63,6 @@ namespace SmallHoneybee.Wpf.Views
 
         private void SetInitData()
         {
-            _unitOfWork = UnityInit.UnitOfWork;
-            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
-            _produceRepository = _unitOfWork.GetRepository<ProduceRepository>();
-
-            List<Category> categories = new List<Category>();
-            categories.AddRange(_categoryRepository.Query().OrderBy(x => x.Name));
-
             var units = new List<KeyValuePair<sbyte?, string>> { new KeyValuePair<sbyte?, string>(null, string.Empty) };
             units.AddRange(CommonHelper.Enumerate<DataType.ProduceUnit>().Select(x => new KeyValuePair<sbyte?, string>((sbyte)x.Key, x.Value)));
 
@@ -78,7 +73,7 @@ namespace SmallHoneybee.Wpf.Views
 
             DataContext = new
             {
-                Categories = categories,
+                Categories = _categories,
                 Produces = _produces,
                 Units = units,
                 EnableTexts = enableTxets,
@@ -116,6 +111,12 @@ namespace SmallHoneybee.Wpf.Views
 
         private void ExecuteSearchText()
         {
+            _unitOfWork = UnityInit.UnitOfWork;
+            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
+            _produceRepository = _unitOfWork.GetRepository<ProduceRepository>();
+
+            _categories.AddRange(_categoryRepository.Query().OrderBy(x => x.Name));
+
             _produces.Clear();
             _produceRepository
                 .Query()
