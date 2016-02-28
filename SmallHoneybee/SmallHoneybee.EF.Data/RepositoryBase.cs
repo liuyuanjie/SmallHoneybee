@@ -34,8 +34,8 @@ namespace SmallHoneybee.EF.Data
 
         public void Update(T entity)
         {
-            _dbSet.Attach(entity);
-            _dataContext.Entry(entity).State = EntityState.Modified;
+            //_dbSet.Attach(entity);
+            //_dataContext.Entry(entity).State = EntityState.Modified;
         }
 
         public void Delete(T entity)

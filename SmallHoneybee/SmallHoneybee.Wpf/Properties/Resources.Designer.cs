@@ -133,6 +133,15 @@ namespace SmallHoneybee.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cash.
+        /// </summary>
+        public static string Cash {
+            get {
+                return ResourceManager.GetString("Cash", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Completed.
         /// </summary>
         public static string Completed {
@@ -174,6 +183,15 @@ namespace SmallHoneybee.Wpf.Properties {
         public static string InCome {
             get {
                 return ResourceManager.GetString("InCome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to MemberCard.
+        /// </summary>
+        public static string MemberCard {
+            get {
+                return ResourceManager.GetString("MemberCard", resourceCulture);
             }
         }
         
@@ -255,6 +273,24 @@ namespace SmallHoneybee.Wpf.Properties {
         public static string SystemName {
             get {
                 return ResourceManager.GetString("SystemName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to UnitUnionPay.
+        /// </summary>
+        public static string UnitUnionPay {
+            get {
+                return ResourceManager.GetString("UnitUnionPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WeiChat.
+        /// </summary>
+        public static string WeiChat {
+            get {
+                return ResourceManager.GetString("WeiChat", resourceCulture);
             }
         }
         

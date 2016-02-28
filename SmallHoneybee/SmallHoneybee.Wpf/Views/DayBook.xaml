@@ -54,6 +54,7 @@
         <DataGrid Grid.Row="3" Name="gridDayBooks"
                   CanUserAddRows="True"
                   AutoGenerateColumns="False"
+                  DataGridCell.GotFocus="DataGrid_CellGotFocus" 
                   ItemsSource="{Binding Path=DataContext.DayBooks, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
                   FontWeight="Medium">
             <DataGrid.Resources>
@@ -115,7 +116,7 @@
                 <DataGridTemplateColumn Header="金额" Width="100">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding HowManey, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay, StringFormat=F2}"
+                            <TextBox Text="{Binding HowManey, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                  KeyDown="TextHowManey_OnKeyDown"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

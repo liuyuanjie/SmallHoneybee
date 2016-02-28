@@ -30,6 +30,6 @@ F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\b
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\MySql.Data.Entity.EF6.dll
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\EntityFramework.xml
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\bin\Debug\EntityFramework.SqlServer.xml
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\obj\Debug\SmallHoneybee.DataModel.csprojResolveAssemblyReference.cache
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\obj\Debug\SmallHoneybee.DataModel.dll
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\obj\Debug\SmallHoneybee.DataModel.pdb
-F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DataModel\obj\Debug\SmallHoneybee.DataModel.csprojResolveAssemblyReference.cache

@@ -128,7 +128,19 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="购买人" Binding="{Binding User.Name}"/>
+                <DataGridTextColumn Header="购买人" Binding="{Binding PrucahseOrderUserUser.Name}"/>
+                <DataGridComboBoxColumn Header="结算方式">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.HowBalanceTexts,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" />
+                            <Setter Property="DisplayMemberPath" Value="Value" />
+                            <Setter Property="SelectedValuePath" Value="Key" />
+                            <Setter Property="SelectedValue" Value="{Binding HowBalance}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Header="结算人" Binding="{Binding OriginUserUser.Name}"/>
                 <DataGridTextColumn Header="备注" Binding="{Binding Description}"/>
 
             </DataGrid.Columns>

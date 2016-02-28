@@ -61,6 +61,7 @@
     <Property Name="PackSize" Type="varchar" MaxLength="30" />
     <Property Name="RetailPrice" Type="float" Nullable="false" />
     <Property Name="DiscountRate" Type="float" Nullable="false" />
+    <Property Name="LowestDiscountRate" Type="float" />
     <Property Name="FactoryPrice" Type="float" Nullable="false" />
     <Property Name="OrderSize" Type="varchar" MaxLength="30" />
     <Property Name="PackFee" Type="float" />
@@ -126,6 +127,7 @@
     <Property Name="SaleOrderStatus" Type="tinyint" Nullable="false" />
     <Property Name="OriginUserId" Type="int" />
     <Property Name="PurchaseOrderUserId" Type="int" />
+    <Property Name="HowBalance" Type="tinyint" Nullable="false" />
     <Property Name="DateOriginated" Type="datetime" Precision="0" />
     <Property Name="DateCompleted" Type="datetime" Precision="0" />
     <Property Name="ProduceCost" Type="float" />
@@ -160,8 +162,10 @@
     <Property Name="ProduceId" Type="int" />
     <Property Name="DiscountRate" Type="float" Nullable="false" />
     <Property Name="DateSaled" Type="datetime" Precision="0" />
-    <Property Name="Quantity" Type="float" />
+    <Property Name="RetailPrice" Type="float" />
     <Property Name="CostPerUnit" Type="float" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="SOProduceStatusCategory" Type="tinyint" Nullable="false" />
     <Property Name="Description" Type="varchar" MaxLength="255" />
     <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
     <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />

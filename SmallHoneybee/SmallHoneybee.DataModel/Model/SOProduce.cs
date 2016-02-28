@@ -19,8 +19,10 @@ namespace SmallHoneybee.DataModel.Model
         public Nullable<int> ProduceId { get; set; }
         public float DiscountRate { get; set; }
         public Nullable<System.DateTime> DateSaled { get; set; }
-        public Nullable<float> Quantity { get; set; }
+        public Nullable<float> RetailPrice { get; set; }
         public Nullable<float> CostPerUnit { get; set; }
+        public Nullable<float> Quantity { get; set; }
+        public sbyte SOProduceStatusCategory { get; set; }
         public string Description { get; set; }
         public System.DateTime CreatedOn { get; set; }
         public string CreatedBy { get; set; }

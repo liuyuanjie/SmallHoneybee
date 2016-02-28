@@ -37,6 +37,8 @@ namespace SmallHoneybee.Wpf
             {
                 ResourcesHelper.CurrentUserRolePermission
             };
+
+            TxtCurrentUser.Text = string.Format("当前登录用户: {0}", ResourcesHelper.CurrentUser.Name);
         }
 
         private void RTReportMenuNavigation_Click(object sender, RoutedEventArgs e)

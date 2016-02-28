@@ -15,6 +15,8 @@ namespace SmallHoneybee.Wpf.Common
         public static string SystemName = Resources.SystemName;
         public const string ReRunSystemError = "系统已经在运行,请先停止当前运行系统!";
         public static User CurrentUser;
+        public static string CoustomUserNoStart = "900000";
+
 
         public static RolePermission CurrentUserRolePermission;
 

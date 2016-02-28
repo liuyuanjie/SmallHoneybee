@@ -48,6 +48,14 @@ namespace SmallHoneybee.Common
             RetailPrice
         }
 
+        public enum SaleOrderBalancedMode
+        {
+            Cash,
+            MemberCard,
+            UnitUnionPay,
+            WeiChat
+        }
+
         public enum POStatusCategory
         {
             Ordered,

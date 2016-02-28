@@ -30,6 +30,7 @@ namespace SmallHoneybee.DataModel.Model
         public string PackSize { get; set; }
         public float RetailPrice { get; set; }
         public float DiscountRate { get; set; }
+        public Nullable<float> LowestDiscountRate { get; set; }
         public float FactoryPrice { get; set; }
         public string OrderSize { get; set; }
         public Nullable<float> PackFee { get; set; }

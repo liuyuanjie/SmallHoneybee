@@ -51,11 +51,15 @@ namespace SmallHoneybee.Wpf.Views
             var saleOrderStatuses = new List<KeyValuePair<sbyte?, string>> { new KeyValuePair<sbyte?, string>(null, string.Empty) };
             saleOrderStatuses.AddRange(CommonHelper.Enumerate<DataType.SaleOrderStatus>().Select(x => new KeyValuePair<sbyte?, string>((sbyte)x.Key, x.Value)));
 
+            var howBalances = new List<KeyValuePair<sbyte?, string>> { new KeyValuePair<sbyte?, string>(null, string.Empty) };
+            howBalances.AddRange(CommonHelper.Enumerate<DataType.SaleOrderBalancedMode>().Select(x => new KeyValuePair<sbyte?, string>((sbyte)x.Key, x.Value)));
+
             DataContext = new
             {
                 SaleOrders = _saleOrders,
                 SOProduceDomainModels = _soProduceDomainModels,
-                SaleOrderStatusTexts = saleOrderStatuses
+                SaleOrderStatusTexts = saleOrderStatuses,
+                HowBalanceTexts = howBalances
             };
         }
 
@@ -86,18 +90,24 @@ namespace SmallHoneybee.Wpf.Views
             _saleOrders.Clear();
             IQueryable<DataModel.Model.SaleOrder> saleOrders = _saleOrderRepository.Query();
 
-            if (DateStartDate.SelectedDate.HasValue && DateEndDate.SelectedDate.HasValue)
+            DateTime? startDate = DateStartDate.SelectedDate;
+            DateTime? endDate = DateEndDate.SelectedDate;
+
+            if (startDate.HasValue && endDate.HasValue)
             {
-                saleOrders = saleOrders.Where(x => x.DateOriginated >= DateStartDate.SelectedDate.Value &&
-                    x.DateOriginated < DateEndDate.SelectedDate.Value);
+                endDate = endDate.Value.AddDays(1);
+                saleOrders = saleOrders.Where(x => x.DateOriginated >= startDate &&
+                    x.DateOriginated < endDate);
             }
-            else if (DateStartDate.SelectedDate.HasValue)
+            else if (startDate.HasValue)
             {
-                saleOrders = saleOrders.Where(x => x.DateOriginated >= DateStartDate.SelectedDate.Value);
+                saleOrders = saleOrders.Where(x => x.DateOriginated >= startDate);
             }
-            else if (DateEndDate.SelectedDate.HasValue)
+            else if (endDate.HasValue)
             {
-                saleOrders = saleOrders.Where(x => x.DateOriginated < DateEndDate.SelectedDate.Value);
+                endDate = endDate.Value.AddDays(1);
+
+                saleOrders = saleOrders.Where(x => x.DateOriginated < endDate);
             }
 
             saleOrders
@@ -112,9 +122,9 @@ namespace SmallHoneybee.Wpf.Views
                 .GroupBy(x => x.Group1)
                 .Select(m => new
                 {
-                    TotalCount=m.Count(),
+                    TotalCount = m.Count(),
                     TotalQuantity = m.Sum(y => y.x.SOProduces.Sum(s => s.Quantity)),
-                    TotalPrice = m.Sum(y=>y.x.TotalCost),
+                    TotalPrice = m.Sum(y => y.x.TotalCost),
                 }).FirstOrDefault();
             TxtTotalInfo.Text = string.Format("共计 {0} 条记录, 共计 {1} 件商品，总计 {2}",
                 totalInfo != null ? totalInfo.TotalCount : 0,
@@ -182,7 +192,8 @@ namespace SmallHoneybee.Wpf.Views
             var saleOrderForm = new SaleOrderForm(this, new DataModel.Model.SaleOrder
             {
                 DateOriginated = DateTime.Now,
-                SaleOrderNo = saleOrderNo
+                SaleOrderNo = saleOrderNo,
+                OriginUserId = userId
             });
             saleOrderForm.ShowDialog();
         }
@@ -215,11 +226,9 @@ namespace SmallHoneybee.Wpf.Views
     }
 
 
-
     public class SaleOrderDoMainModel
     {
         public DataModel.Model.SaleOrder SaleOrder { get; set; }
-        //public 
     }
 
     public class SOProduceDomainModel : INotifyPropertyChanged

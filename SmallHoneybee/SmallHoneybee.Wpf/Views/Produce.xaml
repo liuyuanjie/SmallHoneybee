@@ -50,14 +50,17 @@
             <!--<Button  Grid.Column="5" Grid.Row="0" Content="{x:Static props:Resources.Import}" Click="BtnImport_Click"></Button>-->
         </Grid>
         <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
-        <DataGrid Grid.Row="3" Name="gridProduces" AutoGenerateColumns="False" CanUserReorderColumns="True" CanUserResizeColumns="True" ItemsSource="{Binding Path=DataContext.Produces, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" IsReadOnly="True" FontWeight="Medium">
+        <DataGrid DataGridCell.GotFocus="DataGrid_CellGotFocus"  Grid.Row="3" Name="gridProduces" AutoGenerateColumns="False" 
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True" ItemsSource="{Binding Path=DataContext.Produces, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
+                  >
             <DataGrid.Resources>
                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextStyle}" >
                     <Setter Property="Margin" Value="1" />
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <!--<DataGridTemplateColumn Header="产品系列" Width="150">
+                <DataGridTemplateColumn Header="产品系列" Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox 
@@ -69,8 +72,8 @@
                                 IsReadOnly="True"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>-->
-                <DataGridTextColumn Header="产品系列" Binding="{Binding Category.Name}"/>
+                </DataGridTemplateColumn>
+                <!--<DataGridTextColumn Header="产品系列" Binding="{Binding Category.Name}"/>-->
                 <DataGridTemplateColumn Header="条形码" Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -98,7 +101,7 @@
                 <DataGridTemplateColumn Header="数量">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Quantity, StringFormat=F2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            <TextBox Text="{Binding Quantity, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                      IsEnabled="{Binding Path=DataContext.CurrentUserRolePermission.ProduceFactoryPriceEdit,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -106,7 +109,7 @@
                 <DataGridTemplateColumn Header="零售价">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding RetailPrice, StringFormat=F2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                            <TextBox Text="{Binding RetailPrice, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                      IsEnabled="{Binding Path=DataContext.CurrentUserRolePermission.ProduceFactoryPriceEdit,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -114,7 +117,15 @@
                 <DataGridTemplateColumn Header="零售折扣">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding DiscountRate, StringFormat=F2, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                            <TextBox Text="{Binding DiscountRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                     IsEnabled="{Binding Path=DataContext.CurrentUserRolePermission.ProduceHeightEdit,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="最低零售折扣">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding LowestDiscountRate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                      IsEnabled="{Binding Path=DataContext.CurrentUserRolePermission.ProduceHeightEdit,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

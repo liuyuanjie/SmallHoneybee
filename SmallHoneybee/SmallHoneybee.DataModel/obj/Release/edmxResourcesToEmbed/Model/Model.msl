@@ -64,6 +64,7 @@
           <ScalarProperty Name="PackSize" ColumnName="PackSize" />
           <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
           <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
+          <ScalarProperty Name="LowestDiscountRate" ColumnName="LowestDiscountRate" />
           <ScalarProperty Name="FactoryPrice" ColumnName="FactoryPrice" />
           <ScalarProperty Name="OrderSize" ColumnName="OrderSize" />
           <ScalarProperty Name="PackFee" ColumnName="PackFee" />
@@ -132,6 +133,7 @@
           <ScalarProperty Name="SaleOrderStatus" ColumnName="SaleOrderStatus" />
           <ScalarProperty Name="OriginUserId" ColumnName="OriginUserId" />
           <ScalarProperty Name="PurchaseOrderUserId" ColumnName="PurchaseOrderUserId" />
+          <ScalarProperty Name="HowBalance" ColumnName="HowBalance" />
           <ScalarProperty Name="DateOriginated" ColumnName="DateOriginated" />
           <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
           <ScalarProperty Name="ProduceCost" ColumnName="ProduceCost" />
@@ -168,8 +170,10 @@
           <ScalarProperty Name="ProduceId" ColumnName="ProduceId" />
           <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
           <ScalarProperty Name="DateSaled" ColumnName="DateSaled" />
-          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
           <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="SOProduceStatusCategory" ColumnName="SOProduceStatusCategory" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
           <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

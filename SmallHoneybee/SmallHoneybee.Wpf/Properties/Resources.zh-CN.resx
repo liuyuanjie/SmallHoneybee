@@ -141,6 +141,9 @@
   <data name="Case" xml:space="preserve">
     <value>箱</value>
   </data>
+  <data name="Cash" xml:space="preserve">
+    <value>现金</value>
+  </data>
   <data name="Completed" xml:space="preserve">
     <value>已完成</value>
   </data>
@@ -155,6 +158,9 @@
   </data>
   <data name="InCome" xml:space="preserve">
     <value>收纳</value>
+  </data>
+  <data name="MemberCard" xml:space="preserve">
+    <value>充值卡</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>不详</value>
@@ -182,6 +188,12 @@
   </data>
   <data name="SystemName" xml:space="preserve">
     <value>小蜜蜂零售管理</value>
+  </data>
+  <data name="UnitUnionPay" xml:space="preserve">
+    <value>银联</value>
+  </data>
+  <data name="WeiChat" xml:space="preserve">
+    <value>微信</value>
   </data>
   <data name="Worker" xml:space="preserve">
     <value>普通管理员</value>

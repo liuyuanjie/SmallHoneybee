@@ -66,6 +66,7 @@
           <Property Name="PackSize" Type="varchar" MaxLength="30" />
           <Property Name="RetailPrice" Type="float" Nullable="false" />
           <Property Name="DiscountRate" Type="float" Nullable="false" />
+          <Property Name="LowestDiscountRate" Type="float" />
           <Property Name="FactoryPrice" Type="float" Nullable="false" />
           <Property Name="OrderSize" Type="varchar" MaxLength="30" />
           <Property Name="PackFee" Type="float" />
@@ -131,6 +132,7 @@
           <Property Name="SaleOrderStatus" Type="tinyint" Nullable="false" />
           <Property Name="OriginUserId" Type="int" />
           <Property Name="PurchaseOrderUserId" Type="int" />
+          <Property Name="HowBalance" Type="tinyint" Nullable="false" />
           <Property Name="DateOriginated" Type="datetime" Precision="0" />
           <Property Name="DateCompleted" Type="datetime" Precision="0" />
           <Property Name="ProduceCost" Type="float" />
@@ -165,8 +167,10 @@
           <Property Name="ProduceId" Type="int" />
           <Property Name="DiscountRate" Type="float" Nullable="false" />
           <Property Name="DateSaled" Type="datetime" Precision="0" />
-          <Property Name="Quantity" Type="float" />
+          <Property Name="RetailPrice" Type="float" />
           <Property Name="CostPerUnit" Type="float" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="SOProduceStatusCategory" Type="tinyint" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="255" />
           <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
           <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
@@ -498,6 +502,7 @@
           <Property Name="PackSize" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="RetailPrice" Type="Single" Nullable="false" />
           <Property Name="DiscountRate" Type="Single" Nullable="false" />
+          <Property Name="LowestDiscountRate" Type="Single" />
           <Property Name="FactoryPrice" Type="Single" Nullable="false" />
           <Property Name="OrderSize" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="PackFee" Type="Single" />
@@ -570,6 +575,7 @@
           <Property Name="SaleOrderStatus" Type="SByte" Nullable="false" />
           <Property Name="OriginUserId" Type="Int32" />
           <Property Name="PurchaseOrderUserId" Type="Int32" />
+          <Property Name="HowBalance" Type="SByte" Nullable="false" />
           <Property Name="DateOriginated" Type="DateTime" />
           <Property Name="DateCompleted" Type="DateTime" />
           <Property Name="ProduceCost" Type="Single" />
@@ -582,8 +588,8 @@
           <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="OriginUser" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="SaleOrder" ToRole="User" />
-          <NavigationProperty Name="PurchaseOrderUser" Relationship="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" FromRole="SaleOrder" ToRole="User" />
+          <NavigationProperty Name="OriginUserUser" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="SaleOrder" ToRole="User" />
+          <NavigationProperty Name="PrucahseOrderUserUser" Relationship="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" FromRole="SaleOrder" ToRole="User" />
           <NavigationProperty Name="SOLogs" Relationship="Self.FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId" FromRole="SaleOrder" ToRole="SOLog" />
           <NavigationProperty Name="SOProduces" Relationship="Self.Fk_SOProduce_SaleOrder_SaleOrderId_SaleOrderId" FromRole="SaleOrder" ToRole="SOProduce" />
         </EntityType>
@@ -609,8 +615,10 @@
           <Property Name="ProduceId" Type="Int32" />
           <Property Name="DiscountRate" Type="Single" Nullable="false" />
           <Property Name="DateSaled" Type="DateTime" />
-          <Property Name="Quantity" Type="Single" />
+          <Property Name="RetailPrice" Type="Single" />
           <Property Name="CostPerUnit" Type="Single" />
+          <Property Name="Quantity" Type="Single" />
+          <Property Name="SOProduceStatusCategory" Type="SByte" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
           <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -662,9 +670,9 @@
           <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
           <Property Name="LastModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <NavigationProperty Name="SaleOrderPurchaseOrders" Relationship="Self.FK_PurchaseOrder_User_OriginatorId_UserId" FromRole="User" ToRole="PurchaseOrder" />
-          <NavigationProperty Name="SaleOrderOriginUsers" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="User" ToRole="SaleOrder" />
-          <NavigationProperty Name="SaleOrderPurchaseOrderUsers" Relationship="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" FromRole="User" ToRole="SaleOrder" />
+          <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_PurchaseOrder_User_OriginatorId_UserId" FromRole="User" ToRole="PurchaseOrder" />
+          <NavigationProperty Name="SaleOrdersOriginUser" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="User" ToRole="SaleOrder" />
+          <NavigationProperty Name="SaleOrdersPurchaseOrderUser" Relationship="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" FromRole="User" ToRole="SaleOrder" />
           <NavigationProperty Name="Userlogs" Relationship="Self.FK_UserLog_User_UserId_UserId" FromRole="User" ToRole="Userlog" />
         </EntityType>
         <EntityType Name="Userlog">
@@ -949,6 +957,7 @@
                 <ScalarProperty Name="PackSize" ColumnName="PackSize" />
                 <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
                 <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
+                <ScalarProperty Name="LowestDiscountRate" ColumnName="LowestDiscountRate" />
                 <ScalarProperty Name="FactoryPrice" ColumnName="FactoryPrice" />
                 <ScalarProperty Name="OrderSize" ColumnName="OrderSize" />
                 <ScalarProperty Name="PackFee" ColumnName="PackFee" />
@@ -1017,6 +1026,7 @@
                 <ScalarProperty Name="SaleOrderStatus" ColumnName="SaleOrderStatus" />
                 <ScalarProperty Name="OriginUserId" ColumnName="OriginUserId" />
                 <ScalarProperty Name="PurchaseOrderUserId" ColumnName="PurchaseOrderUserId" />
+                <ScalarProperty Name="HowBalance" ColumnName="HowBalance" />
                 <ScalarProperty Name="DateOriginated" ColumnName="DateOriginated" />
                 <ScalarProperty Name="DateCompleted" ColumnName="DateCompleted" />
                 <ScalarProperty Name="ProduceCost" ColumnName="ProduceCost" />
@@ -1053,8 +1063,10 @@
                 <ScalarProperty Name="ProduceId" ColumnName="ProduceId" />
                 <ScalarProperty Name="DiscountRate" ColumnName="DiscountRate" />
                 <ScalarProperty Name="DateSaled" ColumnName="DateSaled" />
-                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="RetailPrice" ColumnName="RetailPrice" />
                 <ScalarProperty Name="CostPerUnit" ColumnName="CostPerUnit" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="SOProduceStatusCategory" ColumnName="SOProduceStatusCategory" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />

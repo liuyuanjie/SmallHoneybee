@@ -186,4 +186,16 @@
   <data name="PayOut" xml:space="preserve">
     <value>Pay Out</value>
   </data>
+  <data name="Cash" xml:space="preserve">
+    <value>Cash</value>
+  </data>
+  <data name="MemberCard" xml:space="preserve">
+    <value>MemberCard</value>
+  </data>
+  <data name="UnitUnionPay" xml:space="preserve">
+    <value>UnitUnionPay</value>
+  </data>
+  <data name="WeiChat" xml:space="preserve">
+    <value>WeiChat</value>
+  </data>
 </root>

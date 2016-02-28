@@ -45,6 +45,15 @@ namespace SmallHoneybee.Wpf.Views
             SetInitData();
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected void NotifyPropertyChange(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
         public ObservableCollection<DataModel.Model.Produce> Produces
         {
             get { return _produces; }
@@ -111,9 +120,7 @@ namespace SmallHoneybee.Wpf.Views
 
         private void ExecuteSearchText()
         {
-            _unitOfWork = UnityInit.UnitOfWork;
-            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
-            _produceRepository = _unitOfWork.GetRepository<ProduceRepository>();
+            InitUnitOfWork();
 
             _categories.AddRange(_categoryRepository.Query().OrderBy(x => x.Name));
 
@@ -154,12 +161,28 @@ namespace SmallHoneybee.Wpf.Views
                 _produces.Where(x => !string.IsNullOrEmpty(x.ProduceNo) &&
                     !string.IsNullOrEmpty(x.Name)).ForEach(x =>
                     {
-                        if (x.ProduceId > 0)
-                        {
-                            CommonHelper.UpdateModifiedOnAndDate(ResourcesHelper.CurrentUser, _produces);
-                            _produceRepository.Update(x);
-                        }
+                        x.BarCode = string.IsNullOrEmpty(x.BarCode) ? null : x.BarCode;
+                        x.ProduceNo = string.IsNullOrEmpty(x.ProduceNo) ? null : x.ProduceNo;
+                        //if (x.ProduceId > 0)
+                        //{
+                        //    //CommonHelper.UpdateModifiedOnAndDate(ResourcesHelper.CurrentUser, _produces);
+                        //    _produceRepository.Update(x);
+                        //}
                     });
+                var duBarCodes = _produces.Where(x=>x.BarCode!=null).GroupBy(x => x.BarCode).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
+                var duProduceNos = _produces.Where(x => x.ProduceNo != null).GroupBy(x => x.ProduceNo).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
+
+                if (duBarCodes.Any() || duProduceNos.Any())
+                {
+                    var BarCodesMsg = duBarCodes.JoinStrings("|");
+                    var duProduceNosMsg = duProduceNos.JoinStrings("|");
+                    MessageBox.Show(string.Format("商品条形码或者商品编号不唯一！\r\n{0}\r\n{1}",
+                            duBarCodes.Any() ? string.Format("商品条形码: {0}", BarCodesMsg) : string.Empty,
+                            duProduceNos.Any() ? string.Format("商品编号不: {0}", duProduceNosMsg) : string.Empty),
+                        SmallHoneybee.Wpf.Properties.Resources.SystemName,
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
 
                 _unitOfWork.Commit();
 
@@ -168,18 +191,54 @@ namespace SmallHoneybee.Wpf.Views
             }
             catch (Exception)
             {
+                InitUnitOfWork();
                 MessageBox.Show("保存失败！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
                  MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void NotifyPropertyChange(string propertyName)
+        private void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)
         {
-            if (PropertyChanged != null)
+            // Lookup for the source to be DataGridCell
+            if (e.OriginalSource.GetType() == typeof(DataGridCell))
             {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                // Starts the Edit on the row;
+                //DataGrid grd = (DataGrid)sender;
+                //grd.BeginEdit(e);
+
+                Control control = GetFirstChildByType<Control>(e.OriginalSource as DataGridCell);
+                if (control != null)
+                {
+                    control.Focus();
+                }
             }
+        }
+
+        private T GetFirstChildByType<T>(DependencyObject prop) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(prop); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild((prop), i) as DependencyObject;
+                if (child == null)
+                    continue;
+
+                T castedProp = child as T;
+                if (castedProp != null)
+                    return castedProp;
+
+                castedProp = GetFirstChildByType<T>(child);
+
+                if (castedProp != null)
+                    return castedProp;
+            }
+            return null;
+        }
+
+        private void InitUnitOfWork()
+        {
+            _unitOfWork = UnityInit.UnitOfWork;
+            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
+            _produceRepository = _unitOfWork.GetRepository<ProduceRepository>();
         }
     }
 }

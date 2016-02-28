@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-392123552591
+40916360537
 
-27-114013222
-32-1611580054
-MainWindow.xaml;Resources\button.xaml;Resources\checkbox.xaml;Resources\combobox.xaml;Resources\expander.xaml;Resources\frame.xaml;Resources\groupbox.xaml;Resources\label.xaml;Resources\listbox.xaml;Resources\listview.xaml;Resources\menu.xaml;Resources\navigationwindow.xaml;Resources\progressbar.xaml;Resources\radiobutton.xaml;Resources\resizegrip.xaml;Resources\scrollbar.xaml;Resources\scrollviewer.xaml;Resources\separator.xaml;Resources\shared.xaml;Resources\slider.xaml;Resources\statusbar.xaml;Resources\Style.xaml;Resources\tabcontrol.xaml;Resources\textbox.xaml;Resources\toolbar.xaml;Resources\tooltip.xaml;Resources\treeview.xaml;Resources\window.xaml;Views\BalanceFrom.xaml;Views\DayBook.xaml;Views\Login.xaml;Views\Produce.xaml;Views\PurchaseOrder.xaml;Views\SaleOrder.xaml;Views\SaleOrderForm.xaml;Views\Shared\ChooseMassagebox.xaml;Views\Shared\FileDialog.xaml;Views\SystemSetting.xaml;Views\User.xaml;
+281952192713
+34-209410376
+MainWindow.xaml;Resources\button.xaml;Resources\checkbox.xaml;Resources\combobox.xaml;Resources\expander.xaml;Resources\frame.xaml;Resources\groupbox.xaml;Resources\label.xaml;Resources\listbox.xaml;Resources\listview.xaml;Resources\menu.xaml;Resources\navigationwindow.xaml;Resources\progressbar.xaml;Resources\radiobutton.xaml;Resources\resizegrip.xaml;Resources\scrollbar.xaml;Resources\scrollviewer.xaml;Resources\separator.xaml;Resources\shared.xaml;Resources\slider.xaml;Resources\statusbar.xaml;Resources\Style.xaml;Resources\tabcontrol.xaml;Resources\textbox.xaml;Resources\toolbar.xaml;Resources\tooltip.xaml;Resources\treeview.xaml;Resources\window.xaml;Views\BalanceFrom.xaml;Views\DayBook.xaml;Views\Login.xaml;Views\PrintWindow.xaml;Views\Produce.xaml;Views\PurchaseOrder.xaml;Views\SaleOrder.xaml;Views\SaleOrderForm.xaml;Views\Shared\ChooseMassagebox.xaml;Views\Shared\FileDialog.xaml;Views\SystemSetting.xaml;Views\User.xaml;
 
 True
 

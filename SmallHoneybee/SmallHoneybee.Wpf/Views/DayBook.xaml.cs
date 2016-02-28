@@ -16,6 +16,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Practices.ObjectBuilder2;
 using SmallHoneybee.Common;
+using SmallHoneybee.DataModel.Model;
 using SmallHoneybee.EF.Data;
 using SmallHoneybee.EF.Data.Repository.Impl;
 using SmallHoneybee.EF.Data.UntityContainer;
@@ -109,6 +110,8 @@ namespace SmallHoneybee.Wpf.Views
                 .OrderByDescending(x => x.DayBookDate)
                 .ToList()
                 .ForEach(x => _dayBooks.Add(x));
+
+            InitBlankRow();
         }
 
         private void CommandBinding_ClearSearchText_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -186,16 +189,54 @@ namespace SmallHoneybee.Wpf.Views
         {
             if (e.Key == Key.Enter)
             {
-                _dayBooks.Add(new DataModel.Model.DayBook
-                {
-                    DayBookType = 1,
-                    DayBookDate = DateTime.Now,
-                    CreatedBy = ResourcesHelper.CurrentUser.Name,
-                    CreatedOn = DateTime.Now,
-                    LastModifiedBy = ResourcesHelper.CurrentUser.Name,
-                    LastModifiedOn = DateTime.Now,
-                });
+                InitBlankRow();
             }
+        }
+
+        private void InitBlankRow()
+        {
+            _dayBooks.Add(new DataModel.Model.DayBook
+            {
+                DayBookType = 1,
+                DayBookDate = DateTime.Now,
+                CreatedBy = ResourcesHelper.CurrentUser.Name,
+                CreatedOn = DateTime.Now,
+                LastModifiedBy = ResourcesHelper.CurrentUser.Name,
+                LastModifiedOn = DateTime.Now,
+            });
+        }
+
+        private void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)
+        {
+            // Lookup for the source to be DataGridCell
+            if (e.OriginalSource.GetType() == typeof(DataGridCell))
+            {
+                Control control = GetFirstChildByType<Control>(e.OriginalSource as DataGridCell);
+                if (control != null)
+                {
+                    control.Focus();
+                }
+            }
+        }
+
+        private T GetFirstChildByType<T>(DependencyObject prop) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(prop); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild((prop), i) as DependencyObject;
+                if (child == null)
+                    continue;
+
+                T castedProp = child as T;
+                if (castedProp != null)
+                    return castedProp;
+
+                castedProp = GetFirstChildByType<T>(child);
+
+                if (castedProp != null)
+                    return castedProp;
+            }
+            return null;
         }
     }
 }

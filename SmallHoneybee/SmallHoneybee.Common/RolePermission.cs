@@ -16,6 +16,8 @@ namespace SmallHoneybee.Common
                     SaleOrderView = true;
                     SaleOrderEdit = true;
                     SaleOrderDelete = true;
+                    SaleOrderFavorableLimitCost = true;
+
                     ProduceView = true;
                     ProduceEdit = true;
                     ProduceHeightEdit = false;
@@ -92,6 +94,8 @@ namespace SmallHoneybee.Common
                     break;
             }
         }
+
+        public bool SaleOrderFavorableLimitCost { get; set; }
 
         public bool SaleOrderFavorableCost { get; set; }
         public bool SaleOrderView { get; set; }

@@ -32,7 +32,7 @@ namespace SmallHoneybee.Wpf.Views
     public partial class User : Page, INotifyPropertyChanged
     {
         private IUnitOfWork _unitOfWork;
-        private  IUserRepository _userRepository;
+        private IUserRepository _userRepository;
 
         private ObservableCollection<DataModel.Model.User> _users = new ObservableCollection<DataModel.Model.User>();
 
@@ -68,7 +68,8 @@ namespace SmallHoneybee.Wpf.Views
 
             DataContext = new
             {
-                UserTypes = userTypes, Users,
+                UserTypes = userTypes,
+                Users,
                 EnableTexts = enableTxets
             };
         }
@@ -96,11 +97,14 @@ namespace SmallHoneybee.Wpf.Views
             _users.Clear();
             _userRepository
                 .Query()
+                .Where(x => x.UserType == (sbyte)DataType.UserType.Coustom)
                 .Where(x => x.UserNo.Contains(TxtSearchBox.Text) ||
                     x.Phone.Contains(TxtSearchBox.Text) ||
                     x.Name.Contains(TxtSearchBox.Text))
                 .ToList()
                 .ForEach(x => _users.Add(x));
+
+                InitBlankRow();
         }
 
         private void CommandBinding_ClearSearchText_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -175,25 +179,62 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
-        private void TextUserNo_OnKeyDown(object sender, KeyEventArgs e)
+        private void TextName_OnKeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {
-                _users.Add(new DataModel.Model.User
-                {
-                    UserType = 1,
-                    Enable = true,
-                    Login = new Guid().ToString(),
-                    PasswordHash = SaltedHash.Create("xislkfweorkdf").Hash,
-                    PasswordSalt = SaltedHash.Create("xislkfweorkdf").Salt,
-                    UserNo = (int.Parse(_users.Max(x => x.UserNo)) + 1).ToString(),
-                    CreatedBy = ResourcesHelper.CurrentUser.Name,
-                    CreatedOn = DateTime.Now,
-                    LastModifiedBy = ResourcesHelper.CurrentUser.Name,
-                    LastModifiedOn = DateTime.Now,
-
-                });
+                InitBlankRow();
             }
+        }
+
+        private void InitBlankRow()
+        {
+            _users.Add(new DataModel.Model.User
+            {
+                UserType = 0,
+                Enable = true,
+                Login = new Guid().ToString(),
+                PasswordHash = SaltedHash.Create("xislkfweorkdf").Hash,
+                PasswordSalt = SaltedHash.Create("xislkfweorkdf").Salt,
+                UserNo = (int.Parse(_users.Max(x => x.UserNo) ?? ResourcesHelper.CoustomUserNoStart) + 1).ToString(),
+                CreatedBy = ResourcesHelper.CurrentUser.Name,
+                CreatedOn = DateTime.Now,
+                LastModifiedBy = ResourcesHelper.CurrentUser.Name,
+                LastModifiedOn = DateTime.Now,
+            });
+        }
+
+        private void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)
+        {
+            // Lookup for the source to be DataGridCell
+            if (e.OriginalSource.GetType() == typeof(DataGridCell))
+            {
+                Control control = GetFirstChildByType<Control>(e.OriginalSource as DataGridCell);
+                if (control != null)
+                {
+                    control.Focus();
+                }
+            }
+        }
+
+        private T GetFirstChildByType<T>(DependencyObject prop) where T : DependencyObject
+        {
+            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(prop); i++)
+            {
+                DependencyObject child = VisualTreeHelper.GetChild((prop), i) as DependencyObject;
+                if (child == null)
+                    continue;
+
+                T castedProp = child as T;
+                if (castedProp != null)
+                    return castedProp;
+
+                castedProp = GetFirstChildByType<T>(child);
+
+                if (castedProp != null)
+                    return castedProp;
+            }
+            return null;
         }
     }
 }

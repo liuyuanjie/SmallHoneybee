@@ -232,131 +232,131 @@ namespace SmallHoneybee.Wpf.Views
         private bool _isClosedSaleOrderFormWindow = false;
     }
 
-    public class BalanceDomainModel : INotifyPropertyChanged
-    {
-        public event PropertyChangedEventHandler PropertyChanged;
-        protected void NotifyPropertyChange(string propertyName)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+    //public class BalanceDomainModel : INotifyPropertyChanged
+    //{
+    //    public event PropertyChangedEventHandler PropertyChanged;
+    //    protected void NotifyPropertyChange(string propertyName)
+    //    {
+    //        if (PropertyChanged != null)
+    //        {
+    //            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+    //        }
+    //    }
 
-        private string _userBaseInfo;
-        public string UserBaseInfo
-        {
-            get { return _userBaseInfo; }
-            set
-            {
-                _userBaseInfo = value;
-                NotifyPropertyChange("UserBaseInfo");
-            }
-        }
+    //    private string _userBaseInfo;
+    //    public string UserBaseInfo
+    //    {
+    //        get { return _userBaseInfo; }
+    //        set
+    //        {
+    //            _userBaseInfo = value;
+    //            NotifyPropertyChange("UserBaseInfo");
+    //        }
+    //    }
 
-        private string _userMemberInfo;
-        public string UserMemberInfo
-        {
-            get { return _userMemberInfo; }
-            set
-            {
-                _userMemberInfo = value;
-                NotifyPropertyChange("UserMemberInfo");
-            }
-        }
+    //    private string _userMemberInfo;
+    //    public string UserMemberInfo
+    //    {
+    //        get { return _userMemberInfo; }
+    //        set
+    //        {
+    //            _userMemberInfo = value;
+    //            NotifyPropertyChange("UserMemberInfo");
+    //        }
+    //    }
 
 
-        private float _discountPrice;
-        public float DiscountPrice
-        {
-            get { return _discountPrice; }
-            set
-            {
-                _discountPrice = value;
-                NotifyPropertyChange("DiscountPrice");
-            }
-        }
+    //    private float _discountPrice;
+    //    public float DiscountPrice
+    //    {
+    //        get { return _discountPrice; }
+    //        set
+    //        {
+    //            _discountPrice = value;
+    //            NotifyPropertyChange("DiscountPrice");
+    //        }
+    //    }
 
-        //private float _receivedPrice;
-        public float ReceivedPrice
-        {
-            get { return TotalPrice - DiscountPrice; }
-            set
-            {
-                //_receivedPrice = value;
-                NotifyPropertyChange("ReceivedPrice");
-            }
-        }
+    //    //private float _receivedPrice;
+    //    public float ReceivedPrice
+    //    {
+    //        get { return TotalPrice - DiscountPrice; }
+    //        set
+    //        {
+    //            //_receivedPrice = value;
+    //            NotifyPropertyChange("ReceivedPrice");
+    //        }
+    //    }
 
-        private float _realPrice;
-        public float RealPrice
-        {
-            get { return _realPrice; }
-            set
-            {
-                _realPrice = value;
-                NotifyPropertyChange("RealPrice");
-            }
-        }
+    //    private float _realPrice;
+    //    public float RealPrice
+    //    {
+    //        get { return _realPrice; }
+    //        set
+    //        {
+    //            _realPrice = value;
+    //            NotifyPropertyChange("RealPrice");
+    //        }
+    //    }
 
-        //private float _returnedPrice;
-        public float ReturnedPrice
-        {
-            get { return RealPrice - ReceivedPrice; }
-            set
-            {
-                //_returnedPrice = value;
-                NotifyPropertyChange("ReturnedPrice");
-            }
-        }
+    //    //private float _returnedPrice;
+    //    public float ReturnedPrice
+    //    {
+    //        get { return RealPrice - ReceivedPrice; }
+    //        set
+    //        {
+    //            //_returnedPrice = value;
+    //            NotifyPropertyChange("ReturnedPrice");
+    //        }
+    //    }
 
-        private float _detuctedPrice;
+    //    private float _detuctedPrice;
 
-        public float DetuctedPrice
-        {
-            get { return _detuctedPrice; }
-            set
-            {
-                _detuctedPrice = value;
-                NotifyPropertyChange("DetuctedPrice");
-            }
-        }
+    //    public float DetuctedPrice
+    //    {
+    //        get { return _detuctedPrice; }
+    //        set
+    //        {
+    //            _detuctedPrice = value;
+    //            NotifyPropertyChange("DetuctedPrice");
+    //        }
+    //    }
 
-        //private float _surplusPrice;
+    //    //private float _surplusPrice;
 
-        public float SurplusPrice
-        {
-            get { return CashTotal - ReceivedPrice; }
-            set
-            {
-                //_surplusPrice = value;
-                NotifyPropertyChange("SurplusPrice");
-            }
-        }
+    //    public float SurplusPrice
+    //    {
+    //        get { return CashTotal - ReceivedPrice; }
+    //        set
+    //        {
+    //            //_surplusPrice = value;
+    //            NotifyPropertyChange("SurplusPrice");
+    //        }
+    //    }
 
-        private string _memberInfo;
+    //    private string _memberInfo;
 
-        public string MemberInfo
-        {
-            get { return _memberInfo; }
-            set
-            {
-                _memberInfo = value;
-                NotifyPropertyChange("MemberInfo");
-            }
-        }
+    //    public string MemberInfo
+    //    {
+    //        get { return _memberInfo; }
+    //        set
+    //        {
+    //            _memberInfo = value;
+    //            NotifyPropertyChange("MemberInfo");
+    //        }
+    //    }
 
-        public float TotalPrice { get; set; }
+    //    public float TotalPrice { get; set; }
 
-        public float CashTotal { get; set; }
-        public float MemberPoints { get; set; }
+    //    public float CashTotal { get; set; }
+    //    public float MemberPoints { get; set; }
 
-        public float CurrentMemberPoints
-        {
-            get
-            {
-                return ReceivedPrice * Settings.Default.MemberPointsRate;
-            }
-        }
-    }
+    //    public float CurrentMemberPoints
+    //    {
+    //        get
+    //        {
+    //            return ReceivedPrice * Settings.Default.MemberPointsRate;
+    //        }
+    //    }
+    //}
 }
