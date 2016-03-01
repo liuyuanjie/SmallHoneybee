@@ -6,3 +6,4 @@ F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\bin\Release\SmallHoneybee.DomainModel.pdb
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\obj\Release\SmallHoneybee.DomainModel.dll
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\obj\Release\SmallHoneybee.DomainModel.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.DomainModel\obj\Release\SmallHoneybee.DomainModel.csprojResolveAssemblyReference.cache

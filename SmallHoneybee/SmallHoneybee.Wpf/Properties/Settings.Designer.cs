@@ -43,5 +43,14 @@ namespace SmallHoneybee.Wpf.Properties {
                 this["Login"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        public long GeneralMangerMaxDiscountPrice {
+            get {
+                return ((long)(this["GeneralMangerMaxDiscountPrice"]));
+            }
+        }
     }
 }

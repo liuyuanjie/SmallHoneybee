@@ -3,23 +3,19 @@
 
     <Style x:Key="BaseStyle" TargetType="{x:Type Control}">
         <Setter Property="Margin" Value="5" />
+        <Setter Property="FontFamily" Value="Microsoft YaHei" />
+        <Setter Property="FontSize" Value="12" />
     </Style>
     <Style TargetType="{x:Type Button}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="Width" Value="80" />
         <Setter Property="Height" Value="30" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="Cursor" Value="Hand" />
     </Style>
     <Style TargetType="{x:Type GroupBox}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="BorderBrush" Value="#FF9DCD19"/>
     </Style>
     <Style TargetType="{x:Type TabControl}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="BorderBrush" Value="#FF9DCD19"/>
     </Style>
 
@@ -34,36 +30,31 @@
     </Style>
 
     <Style TargetType="{x:Type PasswordBox}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Background" Value="#FFF0FDFC"/>
         <Setter Property="BorderBrush" Value="#FF9DCD19"/>
     </Style>
     <Style TargetType="{x:Type DatePicker}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Background" Value="#FFF0FDFC"/>
         <Setter Property="BorderBrush" Value="#FF9DCD19"/>
         <Setter Property="Cursor" Value="Hand" />
     </Style>
     <Style x:Key="CommonDatePickerStyle"  TargetType="{x:Type DatePicker}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="FontSize" Value="12" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Background" Value="#FFF0FDFC"/>
         <Setter Property="BorderBrush" Value="#FF9DCD19"/>
         <Setter Property="Cursor" Value="Hand" />
     </Style>
 
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Background" Value="#FFF0FDFC"/>
         <Setter Property="BorderBrush" Value="#FF9DCD19"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Control.Foreground" Value="#FFFFFF"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
     <Style x:Key="CommonTextStyle" TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Background" Value="#FFF0FDFC"/>
         <Setter Property="BorderBrush" Value="#FF9DCD19"/>
     </Style>
@@ -81,13 +72,10 @@
     </Style>
 
     <Style TargetType="{x:Type CheckBox}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
         <Setter Property="Cursor" Value="Hand" />
     </Style>
     <Style TargetType="{x:Type RadioButton}" BasedOn="{StaticResource BaseStyle}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+
         <Setter Property="Cursor" Value="Hand" />
     </Style>
 
@@ -96,20 +84,19 @@
     </Style>
     <Style TargetType="{x:Type MenuItem}">
         <Style.Setters>
-            <!--<Setter Property="MinWidth" Value="120" />-->
             <Setter Property="Height" Value="30" />
             <Setter Property="Margin" Value="5,5" />
             <Setter Property="Foreground" Value="White" />
             <Setter Property="VerticalAlignment" Value="Center" />
-            <Setter Property="Background" Value="#FF90929C" />
+            <Setter Property="Background" Value="#D5D9E8" />
             <Setter Property="Cursor" Value="Hand" />
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsChecked" Value="True">
-                <Setter Property="Control.Background" Value="#FF33B5C9"/>
+                <Setter Property="Control.Background" Value="#82C257"/>
             </Trigger>
             <Trigger Property="IsChecked" Value="False">
-                <Setter Property="Control.Background" Value="#FF90929C"/>
+                <Setter Property="Control.Background" Value="#D5D9E8"/>
             </Trigger>
             <Trigger Property="IsVisible" Value="False">
                 <Setter Property="Width" Value="0" />
@@ -119,12 +106,53 @@
     </Style>
     <Style TargetType="{x:Type TextBlock}" >
         <Setter Property="Margin" Value="5" />
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Microsoft YaHei" />
     </Style>
-    <Style TargetType="{x:Type DataGrid}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="FontFamily" Value="Segoe UI" />
+    
+    <Style TargetType="DataGrid">
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontFamily" Value="Microsoft YaHei" />
         <Setter Property="RowHeight" Value="30" />
+        <Setter Property="AlternationCount" Value="2" />
+        <Setter Property="Background" Value="#FAFAFA" />
+        <Setter Property="BorderBrush" Value="#FAFAFA" />
+        <Setter Property="HorizontalGridLinesBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#F4F5F7"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VerticalGridLinesBrush">
+            <Setter.Value>
+                <SolidColorBrush Color="#F4F5F7"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style  TargetType="DataGridRow">
+        <Setter Property="Background" Value="#F2F2F2" />
+        <Setter Property="Foreground" Value="Black" />
+        <Style.Triggers>
+            <Trigger Property="AlternationIndex" Value="0" >
+                <Setter Property="Background" Value="#DDE8BA" />
+            </Trigger>
+            <Trigger Property="AlternationIndex" Value="1" >
+                <Setter Property="Background" Value="#FFFFFF" />
+            </Trigger>
+
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#C1F396"/>
+            </Trigger>
+
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#82C257"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="DataGridCell">
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background" Value="#82C257"/>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 </ResourceDictionary> 

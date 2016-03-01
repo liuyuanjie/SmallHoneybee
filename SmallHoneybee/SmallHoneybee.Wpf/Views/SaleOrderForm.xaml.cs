@@ -150,7 +150,6 @@ namespace SmallHoneybee.Wpf.Views
             _soProduceDomainModels.ForEach(
                 x =>
                 {
-                    //x.SOProduce.CostPerUnit = x.SOProduce.DiscountRate * x.SOProduce.Produce.RetailPrice;
                     x.SOProduce.RetailPrice = x.SOProduce.Produce.RetailPrice;
                     x.SOProduce.SOProduceStatusCategory = (sbyte)saleOrderStatus;
                 });
@@ -175,7 +174,6 @@ namespace SmallHoneybee.Wpf.Views
 
             _saleOrder.SaleOrderStatus = (sbyte)saleOrderStatus;
         }
-
 
         private void TxtQuantity_OnLostFocus(object sender, RoutedEventArgs e)
         {
@@ -307,7 +305,7 @@ namespace SmallHoneybee.Wpf.Views
                 var barCode = (TextBox)sender;
                 if (barCode.IsFocused)
                 {
-                    var produce = _produceRepository.Query().Where(x => x.BarCode.StartsWith(barCode.Text)).FirstOrDefault();
+                    var produce = _produceRepository.Query().FirstOrDefault(x => x.BarCode.StartsWith(barCode.Text));
                     if (produce != null)
                     {
                         var soProduceDomainModel = GridSOProduces.SelectedItem as SOProduceDomainModel;
@@ -320,16 +318,17 @@ namespace SmallHoneybee.Wpf.Views
                                     Produce = produce,
                                     ProduceId = produce.ProduceId,
                                     Quantity = 1,
-                                    CostPerUnit = produce.RetailPrice * produce.DiscountRate,
+                                    CostPerUnit = produce.RetailPrice*produce.DiscountRate,
                                     SaleOrder = _saleOrder,
                                     SaleOrderId = _saleOrder.SaleOrderId,
                                     RetailPrice = produce.RetailPrice,
                                     DiscountRate = produce.DiscountRate
                                 },
-                                CostPerUnit = produce.RetailPrice * produce.DiscountRate,
-                                SOProduceTotal = produce.RetailPrice * produce.DiscountRate * 1,
+                                CostPerUnit = produce.RetailPrice*produce.DiscountRate,
+                                SOProduceTotal = produce.RetailPrice*produce.DiscountRate*1,
                             };
                             _soProduceDomainModels.Add(soProduceDomainModel);
+                            
                         }
                     }
 
@@ -367,6 +366,21 @@ namespace SmallHoneybee.Wpf.Views
         {
             if (e.Key == Key.Enter)
             {
+                var discountPrice = string.IsNullOrEmpty(TxtDiscount.Text) ? 0 : float.Parse(TxtDiscount.Text);
+                if (!ResourcesHelper.CurrentUserRolePermission.SaleOrderFavorableCost &&
+                    discountPrice > Settings.Default.GeneralMangerMaxDiscountPrice)
+                {
+                    TxtDiscount.Background =
+                                (System.Windows.Media.Brush)new BrushConverter().ConvertFromString("#FFA8A8");
+                    MessageBox.Show("结算失败, 优惠金额超过上限, 要赔钱卖了！", Properties.Resources.SystemName,
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+                else
+                {
+                    TxtDiscount.Background =
+                        (System.Windows.Media.Brush)new BrushConverter().ConvertFromString("#FFF0FDFC");
+                }
                 UpdateBalanceData();
             }
         }
@@ -425,13 +439,13 @@ namespace SmallHoneybee.Wpf.Views
                 }
                 if (_balanceDomainModel.DiscountPrice > 0)
                 {
-                    //if (!ResourcesHelper.CurrentUserRolePermission.SaleOrderFavorableCost &&
-                    //    _balanceDomainModel.DiscountPrice > _balanceDomainModel.TotalPrice * 0.05)
-                    //{
-                    //    MessageBox.Show("结算失败, 优惠金额太多, 要赔钱卖了！", Properties.Resources.SystemName,
-                    //        MessageBoxButton.OK, MessageBoxImage.Warning);
-                    //    return;
-                    //}
+                    if (!ResourcesHelper.CurrentUserRolePermission.SaleOrderFavorableCost &&
+                        _balanceDomainModel.DiscountPrice > Settings.Default.GeneralMangerMaxDiscountPrice)
+                    {
+                        MessageBox.Show("结算失败, 优惠金额超过上限, 要赔钱卖了！", Properties.Resources.SystemName,
+                            MessageBoxButton.OK, MessageBoxImage.Warning);
+                        return;
+                    }
 
                     if (_balanceDomainModel.DiscountPrice > _balanceDomainModel.TotalPrice)
                     {
@@ -526,37 +540,6 @@ namespace SmallHoneybee.Wpf.Views
                 SaleOrderWindow.ExecuteSearchText();
                 Close();
             }
-        }
-
-        private void TxtBarCode_OnTextChanged(object sender, TextChangedEventArgs e)
-        {
-            //var barCode = (TextBox)sender;
-            //if (barCode.IsFocused && !string.IsNullOrEmpty(barCode.Text) && barCode.Text.Length >= 3)
-            //{
-            //    var produces = _produceRepository.Query().Where(x => x.BarCode.StartsWith(barCode.Text));
-            //    if (produces.Count() == 1)
-            //    {
-            //        var produce = produces.First();
-            //        var soProduceDomainModel = GridSOProduces.SelectedItem as SOProduceDomainModel;
-            //        if (soProduceDomainModel == null)
-            //        {
-            //            soProduceDomainModel = new SOProduceDomainModel
-            //            {
-            //                SOProduce = new SOProduce
-            //                {
-            //                    Produce = produce,
-            //                    ProduceId = produce.ProduceId,
-            //                    Quantity = 1,
-            //                    CostPerUnit = produce.RetailPrice,
-            //                    SaleOrder = _saleOrder,
-            //                    SaleOrderId = _saleOrder.SaleOrderId,
-            //                    DiscountRate = produce.DiscountRate
-            //                }
-            //            };
-            //            _soProduceDomainModels.Add(soProduceDomainModel);
-            //        }
-            //    }
-            //}
         }
 
         private void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)

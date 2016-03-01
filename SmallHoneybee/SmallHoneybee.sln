@@ -11,7 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallHoneybee.EF.Data", "Sm
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SmallHonebee.SQL", "SmallHonebee.SQL", "{FD2B57B2-0F26-4859-89C4-C5E2340FC036}"
 	ProjectSection(SolutionItems) = preProject
-		SmallHonebee-Schema.sql = SmallHonebee-Schema.sql
+		SmallHonebee.SQL\SmallHonebee-Schema.sql = SmallHonebee.SQL\SmallHonebee-Schema.sql
+		SmallHonebee.SQL\Update.bat = SmallHonebee.SQL\Update.bat
+		SmallHonebee.SQL\Update_2016.02.29-2016.03.01.sql = SmallHonebee.SQL\Update_2016.02.29-2016.03.01.sql
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallHoneybee.Common", "SmallHoneybee.Common\SmallHoneybee.Common.csproj", "{9D86EA95-3EB8-41CC-8237-A2AF9FD0AD8E}"

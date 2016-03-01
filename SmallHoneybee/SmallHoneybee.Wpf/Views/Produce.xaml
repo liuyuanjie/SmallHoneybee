@@ -61,6 +61,13 @@
             <DataGrid.Resources>
                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextStyle}" >
                     <Setter Property="Margin" Value="1" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Control.Opacity" Value="0.8"/>
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="Control.BorderThickness" Value="0"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>

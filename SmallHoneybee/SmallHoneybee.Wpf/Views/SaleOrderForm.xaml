@@ -83,6 +83,13 @@
             <DataGrid.Resources>
                 <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextStyle}" >
                     <Setter Property="Margin" Value="1" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Control.Opacity" Value="0.8"/>
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="Control.BorderThickness" Value="0"/>
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
@@ -101,8 +108,7 @@
                 <DataGridTemplateColumn Header="产品条形码"  Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding SOProduce.Produce.BarCode}" Name="TxtBarCode"
-                                   TextChanged="TxtBarCode_OnTextChanged" KeyDown="TxtBarCode_OnKeyDown"></TextBox>
+                            <TextBox Text="{Binding SOProduce.Produce.BarCode}" Name="TxtBarCode" KeyDown="TxtBarCode_OnKeyDown"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -169,12 +175,12 @@
             </DataGrid.Columns>
         </DataGrid>
         <StackPanel  Grid.Row="3" HorizontalAlignment="Right" Orientation="Horizontal" >
-            <TextBlock FontWeight="Bold"  Foreground="#26CE25" FontSize="16" VerticalAlignment="Center" Name="TextTotalCount" Margin="0,0,2,0">数量： 0.00，</TextBlock>
-            <TextBlock FontWeight="Bold"  Foreground="#FF5454" FontSize="16" VerticalAlignment="Center" Name="TextTotalOriginal" Margin="0,0,2,0">原价小计： 0.00，</TextBlock>
-            <TextBlock FontWeight="Bold"  Foreground="#FF5454" FontSize="16" VerticalAlignment="Center" Name="TextTotalDiscount" Margin="0,0,2,0">优惠小计： 0.00，</TextBlock>
+            <TextBlock FontWeight="Bold"  Foreground="#26CE25" FontSize="14" VerticalAlignment="Center" Name="TextTotalCount" Margin="0,0,2,0">数量： 0.00，</TextBlock>
+            <TextBlock FontWeight="Bold"  Foreground="#26CE25" FontSize="14" VerticalAlignment="Center" Name="TextTotalOriginal" Margin="0,0,2,0">原价小计： 0.00，</TextBlock>
+            <TextBlock FontWeight="Bold"  Foreground="#26CE25" FontSize="14" VerticalAlignment="Center" Name="TextTotalDiscount" Margin="0,0,2,0">优惠小计： 0.00，</TextBlock>
             <TextBlock FontWeight="Bold"  Foreground="#FF0303" FontSize="20" VerticalAlignment="Center" Name="TextTotalNumber" Margin="0,0,10,0">折后小计： 0.00</TextBlock>
         </StackPanel>
-        <StackPanel Grid.Row="4" Orientation="Horizontal" Background="#FFE8F5C4" Visibility="{Binding Path=CurrentUserRolePermission.SaleOrderFavorableCost,Converter={StaticResource VisibilityConverter}}">
+        <StackPanel Grid.Row="4" Orientation="Horizontal" Background="#FFE8F5C4">
             <TextBlock Text="商品小计金额：" VerticalAlignment="Center"></TextBlock>
             <TextBox MinWidth="150" IsEnabled="false" Text="{Binding Path=DataContext.BalanceDomainModel.TotalPrice,StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
             <TextBlock Text="优惠金额：" VerticalAlignment="Center"></TextBlock>
@@ -229,7 +235,7 @@
                     <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="1" Style="{StaticResource MarkedTextStyle}" Text="{Binding Path=DataContext.BalanceDomainModel.SurplusPrice,Mode=OneWay,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </Grid>
             </TabItem>
-            <TabItem Name="TabItemUnionPay">
+            <TabItem Name="TabItemUnionPay" Visibility="Hidden">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <RadioButton Width="150" x:Name="RadBanlanceModeUnionPay" GroupName="BanlanceMode" DataContext="2"  Content="银联卡结算"></RadioButton>

@@ -37,7 +37,7 @@
                 <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,5,0,5" >
-                <Menu x:Name="SamllHoneybeeMenu" Height="40" FontSize="20" Margin="5,5,0,5" Background="#FFC9CBD3">
+                <Menu x:Name="SamllHoneybeeMenu" Height="40" FontSize="20" Margin="5,5,0,5" Background="#DDF2A2">
                     <MenuItem x:Name="SamllHoneybeeSaleOrderMenu" Header="零售管理" 
                           Visibility="{Binding Path=CurrentUserRolePermission.SaleOrderView,Converter={StaticResource VisibilityConverter}}"
                           Click="RTReportMenuNavigation_Click">
