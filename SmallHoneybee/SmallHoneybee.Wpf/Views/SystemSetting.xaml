@@ -1,13 +1,67 @@
 ﻿<Page x:Class="SmallHoneybee.Wpf.Views.SystemSetting"
+     xmlns:sys="clr-namespace:System;assembly=mscorlib"  
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:props="clr-namespace:SmallHoneybee.Wpf.Properties"
+      xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       mc:Ignorable="d" 
-      d:DesignHeight="300" d:DesignWidth="300"
 	Title="SystemSetting">
-
-    <Grid>
+    <Page.Resources>
+        <RoutedUICommand x:Key="ClearSearchText" Text="Increase Font Size" />
+        <RoutedUICommand x:Key="ExecuteSearchText" Text="Decrease Font Size" />
+        <ResourceDictionary x:Key="CommonStyle">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid  Resources="{StaticResource CommonStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1000*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0"  FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0">||系统设置</TextBlock>
+        <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+            <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
+            </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="260"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="260"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="积分/合计：" HorizontalAlignment="Right"/>
+        <TextBox Grid.Column="1" Grid.Row="0" 
+            Name="TxtMemberPointsRate" Text="{Binding Path=DataContext.SystemSetting.MemberPointsRate,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
+        <TextBlock Grid.Column="2" Grid.Row="0" Text="允许普通操作员最大合价优惠金额：" HorizontalAlignment="Right"/>
+        <TextBox Grid.Column="3" Grid.Row="0" 
+            Name="TxtSOProduceGeneralMangerMaxDiscountPrice" Text="{Binding Path=DataContext.SystemSetting.SOProduceGeneralMangerMaxDiscountPrice,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
         
+        <TextBlock Grid.Column="0" Grid.Row="1" Text="零售打印店名：" HorizontalAlignment="Right"/>
+        <TextBox Grid.Column="1" Grid.Row="1" 
+            Name="TxtReportMerchantsName" Text="{Binding Path=DataContext.SystemSetting.ReportMerchantsName,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
+        <TextBlock Grid.Column="2" Grid.Row="1" Text="零售打印电话：" HorizontalAlignment="Right"/>
+        <TextBox Grid.Column="3" Grid.Row="1" 
+            Name="TxtReportPhone" Text="{Binding Path=DataContext.SystemSetting.ReportPhone,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
+        <TextBlock Grid.Column="0" Grid.Row="2" Text="零售打印地址：" HorizontalAlignment="Right"/>
+        <TextBox Grid.Column="1" Grid.Row="2" 
+            Name="TxtReportAddress" Text="{Binding Path=DataContext.SystemSetting.ReportAddress,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
+        <TextBlock Grid.Column="2" Grid.Row="2" Text="零售打印打印机名称：" HorizontalAlignment="Right"/>
+            <TextBox Grid.Column="3" Grid.Row="2" 
+            Name="TxtReportPrintName" Text="{Binding Path=DataContext.SystemSetting.ReportPrintName,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
+        </Grid>
+        <StackPanel Grid.Column="0" Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button FontWeight="Bold" Content="保存" Width="90" Name="ButSave" Click="ButSave_OnClick" ></Button>
+            <Button FontWeight="Bold" Content="取消" Width="60" Name="ButCancel" Click="ButCancel_OnClick" ></Button>
+        </StackPanel>
     </Grid>
 </Page>

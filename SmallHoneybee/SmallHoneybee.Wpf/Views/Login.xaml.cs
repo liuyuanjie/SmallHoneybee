@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,11 +28,14 @@ namespace SmallHoneybee.Wpf.Views
     public partial class Login : Window
     {
         private readonly IUserRepository _userRepository;
+        private readonly ISystemSettingRepository _systemSettingRepository;
 
         public Login()
         {
             InitializeComponent();
             _userRepository = UnityInit.UnitOfWork.GetRepository<UserRepository>();
+            _systemSettingRepository = UnityInit.UnitOfWork.GetRepository<SystemSettingRepository>();
+
             TxtVersion.Text = string.Format("当前版本号 : V{0}", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString());
             CheckBoxLogin.IsChecked = !string.IsNullOrEmpty(Settings.Default.Login);
             TextLogin.Text = Settings.Default.Login;
@@ -64,7 +68,12 @@ namespace SmallHoneybee.Wpf.Views
             if (user != null && SaltedHash.Create(user.PasswordSalt, user.PasswordHash).Verify(password))
             {
                 ResourcesHelper.CurrentUserRolePermission = new RolePermission((DataType.UserType)user.UserType);
+                ResourcesHelper.SystemSettings = _systemSettingRepository.Query()
+                    .Where(x => x.IsEnable)
+                    .ToList()
+                    .ToDictionary(x => short.Parse(x.SettingCode), x => x.SettingValue);
                 ResourcesHelper.CurrentUser = user;
+
                 if (CheckBoxLogin.IsChecked.HasValue &&
                     CheckBoxLogin.IsChecked.Value)
                 {

@@ -5,6 +5,6 @@
     Renaming the file extension or editing the content of this file may   
     cause the file to be unrecognizable by the program.
 -->
-<GenericObjectDataSource DisplayName="BalanceDomainModel" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
-   <TypeInfo>SmallHoneybee.Wpf.Views.BalanceDomainModel, SmallHoneybee.Wpf, Version=1.0.0.1, Culture=neutral, PublicKeyToken=null</TypeInfo>
+<GenericObjectDataSource DisplayName="SaleOrderReportModel" Version="1.0" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+   <TypeInfo>SmallHoneybee.Wpf.Report.SaleOrderReportModel, SmallHoneybee.Wpf, Version=2016.2.29.1, Culture=neutral, PublicKeyToken=null</TypeInfo>
 </GenericObjectDataSource>

@@ -95,5 +95,17 @@ namespace SmallHoneybee.Common
             QuantityOrdered,
             QuantityReceived
         }
+
+        public enum SystemSettingCode : short
+        {
+            SystemVersion = 1000,
+            MemberPointsRate = 1001,
+            SOProduceGeneralMangerMaxDiscountPrice = 1002,
+
+            ReportMerchantsName = 1101,
+            ReportPhone = 1102,
+            ReportAddress = 1103,
+            ReportPrintName = 1104
+        }
     }
 }

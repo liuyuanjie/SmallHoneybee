@@ -43,6 +43,7 @@ namespace SmallHoneybee.Wpf
                     stringBuilder.AppendFormat("/n {0}", e.Exception.InnerException.Message);
                 }
                 stringBuilder.AppendFormat("/n {0}", e.Exception.StackTrace);
+                Log4NetHelper.WriteLog(stringBuilder.ToString());
                 MessageBox.Show(stringBuilder.ToString());
                 e.Handled = true;  
             };

@@ -58,10 +58,10 @@
                           Visibility="{Binding Path=CurrentUserRolePermission.DayBookView,Converter={StaticResource VisibilityConverter}}"
                           Click="SamllHoneybeeDayBookMenu_OnClick" >
                     </MenuItem>
-                    <!--<MenuItem x:Name="SamllHoneybeeSystemSettingMenu" Header="系统设置" 
+                    <MenuItem x:Name="SamllHoneybeeSystemSettingMenu" Header="系统设置" 
                           Visibility="{Binding Path=CurrentUserRolePermission.SystemSettingView,Converter={StaticResource VisibilityConverter}}"
                           Click="SamllHoneybeeSystemSettingMenu_OnClick" >
-                    </MenuItem>-->
+                    </MenuItem>
                 </Menu>
             </StackPanel>
             <TextBlock Grid.Column="1" Grid.Row="0"  Margin="0,5,0,5" Height="40" FontSize="18" Name="TxtCurrentUser" Background="#FFC1F396" VerticalAlignment="Center" FontWeight="Bold" Padding="5,8" Foreground="#FFFFFF"></TextBlock>

@@ -104,3 +104,15 @@ F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Deb
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\zh-CN\SmallHoneybee.Wpf.resources.dll
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\SmallHoneybee.Wpf.exe
 F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\obj\Debug\SmallHoneybee.Wpf.pdb
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\Report\SaleOrderDetail.rdlc
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\Microsoft.ReportViewer.WinForms.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\de\Microsoft.ReportViewer.WinForms.resources.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\es\Microsoft.ReportViewer.WinForms.resources.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\fr\Microsoft.ReportViewer.WinForms.resources.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\it\Microsoft.ReportViewer.WinForms.resources.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\ja\Microsoft.ReportViewer.WinForms.resources.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\ko\Microsoft.ReportViewer.WinForms.resources.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\pt\Microsoft.ReportViewer.WinForms.resources.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\ru\Microsoft.ReportViewer.WinForms.resources.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+F:\yuanjie\HomeOffice\kkak\SmallHoneybee\SmallHoneybee\SmallHoneybee.Wpf\bin\Debug\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll

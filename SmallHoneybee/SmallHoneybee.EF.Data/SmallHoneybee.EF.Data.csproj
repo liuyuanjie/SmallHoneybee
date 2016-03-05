@@ -64,6 +64,7 @@
     <Compile Include="Repository\Impl\POItemRepository.cs" />
     <Compile Include="Repository\Impl\SOProduceRepository.cs" />
     <Compile Include="Repository\Impl\DayBookRepository.cs" />
+    <Compile Include="Repository\Impl\SytemSettingRepository.cs" />
     <Compile Include="Repository\Impl\UserRepository.cs" />
     <Compile Include="Repository\Impl\SaleOrderRepository.cs" />
     <Compile Include="Repository\Impl\PurchaseOrderRepository.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Repository\ICategoryRepository.cs" />
     <Compile Include="Repository\IPOItemRepository.cs" />
     <Compile Include="Repository\ISOProduceRepository.cs" />
+    <Compile Include="Repository\ISystemSetting.cs" />
     <Compile Include="Repository\IUserRepository.cs" />
     <Compile Include="Repository\ISaleOrderRepository.cs" />
     <Compile Include="Repository\IPurchaseOrderRepository.cs" />

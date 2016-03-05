@@ -21,6 +21,8 @@ namespace SmallHoneybee.EF.Data.UntityContainer
             UnityContainer.RegisterType<IPOItemRepository, POItemRepository>();
             UnityContainer.RegisterType<ISaleOrderRepository, SaleOrderRepository>();
             UnityContainer.RegisterType<IUserRepository, UserRepository>();
+            UnityContainer.RegisterType<ISystemSettingRepository, SystemSettingRepository>();
+
         }
 
         public static IUnitOfWork UnitOfWork

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
@@ -17,6 +18,7 @@ using SmallHoneybee.EF.Data.Repository.Impl;
 using SmallHoneybee.EF.Data.UntityContainer;
 using SmallHoneybee.Wpf.Common;
 using SmallHoneybee.Wpf.Properties;
+using SmallHoneybee.Wpf.Report;
 using Brush = System.Drawing.Brush;
 
 namespace SmallHoneybee.Wpf.Views
@@ -236,7 +238,7 @@ namespace SmallHoneybee.Wpf.Views
                     = soProduceDomainModel.SOProduce.Produce.RetailPrice *
                         soProduceDomainModel.SOProduce.DiscountRate;
                 soProduceDomainModel.SOProduceTotal = (soProduceDomainModel.SOProduce.Quantity ?? 0) *
-                   (soProduceDomainModel.SOProduce.CostPerUnit ?? 0);
+                   ((float)soProduceDomainModel.SOProduce.CostPerUnit);
 
                 SetTotalNameberText();
             }
@@ -258,8 +260,8 @@ namespace SmallHoneybee.Wpf.Views
         private void SetTotalNameberText()
         {
             _saleOrder.TotalCost = (_saleOrder.OtherCost ?? 0) +
-                (_soProduceDomainModels.Where(x => x.SOProduce != null)
-                    .Sum(x => x.SOProduce.Quantity * x.SOProduce.CostPerUnit) ?? 0);
+                ((float)_soProduceDomainModels.Where(x => x.SOProduce != null)
+                    .Sum(x => x.SOProduce.Quantity * x.SOProduce.CostPerUnit));
 
             _saleOrder.ProduceTotalCount = _soProduceDomainModels.Where(x => x.SOProduce != null)
                         .Sum(x => x.SOProduce.Quantity ?? 0);
@@ -318,17 +320,17 @@ namespace SmallHoneybee.Wpf.Views
                                     Produce = produce,
                                     ProduceId = produce.ProduceId,
                                     Quantity = 1,
-                                    CostPerUnit = produce.RetailPrice*produce.DiscountRate,
+                                    CostPerUnit = produce.RetailPrice * produce.DiscountRate,
                                     SaleOrder = _saleOrder,
                                     SaleOrderId = _saleOrder.SaleOrderId,
                                     RetailPrice = produce.RetailPrice,
                                     DiscountRate = produce.DiscountRate
                                 },
-                                CostPerUnit = produce.RetailPrice*produce.DiscountRate,
-                                SOProduceTotal = produce.RetailPrice*produce.DiscountRate*1,
+                                CostPerUnit = produce.RetailPrice * produce.DiscountRate,
+                                SOProduceTotal = produce.RetailPrice * produce.DiscountRate * 1,
                             };
                             _soProduceDomainModels.Add(soProduceDomainModel);
-                            
+
                         }
                     }
 
@@ -411,6 +413,53 @@ namespace SmallHoneybee.Wpf.Views
 
         private void ButPrint_OnClick(object sender, RoutedEventArgs e)
         {
+            PrintReport();
+        }
+
+        private void PrintReport()
+        {
+            using (
+                ReportPrint report =
+                    new ReportPrint(ResourcesHelper.SystemSettings[(short) DataType.SystemSettingCode.ReportPrintName]))
+            {
+                {
+                    SaleOrderReportModel saleOrderReportModel = new SaleOrderReportModel
+                    {
+                        SOProucedDetailReportModels = new List<SOProucedDetailReportModel>(),
+                        SOProuceSummaryReportModels = new List<SOProuceSummaryReportModel>
+                        {
+                            new SOProuceSummaryReportModel
+                            {
+                                MerchantsName =
+                                    ResourcesHelper.SystemSettings[(short) DataType.SystemSettingCode.ReportMerchantsName],
+                                OriginUser = ResourcesHelper.CurrentUser.Name,
+                                SaleOrderNo = _saleOrder.SaleOrderNo,
+                                ProduceTotalCount = _saleOrder.ProduceTotalCount ?? 0,
+                                ProduceTotalOriginal = _saleOrder.ProduceTotalOriginal ?? 0,
+                                ProduceTotalDiscountAndFavorableCost =
+                                    (_saleOrder.ProduceTotalDiscount ?? 0) + (_saleOrder.FavorableCost ?? 0),
+                                TotalCost = _saleOrder.TotalCost ?? 0,
+                                HowBalanceName =
+                                    CommonHelper.Enumerate<DataType.SaleOrderBalancedMode>()
+                                        .Single(x => x.Key == _saleOrder.HowBalance)
+                                        .Value,
+                                Phone = ResourcesHelper.SystemSettings[(short) DataType.SystemSettingCode.ReportPhone],
+                                Address =
+                                    ResourcesHelper.SystemSettings[(short) DataType.SystemSettingCode.ReportAddress],
+                            }
+                        }
+                    };
+                    _soProduceDomainModels.ForEach(x =>
+                        saleOrderReportModel.SOProucedDetailReportModels.Add(new SOProucedDetailReportModel
+                        {
+                            ProduceName = x.SOProduce.Produce.Name,
+                            CostPerUnit = x.SOProduce.CostPerUnit ?? 0,
+                            Quantity = x.SOProduce.Quantity ?? 0,
+                            RetailPrice = x.SOProduce.RetailPrice ?? 0
+                        }));
+                    report.Run(saleOrderReportModel);
+                }
+            }
         }
 
         private void ButBalance_OnClick(object sender, RoutedEventArgs e)
@@ -526,6 +575,19 @@ namespace SmallHoneybee.Wpf.Views
                 _saleOrder.SaleOrderStatus = (sbyte)DataType.SaleOrderStatus.Balanced;
                 _unitOfWork.Commit();
 
+                if (ResourcesHelper.CurrentUser.UserType != (byte)DataType.UserType.Admin)
+                {
+                    try
+                    {
+                        PrintReport();
+                    }
+                    finally
+                    {
+                        MessageBox.Show("结算成功, 打印小票失败！", Properties.Resources.SystemName,
+                            MessageBoxButton.OK, MessageBoxImage.Warning);
+                    }
+                }
+
                 MessageBox.Show("结算成功！", Properties.Resources.SystemName,
                     MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -609,7 +671,6 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
-
         private float _discountPrice;
         public float DiscountPrice
         {
@@ -621,13 +682,11 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
-        //private float _receivedPrice;
         public float ReceivedPrice
         {
             get { return TotalPrice - DiscountPrice; }
             set
             {
-                //_receivedPrice = value;
                 NotifyPropertyChange("ReceivedPrice");
             }
         }
@@ -643,19 +702,16 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
-        //private float _returnedPrice;
         public float ReturnedPrice
         {
             get { return RealPrice - ReceivedPrice; }
             set
             {
-                //_returnedPrice = value;
                 NotifyPropertyChange("ReturnedPrice");
             }
         }
 
         private float _detuctedPrice;
-
         public float DetuctedPrice
         {
             get { return _detuctedPrice; }
@@ -666,20 +722,17 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
-        //private float _surplusPrice;
 
         public float SurplusPrice
         {
             get { return CashTotal - ReceivedPrice; }
             set
             {
-                //_surplusPrice = value;
                 NotifyPropertyChange("SurplusPrice");
             }
         }
 
         private string _memberInfo;
-
         public string MemberInfo
         {
             get { return _memberInfo; }
@@ -709,42 +762,6 @@ namespace SmallHoneybee.Wpf.Views
             {
                 return ReceivedPrice * Settings.Default.MemberPointsRate;
             }
-        }
-    }
-
-    public class BaseWindow : Window
-    {
-        public void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)
-        {
-            // Lookup for the source to be DataGridCell
-            if (e.OriginalSource.GetType() == typeof(DataGridCell))
-            {
-                Control control = GetFirstChildByType<Control>(e.OriginalSource as DataGridCell);
-                if (control != null)
-                {
-                    control.Focus();
-                }
-            }
-        }
-
-        public T GetFirstChildByType<T>(DependencyObject prop) where T : DependencyObject
-        {
-            for (int i = 0; i < VisualTreeHelper.GetChildrenCount(prop); i++)
-            {
-                DependencyObject child = VisualTreeHelper.GetChild((prop), i) as DependencyObject;
-                if (child == null)
-                    continue;
-
-                T castedProp = child as T;
-                if (castedProp != null)
-                    return castedProp;
-
-                castedProp = GetFirstChildByType<T>(child);
-
-                if (castedProp != null)
-                    return castedProp;
-            }
-            return null;
         }
     }
 }

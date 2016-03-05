@@ -182,10 +182,10 @@
         </StackPanel>
         <StackPanel Grid.Row="4" Orientation="Horizontal" Background="#FFE8F5C4">
             <TextBlock Text="商品小计金额：" VerticalAlignment="Center"></TextBlock>
-            <TextBox MinWidth="150" IsEnabled="false" Text="{Binding Path=DataContext.BalanceDomainModel.TotalPrice,StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+            <TextBox MinWidth="150" IsEnabled="false" Style="{StaticResource MarkedTextStyle}" Text="{Binding Path=DataContext.BalanceDomainModel.TotalPrice,StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
             <TextBlock Text="优惠金额：" VerticalAlignment="Center"></TextBlock>
             <TextBox MinWidth="150" Text="{Binding Path=DataContext.BalanceDomainModel.DiscountPrice,StringFormat=F2,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
-                     Name="TxtDiscount" KeyDown="TxtDiscount_OnKeyDown"></TextBox>
+                FontSize="20"     Name="TxtDiscount" KeyDown="TxtDiscount_OnKeyDown"></TextBox>
             <TextBlock  Text="应收金额：" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
             <TextBox MinWidth="150" IsEnabled="false" Style="{StaticResource MarkedTextStyle}"
                 Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" />
@@ -230,9 +230,9 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Grid.Row="0"  Text="扣除金额：" HorizontalAlignment="Right"></TextBlock>
-                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="0"  Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBox>
+                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="0" FontSize="20" Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBox>
                     <TextBlock Grid.Column="0" Grid.Row="1"  Text="剩余金额：" HorizontalAlignment="Right"></TextBlock>
-                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="1" Style="{StaticResource MarkedTextStyle}" Text="{Binding Path=DataContext.BalanceDomainModel.SurplusPrice,Mode=OneWay,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="1"     Style="{StaticResource MarkedTextStyle}" Text="{Binding Path=DataContext.BalanceDomainModel.SurplusPrice,Mode=OneWay,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </Grid>
             </TabItem>
             <TabItem Name="TabItemUnionPay" Visibility="Hidden">
@@ -252,13 +252,13 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Grid.Row="0"  Text="扣除金额：" HorizontalAlignment="Right"></TextBlock>
-                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="0"  Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBox>
+                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="0" FontSize="20"   Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBox>
                 </Grid>
             </TabItem>
         </TabControl>
         <StackPanel   Grid.Column="0" Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="{Binding Path=DataContext.BalanceDomainModel.MemberInfo,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBlock>
-            <!--<Button FontWeight="Bold" Content="打印" Width="120" Name="ButPrint" Click="ButPrint_OnClick"></Button>-->
+            <Button FontWeight="Bold" Content="打印" Width="120" Name="ButPrint" Visibility="Hidden" Click="ButPrint_OnClick"></Button>
             <Button FontWeight="Bold" Content="结算" Width="120" Name="ButBalance" Click="ButBalance_OnClick"></Button>
             <Button FontWeight="Bold" Content="保存" Width="90" Name="ButSave" Click="ButSave_OnClick" ></Button>
             <Button FontWeight="Bold" Content="取消" Width="60" Name="ButCancel" Click="ButCancel_OnClick" ></Button>
