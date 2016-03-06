@@ -258,7 +258,6 @@
         </TabControl>
         <StackPanel   Grid.Column="0" Grid.Row="6" Margin="5" Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="{Binding Path=DataContext.BalanceDomainModel.MemberInfo,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBlock>
-            <Button FontWeight="Bold" Content="打印" Width="120" Name="ButPrint" Visibility="Hidden" Click="ButPrint_OnClick"></Button>
             <Button FontWeight="Bold" Content="结算" Width="120" Name="ButBalance" Click="ButBalance_OnClick"></Button>
             <Button FontWeight="Bold" Content="保存" Width="90" Name="ButSave" Click="ButSave_OnClick" ></Button>
             <Button FontWeight="Bold" Content="取消" Width="60" Name="ButCancel" Click="ButCancel_OnClick" ></Button>

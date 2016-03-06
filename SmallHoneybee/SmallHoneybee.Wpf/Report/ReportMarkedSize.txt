@@ -1,1 +1,13 @@
-﻿
+﻿<PageWidth>2.945in</PageWidth>
+2.9134in, 3.25973in
+2.79501in, 0.20208in
+
+="原价: " & FormatNumber(Fields!RetailPrice.Value,2)
+=FormatNumber(Fields!CostPerUnit.Value,2)
+=FormatNumber(Fields!Quantity.Value,0)
+=FormatNumber(Fields!SOProduceTotal.Value,2)
+=FormatNumber(Fields!TotalCost.Value,2)
+
+="付款: " & FormatNumber(Fields!HowBalanceName.Value,2) & " " &
+ "实收: " & FormatNumber(Fields!RealPrice.Value,2) & " " &
+ "找零: " & FormatNumber(Fields!ReturnedPrice.Value,2)

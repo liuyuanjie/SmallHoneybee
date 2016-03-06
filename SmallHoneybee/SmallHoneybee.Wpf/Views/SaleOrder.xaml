@@ -64,7 +64,7 @@
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label MouseDoubleClick="ButEditSaleOrder_Click" Cursor="Hand" Width="16" Height="16">
+                            <Label MouseDoubleClick="ButEditSaleOrder_Click" ToolTip="修改" Cursor="Hand" Width="16" Height="16">
                                 <av:Label.Background>
                                     <av:ImageBrush ImageSource="/SmallHoneybee.Wpf;component/images/icoEdit.png"/>
                                 </av:Label.Background>
@@ -75,7 +75,18 @@
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label MouseDoubleClick="ButDeleteSaleOrder_Click" Cursor="Hand"  Width="16" Height="16">
+                            <Label MouseDoubleClick="ButPrintSaleOrder_Click" ToolTip="打印" Cursor="Hand"  Width="16" Height="16">
+                                <av:Label.Background>
+                                    <av:ImageBrush ImageSource="/SmallHoneybee.Wpf;component/images/icoPrint.png"/>
+                                </av:Label.Background>
+                            </Label>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="30">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Label MouseDoubleClick="ButDeleteSaleOrder_Click" ToolTip="删除" Cursor="Hand"  Width="16" Height="16">
                                 <av:Label.Background>
                                     <av:ImageBrush ImageSource="/SmallHoneybee.Wpf;component/images/icoDelete.png"/>
                                 </av:Label.Background>

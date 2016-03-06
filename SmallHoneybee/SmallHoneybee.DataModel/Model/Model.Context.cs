@@ -27,6 +27,8 @@ namespace SmallHoneybee.DataModel.Model
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<DayBook> DayBooks { get; set; }
+        public virtual DbSet<MemberCard> MemberCards { get; set; }
+        public virtual DbSet<MemberCardLog> MemberCardLogs { get; set; }
         public virtual DbSet<POItem> POItems { get; set; }
         public virtual DbSet<Produce> Produces { get; set; }
         public virtual DbSet<Producelog> Producelogs { get; set; }
@@ -37,5 +39,6 @@ namespace SmallHoneybee.DataModel.Model
         public virtual DbSet<SystemSetting> SystemSettings { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Userlog> Userlogs { get; set; }
+        public virtual DbSet<UserMemberCard> UserMemberCards { get; set; }
     }
 }

@@ -20,6 +20,7 @@ namespace SmallHoneybee.DataModel.Model
             this.SaleOrdersOriginUser = new HashSet<SaleOrder>();
             this.SaleOrdersPurchaseOrderUser = new HashSet<SaleOrder>();
             this.Userlogs = new HashSet<Userlog>();
+            this.UserMemberCards = new HashSet<UserMemberCard>();
         }
     
         public int UserId { get; set; }
@@ -53,5 +54,6 @@ namespace SmallHoneybee.DataModel.Model
         public virtual ICollection<SaleOrder> SaleOrdersOriginUser { get; set; }
         public virtual ICollection<SaleOrder> SaleOrdersPurchaseOrderUser { get; set; }
         public virtual ICollection<Userlog> Userlogs { get; set; }
+        public virtual ICollection<UserMemberCard> UserMemberCards { get; set; }
     }
 }

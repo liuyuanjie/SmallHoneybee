@@ -42,6 +42,8 @@ namespace SmallHoneybee.DataModel.Model
         public Nullable<float> ProduceTotalCount { get; set; }
         public Nullable<float> ProduceTotalOriginal { get; set; }
         public Nullable<float> ProduceTotalDiscount { get; set; }
+        public Nullable<float> UserRealPrice { get; set; }
+        public Nullable<float> UserReturnedPrice { get; set; }
     
         public virtual User OriginUserUser { get; set; }
         public virtual User PrucahseOrderUserUser { get; set; }

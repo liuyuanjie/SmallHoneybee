@@ -30,6 +30,41 @@
     <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
     <Property Name="SettlementMen" Type="varchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="MemberCard">
+    <Key>
+      <PropertyRef Name="MemberCardId" />
+    </Key>
+    <Property Name="MemberCardId" Type="int" Nullable="false" />
+    <Property Name="MemberCardNo" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="255" />
+    <Property Name="MemberType" Type="tinyint" Nullable="false" />
+    <Property Name="MemberMoney" Type="float" Nullable="false" />
+    <Property Name="DispatchDate" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="DispatchUser" Type="int" />
+    <Property Name="SurplusMoney" Type="float" Nullable="false" />
+    <Property Name="IsEnable" Type="bit" Nullable="false" />
+    <Property Name="PasswordSalt" Type="varchar" MaxLength="255" />
+    <Property Name="PasswordHash" Type="varchar" MaxLength="255" />
+    <Property Name="MemberCardStatus" Type="tinyint" Nullable="false" />
+    <Property Name="Descript" Type="varchar" MaxLength="255" />
+    <Property Name="CreatedOn" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastModifiedOn" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
+  </EntityType>
+  <EntityType Name="MemberCardLog">
+    <Key>
+      <PropertyRef Name="MemberCardLogId" />
+    </Key>
+    <Property Name="MemberCardLogId" Type="int" Nullable="false" />
+    <Property Name="MemberCardId" Type="int" Nullable="false" />
+    <Property Name="OldValue" Type="text" />
+    <Property Name="NewValue" Type="text" />
+    <Property Name="DateChanged" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="ChangedBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
+  </EntityType>
   <EntityType Name="POItem">
     <Key>
       <PropertyRef Name="POItemId" />
@@ -144,6 +179,8 @@
     <Property Name="ProduceTotalCount" Type="float" />
     <Property Name="ProduceTotalOriginal" Type="float" />
     <Property Name="ProduceTotalDiscount" Type="float" />
+    <Property Name="UserRealPrice" Type="float" />
+    <Property Name="UserReturnedPrice" Type="float" />
   </EntityType>
   <EntityType Name="SOLog">
     <Key>
@@ -235,6 +272,26 @@
     <Property Name="ChangedBy" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="RowVersion" Type="timestamp" Precision="0" Nullable="false" StoreGeneratedPattern="Computed" />
   </EntityType>
+  <EntityType Name="UserMemberCard">
+    <Key>
+      <PropertyRef Name="UserMemberCardId" />
+    </Key>
+    <Property Name="UserMemberCardId" Type="int" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="MemberCardId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_MemberCardLog_MemberCard_MemberCardId_MemberCardd">
+    <End Role="MemberCard" Type="Self.MemberCard" Multiplicity="1" />
+    <End Role="MemberCardLog" Type="Self.MemberCardLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MemberCard">
+        <PropertyRef Name="MemberCardId" />
+      </Principal>
+      <Dependent Role="MemberCardLog">
+        <PropertyRef Name="MemberCardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_POItem_Produce_ProduceId_ProduceId">
     <End Role="Produce" Type="Self.Produce" Multiplicity="1" />
     <End Role="POItem" Type="Self.POItem" Multiplicity="*" />
@@ -377,9 +434,35 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_UserMemberCard_MemberCard_MemberCardId_MemberCardId">
+    <End Role="MemberCard" Type="Self.MemberCard" Multiplicity="1" />
+    <End Role="UserMemberCard" Type="Self.UserMemberCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MemberCard">
+        <PropertyRef Name="MemberCardId" />
+      </Principal>
+      <Dependent Role="UserMemberCard">
+        <PropertyRef Name="MemberCardId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_UserMemberCard_User_UserId_UserId">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="UserMemberCard" Type="Self.UserMemberCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="UserMemberCard">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="SmallHoneybeeModelStoreContainer">
     <EntitySet Name="Category" EntityType="Self.Category" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="DayBook" EntityType="Self.DayBook" Schema="smallhoneybee" store:Type="Tables" />
+    <EntitySet Name="MemberCard" EntityType="Self.MemberCard" Schema="smallhoneybee" store:Type="Tables" />
+    <EntitySet Name="MemberCardLog" EntityType="Self.MemberCardLog" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="POItem" EntityType="Self.POItem" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="Produce" EntityType="Self.Produce" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="Producelog" EntityType="Self.Producelog" Schema="smallhoneybee" store:Type="Tables" />
@@ -390,6 +473,11 @@
     <EntitySet Name="SystemSetting" EntityType="Self.SystemSetting" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="User" EntityType="Self.User" Schema="smallhoneybee" store:Type="Tables" />
     <EntitySet Name="Userlog" EntityType="Self.Userlog" Schema="smallhoneybee" store:Type="Tables" />
+    <EntitySet Name="UserMemberCard" EntityType="Self.UserMemberCard" Schema="smallhoneybee" store:Type="Tables" />
+    <AssociationSet Name="FK_MemberCardLog_MemberCard_MemberCardId_MemberCardd" Association="Self.FK_MemberCardLog_MemberCard_MemberCardId_MemberCardd">
+      <End Role="MemberCard" EntitySet="MemberCard" />
+      <End Role="MemberCardLog" EntitySet="MemberCardLog" />
+    </AssociationSet>
     <AssociationSet Name="FK_POItem_Produce_ProduceId_ProduceId" Association="Self.FK_POItem_Produce_ProduceId_ProduceId">
       <End Role="Produce" EntitySet="Produce" />
       <End Role="POItem" EntitySet="POItem" />
@@ -433,6 +521,14 @@
     <AssociationSet Name="FK_UserLog_User_UserId_UserId" Association="Self.FK_UserLog_User_UserId_UserId">
       <End Role="User" EntitySet="User" />
       <End Role="Userlog" EntitySet="Userlog" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMemberCard_MemberCard_MemberCardId_MemberCardId" Association="Self.FK_UserMemberCard_MemberCard_MemberCardId_MemberCardId">
+      <End Role="MemberCard" EntitySet="MemberCard" />
+      <End Role="UserMemberCard" EntitySet="UserMemberCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK_UserMemberCard_User_UserId_UserId" Association="Self.FK_UserMemberCard_User_UserId_UserId">
+      <End Role="User" EntitySet="User" />
+      <End Role="UserMemberCard" EntitySet="UserMemberCard" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

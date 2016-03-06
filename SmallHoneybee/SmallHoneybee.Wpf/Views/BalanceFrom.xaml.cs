@@ -104,7 +104,8 @@ namespace SmallHoneybee.Wpf.Views
                         }
 
                         _saleOrder.OriginUserId = _user.UserId == 0 ? (int?)null : _user.UserId;
-                        _user.MemberPoints += _balanceDomainModel.ReceivedPrice * Settings.Default.MemberPointsRate;
+                        _user.MemberPoints += _balanceDomainModel.ReceivedPrice * 
+                            float.Parse(ResourcesHelper.SystemSettings[(short)DataType.SystemSettingCode.MemberPointsRate]);
                         _user.Userlogs.Add(new Userlog
                         {
                             ChangedBy = ResourcesHelper.CurrentUser.Name,

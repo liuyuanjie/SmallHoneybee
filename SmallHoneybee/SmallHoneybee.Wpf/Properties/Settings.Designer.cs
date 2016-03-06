@@ -23,15 +23,6 @@ namespace SmallHoneybee.Wpf.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("10")]
-        public float MemberPointsRate {
-            get {
-                return ((float)(this["MemberPointsRate"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
@@ -41,15 +32,6 @@ namespace SmallHoneybee.Wpf.Properties {
             }
             set {
                 this["Login"] = value;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
-        public long GeneralMangerMaxDiscountPrice {
-            get {
-                return ((long)(this["GeneralMangerMaxDiscountPrice"]));
             }
         }
     }

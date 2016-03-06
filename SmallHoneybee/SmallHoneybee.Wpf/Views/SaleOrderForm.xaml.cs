@@ -155,6 +155,8 @@ namespace SmallHoneybee.Wpf.Views
                     x.SOProduce.RetailPrice = x.SOProduce.Produce.RetailPrice;
                     x.SOProduce.SOProduceStatusCategory = (sbyte)saleOrderStatus;
                 });
+            _saleOrder.UserRealPrice = _balanceDomainModel.RealPrice;
+            _saleOrder.UserReturnedPrice = _balanceDomainModel.ReturnedPrice;
             _saleOrder.ProduceCost = _soProduceDomainModels.Sum(x => x.SOProduce.Quantity * x.CostPerUnit);
             _saleOrder.TotalCost = (_saleOrder.OtherCost ?? 0) + _saleOrder.ProduceCost;
             _saleOrder.SaleOrderStatus = (sbyte)saleOrderStatus;
@@ -320,21 +322,20 @@ namespace SmallHoneybee.Wpf.Views
                                     Produce = produce,
                                     ProduceId = produce.ProduceId,
                                     Quantity = 1,
-                                    CostPerUnit = produce.RetailPrice * produce.DiscountRate,
+                                    CostPerUnit = produce.RetailPrice*produce.DiscountRate,
                                     SaleOrder = _saleOrder,
                                     SaleOrderId = _saleOrder.SaleOrderId,
                                     RetailPrice = produce.RetailPrice,
                                     DiscountRate = produce.DiscountRate
                                 },
-                                CostPerUnit = produce.RetailPrice * produce.DiscountRate,
-                                SOProduceTotal = produce.RetailPrice * produce.DiscountRate * 1,
+                                CostPerUnit = produce.RetailPrice*produce.DiscountRate,
+                                SOProduceTotal = produce.RetailPrice*produce.DiscountRate*1,
                             };
                             _soProduceDomainModels.Add(soProduceDomainModel);
 
                         }
+                        barCode.Text = string.Empty;
                     }
-
-                    barCode.Text = string.Empty;
                 }
             }
         }
@@ -370,7 +371,7 @@ namespace SmallHoneybee.Wpf.Views
             {
                 var discountPrice = string.IsNullOrEmpty(TxtDiscount.Text) ? 0 : float.Parse(TxtDiscount.Text);
                 if (!ResourcesHelper.CurrentUserRolePermission.SaleOrderFavorableCost &&
-                    discountPrice > Settings.Default.GeneralMangerMaxDiscountPrice)
+                    discountPrice > float.Parse(ResourcesHelper.SystemSettings[(short)DataType.SystemSettingCode.SOProduceGeneralMangerMaxDiscountPrice]))
                 {
                     TxtDiscount.Background =
                                 (System.Windows.Media.Brush)new BrushConverter().ConvertFromString("#FFA8A8");
@@ -411,57 +412,6 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
-        private void ButPrint_OnClick(object sender, RoutedEventArgs e)
-        {
-            PrintReport();
-        }
-
-        private void PrintReport()
-        {
-            using (
-                ReportPrint report =
-                    new ReportPrint(ResourcesHelper.SystemSettings[(short) DataType.SystemSettingCode.ReportPrintName]))
-            {
-                {
-                    SaleOrderReportModel saleOrderReportModel = new SaleOrderReportModel
-                    {
-                        SOProucedDetailReportModels = new List<SOProucedDetailReportModel>(),
-                        SOProuceSummaryReportModels = new List<SOProuceSummaryReportModel>
-                        {
-                            new SOProuceSummaryReportModel
-                            {
-                                MerchantsName =
-                                    ResourcesHelper.SystemSettings[(short) DataType.SystemSettingCode.ReportMerchantsName],
-                                OriginUser = ResourcesHelper.CurrentUser.Name,
-                                SaleOrderNo = _saleOrder.SaleOrderNo,
-                                ProduceTotalCount = _saleOrder.ProduceTotalCount ?? 0,
-                                ProduceTotalOriginal = _saleOrder.ProduceTotalOriginal ?? 0,
-                                ProduceTotalDiscountAndFavorableCost =
-                                    (_saleOrder.ProduceTotalDiscount ?? 0) + (_saleOrder.FavorableCost ?? 0),
-                                TotalCost = _saleOrder.TotalCost ?? 0,
-                                HowBalanceName =
-                                    CommonHelper.Enumerate<DataType.SaleOrderBalancedMode>()
-                                        .Single(x => x.Key == _saleOrder.HowBalance)
-                                        .Value,
-                                Phone = ResourcesHelper.SystemSettings[(short) DataType.SystemSettingCode.ReportPhone],
-                                Address =
-                                    ResourcesHelper.SystemSettings[(short) DataType.SystemSettingCode.ReportAddress],
-                            }
-                        }
-                    };
-                    _soProduceDomainModels.ForEach(x =>
-                        saleOrderReportModel.SOProucedDetailReportModels.Add(new SOProucedDetailReportModel
-                        {
-                            ProduceName = x.SOProduce.Produce.Name,
-                            CostPerUnit = x.SOProduce.CostPerUnit ?? 0,
-                            Quantity = x.SOProduce.Quantity ?? 0,
-                            RetailPrice = x.SOProduce.RetailPrice ?? 0
-                        }));
-                    report.Run(saleOrderReportModel);
-                }
-            }
-        }
-
         private void ButBalance_OnClick(object sender, RoutedEventArgs e)
         {
             try
@@ -489,7 +439,7 @@ namespace SmallHoneybee.Wpf.Views
                 if (_balanceDomainModel.DiscountPrice > 0)
                 {
                     if (!ResourcesHelper.CurrentUserRolePermission.SaleOrderFavorableCost &&
-                        _balanceDomainModel.DiscountPrice > Settings.Default.GeneralMangerMaxDiscountPrice)
+                        _balanceDomainModel.DiscountPrice > float.Parse(ResourcesHelper.SystemSettings[(short)DataType.SystemSettingCode.SOProduceGeneralMangerMaxDiscountPrice]))
                     {
                         MessageBox.Show("结算失败, 优惠金额超过上限, 要赔钱卖了！", Properties.Resources.SystemName,
                             MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -534,7 +484,7 @@ namespace SmallHoneybee.Wpf.Views
                     }
 
                     _saleOrder.PurchaseOrderUserId = _user.UserId == 0 ? (int?)null : _user.UserId;
-                    _user.MemberPoints += _balanceDomainModel.ReceivedPrice * Settings.Default.MemberPointsRate;
+                    _user.MemberPoints += _balanceDomainModel.ReceivedPrice * float.Parse(ResourcesHelper.SystemSettings[(short)DataType.SystemSettingCode.MemberPointsRate]);
                     _user.Userlogs.Add(new Userlog
                     {
                         ChangedBy = ResourcesHelper.CurrentUser.Name,
@@ -579,7 +529,7 @@ namespace SmallHoneybee.Wpf.Views
                 {
                     try
                     {
-                        PrintReport();
+                        SaleOrderReportPrint.Print(_saleOrder);
 
                         MessageBox.Show("结算成功！", Properties.Resources.SystemName,
                             MessageBoxButton.OK, MessageBoxImage.Information);
@@ -762,7 +712,7 @@ namespace SmallHoneybee.Wpf.Views
         {
             get
             {
-                return ReceivedPrice * Settings.Default.MemberPointsRate;
+                return ReceivedPrice * float.Parse(ResourcesHelper.SystemSettings[(short)DataType.SystemSettingCode.MemberPointsRate]);
             }
         }
     }

@@ -17,6 +17,7 @@ using SmallHoneybee.EF.Data.Repository;
 using SmallHoneybee.EF.Data.Repository.Impl;
 using SmallHoneybee.EF.Data.UntityContainer;
 using SmallHoneybee.Wpf.Common;
+using SmallHoneybee.Wpf.Report;
 using DataGrid = System.Windows.Controls.DataGrid;
 using MessageBox = System.Windows.MessageBox;
 
@@ -89,10 +90,10 @@ namespace SmallHoneybee.Wpf.Views
 
             _saleOrders.Clear();
             IQueryable<DataModel.Model.SaleOrder> saleOrders = _saleOrderRepository.Query();
-            if (ResourcesHelper.CurrentUser.UserType < (byte) DataType.UserType.FactoryPriceManger)
+            if (ResourcesHelper.CurrentUser.UserType < (byte)DataType.UserType.FactoryPriceManger)
             {
                 saleOrders =
-                    saleOrders.Where(x => x.OriginUserUser.UserType < (byte) DataType.UserType.FactoryPriceManger);
+                    saleOrders.Where(x => x.OriginUserUser.UserType < (byte)DataType.UserType.FactoryPriceManger);
             }
 
             DateTime? startDate = DateStartDate.SelectedDate;
@@ -228,8 +229,13 @@ namespace SmallHoneybee.Wpf.Views
             var saleOrderForm = new SaleOrderForm(this, (DataModel.Model.SaleOrder)GridSaleOrders.SelectedItem);
             saleOrderForm.ShowDialog();
         }
-    }
 
+        private void ButPrintSaleOrder_Click(object sender, MouseButtonEventArgs e)
+        {
+            var saleOrder = (DataModel.Model.SaleOrder)GridSaleOrders.SelectedItem;
+            SaleOrderReportPrint.Print(saleOrder);
+        }
+    }
 
     public class SaleOrderDoMainModel
     {

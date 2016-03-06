@@ -105,7 +105,9 @@ namespace SmallHoneybee.Common
             ReportMerchantsName = 1101,
             ReportPhone = 1102,
             ReportAddress = 1103,
-            ReportPrintName = 1104
+            ReportPrintName = 1104,
+            ReportHealthline = 1105,
+            ReportWebSiteUrl = 1106,
         }
     }
 }

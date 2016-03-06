@@ -42,6 +42,10 @@ namespace SmallHoneybee.Wpf.Report
         public string Phone { get; set; }
         public string Address { get; set; }
         public string Healthline { get; set; }
-        public string ServiceTel { get; set; }
+        public string WebSiteUrl { get; set; }
+        public byte HowBalance { get; set; }
+        public float RealPrice { get; set; }
+        public float ReturnedPrice { get; set; }
+
     }
 }
