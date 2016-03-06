@@ -208,7 +208,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Row="0" Grid.Column="0" Text="实收金额：" VerticalAlignment="Center" HorizontalAlignment="Right"></TextBlock>
-                    <TextBox Grid.Row="0"  Grid.Column="1" Text="{Binding Path=DataContext.BalanceDomainModel.RealPrice,StringFormat=F2,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Name="TxtRealPrice" KeyDown="TxtRealPrice_OnKeyDown"></TextBox>
+                    <TextBox Grid.Row="0"  Grid.Column="1" FontSize="20" Text="{Binding Path=DataContext.BalanceDomainModel.RealPrice,StringFormat=F2,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}" Name="TxtRealPrice" KeyDown="TxtRealPrice_OnKeyDown"></TextBox>
                     <TextBlock Grid.Row="1"  Grid.Column="0" Text="找零：" VerticalAlignment="Center" HorizontalAlignment="Right" FontWeight="Bold"/>
                     <TextBox Grid.Row="1"  Grid.Column="1" Style="{StaticResource MarkedTextStyle}" IsEnabled="False" Text="{Binding Path=DataContext.BalanceDomainModel.ReturnedPrice,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </Grid>

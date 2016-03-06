@@ -580,16 +580,18 @@ namespace SmallHoneybee.Wpf.Views
                     try
                     {
                         PrintReport();
+
+                        MessageBox.Show("结算成功！", Properties.Resources.SystemName,
+                            MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    finally
+                    catch(Exception ex)
                     {
+                        Log4NetHelper.WriteLog(ex.ToString());
+
                         MessageBox.Show("结算成功, 打印小票失败！", Properties.Resources.SystemName,
                             MessageBoxButton.OK, MessageBoxImage.Warning);
                     }
                 }
-
-                MessageBox.Show("结算成功！", Properties.Resources.SystemName,
-                    MessageBoxButton.OK, MessageBoxImage.Information);
 
                 SaleOrderWindow.ExecuteSearchText();
                 Close();

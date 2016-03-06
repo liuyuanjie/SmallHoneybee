@@ -19,12 +19,12 @@ namespace SmallHoneybee.Wpf.Report
         readonly string _printerName = "SmallHoneybee";
         const string _deviceInfo = "<DeviceInfo>" +
                           "  <OutputFormat>EMF</OutputFormat>" +
-                          "  <PageWidth>8.5in</PageWidth>" +
+                          "  <PageWidth>2.945in</PageWidth>" +
                           "  <PageHeight>11in</PageHeight>" +
-                          "  <MarginTop>0.25in</MarginTop>" +
-                          "  <MarginLeft>0.25in</MarginLeft>" +
-                          "  <MarginRight>0.25in</MarginRight>" +
-                          "  <MarginBottom>0.25in</MarginBottom>" +
+                          "  <MarginTop>0.1in</MarginTop>" +
+                          "  <MarginLeft>0.01in</MarginLeft>" +
+                          "  <MarginRight>0.01in</MarginRight>" +
+                          "  <MarginBottom>0.1in</MarginBottom>" +
                           "</DeviceInfo>";
 
         public ReportPrint(string printName)
