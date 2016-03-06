@@ -267,7 +267,7 @@
                             <TextRun>
                               <Value>=FormatNumber(Fields!RetailPrice.Value,2)</Value>
                               <Style>
-                                <FontFamily>SimSun</FontFamily>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
@@ -304,7 +304,7 @@
                             <TextRun>
                               <Value>=FormatNumber(Fields!CostPerUnit.Value,2)</Value>
                               <Style>
-                                <FontFamily>SimSun</FontFamily>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
@@ -339,7 +339,7 @@
                             <TextRun>
                               <Value>=FormatNumber(Fields!Quantity.Value,0)</Value>
                               <Style>
-                                <FontFamily>SimSun</FontFamily>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
@@ -374,7 +374,7 @@
                             <TextRun>
                               <Value>=FormatNumber(Fields!SOProduceTotal.Value,2)</Value>
                               <Style>
-                                <FontFamily>SimSun</FontFamily>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
@@ -548,7 +548,7 @@
                             <TextRun>
                               <Value>=Format(Now,"yyyy-MM-dd HH:mm")</Value>
                               <Style>
-                                <FontFamily>SimSun</FontFamily>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
@@ -567,6 +567,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -609,7 +610,7 @@
               <Width>1.60275in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.161in</Width>
+              <Width>1.17142in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
@@ -650,23 +651,26 @@
                 </TablixCell>
                 <TablixCell>
                   <CellContents>
-                    <Textbox Name="Textbox35">
+                    <Textbox Name="TotalCost">
                       <CanGrow>true</CanGrow>
                       <KeepTogether>true</KeepTogether>
                       <Paragraphs>
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value />
+                              <Value>=FormatNumber(Fields!RealPrice.Value,2)</Value>
                               <Style>
+                                <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
                               </Style>
                             </TextRun>
                           </TextRuns>
-                          <Style />
+                          <Style>
+                            <TextAlign>Right</TextAlign>
+                          </Style>
                         </Paragraph>
                       </Paragraphs>
-                      <rd:DefaultName>Textbox35</rd:DefaultName>
+                      <rd:DefaultName>TotalCost</rd:DefaultName>
                       <Style>
                         <Border>
                           <Style>None</Style>
@@ -913,7 +917,7 @@
         <Top>1.4007in</Top>
         <Left>0.00917in</Left>
         <Height>0.70834in</Height>
-        <Width>2.76375in</Width>
+        <Width>2.77417in</Width>
         <ZIndex>4</ZIndex>
         <Style>
           <Border>
