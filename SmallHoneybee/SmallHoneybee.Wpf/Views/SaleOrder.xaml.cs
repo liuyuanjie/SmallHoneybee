@@ -163,23 +163,19 @@ namespace SmallHoneybee.Wpf.Views
             _soProduceDomainModels.Clear();
 
             DataModel.Model.SaleOrder saleOrder = (DataModel.Model.SaleOrder)((DataGrid)sender).CurrentItem;
+
+            if (saleOrder == null && ((DataGrid)sender).Items.Count > 0)
+            {
+                saleOrder = (DataModel.Model.SaleOrder)((DataGrid)sender).Items[0];
+            }
+
             if (saleOrder != null)
             {
                 saleOrder.SOProduces.ForEach(x => _soProduceDomainModels.Add(new SOProduceDomainModel
                 {
-                    SOProduce = x
+                    SOProduce = x,
+                    SOProduceTotal = (x.Quantity * x.CostPerUnit) ?? 0
                 }));
-            }
-            else
-            {
-                if (((DataGrid)sender).Items.Count > 0)
-                {
-                    saleOrder = (DataModel.Model.SaleOrder)((DataGrid)sender).Items[0];
-                    saleOrder.SOProduces.ForEach(x => _soProduceDomainModels.Add(new SOProduceDomainModel
-                    {
-                        SOProduce = x
-                    }));
-                }
             }
         }
 

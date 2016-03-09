@@ -58,7 +58,7 @@
         </Grid>
         <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
         <DataGrid Grid.Row="3" Name="GridSaleOrders" AutoGenerateColumns="False" 
-                  ItemsSource="{Binding Path=DataContext.SaleOrders,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
+                  ItemsSource="{Binding Path=SaleOrders}" 
                   IsReadOnly="True"  FontWeight="Medium" SelectionChanged="GridSaleOrders_OnSelectionChanged" SelectionMode="Single" SelectedIndex="0">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Width="30">
@@ -171,7 +171,7 @@
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock  Grid.Column="0" Grid.Row="4" Name="TxtTotalInfo" FontWeight="Bold" HorizontalAlignment="Right"/>
-        <DataGrid Grid.Row="5" Name="GridSOProduces" AutoGenerateColumns="False" ItemsSource="{Binding Path=DataContext.SOProduceDomainModels,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" IsReadOnly="True"  FontWeight="Medium">
+        <DataGrid Grid.Row="5" Name="GridSOProduces" AutoGenerateColumns="False" ItemsSource="{Binding Path=SOProduceDomainModels}" IsReadOnly="True"  FontWeight="Medium">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="产品条形码" Binding="{Binding SOProduce.Produce.BarCode}"/>
                 <DataGridTextColumn Header="产品编号" Binding="{Binding SOProduce.Produce.ProduceNo}"/>

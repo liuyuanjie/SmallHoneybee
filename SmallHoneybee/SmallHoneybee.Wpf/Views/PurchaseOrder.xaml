@@ -22,7 +22,9 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="5"></RowDefinition>
             <RowDefinition Height="200"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1000*"/>
@@ -45,7 +47,7 @@
             <TextBox Grid.Column="1" Grid.Row="0" Name="TxtSearchBox"></TextBox>
             <Button  Grid.Column="2" Grid.Row="0" Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
             <Button  Grid.Column="3" Grid.Row="0" Content="清空" Click="BtnClear_Click" />
-            <!--<Button  Grid.Column="4" Grid.Row="0" Content="{x:Static props:Resources.Import}" Click="BtnImport_Click"></Button>-->
+            <Button  Grid.Column="4" Grid.Row="0" Content="{x:Static props:Resources.Import}" Click="BtnImport_Click"></Button>
         </Grid>
         <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
         <DataGrid Grid.Row="3" Name="GridPurchaseOrders" AutoGenerateColumns="False" 
@@ -111,7 +113,8 @@
                 
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid Grid.Row="4" Name="GridPOItems" AutoGenerateColumns="False" ItemsSource="{Binding Path=DataContext.POItemDomainModels,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" IsReadOnly="True" FontWeight="Medium">
+        <TextBlock  Grid.Column="0" Grid.Row="4" Name="TxtTotalInfo" FontWeight="Bold" HorizontalAlignment="Right"/>
+        <DataGrid Grid.Row="5" Name="GridPOItems" AutoGenerateColumns="False" ItemsSource="{Binding Path=DataContext.POItemDomainModels,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" IsReadOnly="True" FontWeight="Medium">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="产品条形码" Binding="{Binding POItem.Produce.BarCode}"/>
                 <DataGridTextColumn Header="产品编号" Binding="{Binding POItem.Produce.ProduceNo}"/>
@@ -175,6 +178,7 @@
                 <DataGridTextColumn Header="备注" Binding="{Binding POItem.Description}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBlock  Grid.Column="0" Grid.Row="6" Name="TxtDetailTotalInfo" FontWeight="Bold" HorizontalAlignment="Right"/>
     </av:Grid>
     <Page.InputBindings>
         <KeyBinding Gesture="Esc" Command="{StaticResource ClearSearchText}"/>

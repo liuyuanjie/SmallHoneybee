@@ -23,6 +23,7 @@
             <RowDefinition Height="50"></RowDefinition>
             <RowDefinition Height="5"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="25"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1000*"/>
@@ -47,7 +48,10 @@
             <Button  Grid.Column="2" Grid.Row="0" Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
             <Button  Grid.Column="3" Grid.Row="0" Content="清空" Click="BtnClear_Click" />
             <Button  Grid.Column="4" Grid.Row="0" Content="保存" Click="BtnSave_Click" ></Button>
-            <!--<Button  Grid.Column="5" Grid.Row="0" Content="{x:Static props:Resources.Import}" Click="BtnImport_Click"></Button>-->
+            <Button  Grid.Column="5" Grid.Row="0" Visibility="{Binding 
+                                Path=DataContext.CurrentUserRolePermission.ProduceFactoryPriceEdit,
+                                RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}},
+                                Converter={StaticResource VisibilityConverter}}" Content="{x:Static props:Resources.Import}" Click="BtnImport_Click"></Button>
         </Grid>
         <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
         <DataGrid DataGridCell.GotFocus="DataGrid_CellGotFocus"  Grid.Row="3" Name="gridProduces" 
@@ -71,6 +75,19 @@
                 </Style>
             </DataGrid.Resources>
             <DataGrid.Columns>
+                <DataGridTemplateColumn  Width="30">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Name="ButDeleteSaleOrder"
+                                   Cursor="Hand"
+                                    Width="16"
+                                   ToolTip="进销记录"
+                                   Height="16"
+                                   Source="/SmallHoneybee.Wpf;component/images/icoLog.png">
+                            </Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="产品系列" Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -211,6 +228,7 @@
                 <DataGridTextColumn Header="订购规格/销售规格" Binding="{Binding PurchasedUsedRatio}"/>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBlock  Grid.Column="0" Grid.Row="4" Name="TxtTotalInfo" FontWeight="Bold" HorizontalAlignment="Right"/>
     </Grid>
     <Page.InputBindings>
         <KeyBinding Gesture="Esc" Command="{StaticResource ClearSearchText}"/>

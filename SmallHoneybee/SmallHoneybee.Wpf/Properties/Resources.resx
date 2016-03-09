@@ -210,4 +210,10 @@
   <data name="Top" xml:space="preserve">
     <value>Top</value>
   </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="NonActive" xml:space="preserve">
+    <value>Non Active</value>
+  </data>
 </root>

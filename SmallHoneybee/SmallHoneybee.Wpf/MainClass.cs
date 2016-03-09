@@ -74,11 +74,10 @@ namespace SmallHoneybee.Wpf
                 string dbVersion;
                 using (MySqlConnection mySqlConnection = new MySqlConnection(settings.ConnectionString))
                 {
-                    MySqlCommand command = new MySqlCommand("SELECT SettingValue FROM SystemSetting WHERE SettingCode = 1000", mySqlConnection);
+                    MySqlCommand command = mySqlConnection.CreateCommand();
+                    command.CommandText = "SELECT SettingValue FROM SystemSetting WHERE SettingCode = 1000";
                     mySqlConnection.Open();
                     dbVersion = command.ExecuteScalar().ToString();
-
-                    mySqlConnection.Close();
                 }
 
                 DirectoryInfo folder = new DirectoryInfo(Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, @"SmallHonebee.SQL"));
@@ -96,13 +95,13 @@ namespace SmallHoneybee.Wpf
                         streamReader.Close();
                     }
 
-                    using (MySqlConnection c = new MySqlConnection(settings.ConnectionString))
+                    using (MySqlConnection mySqlConnection = new MySqlConnection(settings.ConnectionString))
                     {
-                        c.Open();
-                        using (MySqlCommand cmd = c.CreateCommand())
-                        using (MySqlTransaction xt = c.BeginTransaction())
+                        mySqlConnection.Open();
+                        using (MySqlCommand cmd = mySqlConnection.CreateCommand())
+                        using (MySqlTransaction xt = mySqlConnection.BeginTransaction())
                         {
-                            cmd.Connection = c;
+                            cmd.Connection = mySqlConnection;
                             cmd.Transaction = xt;
                             try
                             {

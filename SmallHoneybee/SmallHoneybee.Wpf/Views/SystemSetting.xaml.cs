@@ -53,6 +53,7 @@ namespace SmallHoneybee.Wpf.Views
             setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportPrintName).ToString()).SettingValue = systemSetting.ReportPrintName;
             setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportHealthline).ToString()).SettingValue = systemSetting.ReportHealthline;
             setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportWebSiteUrl).ToString()).SettingValue = systemSetting.ReportWebSiteUrl;
+            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.DefaultMemberCardPW).ToString()).SettingValue = systemSetting.DefaultMemberCardPW;
             _unitOfWork.Commit();
         }
 
@@ -77,6 +78,7 @@ namespace SmallHoneybee.Wpf.Views
             systemSetting.ReportPrintName = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportPrintName).ToString()).SettingValue;
             systemSetting.ReportHealthline = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportHealthline).ToString()).SettingValue;
             systemSetting.ReportWebSiteUrl = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportWebSiteUrl).ToString()).SettingValue;
+            systemSetting.DefaultMemberCardPW = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.DefaultMemberCardPW).ToString()).SettingValue;
         }
     }
 
@@ -91,5 +93,6 @@ namespace SmallHoneybee.Wpf.Views
         public string ReportPrintName { get; set; }
         public string ReportHealthline { get; set; }
         public string ReportWebSiteUrl { get; set; }
+        public string DefaultMemberCardPW { get; set; }
     }
 }

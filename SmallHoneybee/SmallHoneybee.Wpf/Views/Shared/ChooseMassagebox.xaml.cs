@@ -8,33 +8,28 @@ namespace SmallHoneybee.Wpf.Views.Shared
     /// </summary>
     public partial class ChooseMassagebox : Window
     {
-        public int windowStyle = 1;
-        public ChooseMassagebox()
+        private Window _mainWindow;
+        public ChooseMassagebox(MainWindow mainWindow)
         {
+            _mainWindow = mainWindow;
             InitializeComponent();
-        }
-
-        private void Window_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            this.DragMove();
         }
 
         private void btnRegin_Click(object sender, RoutedEventArgs e)
         {
             if ((bool)closeStyle.IsChecked)
             {
-                windowStyle = 1;
+                this.Close();
+                _mainWindow.WindowState = WindowState.Minimized;
             }
             else
             {
-                windowStyle = 2;
+                Application.Current.Shutdown();
             }
-            this.Close();
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
         {
-            windowStyle = 0;
             this.Close();
         }
     }

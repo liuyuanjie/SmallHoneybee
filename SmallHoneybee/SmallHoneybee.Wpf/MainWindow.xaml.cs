@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,7 @@ namespace SmallHoneybee.Wpf
             };
 
             TxtCurrentUser.Text = string.Format("当前登录用户: {0}", ResourcesHelper.CurrentUser.Name);
+            //MaxWindows.RepairWindowBehavior(this);
         }
 
         private void RTReportMenuNavigation_Click(object sender, RoutedEventArgs e)
@@ -48,8 +50,6 @@ namespace SmallHoneybee.Wpf
             frame_run.Content = new SaleOrder();
             var menuItem = (MenuItem)sender;
             menuItem.IsChecked = true;
-
-
         }
 
         private void HSReportMenuNavigation_Click(object sender, RoutedEventArgs e)
@@ -68,7 +68,6 @@ namespace SmallHoneybee.Wpf
             frame_run.Content = new PurchaseOrder();
             var menuItem = (MenuItem)sender;
             menuItem.IsChecked = true;
-
         }
 
         private void ServiceCommMenuNavigation_Click(object sender, RoutedEventArgs e)
@@ -113,7 +112,28 @@ namespace SmallHoneybee.Wpf
 
         private void ButExit_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Application.Current.Shutdown();
+            ChooseMassagebox chooseMassagebox = new ChooseMassagebox(this);
+            chooseMassagebox.Show();
+        }
+
+        private void SamllHoneybeeMemberCardMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            ClearMeunChecked();
+
+            frame_run.Content = new Views.MemberCard();
+            var menuItem = (MenuItem)sender;
+            menuItem.IsChecked = true;
+        }
+
+        private void ButMin_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
+
+        private void MainWindow_OnClosing(object sender, CancelEventArgs e)
+        {
+            ChooseMassagebox chooseMassagebox = new ChooseMassagebox(this);
+            chooseMassagebox.Show();
         }
     }
 }

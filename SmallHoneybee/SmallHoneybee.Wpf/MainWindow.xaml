@@ -4,9 +4,9 @@
         xmlns:props="clr-namespace:SmallHoneybee.Wpf.Properties"
         Title="{x:Static props:Resources.SystemName}"
         BorderBrush="#FF293955" WindowStartupLocation="CenterScreen" 
-        Icon="/SmallHoneybee.Wpf;component/images/ico_samllhoneybee.ico" MinWidth="1024"
-        xmlns:convert="clr-namespace:SmallHoneybee.Wpf.Common.PropertyConvert"
-        MinHeight="768" FontWeight="Normal" WindowState="Maximized">
+        Icon="/SmallHoneybee.Wpf;component/images/ico_samllhoneybee.ico" 
+        xmlns:convert="clr-namespace:SmallHoneybee.Wpf.Common.PropertyConvert" 
+        FontWeight="Normal" WindowState="Maximized" Closing="MainWindow_OnClosing" >
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -15,10 +15,10 @@
             <convert:VisibilityConverter x:Key="VisibilityConverter"></convert:VisibilityConverter>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid>
+    <Grid Margin="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="0"></RowDefinition>
-            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="0"></RowDefinition>
             <RowDefinition Height="2" />
             <RowDefinition Height="600*"/>
@@ -28,32 +28,37 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1000*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid Grid.Column="0" Grid.Row="0">
         </Grid>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="750*"/>
-                <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="60"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0" Grid.Row="0" Margin="0,5,0,5" >
-                <Menu x:Name="SamllHoneybeeMenu" Height="40" FontSize="20" Margin="5,5,0,5" Background="#DDF2A2">
-                    <MenuItem x:Name="SamllHoneybeeSaleOrderMenu" Header="零售管理" 
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="750*"/>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="60"/>
+                    <!--<ColumnDefinition Width="60"/>-->
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Grid.Row="0" Margin="0">
+                    <Menu x:Name="SamllHoneybeeMenu" Height="40" FontSize="20" Background="#DDF2A2">
+                        <MenuItem x:Name="SamllHoneybeeSaleOrderMenu" Header="零售管理" 
                           Visibility="{Binding Path=CurrentUserRolePermission.SaleOrderView,Converter={StaticResource VisibilityConverter}}"
                           Click="RTReportMenuNavigation_Click">
-                    </MenuItem>
-                    <MenuItem x:Name="SamllHoneybeeProduceMenu" Header="商品管理" 
+                        </MenuItem>
+                        <MenuItem x:Name="SamllHoneybeeProduceMenu" Header="商品管理" 
                           Visibility="{Binding Path=CurrentUserRolePermission.ProduceView,Converter={StaticResource VisibilityConverter}}"
                           Click="HSReportMenuNavigation_Click" >
-                    </MenuItem>
-                    <MenuItem Header="订货管理"  x:Name="SamllHoneybeePurchaseOrderMenu" 
+                        </MenuItem>
+                        <MenuItem Header="订货管理"  x:Name="SamllHoneybeePurchaseOrderMenu" 
                           Visibility="{Binding Path=CurrentUserRolePermission.PurchaseOrderView,Converter={StaticResource VisibilityConverter}}"
                           Click="PollutePortMenuNavigation_Click">
-                    </MenuItem>
-                    <MenuItem x:Name="SamllHoneybeeUserMenu" Header="会员管理" 
+                        </MenuItem>
+                        <MenuItem x:Name="SamllHoneybeeUserMenu" Header="会员管理" 
                           Visibility="{Binding Path=CurrentUserRolePermission.UserView,Converter={StaticResource VisibilityConverter}}"
                           Click="ServiceCommMenuNavigation_Click" >
-                    </MenuItem>
+                        </MenuItem>
+                        <MenuItem x:Name="SamllHoneybeeMemberCardMenu" Header="会员卡管理" 
+                          Visibility="{Binding Path=CurrentUserRolePermission.MemberCardView,Converter={StaticResource VisibilityConverter}}"
+                          Click="SamllHoneybeeMemberCardMenu_OnClick" >
+                        </MenuItem>
                     <MenuItem x:Name="SamllHoneybeeDayBookMenu" Header="日常开支" 
                           Visibility="{Binding Path=CurrentUserRolePermission.DayBookView,Converter={StaticResource VisibilityConverter}}"
                           Click="SamllHoneybeeDayBookMenu_OnClick" >
@@ -61,16 +66,14 @@
                     <MenuItem x:Name="SamllHoneybeeSystemSettingMenu" Header="系统设置" 
                           Visibility="{Binding Path=CurrentUserRolePermission.SystemSettingView,Converter={StaticResource VisibilityConverter}}"
                           Click="SamllHoneybeeSystemSettingMenu_OnClick" >
-                    </MenuItem>
-                </Menu>
-            </StackPanel>
-            <TextBlock Grid.Column="1" Grid.Row="0"  Margin="0,5,0,5" Height="40" FontSize="18" Name="TxtCurrentUser" Background="#FFC1F396" VerticalAlignment="Center" FontWeight="Bold" Padding="5,8" Foreground="#FFFFFF"></TextBlock>
-            <Label Grid.Column="2" Grid.Row="0" Margin="0,5,5,5" Cursor="Hand"  Height="40" FontSize="18" Name="ButExit"  Background="#F62D2D" VerticalAlignment="Center" FontWeight="Bold" Padding="10,8" Foreground="#FFFFFF" MouseDown="ButExit_MouseDown">退出</Label>
-        </Grid>
-            
-        <Viewbox Grid.Column="0" Grid.Row="2" Stretch="Fill"/>
-        <GridSplitter HorizontalAlignment="Stretch" Grid.Column="0" Grid.Row="3" Margin="0,0,0,1" AllowDrop="False" />
-        <Grid Grid.Column="0" Grid.Row="4" Margin="15,5">
+                        </MenuItem>
+                    </Menu>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Grid.Row="0"  Margin="0" Height="40" FontSize="18" Name="TxtCurrentUser" Background="#FFC1F396" VerticalAlignment="Center" FontWeight="Bold" Padding="5,8" Foreground="#FFFFFF"></TextBlock>
+                <!--<Label Grid.Column="2" Grid.Row="0" Margin="0" Cursor="Hand"  Height="40" FontSize="18" Name="ButMin"  Background="#FFE200" VerticalAlignment="Center" FontWeight="Bold" Padding="10,8" Foreground="#FFFFFF" MouseDown="ButMin_MouseDown">最小化</Label>-->
+                <Label Grid.Column="2" Grid.Row="0" Margin="0" Cursor="Hand"  Height="40" FontSize="18" Name="ButExit"  Background="#F62D2D" VerticalAlignment="Center" FontWeight="Bold" Padding="10,8" Foreground="#FFFFFF" MouseDown="ButExit_MouseDown">退出</Label>
+            </Grid>
+        <Grid Grid.Column="0" Grid.Row="4" Margin="5,5">
             <Frame x:Name="frame_run" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch" NavigationUIVisibility="Hidden">
             </Frame>
         </Grid>

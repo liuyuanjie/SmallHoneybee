@@ -65,7 +65,9 @@ namespace SmallHoneybee.Wpf.Views
         public SaleOrderForm(SaleOrder saleOrderWindow, DataModel.Model.SaleOrder saleOrder)
         {
             InitializeComponent();
+
             TxtUserNoOrPhone.Focus();
+
             _unitOfWork = UnityInit.UnitOfWork;
             _saleOrderRepository = _unitOfWork.GetRepository<SaleOrderRepository>();
             _soProduceRepository = _unitOfWork.GetRepository<SOProduceRepository>();
@@ -84,10 +86,21 @@ namespace SmallHoneybee.Wpf.Views
                     CostPerUnit = x.CostPerUnit,
                     SOProduceTotal = (x.CostPerUnit ?? 0) * x.Quantity ?? 0
                 }));
+
+                if (_saleOrder.PurchaseOrderUserId.HasValue)
+                {
+                    _user = _userRepository.GetByUserId(_saleOrder.PurchaseOrderUserId.Value);
+                }
             }
             else
             {
                 _saleOrder = saleOrder;
+            }
+
+            if (_saleOrder.SaleOrderStatus == (byte)DataType.SaleOrderStatus.Balanced)
+            {
+                ButSave.IsEnabled = false;
+                ButBalance.IsEnabled = false;
             }
 
             _balanceDomainModel = new BalanceDomainModel
@@ -95,25 +108,25 @@ namespace SmallHoneybee.Wpf.Views
                 TotalPrice = saleOrder.TotalCost ?? 0,
                 DiscountPrice = saleOrder.FavorableCost ?? 0,
                 CashTotal = _user.CashTotal,
+                RealPrice = saleOrder.UserRealPrice ?? 0,
+                ReturnedPrice = saleOrder.UserReturnedPrice ?? 0
             };
 
             DataContext = new
             {
                 SaleOrder = _saleOrder,
                 SOProduceDomainModels,
-                CurrentUserRolePermission = ResourcesHelper.CurrentUserRolePermission,
+                ResourcesHelper.CurrentUserRolePermission,
                 BalanceDomainModel = _balanceDomainModel,
             };
+
             TxtDiscount.Text = _balanceDomainModel.DiscountPrice.ToString();
+            TxtRealPrice.Text = _balanceDomainModel.RealPrice.ToString();
 
             _soProduceDomainModels.CollectionChanged += (sender, e) => SetTotalNameberText();
 
             SetTotalNameberText();
-            if (_saleOrder.SaleOrderStatus == (byte)DataType.SaleOrderStatus.Balanced)
-            {
-                ButSave.IsEnabled = false;
-                ButBalance.IsEnabled = false;
-            }
+            SetUserInfo();
 
             RadBanlanceModeCard.Click += (s, e) =>
             {
@@ -322,14 +335,14 @@ namespace SmallHoneybee.Wpf.Views
                                     Produce = produce,
                                     ProduceId = produce.ProduceId,
                                     Quantity = 1,
-                                    CostPerUnit = produce.RetailPrice*produce.DiscountRate,
+                                    CostPerUnit = produce.RetailPrice * produce.DiscountRate,
                                     SaleOrder = _saleOrder,
                                     SaleOrderId = _saleOrder.SaleOrderId,
                                     RetailPrice = produce.RetailPrice,
                                     DiscountRate = produce.DiscountRate
                                 },
-                                CostPerUnit = produce.RetailPrice*produce.DiscountRate,
-                                SOProduceTotal = produce.RetailPrice*produce.DiscountRate*1,
+                                CostPerUnit = produce.RetailPrice * produce.DiscountRate,
+                                SOProduceTotal = produce.RetailPrice * produce.DiscountRate * 1,
                             };
                             _soProduceDomainModels.Add(soProduceDomainModel);
 
@@ -350,18 +363,25 @@ namespace SmallHoneybee.Wpf.Views
                 if (users.Count() == 1)
                 {
                     _user = users.First();
-                    _balanceDomainModel.CashTotal = _user.CashTotal;
-                    _balanceDomainModel.MemberPoints = _user.MemberPoints;
-
-
-                    _balanceDomainModel.UserBaseInfo = string.Format("姓名：{0} 电话：{1}", _user.Name, _user.Phone);
-                    _balanceDomainModel.UserMemberInfo = string.Format("会员账户：剩余金额：{0}, 累计积分：{1}",
-                        _user.CashTotal.ToString("F2"), _user.MemberPoints.ToString("F2"));
-
-                    _balanceDomainModel.MemberInfo = string.Format("当前积分：{0}, 本次积分：{1}, 累计积分：{2}",
-                        _balanceDomainModel.MemberPoints.ToString("F2"), _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
-                        (_balanceDomainModel.CurrentMemberPoints + _balanceDomainModel.MemberPoints).ToString("F2"));
+                    SetUserInfo();
                 }
+            }
+        }
+
+        private void SetUserInfo()
+        {
+            if (_user.UserId > 0)
+            {
+                _balanceDomainModel.CashTotal = _user.CashTotal;
+                _balanceDomainModel.MemberPoints = _user.MemberPoints;
+
+                _balanceDomainModel.UserBaseInfo = string.Format("姓名：{0} 电话：{1}", _user.Name, _user.Phone);
+                _balanceDomainModel.UserMemberInfo = string.Format("会员账户：剩余金额：{0}, 累计积分：{1}",
+                    _user.CashTotal.ToString("F2"), _user.MemberPoints.ToString("F2"));
+
+                _balanceDomainModel.MemberInfo = string.Format("当前积分：{0}, 本次积分：{1}, 累计积分：{2}",
+                    _balanceDomainModel.MemberPoints.ToString("F2"), _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
+                    (_balanceDomainModel.CurrentMemberPoints + _balanceDomainModel.MemberPoints).ToString("F2"));
             }
         }
 
@@ -534,7 +554,7 @@ namespace SmallHoneybee.Wpf.Views
                         MessageBox.Show("结算成功！", Properties.Resources.SystemName,
                             MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         Log4NetHelper.WriteLog(ex.ToString());
 

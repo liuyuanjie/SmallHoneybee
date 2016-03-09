@@ -33,6 +33,7 @@
                 <RowDefinition Height="35"></RowDefinition>
                 <RowDefinition Height="35"></RowDefinition>
                 <RowDefinition Height="35"></RowDefinition>
+                <RowDefinition Height="35"></RowDefinition>
             </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200"/>
@@ -58,13 +59,16 @@
             Name="TxtReportAddress" Text="{Binding Path=DataContext.SystemSetting.ReportAddress,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
         <TextBlock Grid.Column="2" Grid.Row="2" Text="零售打印打印机名称：" HorizontalAlignment="Right"/>
         <TextBox Grid.Column="3" Grid.Row="2" 
-            Name="TxtReportPrintName" Text="{Binding Path=DataContext.SystemSetting.ReportPrintName,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
-            <TextBlock Grid.Column="0" Grid.Row="3" Text="健康热线：" HorizontalAlignment="Right"/>
-            <TextBox Grid.Column="1" Grid.Row="3" 
-            Name="TxtReportHealthline" Text="{Binding Path=DataContext.SystemSetting.ReportHealthline,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
-            <TextBlock Grid.Column="2" Grid.Row="3" Text="公司网站：" HorizontalAlignment="Right"/>
-            <TextBox Grid.Column="3" Grid.Row="3" 
-            Name="TxtReportWebSiteUrl" Text="{Binding Path=DataContext.SystemSetting.ReportWebSiteUrl,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
+        Name="TxtReportPrintName" Text="{Binding Path=DataContext.SystemSetting.ReportPrintName,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
+        <TextBlock Grid.Column="0" Grid.Row="3" Text="健康热线：" HorizontalAlignment="Right"/>
+        <TextBox Grid.Column="1" Grid.Row="3" 
+        Name="TxtReportHealthline" Text="{Binding Path=DataContext.SystemSetting.ReportHealthline,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
+        <TextBlock Grid.Column="2" Grid.Row="3" Text="公司网站：" HorizontalAlignment="Right"/>
+        <TextBox Grid.Column="3" Grid.Row="3" 
+        Name="TxtReportWebSiteUrl" Text="{Binding Path=DataContext.SystemSetting.ReportWebSiteUrl,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
+            <TextBlock Grid.Column="0" Grid.Row="4" Text="健康卡初始密码：" HorizontalAlignment="Right"/>
+            <TextBox Grid.Column="1" Grid.Row="4" 
+        Name="TxtDefaultMemberCardPW" Text="{Binding Path=DataContext.SystemSetting.DefaultMemberCardPW,Mode=TwoWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" ></TextBox>
 
         </Grid>
         <StackPanel Grid.Column="0" Grid.Row="2"  Orientation="Horizontal" HorizontalAlignment="Right">

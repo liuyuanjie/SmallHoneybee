@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Active" xml:space="preserve">
+    <value>已激活</value>
+  </data>
   <data name="Admin" xml:space="preserve">
     <value>高级管理员</value>
   </data>
@@ -170,6 +173,9 @@
   </data>
   <data name="Middle" xml:space="preserve">
     <value>中级</value>
+  </data>
+  <data name="NonActive" xml:space="preserve">
+    <value>未激活</value>
   </data>
   <data name="None" xml:space="preserve">
     <value>不详</value>

@@ -45,9 +45,7 @@ namespace SmallHoneybee.Wpf.Views
 
         private void SetInitData()
         {
-            _unitOfWork = UnityInit.UnitOfWork;
-            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
-            _purchaseOrderRepository = _unitOfWork.GetRepository<PurchaseOrderRepository>();
+            InitUnitOfWork();
 
             var categories = new List<Category>();
             categories.AddRange(_categoryRepository.Query().OrderBy(x => x.Name));
@@ -91,6 +89,8 @@ namespace SmallHoneybee.Wpf.Views
 
         private void ExecuteSearchText()
         {
+            InitUnitOfWork();
+
             _purchaseOrders.Clear();
             _purchaseOrderRepository
                 .Query()
@@ -99,6 +99,15 @@ namespace SmallHoneybee.Wpf.Views
                     x.Name.Contains(TxtSearchBox.Text))
                 .ToList()
                 .ForEach(x => _purchaseOrders.Add(x));
+
+            TxtTotalInfo.Text = string.Format("共{0}笔订单, 合计{1}金额", _purchaseOrders.Count, _purchaseOrders.Sum(x => x.GrandTotal));
+        }
+
+        private void InitUnitOfWork()
+        {
+            _unitOfWork = UnityInit.UnitOfWork;
+            _categoryRepository = _unitOfWork.GetRepository<CategoryRepository>();
+            _purchaseOrderRepository = _unitOfWork.GetRepository<PurchaseOrderRepository>();
         }
 
         private void CommandBinding_ClearSearchText_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -126,27 +135,25 @@ namespace SmallHoneybee.Wpf.Views
             _poItemDomainModels.Clear();
 
             DataModel.Model.PurchaseOrder purchaseOrder = (DataModel.Model.PurchaseOrder)((DataGrid)sender).CurrentItem;
+            if (purchaseOrder == null && ((DataGrid)sender).Items.Count > 0)
+            {
+                purchaseOrder = (DataModel.Model.PurchaseOrder)((DataGrid)sender).Items[0];
+            }
+
             if (purchaseOrder != null)
             {
                 purchaseOrder.POItems.ForEach(x => _poItemDomainModels.Add(new POItemDomainModel
                 {
                     POItem = x
                 }));
-            }
-            else
-            {
-                if (((DataGrid)sender).Items.Count > 0)
-                {
-                    purchaseOrder = (DataModel.Model.PurchaseOrder)((DataGrid)sender).Items[0];
-                    purchaseOrder.POItems.ForEach(x => _poItemDomainModels.Add(new POItemDomainModel
-                    {
-                        POItem = x
-                    }));
-                }
+
+                TxtDetailTotalInfo.Text = string.Format("共{0}种商品, 合计{1}件, 合计金额: {2}",
+                    purchaseOrder.POItems.Count.ToString("F2"),
+                    purchaseOrder.POItems.Sum(x => x.QuantityReceived ?? 0).ToString("F2"),
+                    (purchaseOrder.POItems.Sum(x => x.QuantityReceived * x.PriceReceived) ?? 0).ToString("F2"));
             }
         }
     }
-
 
     public class POItemDomainModel
     {

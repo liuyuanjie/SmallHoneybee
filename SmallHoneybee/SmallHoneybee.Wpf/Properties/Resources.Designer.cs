@@ -61,6 +61,15 @@ namespace SmallHoneybee.Wpf.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Active.
+        /// </summary>
+        public static string Active {
+            get {
+                return ResourceManager.GetString("Active", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin.
         /// </summary>
         public static string Admin {
@@ -219,6 +228,15 @@ namespace SmallHoneybee.Wpf.Properties {
         public static string Middle {
             get {
                 return ResourceManager.GetString("Middle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Non Active.
+        /// </summary>
+        public static string NonActive {
+            get {
+                return ResourceManager.GetString("NonActive", resourceCulture);
             }
         }
         

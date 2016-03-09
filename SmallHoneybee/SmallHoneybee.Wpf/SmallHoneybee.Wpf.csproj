@@ -131,6 +131,7 @@
     <Compile Include="Common\PropertyConvert\StatusConverter.cs" />
     <Compile Include="Common\ResourcesHelper.cs" />
     <Compile Include="MainClass.cs" />
+    <Compile Include="MaxWindows.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -178,6 +179,9 @@
     </Compile>
     <Compile Include="Views\SystemSetting.xaml.cs">
       <DependentUpon>SystemSetting.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MemberCard.xaml.cs">
+      <DependentUpon>MemberCard.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
@@ -342,6 +346,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\MemberCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\User.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -380,7 +388,9 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SmallHoneybee.Common\SmallHoneybee.Common.csproj">
@@ -428,6 +438,11 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\icoPrint.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icoLog.png" />
+    <Resource Include="images\icoMemberCard.png" />
+    <Resource Include="images\icoPassword.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

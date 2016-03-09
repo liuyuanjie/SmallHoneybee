@@ -94,7 +94,7 @@ namespace SmallHoneybee.Wpf.Views
                 DataGridColumn deletedColumn = null;
                 gridProduces.Columns.ForEach(x =>
                 {
-                    if (x.Header.ToString() == "出厂价")
+                    if (x.Header != null && x.Header.ToString() == "出厂价")
                     {
                         deletedColumn = x;
                     }
@@ -136,6 +136,21 @@ namespace SmallHoneybee.Wpf.Views
                 .ForEach(x => _produces.Add(x));
 
             InitBlankRow();
+
+            if (!ResourcesHelper.CurrentUserRolePermission.ProduceFactoryPriceEdit)
+            {
+                TxtTotalInfo.Text = string.Format("共{0}种商品, 合计{1}件",
+                    _produces.Count.ToString("F2"), _produces.Sum(x => x.Quantity).ToString("F2"));
+            }
+            else
+            {
+                TxtTotalInfo.Text = string.Format("共{0}种商品, 合计{1}件, 零售价合计金额: {2}, 折扣零售价合计金额: {3}, 最低折扣零售价合计金额: {4}, 出厂价合计金额: {5}",
+                    _produces.Count.ToString("F2"), _produces.Sum(x => x.Quantity).ToString("F2"),
+                    _produces.Sum(x => x.RetailPrice * x.Quantity).ToString("F2"),
+                    _produces.Sum(x => x.RetailPrice * x.DiscountRate * x.Quantity).ToString("F2"),
+                    _produces.Sum(x => x.RetailPrice * (x.LowestDiscountRate ?? x.DiscountRate) * x.Quantity).ToString("F2"),
+                    _produces.Sum(x => x.Quantity * x.FactoryPrice).ToString("F2"));
+            }
         }
 
         private void CommandBinding_ClearSearchText_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -173,7 +188,7 @@ namespace SmallHoneybee.Wpf.Views
                             _produceRepository.Create(x);
                         }
                     });
-                var duBarCodes = _produces.Where(x=>x.BarCode!=null).GroupBy(x => x.BarCode).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
+                var duBarCodes = _produces.Where(x => x.BarCode != null).GroupBy(x => x.BarCode).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
                 var duProduceNos = _produces.Where(x => x.ProduceNo != null).GroupBy(x => x.ProduceNo).Where(g => g.Count() > 1).Select(x => x.Key).ToList();
 
                 if (duBarCodes.Any() || duProduceNos.Any())
@@ -206,10 +221,6 @@ namespace SmallHoneybee.Wpf.Views
             // Lookup for the source to be DataGridCell
             if (e.OriginalSource.GetType() == typeof(DataGridCell))
             {
-                // Starts the Edit on the row;
-                //DataGrid grd = (DataGrid)sender;
-                //grd.BeginEdit(e);
-
                 Control control = GetFirstChildByType<Control>(e.OriginalSource as DataGridCell);
                 if (control != null)
                 {

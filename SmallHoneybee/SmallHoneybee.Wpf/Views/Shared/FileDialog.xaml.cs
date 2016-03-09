@@ -71,7 +71,7 @@ namespace SmallHoneybee.Wpf.Views.Shared
 
         private void ImportProduces()
         {
-            IList<DataModel.Model.Produce> produces = new List<DataModel.Model.Produce>();
+            List<DataModel.Model.Produce> produces = new List<DataModel.Model.Produce>();
             IEnumerable<Category> categories =
                 _categoryRepository.Query().ToList();
             IEnumerable<IEnumerable<KeyValuePair<string, string>>> csvContengs = CsvHepler.GetCsvData(tbPath.Text);
@@ -118,20 +118,32 @@ namespace SmallHoneybee.Wpf.Views.Shared
                                 continue;
 
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                continue;
                         }
                     }
                 }
                 produces.Add(produce);
             });
 
+            var existedProduceNos = _produceRepository.Query().Select(x => x.ProduceNo);
+            produces.RemoveAll(x => existedProduceNos.Contains(x.ProduceNo));
             _produceRepository.BatchInsertProduces(produces);
             _unitOfWork.Commit();
+
+            System.Windows.MessageBox.Show("商品导入成功！", Properties.Resources.SystemName,
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            Close();
         }
 
         private void ImportPurchaseOrders()
         {
-            DataModel.Model.PurchaseOrder purchaseOrder = _purchaseOrderRepository.Query().First();
+            DataModel.Model.PurchaseOrder purchaseOrder = _purchaseOrderRepository
+                .Query().OrderByDescending(x => x.DateOriginated).FirstOrDefault(x=>x.POStatusCategory == (sbyte)DataType.POStatusCategory.Ordered);
+
+            if (purchaseOrder == null)
+            {
+                return;
+            }
 
             IList<DataModel.Model.Produce> produces = _produceRepository.Query().ToList();
 
@@ -173,30 +185,41 @@ namespace SmallHoneybee.Wpf.Views.Shared
                                 continue;
 
                             default:
-                                throw new ArgumentOutOfRangeException();
+                                continue;
                         }
                     }
                 }
-                poItem.POStatusCategory = (sbyte)DataType.POStatusCategory.Completed;
+                poItem.POStatusCategory = (sbyte)DataType.POItemStatusCategory.Dispatched;
                 poItem.CreatedBy = "admin";
                 poItem.CreatedOn = DateTime.Now;
                 poItem.LastModifiedBy = "admin";
                 poItem.LastModifiedOn = DateTime.Now;
                 poItem.RowVersion = DateTime.Now;
                 poItem.Produce.Quantity += poItem.QuantityReceived ?? 0;
+                poItem.Produce.Producelogs.Add(new Producelog
+                {
+                    ChangedBy = ResourcesHelper.CurrentUser.Name,
+                    DateChanged = DateTime.Now,
+                    NewValue = string.Format("进货单据: {0}, 本次进货数量: {1}, 本次进货价格: {2}, 总计数量: {3}",
+                    purchaseOrder.PurchaseOrderNo,
+                    (poItem.QuantityReceived ?? 0).ToString("F2"),
+                    (poItem.PriceReceived ?? 0).ToString("F2"),
+                    poItem.Produce.Quantity.ToString("F2"))
+                });
                 poItem.Produce.LastOrderDate = DateTime.Now;
 
                 purchaseOrder.POItems.Add(poItem);
             });
+            purchaseOrder.POStatusCategory = (sbyte)DataType.POStatusCategory.Completed;
             purchaseOrder.TotalAmount = purchaseOrder.POItems.Sum(x => x.PriceReceived * x.QuantityReceived);
             purchaseOrder.GrandTotal = (purchaseOrder.TotalAmount ?? 0) + (purchaseOrder.TotalOther ?? 0)
                                        + (purchaseOrder.TotalShipping ?? 0) + (purchaseOrder.TotalTax ?? 0);
             _purchaseOrderRepository.Update(purchaseOrder);
-            purchaseOrder.POItems.ForEach(x =>
-            {
-
-            });
             _unitOfWork.Commit();
+
+            System.Windows.MessageBox.Show("订单导入成功！", Properties.Resources.SystemName,
+                MessageBoxButton.OK, MessageBoxImage.Information);
+            Close();
         }
     }
 }

@@ -87,6 +87,7 @@ namespace SmallHoneybee.Common
         {
             POContractNo,
             PurchaseOrderNo,
+            ProduceName,
             ProduceNo,
             PriceOrdered,
             PriceReceived,
@@ -99,6 +100,7 @@ namespace SmallHoneybee.Common
             SystemVersion = 1000,
             MemberPointsRate = 1001,
             SOProduceGeneralMangerMaxDiscountPrice = 1002,
+            DefaultMemberCardPW=1003,
 
             ReportMerchantsName = 1101,
             ReportPhone = 1102,
@@ -106,6 +108,12 @@ namespace SmallHoneybee.Common
             ReportPrintName = 1104,
             ReportHealthline = 1105,
             ReportWebSiteUrl = 1106,
+        }
+
+        public enum MemberCardStatus
+        {
+            NonActive,
+            Active
         }
     }
 }
