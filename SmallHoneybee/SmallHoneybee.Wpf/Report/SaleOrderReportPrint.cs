@@ -36,6 +36,8 @@ namespace SmallHoneybee.Wpf.Report
                                 ProduceTotalDiscountAndFavorableCost =
                                     (saleOrder.ProduceTotalDiscount ?? 0) + (saleOrder.FavorableCost ?? 0),
                                 TotalCost = saleOrder.TotalCost ?? 0,
+                                ProduceCost = saleOrder.ProduceCost ?? 0,
+                                HowBalance=(byte)saleOrder.HowBalance,
                                 HowBalanceName =
                                     CommonHelper.Enumerate<DataType.SaleOrderBalancedMode>()
                                         .Single(x => x.Key == saleOrder.HowBalance)
@@ -47,7 +49,10 @@ namespace SmallHoneybee.Wpf.Report
                                     ResourcesHelper.SystemSettings[(short) DataType.SystemSettingCode.ReportHealthline],
                                 WebSiteUrl =
                                     ResourcesHelper.SystemSettings[(short) DataType.SystemSettingCode.ReportWebSiteUrl],
-
+                                MemberCardCashTotal=
+                                    saleOrder.HowBalance==(sbyte)DataType.SaleOrderBalancedMode.MemberCard
+                                    ?saleOrder.PrucahseOrderUserUser.CashTotal
+                                    :saleOrder.UserReturnedPrice ?? 0,
                             }
                         }
                     };

@@ -16,8 +16,7 @@ namespace SmallHoneybee.DataModel.Model
     {
         public MemberCard()
         {
-            this.MemberCardLogs = new HashSet<MemberCardLog>();
-            this.UserMemberCards = new HashSet<UserMemberCard>();
+            this.MemberCardlogs = new HashSet<MemberCardLog>();
         }
     
         public int MemberCardId { get; set; }
@@ -26,8 +25,8 @@ namespace SmallHoneybee.DataModel.Model
         public sbyte MemberType { get; set; }
         public float MemberMoney { get; set; }
         public System.DateTime DispatchDate { get; set; }
-        public Nullable<int> DispatchUser { get; set; }
-        public float SurplusMoney { get; set; }
+        public Nullable<int> DispatchUserId { get; set; }
+        public float PrincipalSurplusMoney { get; set; }
         public bool IsEnable { get; set; }
         public string PasswordSalt { get; set; }
         public string PasswordHash { get; set; }
@@ -38,8 +37,12 @@ namespace SmallHoneybee.DataModel.Model
         public System.DateTime LastModifiedOn { get; set; }
         public string LastModifiedBy { get; set; }
         public System.DateTime RowVersion { get; set; }
+        public float TotalSurplusMoney { get; set; }
+        public float FavorableSurplusMoney { get; set; }
+        public Nullable<int> RelateUserId { get; set; }
     
-        public virtual ICollection<MemberCardLog> MemberCardLogs { get; set; }
-        public virtual ICollection<UserMemberCard> UserMemberCards { get; set; }
+        public virtual User DispatchUserUser { get; set; }
+        public virtual User RelateUserUser { get; set; }
+        public virtual ICollection<MemberCardLog> MemberCardlogs { get; set; }
     }
 }

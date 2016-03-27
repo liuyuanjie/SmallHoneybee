@@ -39,6 +39,5 @@ namespace SmallHoneybee.DataModel.Model
         public virtual DbSet<SystemSetting> SystemSettings { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Userlog> Userlogs { get; set; }
-        public virtual DbSet<UserMemberCard> UserMemberCards { get; set; }
     }
 }

@@ -150,6 +150,9 @@
   <data name="Completed" xml:space="preserve">
     <value>已完成</value>
   </data>
+  <data name="Consumption" xml:space="preserve">
+    <value>消费</value>
+  </data>
   <data name="Coustom" xml:space="preserve">
     <value>会员</value>
   </data>
@@ -169,7 +172,7 @@
     <value>初级</value>
   </data>
   <data name="MemberCard" xml:space="preserve">
-    <value>充值卡</value>
+    <value>购物卡</value>
   </data>
   <data name="Middle" xml:space="preserve">
     <value>中级</value>
@@ -186,6 +189,9 @@
   <data name="Ordered" xml:space="preserve">
     <value>已订购</value>
   </data>
+  <data name="Other" xml:space="preserve">
+    <value>其他</value>
+  </data>
   <data name="PayOut" xml:space="preserve">
     <value>支出</value>
   </data>
@@ -197,6 +203,9 @@
   </data>
   <data name="Received" xml:space="preserve">
     <value>已收货</value>
+  </data>
+  <data name="Saved" xml:space="preserve">
+    <value>充值</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>查询</value>

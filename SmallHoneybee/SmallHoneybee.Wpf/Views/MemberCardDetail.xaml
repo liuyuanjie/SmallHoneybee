@@ -1,0 +1,117 @@
+﻿<Page x:Class="SmallHoneybee.Wpf.Views.MemberCardDetail"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:props="clr-namespace:SmallHoneybee.Wpf.Properties"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+	 Title="购物卡充值消费明细">
+    <Page.Resources>
+        <RoutedUICommand x:Key="ClearSearchText" Text="Increase Font Size" />
+        <RoutedUICommand x:Key="ExecuteSearchText" Text="Decrease Font Size" />
+        <ResourceDictionary x:Key="CommonStyle">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Page.Resources>
+    <Grid Resources="{StaticResource CommonStyle}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="5"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1000*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0">||购物卡充值消费明细</TextBlock>
+        <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
+            <TextBlock Text="购物卡编号/姓名/电话：" HorizontalAlignment="Right" VerticalAlignment="Center" ></TextBlock>
+            <TextBox Name="TxtSearchBox" Width="200" ></TextBox>
+            <TextBlock Text="时间范围：" VerticalAlignment="Center"></TextBlock>
+            <DatePicker Name="DateStartDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long"></DatePicker>
+            <TextBlock VerticalAlignment="Center">～</TextBlock>
+            <DatePicker Name="DateEndDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+            <Button Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
+            <Button Content="清空" Click="BtnClear_Click" />
+                </StackPanel>
+        </Grid>
+        <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
+        <DataGrid Grid.Row="3" Name="gridMemberCardLogs"
+                  CanUserAddRows="True"
+                  AutoGenerateColumns="False"
+                  DataGridCell.GotFocus="DataGrid_CellGotFocus" 
+                  ItemsSource="{Binding Path=DataContext.MemberCardDetailModel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
+                  FontWeight="Medium">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="交易日期" Binding="{Binding DateChanged, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
+                <DataGridTextColumn Header="经办人" Binding="{Binding ChangedBy}"/>
+                <DataGridTextColumn Header="购物卡编号" Binding="{Binding MemberCardNo}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="持卡人" Binding="{Binding RelateUser}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="交易总金额" Width="90"  IsReadOnly="True"  Binding="{Binding TotalMoney, StringFormat=F2}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="交易本金金额" Width="90"  IsReadOnly="True"  Binding="{Binding PrincipalMoney, StringFormat=F2}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="交易赠送金额" Width="90"  IsReadOnly="True"  Binding="{Binding FavorableMoney, StringFormat=F2}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridComboBoxColumn Header="交易类别">
+                    <DataGridComboBoxColumn.ElementStyle>
+                        <Style TargetType="ComboBox">
+                            <Setter Property="ItemsSource" Value="{Binding Path=DataContext.LogTypeTexts,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" />
+                            <Setter Property="DisplayMemberPath" Value="Value" />
+                            <Setter Property="SelectedValuePath" Value="Key" />
+                            <Setter Property="SelectedValue" Value="{Binding LogType}" />
+                        </Style>
+                    </DataGridComboBoxColumn.ElementStyle>
+                </DataGridComboBoxColumn>
+                <DataGridTextColumn Header="备注" Width="250*" Binding="{Binding Description}">
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="MemberCardId" Binding="{Binding MemberCard.MemberCardId}" Visibility="Hidden"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+    <Page.InputBindings>
+        <KeyBinding Gesture="Esc" Command="{StaticResource ClearSearchText}"/>
+        <KeyBinding Gesture="Enter" Command="{StaticResource ExecuteSearchText}"/>
+    </Page.InputBindings>
+    <Page.CommandBindings>
+        <CommandBinding Command="{StaticResource ClearSearchText}"
+                    CanExecute="CommandBinding_ClearSearchText_CanExecute"
+                    Executed="CommandBinding_ClearSearchText_Executed"/>
+        <CommandBinding Command="{StaticResource ExecuteSearchText}"
+                    CanExecute="CommandBinding_ExecuteSearchText_CanExecute"
+                    Executed="CommandBinding_ExecuteSearchText_Executed"/>
+    </Page.CommandBindings>
+
+</Page>
+

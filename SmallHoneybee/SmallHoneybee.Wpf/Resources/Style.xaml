@@ -49,7 +49,7 @@
         <Setter Property="BorderBrush" Value="#FF9DCD19"/>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Control.Foreground" Value="#FFFFFF"/>
+                <Setter Property="Control.Foreground" Value="#000000"/>
             </Trigger>
         </Style.Triggers>
     </Style>

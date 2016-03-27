@@ -21,6 +21,10 @@ namespace SmallHoneybee.DataModel.Model
         public System.DateTime DateChanged { get; set; }
         public string ChangedBy { get; set; }
         public System.DateTime RowVersion { get; set; }
+        public Nullable<sbyte> LogType { get; set; }
+        public sbyte HowBalance { get; set; }
+        public float FavorableMoney { get; set; }
+        public float PrincipalMoney { get; set; }
     
         public virtual MemberCard MemberCard { get; set; }
     }

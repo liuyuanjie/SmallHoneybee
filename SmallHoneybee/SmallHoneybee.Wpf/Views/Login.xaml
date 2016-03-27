@@ -55,7 +55,22 @@
             </Grid>
             <Grid Grid.Row="3" Margin="5,5,5,0">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
-                    <Button Name="ButtonOk" Content="登录" Width="100" Click="Ok_OnClick"/>
+                    <Button Name="ButtonOk" Foreground="White" Content="登录" Width="100" Click="Ok_OnClick">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border BorderThickness="0" CornerRadius="5,5,5,5">
+                                    <Border.Background>
+                                        <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                            <GradientStop Color="White" Offset="0.0" />
+                                            <GradientStop Color="#FF9DCD19" Offset="0.5" />
+                                            <GradientStop Color="White" Offset="0.0" />
+                                        </LinearGradientBrush>
+                                    </Border.Background>
+                                    <ContentPresenter Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
                     <Button Name="BottonCancel" Content="关闭" Width="60" Click="Cancel_OnClick"/>
                 </StackPanel>
             </Grid>

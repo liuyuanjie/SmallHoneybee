@@ -135,5 +135,14 @@ namespace SmallHoneybee.Wpf
             ChooseMassagebox chooseMassagebox = new ChooseMassagebox(this);
             chooseMassagebox.Show();
         }
+
+        private void SamllHoneybeeMemberCardLogMenu_OnClick(object sender, RoutedEventArgs e)
+        {
+            ClearMeunChecked();
+
+            frame_run.Content = new Views.MemberCardDetail();
+            var menuItem = (MenuItem)sender;
+            menuItem.IsChecked = true;
+        }
     }
 }

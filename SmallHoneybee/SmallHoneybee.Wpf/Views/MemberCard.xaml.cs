@@ -3,26 +3,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Practices.ObjectBuilder2;
 using SmallHoneybee.Common;
-using SmallHoneybee.DataModel.Model;
 using SmallHoneybee.EF.Data;
 using SmallHoneybee.EF.Data.Repository;
 using SmallHoneybee.EF.Data.Repository.Impl;
 using SmallHoneybee.EF.Data.UntityContainer;
 using SmallHoneybee.Wpf.Common;
-using SmallHoneybee.Wpf.Views.Shared;
 
 namespace SmallHoneybee.Wpf.Views
 {
@@ -34,9 +25,9 @@ namespace SmallHoneybee.Wpf.Views
         private IUnitOfWork _unitOfWork;
         private IMemberCardRepository _memberCardRepository;
 
-        private ObservableCollection<DataModel.Model.MemberCard> _memberCards = new ObservableCollection<DataModel.Model.MemberCard>();
+        private ObservableCollection<MemberCardModel> _memberCards = new ObservableCollection<MemberCardModel>();
 
-        public ObservableCollection<DataModel.Model.MemberCard> MemberCards
+        public ObservableCollection<MemberCardModel> MemberCards
         {
             get { return _memberCards; }
             set
@@ -102,7 +93,19 @@ namespace SmallHoneybee.Wpf.Views
                     x.MemberCardNo.Contains(TxtSearchBox.Text) ||
                     x.Name.Contains(TxtSearchBox.Text))
                 .ToList()
-                .ForEach(x => _memberCards.Add(x));
+                .ForEach(x => _memberCards.Add(new MemberCardModel
+                {
+                    MemberCard = x,
+                    RelateUserName = x.RelateUserId.HasValue
+                        ? x.RelateUserUser.Name
+                        : string.Empty,
+
+                    DispatchUserName = x.DispatchUserId.HasValue
+                        ? x.DispatchUserUser.Name
+                        : string.Empty,
+                    CanUpdate = x.MemberCardStatus == (sbyte)DataType.MemberCardStatus.NonActive &&
+                        !x.RelateUserId.HasValue
+                }));
 
             InitBlankRow();
         }
@@ -127,15 +130,15 @@ namespace SmallHoneybee.Wpf.Views
             ExecuteSearchText();
         }
 
-        private void ButDeleteUser_Click(object sender, MouseButtonEventArgs e)
+        private void ButDeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            var memberCard = gridUsers.SelectedItem as DataModel.Model.MemberCard;
+            var memberCard = gridUsers.SelectedItem as MemberCardModel;
             if (memberCard != null)
             {
                 _memberCards.Remove(memberCard);
-                if (memberCard.MemberCardId > 0)
+                if (memberCard.MemberCard.MemberCardId > 0)
                 {
-                    _memberCardRepository.Delete(memberCard);
+                    _memberCardRepository.Delete(memberCard.MemberCard);
                 }
             }
         }
@@ -144,17 +147,24 @@ namespace SmallHoneybee.Wpf.Views
         {
             try
             {
-                _memberCards.Where(x => !string.IsNullOrEmpty(x.Name) &&
-                    !string.IsNullOrEmpty(x.MemberCardNo)).ForEach(x =>
+                _memberCards.Where(x => !string.IsNullOrEmpty(x.MemberCard.Name) &&
+                    !string.IsNullOrEmpty(x.MemberCard.MemberCardNo)).ForEach(x =>
                 {
-                    if (x.MemberCardId > 0)
+                    if (x.MemberCard.MemberCardId > 0)
                     {
+                        if (!x.MemberCard.RelateUserId.HasValue)
+                        {
+                            x.MemberCard.TotalSurplusMoney = x.MemberCard.MemberMoney;
+                            x.MemberCard.PrincipalSurplusMoney = x.MemberCard.MemberMoney;
+                        }
                         CommonHelper.UpdateModifiedOnAndDate(ResourcesHelper.CurrentUser, _memberCards);
-                        _memberCardRepository.Update(x);
+                        _memberCardRepository.Update(x.MemberCard);
                     }
                     else
                     {
-                        _memberCardRepository.Create(x);
+                        x.MemberCard.TotalSurplusMoney = x.MemberCard.MemberMoney;
+                        x.MemberCard.PrincipalSurplusMoney = x.MemberCard.MemberMoney;
+                        _memberCardRepository.Create(x.MemberCard);
                     }
                 });
 
@@ -163,10 +173,13 @@ namespace SmallHoneybee.Wpf.Views
                 MessageBox.Show("保存成功！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log4NetHelper.WriteLog(ex.ToString());
+
                 MessageBox.Show("保存失败！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
                  MessageBoxButton.OK, MessageBoxImage.Error);
+                ExecuteSearchText();
             }
         }
 
@@ -189,20 +202,37 @@ namespace SmallHoneybee.Wpf.Views
 
         private void InitBlankRow()
         {
-            _memberCards.Add(new DataModel.Model.MemberCard
+            for (int i = 0; i < 5; i++)
             {
-                MemberType = 0,
-                IsEnable = true,
-                PasswordHash = SaltedHash.Create(ResourcesHelper.SystemSettings[(short)DataType.SystemSettingCode.DefaultMemberCardPW]).Hash,
-                PasswordSalt = SaltedHash.Create(ResourcesHelper.SystemSettings[(short)DataType.SystemSettingCode.DefaultMemberCardPW]).Salt,
-                MemberMoney = 0,
-                SurplusMoney = 0,
-                DispatchDate=DateTime.Now,
-                CreatedBy = ResourcesHelper.CurrentUser.Name,
-                CreatedOn = DateTime.Now,
-                LastModifiedBy = ResourcesHelper.CurrentUser.Name,
-                LastModifiedOn = DateTime.Now,
-            });
+                _memberCards.Add(
+                    new MemberCardModel
+                    {
+                        MemberCard = new DataModel.Model.MemberCard
+                        {
+                            MemberType = 0,
+                            IsEnable = true,
+                            PasswordHash =
+                                SaltedHash.Create(
+                                    ResourcesHelper.SystemSettings[
+                                        (short)DataType.SystemSettingCode.DefaultMemberCardPW]).Hash,
+                            PasswordSalt =
+                                SaltedHash.Create(
+                                    ResourcesHelper.SystemSettings[
+                                        (short)DataType.SystemSettingCode.DefaultMemberCardPW]).Salt,
+                            MemberMoney = 0,
+                            TotalSurplusMoney = 0,
+                            PrincipalSurplusMoney = 0,
+                            FavorableSurplusMoney = 0,
+                            DispatchDate = DateTime.Now,
+                            CreatedBy = ResourcesHelper.CurrentUser.Name,
+                            CreatedOn = DateTime.Now,
+                            LastModifiedBy = ResourcesHelper.CurrentUser.Name,
+                            LastModifiedOn = DateTime.Now,
+                            MemberCardNo = ResourcesHelper.MFTMemberCard
+                        },
+                        CanUpdate = true
+                    });
+            }
         }
 
         private void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)
@@ -237,5 +267,14 @@ namespace SmallHoneybee.Wpf.Views
             }
             return null;
         }
+    }
+
+    public class MemberCardModel
+    {
+        public DataModel.Model.MemberCard MemberCard { get; set; }
+        public string RelateUserName { get; set; }
+        public string DispatchUserName { get; set; }
+        public bool CanUpdate { get; set; }
+
     }
 }

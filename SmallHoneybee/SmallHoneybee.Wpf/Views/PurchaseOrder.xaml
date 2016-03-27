@@ -5,6 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:props="clr-namespace:SmallHoneybee.Wpf.Properties"
       xmlns:av="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:propertyConvert="clr-namespace:SmallHoneybee.Wpf.Common.PropertyConvert"
       mc:Ignorable="d" 
 	Title="订单">
     <Page.Resources>
@@ -14,6 +15,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Resources/Style.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <propertyConvert:POStatusConverter x:Key="POStatusConverter"></propertyConvert:POStatusConverter>
         </ResourceDictionary>
     </Page.Resources>
     <av:Grid  Resources="{StaticResource CommonStyle}">
@@ -37,6 +39,7 @@
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
@@ -47,79 +50,158 @@
             <TextBox Grid.Column="1" Grid.Row="0" Name="TxtSearchBox"></TextBox>
             <Button  Grid.Column="2" Grid.Row="0" Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
             <Button  Grid.Column="3" Grid.Row="0" Content="清空" Click="BtnClear_Click" />
-            <Button  Grid.Column="4" Grid.Row="0" Content="{x:Static props:Resources.Import}" Click="BtnImport_Click"></Button>
+            <Button  Grid.Column="4" Grid.Row="0" Content="保存" Click="BtnSave_Click" ></Button>
+            <Button  Grid.Column="5" Grid.Row="0" Content="{x:Static props:Resources.Import}" Click="BtnImport_Click"></Button>
         </Grid>
         <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
         <DataGrid Grid.Row="3" Name="GridPurchaseOrders" AutoGenerateColumns="False" 
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True" 
+                  CanUserAddRows="False" 
+                  IsReadOnly="True" 
                   ItemsSource="{Binding Path=DataContext.PurchaseOrders,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
-                  IsReadOnly="True" FontWeight="Medium" SelectionChanged="GridPurchaseOrders_OnSelectionChanged" SelectionMode="Single" SelectedIndex="0">
+                  FontWeight="Medium" SelectionChanged="GridPurchaseOrders_OnSelectionChanged" SelectionMode="Single" SelectedIndex="0">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextStyle}" >
+                    <Setter Property="Margin" Value="1" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Control.Opacity" Value="0.8"/>
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="Control.BorderThickness" Value="0"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
                 <DataGridTextColumn Header="PurchaseOrderId" Binding="{Binding PurchaseOrderId}" Visibility="Hidden"/>
-                <DataGridTextColumn Header="订单编号" Binding="{Binding PurchaseOrderNo}"/>
-                <DataGridTextColumn Header="名称" Binding="{Binding Name}"/>
-                <DataGridTextColumn Header="订购人" Binding="{Binding User.Name}"/>
-                <DataGridTemplateColumn Header="状态" >
+                <!--<DataGridTextColumn Header="订单编号" Binding="{Binding PurchaseOrderNo}"/>-->
+                <DataGridTemplateColumn Header="订单编号" Width="100" >
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                            <TextBox Text="{Binding PurchaseOrderNo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                IsEnabled="{Binding POStatusCategory,Converter={StaticResource POStatusConverter}}">
+                            </TextBox>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTextColumn Header="名称" Binding="{Binding Name}"/>-->
+                <DataGridTemplateColumn Header="名称" Width="100" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                IsEnabled="{Binding POStatusCategory,Converter={StaticResource POStatusConverter}}">
+                            </TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="订购人" Width="100"  Binding="{Binding User.Name}"/>
+                <DataGridTemplateColumn Header="状态" Width="100"  >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox 
-                                SelectedValue="{Binding POStatusCategory}" 
+                                SelectedValue="{Binding POStatusCategory, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                 SelectedValuePath="Key" 
                                 DisplayMemberPath="Value" 
                                 ItemsSource="{Binding Path=DataContext.POStatusCategories,
                                     RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
+                                IsEnabled="{Binding POStatusCategory,Converter={StaticResource POStatusConverter}}"
                                 IsReadOnly="True" FontWeight="Bold"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="下单日期" Binding="{Binding DateOriginated, StringFormat=yyyy-MM-dd}"/>
-                <DataGridTextColumn Header="货到日期" Binding="{Binding DateReceived, StringFormat=yyyy-MM-dd}"/>
-                <DataGridTextColumn Header="完成日期" Binding="{Binding DateCompleted, StringFormat=yyyy-MM-dd}"/>
-                <DataGridTextColumn Header="订货金额" Binding="{Binding TotalAmount, StringFormat=F2}">
+                <DataGridTextColumn Header="下单日期" Width="100"  Binding="{Binding DateOriginated, StringFormat=yyyy-MM-dd}"/>
+                <DataGridTextColumn Header="货到日期" Width="100"  Binding="{Binding DateReceived, StringFormat=yyyy-MM-dd}"/>
+                <DataGridTextColumn Header="完成日期" Width="100"  Binding="{Binding DateCompleted, StringFormat=yyyy-MM-dd}"/>
+                <DataGridTextColumn Header="订货金额" Width="100"  Binding="{Binding TotalAmount, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="税款金额" Binding="{Binding TotalTax, StringFormat=F2}">
+                <DataGridTextColumn Header="税款金额" Width="100"  Binding="{Binding TotalTax, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="运费金额" Binding="{Binding TotalShipping, StringFormat=F2}">
+                <DataGridTextColumn Header="运费金额" Width="100"  Binding="{Binding TotalShipping, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="其他金额" Binding="{Binding TotalOther, StringFormat=F2}">
+                <DataGridTextColumn Header="其他金额" Width="100"  Binding="{Binding TotalOther, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="合计金额" Binding="{Binding GrandTotal, StringFormat=F2}" FontWeight="Bold">
+                <DataGridTextColumn Header="合计金额" Width="100"  Binding="{Binding GrandTotal, StringFormat=F2}" FontWeight="Bold">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="备注" Binding="{Binding Description}"/>
-                
+                <!--<DataGridTextColumn Header="备注" Binding="{Binding Description}"/>-->
+                <DataGridTemplateColumn Header="备注" Width="200" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox  Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                IsEnabled="{Binding POStatusCategory,Converter={StaticResource POStatusConverter}}">
+                            </TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock  Grid.Column="0" Grid.Row="4" Name="TxtTotalInfo" FontWeight="Bold" HorizontalAlignment="Right"/>
         <DataGrid Grid.Row="5" Name="GridPOItems" AutoGenerateColumns="False" ItemsSource="{Binding Path=DataContext.POItemDomainModels,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" IsReadOnly="True" FontWeight="Medium">
+            <DataGrid.Resources>
+                <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource CommonTextStyle}" >
+                    <Setter Property="Margin" Value="1" />
+                    <Style.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Control.Opacity" Value="0.8"/>
+                            <Setter Property="Foreground" Value="Black" />
+                            <Setter Property="Control.BorderThickness" Value="0"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="产品条形码" Binding="{Binding POItem.Produce.BarCode}"/>
+                <DataGridTemplateColumn Width="30">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Click="ButDeletePOItem_Click" ToolTip="删除" Cursor="Hand"  Width="16" Height="16">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Image Source="/SmallHoneybee.Wpf;component/images/icoDelete.png" Stretch="Fill"
+                                               IsEnabled="{Binding POStatusCategory,Converter={StaticResource POStatusConverter}}"/>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <!--<DataGridTextColumn Header="产品条形码" Binding="{Binding POItem.Produce.BarCode}"/>-->
+                <DataGridTemplateColumn Header="产品条形码">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding POItem.Produce.BarCode, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                 KeyDown="TxtBarCode_OnKeyDown"
+                                     IsEnabled="{Binding POItem.PurchaseOrder.POStatusCategory,Converter={StaticResource POStatusConverter}}"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="产品编号" Binding="{Binding POItem.Produce.ProduceNo}"/>
                 <DataGridTextColumn Header="产品名称" Binding="{Binding POItem.Produce.Name}"/>
-                <DataGridTemplateColumn Header="状态">
+                <DataGridTemplateColumn Header="状态" Width="100" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox 
@@ -128,6 +210,7 @@
                                 DisplayMemberPath="Value" 
                                 ItemsSource="{Binding Path=DataContext.POItemStatusCategories,
                                     RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
+                                IsEnabled="{Binding POItem.PurchaseOrder.POStatusCategory,Converter={StaticResource POStatusConverter}}"
                                 IsReadOnly="True"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -140,13 +223,29 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="收货数额" Binding="{Binding POItem.QuantityReceived, StringFormat=F2}">
+                <!--<DataGridTemplateColumn Header="订购数额" Width="100" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding POItem.QuantityOrdered, UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=TwoWay}" 
+                                     IsEnabled="{Binding POItem.PurchaseOrder.POStatusCategory,Converter={StaticResource POStatusConverter}}"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <!--<DataGridTextColumn Header="收货数额" Binding="{Binding POItem.QuantityReceived, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                </DataGridTextColumn>-->
+                <DataGridTemplateColumn Header="收货数额" Width="100" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding POItem.QuantityReceived, UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=TwoWay}" 
+                                     IsEnabled="{Binding POItem.PurchaseOrder.POStatusCategory,Converter={StaticResource POStatusConverter}}"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="订购单价" Binding="{Binding POItem.PriceOrdered, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
@@ -154,28 +253,53 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="收货单价" Binding="{Binding POItem.PriceReceived, StringFormat=F2}">
+                <!--<DataGridTemplateColumn Header="订购单价" Width="100" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding POItem.PriceOrdered, UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=TwoWay}" 
+                                    IsEnabled="{Binding POItem.PurchaseOrder.POStatusCategory,Converter={StaticResource POStatusConverter}}"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>-->
+                <!--<DataGridTextColumn Header="收货单价" Binding="{Binding POItem.PriceReceived, StringFormat=F2}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>-->
+                <DataGridTemplateColumn Header="收货单价" Width="100" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox Text="{Binding POItem.PriceReceived, UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=TwoWay}" 
+                                     IsEnabled="{Binding POItem.PurchaseOrder.POStatusCategory,Converter={StaticResource POStatusConverter}}"></TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="合计金额" Width="100"  Binding="{Binding POItemTotal, StringFormat=F2}" FontWeight="Bold">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="合计金额" Binding="{Binding POItemTotal, StringFormat=F2}" FontWeight="Bold">
+                <DataGridTextColumn Header="库存数量" Width="100"  Binding="{Binding POItem.Produce.Quantity, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="库存数量" Binding="{Binding POItem.Produce.Quantity, StringFormat=F2}">
-                    <DataGridTextColumn.ElementStyle>
-                        <Style TargetType="TextBlock">
-                            <Setter Property="HorizontalAlignment" Value="Right"/>
-                        </Style>
-                    </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="备注" Binding="{Binding POItem.Description}"/>
+                <!--<DataGridTextColumn Header="备注" Binding="{Binding POItem.Description}"/>-->
+                <DataGridTemplateColumn Header="备注" Width="200" >
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBox  Text="{Binding POItem.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                IsEnabled="{Binding POStatusCategory,Converter={StaticResource POStatusConverter}}">
+                            </TextBox>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock  Grid.Column="0" Grid.Row="6" Name="TxtDetailTotalInfo" FontWeight="Bold" HorizontalAlignment="Right"/>

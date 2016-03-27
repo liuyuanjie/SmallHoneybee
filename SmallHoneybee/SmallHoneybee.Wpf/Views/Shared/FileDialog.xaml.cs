@@ -138,7 +138,9 @@ namespace SmallHoneybee.Wpf.Views.Shared
         private void ImportPurchaseOrders()
         {
             DataModel.Model.PurchaseOrder purchaseOrder = _purchaseOrderRepository
-                .Query().OrderByDescending(x => x.DateOriginated).FirstOrDefault(x=>x.POStatusCategory == (sbyte)DataType.POStatusCategory.Ordered);
+                .Query()
+                .OrderByDescending(x => x.DateOriginated)
+                .FirstOrDefault(x=>x.POStatusCategory == (sbyte)DataType.POStatusCategory.Ordered);
 
             if (purchaseOrder == null)
             {
@@ -200,11 +202,11 @@ namespace SmallHoneybee.Wpf.Views.Shared
                 {
                     ChangedBy = ResourcesHelper.CurrentUser.Name,
                     DateChanged = DateTime.Now,
-                    NewValue = string.Format("进货单据: {0}, 本次进货数量: {1}, 本次进货价格: {2}, 总计数量: {3}",
-                    purchaseOrder.PurchaseOrderNo,
-                    (poItem.QuantityReceived ?? 0).ToString("F2"),
-                    (poItem.PriceReceived ?? 0).ToString("F2"),
-                    poItem.Produce.Quantity.ToString("F2"))
+                    NewValue = string.Format(ResourcesHelper.PurchaseOrderImporterFormat,
+                        purchaseOrder.PurchaseOrderNo,
+                        (poItem.QuantityReceived ?? 0).ToString("F2"),
+                        (poItem.PriceReceived ?? 0).ToString("F2"),
+                        poItem.Produce.Quantity.ToString("F2"))
                 });
                 poItem.Produce.LastOrderDate = DateTime.Now;
 

@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:props="clr-namespace:SmallHoneybee.Wpf.Properties"
       mc:Ignorable="d" 
-	 Title="健康卡管理">
+	 Title="购物卡管理">
     <Page.Resources>
         <RoutedUICommand x:Key="ClearSearchText" Text="Increase Font Size" />
         <RoutedUICommand x:Key="ExecuteSearchText" Text="Decrease Font Size" />
@@ -25,7 +25,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1000*"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0">||健康卡管理</TextBlock>
+        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,0,0,0">||购物卡管理</TextBlock>
         <Grid Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="5">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -40,7 +40,7 @@
                 <RowDefinition></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Column="0" Grid.Row="0" Text="健康卡编号：" HorizontalAlignment="Right" VerticalAlignment="Center" ></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="购物卡编号：" HorizontalAlignment="Right" VerticalAlignment="Center" ></TextBlock>
             <TextBox Grid.Column="1" Grid.Row="0" Name="TxtSearchBox"></TextBox>
             <Button  Grid.Column="2" Grid.Row="0" Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
             <Button  Grid.Column="3" Grid.Row="0" Content="清空" Click="BtnClear_Click" />
@@ -65,40 +65,43 @@
                 <DataGridTemplateColumn  Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Name="ButDeleteSaleOrder"
-                                   Cursor="Hand"
-                                    Width="16"
-                                   ToolTip="消费记录"
-                                   Height="16"
-                                   Source="/SmallHoneybee.Wpf;component/images/icoLog.png">
-                            </Image>
+                            <Button  ToolTip="消费记录" Cursor="Hand"  Width="16" Height="16">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Image Source="/SmallHoneybee.Wpf;component/images/icoLog.png" Stretch="Fill" />
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn  Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Name="ButDeleteSaleOrder"
-                                   Cursor="Hand"
-                                    Width="16"
-                                   Height="16"
-                                   MouseDown="ButDeleteUser_Click" 
-                                   Source="/SmallHoneybee.Wpf;component/images/icoDelete.png">
-                            </Image>
+                            <Button Click="ButDeleteUser_Click"  ToolTip="删除" Cursor="Hand"  Width="16" Height="16">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Image Source="/SmallHoneybee.Wpf;component/images/icoDelete.png" Stretch="Fill" />
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="编号" Width="90">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding MemberCardNo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></TextBox>
+                            <TextBox Text="{Binding MemberCard.MemberCardNo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                                     IsEnabled="{Binding CanUpdate}"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+                <DataGridTextColumn Header="持卡人" Width="100" Binding="{Binding RelateUserName}">
+                </DataGridTextColumn>
                 <DataGridTemplateColumn Header="名称" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" KeyDown="TextName_OnKeyDown"></TextBox>
+                            <TextBox IsEnabled="{Binding CanUpdate}" Text="{Binding MemberCard.Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" KeyDown="TextName_OnKeyDown"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -106,34 +109,50 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox 
-                                SelectedValue="{Binding MemberType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                SelectedValue="{Binding MemberCard.MemberType, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                 SelectedValuePath="Key" 
                                 DisplayMemberPath="Value" 
                                 ItemsSource="{Binding Path=DataContext.MemberTypes,
                                     RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
-                                IsReadOnly="True"/>
+                                IsReadOnly="True"
+                                IsEnabled="{Binding CanUpdate}"
+                                />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="初始金额" Width="60">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding MemberMoney,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=F2}"
-                                    Name="TxtQuantity"></TextBox>
+                            <TextBox Text="{Binding MemberCard.MemberMoney,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged,StringFormat=F2}"
+                                    Name="TxtQuantity" IsEnabled="{Binding CanUpdate}"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="激活日期" Width="160" >
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <DatePicker Name="DispatchDate"
-                                    SelectedDate="{Binding DispatchDate,StringFormat='yyyy-MM-dd', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
+                            <DatePicker Name="DispatchDate" IsEnabled="False"
+                                    SelectedDate="{Binding MemberCard.DispatchDate,StringFormat='yyyy-MM-dd', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="操作人" Width="100" Binding="{Binding DispatchUser}">
+                <DataGridTextColumn Header="办卡人" Width="100" Binding="{Binding DispatchUserName}">
                 </DataGridTextColumn>
-                <DataGridTextColumn Header="余额金额" Width="90"  IsReadOnly="True"  Binding="{Binding CashTotal, StringFormat=F2}">
+                <DataGridTextColumn Header="余额总金额" Width="90"  IsReadOnly="True"  Binding="{Binding MemberCard.TotalSurplusMoney, StringFormat=F2}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="余额本金金额" Width="90"  IsReadOnly="True"  Binding="{Binding MemberCard.PrincipalSurplusMoney, StringFormat=F2}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Right"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="余额赠送金额" Width="90"  IsReadOnly="True"  Binding="{Binding MemberCard.FavorableSurplusMoney, StringFormat=F2}">
                     <DataGridTextColumn.ElementStyle>
                         <Style TargetType="TextBlock">
                             <Setter Property="HorizontalAlignment" Value="Right"/>
@@ -144,7 +163,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox 
-                                SelectedValue="{Binding IsEnable, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                SelectedValue="{Binding MemberCard.IsEnable, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                 SelectedValuePath="Key" 
                                 DisplayMemberPath="Value" 
                                 ItemsSource="{Binding Path=DataContext.EnableTexts,
@@ -157,11 +176,12 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <ComboBox 
-                                SelectedValue="{Binding MemberCardStatus, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
+                                SelectedValue="{Binding MemberCard.MemberCardStatus, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                 SelectedValuePath="Key" 
                                 DisplayMemberPath="Value" 
                                 ItemsSource="{Binding Path=DataContext.MemberCardStatuses,
                                     RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
+                                IsEnabled="False"
                                 />
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -169,11 +189,11 @@
                 <DataGridTemplateColumn Header="备注" Width="120">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  ></TextBox>
+                            <TextBox Text="{Binding MemberCard.Description, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  ></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                <DataGridTextColumn Header="MemberCardId" Binding="{Binding MemberCardId}" Visibility="Hidden"/>
+                <DataGridTextColumn Header="MemberCardId" Binding="{Binding MemberCard.MemberCardId}" Visibility="Hidden"/>
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

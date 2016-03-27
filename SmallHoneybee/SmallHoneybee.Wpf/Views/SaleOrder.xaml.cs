@@ -200,7 +200,7 @@ namespace SmallHoneybee.Wpf.Views
             saleOrderForm.ShowDialog();
         }
 
-        private void ButDeleteSaleOrder_Click(object sender, MouseButtonEventArgs e)
+        private void ButDeleteSaleOrder_Click(object sender, RoutedEventArgs e)
         {
             var saleOrder = GridSaleOrders.SelectedItem as DataModel.Model.SaleOrder;
             if (saleOrder != null)
@@ -220,13 +220,13 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
-        private void ButEditSaleOrder_Click(object sender, MouseButtonEventArgs e)
+        private void ButEditSaleOrder_Click(object sender,  RoutedEventArgs e)
         {
             var saleOrderForm = new SaleOrderForm(this, (DataModel.Model.SaleOrder)GridSaleOrders.SelectedItem);
             saleOrderForm.ShowDialog();
         }
 
-        private void ButPrintSaleOrder_Click(object sender, MouseButtonEventArgs e)
+        private void ButPrintSaleOrder_Click(object sender, RoutedEventArgs e)
         {
             var saleOrder = (DataModel.Model.SaleOrder)GridSaleOrders.SelectedItem;
             SaleOrderReportPrint.Print(saleOrder);

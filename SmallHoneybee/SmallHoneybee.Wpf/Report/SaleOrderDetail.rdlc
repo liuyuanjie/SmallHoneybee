@@ -3,7 +3,7 @@
   <Body>
     <ReportItems>
       <Line Name="Line1">
-        <Top>0.74931in</Top>
+        <Top>0.59931in</Top>
         <Left>0.01542in</Left>
         <Height>0in</Height>
         <Width>2.78041in</Width>
@@ -426,7 +426,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>SOProuceDetailDataSet</DataSetName>
-        <Top>0.77848in</Top>
+        <Top>0.62848in</Top>
         <Left>0.00083in</Left>
         <Height>0.52362in</Height>
         <Width>2.79501in</Width>
@@ -440,7 +440,7 @@
         </Style>
       </Tablix>
       <Line Name="Line2">
-        <Top>1.31876in</Top>
+        <Top>1.16876in</Top>
         <Left>0.00083in</Left>
         <Height>0in</Height>
         <Width>2.795in</Width>
@@ -567,7 +567,6 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
-                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -658,7 +657,7 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>=FormatNumber(Fields!RealPrice.Value,2)</Value>
+                              <Value>=FormatNumber(Fields!ProduceCost.Value,2)</Value>
                               <Style>
                                 <FontFamily>Calibri</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -681,6 +680,7 @@
                         <PaddingBottom>2pt</PaddingBottom>
                       </Style>
                     </Textbox>
+                    <rd:Selected>true</rd:Selected>
                   </CellContents>
                 </TablixCell>
               </TablixCells>
@@ -867,7 +867,9 @@
                         <Paragraph>
                           <TextRuns>
                             <TextRun>
-                              <Value>="找零金额:" &amp; FormatNumber(Fields!ReturnedPrice.Value,2)</Value>
+                              <Value>=IIf(Fields!HowBalance.Value =1,
+("剩余金额:" &amp; FormatNumber(Fields!MemberCardCashTotal.Value,2)),
+("找零金额:" &amp; FormatNumber(Fields!ReturnedPrice.Value,2)))</Value>
                               <Style>
                                 <FontFamily>SimSun</FontFamily>
                                 <FontSize>8pt</FontSize>
@@ -914,7 +916,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>SOProduceSummaryDataSet</DataSetName>
-        <Top>1.4007in</Top>
+        <Top>1.2507in</Top>
         <Left>0.00917in</Left>
         <Height>0.70834in</Height>
         <Width>2.77417in</Width>
@@ -1154,7 +1156,7 @@
           </TablixMembers>
         </TablixRowHierarchy>
         <DataSetName>SOProduceSummaryDataSet</DataSetName>
-        <Top>2.24098in</Top>
+        <Top>2.09098in</Top>
         <Left>0.00374in</Left>
         <Height>0.91667in</Height>
         <Width>2.76918in</Width>
@@ -1190,6 +1192,13 @@
         <ConnectString>/* Local Connection */</ConnectString>
       </ConnectionProperties>
       <rd:DataSourceID>34acfa6c-3f87-4586-82fe-8a5b375cb608</rd:DataSourceID>
+    </DataSource>
+    <DataSource Name="SmallHoneybeeWpfReport1">
+      <ConnectionProperties>
+        <DataProvider>System.Data.DataSet</DataProvider>
+        <ConnectString>/* Local Connection */</ConnectString>
+      </ConnectionProperties>
+      <rd:DataSourceID>6720c3c1-0c36-43ad-a929-850bdfab6eb6</rd:DataSourceID>
     </DataSource>
   </DataSources>
   <DataSets>
@@ -1229,7 +1238,7 @@
     </DataSet>
     <DataSet Name="SOProduceSummaryDataSet">
       <Query>
-        <DataSourceName>SmallHoneybeeWpfReport</DataSourceName>
+        <DataSourceName>SmallHoneybeeWpfReport1</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -1249,6 +1258,10 @@
           <DataField>HowBalanceName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="MemberCardCashTotal">
+          <DataField>MemberCardCashTotal</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
+        </Field>
         <Field Name="MerchantsName">
           <DataField>MerchantsName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -1260,6 +1273,10 @@
         <Field Name="Phone">
           <DataField>Phone</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ProduceCost">
+          <DataField>ProduceCost</DataField>
+          <rd:TypeName>System.Single</rd:TypeName>
         </Field>
         <Field Name="ProduceTotalCount">
           <DataField>ProduceTotalCount</DataField>
@@ -1298,7 +1315,7 @@
         <rd:DataSetName>SmallHoneybee.Wpf.Report</rd:DataSetName>
         <rd:TableName>SaleOrderReportModel</rd:TableName>
         <rd:ObjectDataSourceSelectMethod>SOProuceSummaryReportModels</rd:ObjectDataSourceSelectMethod>
-        <rd:ObjectDataSourceType>SmallHoneybee.Wpf.Report.SaleOrderReportModel, SmallHoneybee.Wpf, Version=2016.3.6.1, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:ObjectDataSourceType>SmallHoneybee.Wpf.Report.SaleOrderReportModel, SmallHoneybee.Wpf, Version=2016.3.27.1, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>

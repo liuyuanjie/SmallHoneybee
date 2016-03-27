@@ -16,11 +16,12 @@ namespace SmallHoneybee.DataModel.Model
     {
         public User()
         {
+            this.MemberCardsDispatchUser = new HashSet<MemberCard>();
+            this.MemberCardsRelateUser = new HashSet<MemberCard>();
             this.PurchaseOrders = new HashSet<PurchaseOrder>();
             this.SaleOrdersOriginUser = new HashSet<SaleOrder>();
             this.SaleOrdersPurchaseOrderUser = new HashSet<SaleOrder>();
             this.Userlogs = new HashSet<Userlog>();
-            this.UserMemberCards = new HashSet<UserMemberCard>();
         }
     
         public int UserId { get; set; }
@@ -50,10 +51,11 @@ namespace SmallHoneybee.DataModel.Model
         public Nullable<System.DateTime> DateOfBirth { get; set; }
         public Nullable<sbyte> MemberType { get; set; }
     
+        public virtual ICollection<MemberCard> MemberCardsDispatchUser { get; set; }
+        public virtual ICollection<MemberCard> MemberCardsRelateUser { get; set; }
         public virtual ICollection<PurchaseOrder> PurchaseOrders { get; set; }
         public virtual ICollection<SaleOrder> SaleOrdersOriginUser { get; set; }
         public virtual ICollection<SaleOrder> SaleOrdersPurchaseOrderUser { get; set; }
         public virtual ICollection<Userlog> Userlogs { get; set; }
-        public virtual ICollection<UserMemberCard> UserMemberCards { get; set; }
     }
 }

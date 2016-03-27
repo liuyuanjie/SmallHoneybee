@@ -23,6 +23,7 @@ namespace SmallHoneybee.EF.Data.UntityContainer
             UnityContainer.RegisterType<IUserRepository, UserRepository>();
             UnityContainer.RegisterType<ISystemSettingRepository, SystemSettingRepository>();
             UnityContainer.RegisterType<IMemberCardRepository, MemberCardRepository>();
+            UnityContainer.RegisterType<IMemberCardLogRepository, MemberCardLogRepository>();
 
         }
 

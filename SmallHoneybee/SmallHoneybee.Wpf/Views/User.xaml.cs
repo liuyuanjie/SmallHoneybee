@@ -3,26 +3,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Microsoft.Practices.ObjectBuilder2;
 using SmallHoneybee.Common;
-using SmallHoneybee.DataModel.Model;
 using SmallHoneybee.EF.Data;
 using SmallHoneybee.EF.Data.Repository;
 using SmallHoneybee.EF.Data.Repository.Impl;
 using SmallHoneybee.EF.Data.UntityContainer;
 using SmallHoneybee.Wpf.Common;
-using SmallHoneybee.Wpf.Views.Shared;
 
 namespace SmallHoneybee.Wpf.Views
 {
@@ -34,9 +25,9 @@ namespace SmallHoneybee.Wpf.Views
         private IUnitOfWork _unitOfWork;
         private IUserRepository _userRepository;
 
-        private ObservableCollection<DataModel.Model.User> _users = new ObservableCollection<DataModel.Model.User>();
+        private ObservableCollection<UserModel> _users = new ObservableCollection<UserModel>();
 
-        public ObservableCollection<DataModel.Model.User> Users
+        public ObservableCollection<UserModel> Users
         {
             get { return _users; }
             set
@@ -97,7 +88,7 @@ namespace SmallHoneybee.Wpf.Views
             TxtSearchBox.Text = string.Empty;
         }
 
-        private void ExecuteSearchText()
+        public void ExecuteSearchText()
         {
             _unitOfWork = UnityInit.UnitOfWork;
             _userRepository = _unitOfWork.GetRepository<UserRepository>();
@@ -110,9 +101,16 @@ namespace SmallHoneybee.Wpf.Views
                     x.Phone.Contains(TxtSearchBox.Text) ||
                     x.Name.Contains(TxtSearchBox.Text))
                 .ToList()
-                .ForEach(x => _users.Add(x));
+                .ForEach(x => _users.Add(
+                    new UserModel
+                    {
+                        User = x,
+                        MemberCardNo = x.MemberCardsRelateUser.Any(y => y.IsEnable)
+                            ? x.MemberCardsRelateUser.First(y => y.IsEnable).MemberCardNo
+                            : string.Empty
+                    }));
 
-                InitBlankRow();
+            InitBlankRow();
         }
 
         private void CommandBinding_ClearSearchText_CanExecute(object sender, CanExecuteRoutedEventArgs e)
@@ -135,15 +133,15 @@ namespace SmallHoneybee.Wpf.Views
             ExecuteSearchText();
         }
 
-        private void ButDeleteUser_Click(object sender, MouseButtonEventArgs e)
+        private void ButDeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            var user = gridUsers.SelectedItem as DataModel.Model.User;
+            var user = gridUsers.SelectedItem as UserModel;
             if (user != null)
             {
                 _users.Remove(user);
-                if (user.UserId > 0)
+                if (user.User.UserId > 0)
                 {
-                    _userRepository.Delete(user);
+                    _userRepository.Delete(user.User);
                 }
             }
         }
@@ -152,17 +150,32 @@ namespace SmallHoneybee.Wpf.Views
         {
             try
             {
-                _users.Where(x => !string.IsNullOrEmpty(x.Name) &&
-                    !string.IsNullOrEmpty(x.Phone)).ForEach(x =>
+                var phones = _users
+                    .Where(x => x.User.Phone != null)
+                    .GroupBy(x => x.User.Phone)
+                    .Where(g => g.Count() > 1)
+                    .Select(x => x.Key)
+                    .ToList();
+                if (phones.Count > 0)
                 {
-                    if (x.UserId > 0)
+                    MessageBox.Show(string.Format("会员电话号码不唯一！\r\n{0}",
+                            phones.JoinStrings("|")),
+                        Properties.Resources.SystemName,
+                        MessageBoxButton.OK, MessageBoxImage.Warning);
+                    return;
+                }
+
+                _users.Where(x => !string.IsNullOrEmpty(x.User.Name) &&
+                    !string.IsNullOrEmpty(x.User.Phone)).ForEach(x =>
+                {
+                    if (x.User.UserId > 0)
                     {
                         CommonHelper.UpdateModifiedOnAndDate(ResourcesHelper.CurrentUser, _users);
-                        _userRepository.Update(x);
+                        _userRepository.Update(x.User);
                     }
                     else
                     {
-                        _userRepository.Create(x);
+                        _userRepository.Create(x.User);
                     }
                 });
 
@@ -171,10 +184,11 @@ namespace SmallHoneybee.Wpf.Views
                 MessageBox.Show("保存成功！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("保存失败！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
-                 MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBoxButton.OK, MessageBoxImage.Error);
+                ClearSearchText();
             }
         }
 
@@ -197,19 +211,28 @@ namespace SmallHoneybee.Wpf.Views
 
         private void InitBlankRow()
         {
-            _users.Add(new DataModel.Model.User
+            for (int i = 0; i < 5; i++)
             {
-                UserType = 0,
-                Enable = true,
-                Login = new Guid().ToString(),
-                PasswordHash = SaltedHash.Create("xislkfweorkdf").Hash,
-                PasswordSalt = SaltedHash.Create("xislkfweorkdf").Salt,
-                UserNo = (int.Parse(_users.Max(x => x.UserNo) ?? ResourcesHelper.CoustomUserNoStart) + 1).ToString(),
-                CreatedBy = ResourcesHelper.CurrentUser.Name,
-                CreatedOn = DateTime.Now,
-                LastModifiedBy = ResourcesHelper.CurrentUser.Name,
-                LastModifiedOn = DateTime.Now,
-            });
+                _users.Add(new UserModel
+                {
+                    User = new DataModel.Model.User
+                    {
+                        UserType = 0,
+                        Enable = true,
+                        Login = new Guid().ToString(),
+                        PasswordHash = SaltedHash.Create("xislkfweorkdf").Hash,
+                        PasswordSalt = SaltedHash.Create("xislkfweorkdf").Salt,
+                        UserNo =
+                            (int.Parse(_users.Max(x => x.User.UserNo) ?? ResourcesHelper.CoustomUserNoStart) + 1)
+                                .ToString(),
+                        CreatedBy = ResourcesHelper.CurrentUser.Name,
+                        CreatedOn = DateTime.Now,
+                        LastModifiedBy = ResourcesHelper.CurrentUser.Name,
+                        LastModifiedOn = DateTime.Now,
+                    },
+                    MemberCardNo = string.Empty
+                });
+            }
         }
 
         private void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)
@@ -244,5 +267,48 @@ namespace SmallHoneybee.Wpf.Views
             }
             return null;
         }
+
+        private void ButUserWithMemberCard_Click(object sender, RoutedEventArgs e)
+        {
+            var user = gridUsers.SelectedItem as UserModel;
+            if (user != null)
+            {
+                UserWithMemberCard userWithMemberCard = new UserWithMemberCard(this, user.User.UserId);
+                userWithMemberCard.ShowDialog();
+            }
+        }
+
+        private void ButMemberCardInfo_Click(object sender, RoutedEventArgs e)
+        {
+            var user = gridUsers.SelectedItem as UserModel;
+            if (user != null)
+            {
+                if (_userRepository.GetByUserId(user.User.UserId).MemberCardsRelateUser.Any(x => x.IsEnable))
+                {
+                    MemberCardInfo memberCardInfo = new MemberCardInfo(this, user.User.UserId);
+                    memberCardInfo.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("请先绑定购物卡！", Properties.Resources.SystemName,
+                            MessageBoxButton.OK, MessageBoxImage.Warning);
+                }
+            }
+        }
+
+        private void TextPhone_OnKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                InitBlankRow();
+            }
+        }
+    }
+
+    public class UserModel
+    {
+        public DataModel.Model.User User { get; set; }
+        public string MemberCardNo { get; set; }
+
     }
 }

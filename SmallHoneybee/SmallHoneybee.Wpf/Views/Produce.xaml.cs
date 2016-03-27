@@ -208,8 +208,10 @@ namespace SmallHoneybee.Wpf.Views
                 MessageBox.Show("保存成功！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log4NetHelper.WriteLog(ex.ToString());
+
                 InitUnitOfWork();
                 MessageBox.Show("保存失败！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
                  MessageBoxButton.OK, MessageBoxImage.Error);

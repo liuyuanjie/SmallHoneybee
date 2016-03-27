@@ -34,7 +34,8 @@ namespace SmallHoneybee.Wpf.Views
         private BalanceDomainModel _balanceDomainModel = new BalanceDomainModel();
         private DataModel.Model.User _user = new DataModel.Model.User();
 
-        public BalanceFrom(SaleOrderForm saleOrderFormWindow, IUnitOfWork unitOfWork, DataModel.Model.SaleOrder saleOrder)
+        public BalanceFrom(SaleOrderForm saleOrderFormWindow, IUnitOfWork unitOfWork,
+            DataModel.Model.SaleOrder saleOrder)
         {
             InitializeComponent();
 
@@ -83,12 +84,12 @@ namespace SmallHoneybee.Wpf.Views
                 {
                     if (_user.UserId > 0)
                     {
-                        if (RadBanlanceModeCard.IsChecked != null && (bool)RadBanlanceModeCard.IsChecked)
+                        if (RadBanlanceModeCard.IsChecked != null && (bool) RadBanlanceModeCard.IsChecked)
                         {
                             if (_balanceDomainModel.SurplusPrice < 0 ||
                                 _user.CashTotal - _balanceDomainModel.ReceivedPrice < 0)
                             {
-                                MessageBox.Show("会员卡余额不足！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
+                                MessageBox.Show("购物卡余额不足！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
                                     MessageBoxButton.OK, MessageBoxImage.Warning);
                             }
                             else
@@ -103,19 +104,23 @@ namespace SmallHoneybee.Wpf.Views
                             }
                         }
 
-                        _saleOrder.OriginUserId = _user.UserId == 0 ? (int?)null : _user.UserId;
-                        _user.MemberPoints += _balanceDomainModel.ReceivedPrice * 
-                            float.Parse(ResourcesHelper.SystemSettings[(short)DataType.SystemSettingCode.MemberPointsRate]);
+                        _saleOrder.OriginUserId = _user.UserId == 0 ? (int?) null : _user.UserId;
+                        _user.MemberPoints += _balanceDomainModel.ReceivedPrice*
+                                              float.Parse(
+                                                  ResourcesHelper.SystemSettings[
+                                                      (short) DataType.SystemSettingCode.MemberPointsRate]);
                         _user.Userlogs.Add(new Userlog
                         {
                             ChangedBy = ResourcesHelper.CurrentUser.Name,
                             DateChanged = DateTime.Now,
                             NewValue = string.Format("消费单据 : {0}, 本次消费: {1}, 本次累计积分: {2}, 剩余金额: {3}, 累计积分: {4}",
-                            _saleOrder.SaleOrderNo,
-                            _balanceDomainModel.ReceivedPrice.ToString("F2"),
-                            _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
-                            (_balanceDomainModel.SurplusPrice > 0 ? _balanceDomainModel.SurplusPrice : 0).ToString("F2"),
-                           (_balanceDomainModel.CurrentMemberPoints + _balanceDomainModel.MemberPoints).ToString("F2"))
+                                _saleOrder.SaleOrderNo,
+                                _balanceDomainModel.ReceivedPrice.ToString("F2"),
+                                _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
+                                (_balanceDomainModel.SurplusPrice > 0 ? _balanceDomainModel.SurplusPrice : 0).ToString(
+                                    "F2"),
+                                (_balanceDomainModel.CurrentMemberPoints + _balanceDomainModel.MemberPoints).ToString(
+                                    "F2"))
                         });
                     }
 
@@ -129,14 +134,14 @@ namespace SmallHoneybee.Wpf.Views
                             ChangedBy = ResourcesHelper.CurrentUser.Name,
                             DateChanged = DateTime.Now,
                             NewValue = string.Format("消费单据 : {0}, 本次扣除数量: {1}, 本次消费价格: {2}, 剩余数量: {3}",
-                            _saleOrder.SaleOrderNo,
-                            (x.Quantity ?? 0).ToString("F2"),
-                            (x.CostPerUnit ?? 0).ToString("F2"),
-                            x.Produce.Quantity.ToString("F2"))
+                                _saleOrder.SaleOrderNo,
+                                (x.Quantity ?? 0).ToString("F2"),
+                                (x.CostPerUnit ?? 0).ToString("F2"),
+                                x.Produce.Quantity.ToString("F2"))
 
                         });
                     });
-                    _saleOrder.SaleOrderStatus = (sbyte)DataType.SaleOrderStatus.Balanced;
+                    _saleOrder.SaleOrderStatus = (sbyte) DataType.SaleOrderStatus.Balanced;
                     _unitOfWork.Commit();
 
                     MessageBox.Show("结算成功！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
@@ -148,7 +153,7 @@ namespace SmallHoneybee.Wpf.Views
             catch (Exception)
             {
                 MessageBox.Show("结算失败！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
-                                 MessageBoxButton.OK, MessageBoxImage.Error);
+                    MessageBoxButton.OK, MessageBoxImage.Error);
                 _isClosedSaleOrderFormWindow = true;
                 Close();
             }
@@ -162,11 +167,11 @@ namespace SmallHoneybee.Wpf.Views
 
         private void UserNoOrPhone_OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            var barCode = (TextBox)sender;
+            var barCode = (TextBox) sender;
             if (barCode.IsFocused && !string.IsNullOrEmpty(barCode.Text) && barCode.Text.Length >= 3)
             {
                 var users = _userRepository.Query().Where(x => x.Phone.StartsWith(barCode.Text) ||
-                    x.UserNo.StartsWith(barCode.Text));
+                                                               x.UserNo.StartsWith(barCode.Text));
                 if (users.Count() == 1)
                 {
                     _user = users.First();
@@ -179,7 +184,8 @@ namespace SmallHoneybee.Wpf.Views
                         _user.CashTotal.ToString("F2"), _user.MemberPoints.ToString("F2"));
 
                     _balanceDomainModel.MemberInfo = string.Format("当前积分：{0}, 本次积分：{1}, 累计积分：{2}",
-                        _balanceDomainModel.MemberPoints.ToString("F2"), _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
+                        _balanceDomainModel.MemberPoints.ToString("F2"),
+                        _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
                         (_balanceDomainModel.CurrentMemberPoints + _balanceDomainModel.MemberPoints).ToString("F2"));
                 }
             }
@@ -197,8 +203,9 @@ namespace SmallHoneybee.Wpf.Views
                 if (_user.UserId > 0)
                 {
                     _balanceDomainModel.MemberInfo = string.Format("当前积分：{0}, 本次积分：{1}, 累计积分：{2}",
-                       _balanceDomainModel.MemberPoints.ToString("F2"), _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
-                       (_balanceDomainModel.CurrentMemberPoints + _balanceDomainModel.MemberPoints).ToString("F2"));
+                        _balanceDomainModel.MemberPoints.ToString("F2"),
+                        _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
+                        (_balanceDomainModel.CurrentMemberPoints + _balanceDomainModel.MemberPoints).ToString("F2"));
                 }
             }
         }
@@ -215,8 +222,9 @@ namespace SmallHoneybee.Wpf.Views
                 if (_user.UserId > 0)
                 {
                     _balanceDomainModel.MemberInfo = string.Format("当前积分：{0}, 本次积分：{1}, 累计积分：{2}",
-                       _balanceDomainModel.MemberPoints.ToString("F2"), _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
-                       (_balanceDomainModel.CurrentMemberPoints + _balanceDomainModel.MemberPoints).ToString("F2"));
+                        _balanceDomainModel.MemberPoints.ToString("F2"),
+                        _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
+                        (_balanceDomainModel.CurrentMemberPoints + _balanceDomainModel.MemberPoints).ToString("F2"));
                 }
             }
         }
@@ -232,132 +240,4 @@ namespace SmallHoneybee.Wpf.Views
 
         private bool _isClosedSaleOrderFormWindow = false;
     }
-
-    //public class BalanceDomainModel : INotifyPropertyChanged
-    //{
-    //    public event PropertyChangedEventHandler PropertyChanged;
-    //    protected void NotifyPropertyChange(string propertyName)
-    //    {
-    //        if (PropertyChanged != null)
-    //        {
-    //            PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-    //        }
-    //    }
-
-    //    private string _userBaseInfo;
-    //    public string UserBaseInfo
-    //    {
-    //        get { return _userBaseInfo; }
-    //        set
-    //        {
-    //            _userBaseInfo = value;
-    //            NotifyPropertyChange("UserBaseInfo");
-    //        }
-    //    }
-
-    //    private string _userMemberInfo;
-    //    public string UserMemberInfo
-    //    {
-    //        get { return _userMemberInfo; }
-    //        set
-    //        {
-    //            _userMemberInfo = value;
-    //            NotifyPropertyChange("UserMemberInfo");
-    //        }
-    //    }
-
-
-    //    private float _discountPrice;
-    //    public float DiscountPrice
-    //    {
-    //        get { return _discountPrice; }
-    //        set
-    //        {
-    //            _discountPrice = value;
-    //            NotifyPropertyChange("DiscountPrice");
-    //        }
-    //    }
-
-    //    //private float _receivedPrice;
-    //    public float ReceivedPrice
-    //    {
-    //        get { return TotalPrice - DiscountPrice; }
-    //        set
-    //        {
-    //            //_receivedPrice = value;
-    //            NotifyPropertyChange("ReceivedPrice");
-    //        }
-    //    }
-
-    //    private float _realPrice;
-    //    public float RealPrice
-    //    {
-    //        get { return _realPrice; }
-    //        set
-    //        {
-    //            _realPrice = value;
-    //            NotifyPropertyChange("RealPrice");
-    //        }
-    //    }
-
-    //    //private float _returnedPrice;
-    //    public float ReturnedPrice
-    //    {
-    //        get { return RealPrice - ReceivedPrice; }
-    //        set
-    //        {
-    //            //_returnedPrice = value;
-    //            NotifyPropertyChange("ReturnedPrice");
-    //        }
-    //    }
-
-    //    private float _detuctedPrice;
-
-    //    public float DetuctedPrice
-    //    {
-    //        get { return _detuctedPrice; }
-    //        set
-    //        {
-    //            _detuctedPrice = value;
-    //            NotifyPropertyChange("DetuctedPrice");
-    //        }
-    //    }
-
-    //    //private float _surplusPrice;
-
-    //    public float SurplusPrice
-    //    {
-    //        get { return CashTotal - ReceivedPrice; }
-    //        set
-    //        {
-    //            //_surplusPrice = value;
-    //            NotifyPropertyChange("SurplusPrice");
-    //        }
-    //    }
-
-    //    private string _memberInfo;
-
-    //    public string MemberInfo
-    //    {
-    //        get { return _memberInfo; }
-    //        set
-    //        {
-    //            _memberInfo = value;
-    //            NotifyPropertyChange("MemberInfo");
-    //        }
-    //    }
-
-    //    public float TotalPrice { get; set; }
-
-    //    public float CashTotal { get; set; }
-    //    public float MemberPoints { get; set; }
-
-    //    public float CurrentMemberPoints
-    //    {
-    //        get
-    //        {
-    //            return ReceivedPrice * Settings.Default.MemberPointsRate;
-    //        }
-    //    }
-    //}
 }

@@ -115,5 +115,26 @@ namespace SmallHoneybee.Common
             NonActive,
             Active
         }
+
+        public enum MemberCardLogType 
+        {
+            Other,
+            Saved,
+            Consumption
+        }
+
+        public enum UserLogType
+        {
+            Other,
+            Saved,
+            Consumption
+        }
+
+        public enum ProducelogType
+        {
+            Other,
+            SaleOrder,
+            PurchaseOrder
+        }
     }
 }

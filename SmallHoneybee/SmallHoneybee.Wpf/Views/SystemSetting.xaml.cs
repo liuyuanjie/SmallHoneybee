@@ -28,7 +28,7 @@ namespace SmallHoneybee.Wpf.Views
     {
         private IUnitOfWork _unitOfWork;
         private ISystemSettingRepository _systemSettingRepository;
-        private SystemSettingModel systemSetting = new SystemSettingModel();
+        private SystemSettingModel _systemSetting = new SystemSettingModel();
 
         IList<DataModel.Model.SystemSetting> setting;
         public SystemSetting()
@@ -38,22 +38,22 @@ namespace SmallHoneybee.Wpf.Views
             SetSystemSetting();
             DataContext = new
             {
-                SystemSetting = systemSetting
+                SystemSetting = _systemSetting
             };
         }
 
         private void ButSave_OnClick(object sender, RoutedEventArgs e)
         {
             var setting = _systemSettingRepository.Query().Where(x => x.IsEnable).ToList();
-            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.MemberPointsRate).ToString()).SettingValue = systemSetting.MemberPointsRate;
-            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.SOProduceGeneralMangerMaxDiscountPrice).ToString()).SettingValue = systemSetting.SOProduceGeneralMangerMaxDiscountPrice;
-            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportMerchantsName).ToString()).SettingValue = systemSetting.ReportMerchantsName;
-            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportPhone).ToString()).SettingValue = systemSetting.ReportPhone;
-            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportAddress).ToString()).SettingValue = systemSetting.ReportAddress;
-            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportPrintName).ToString()).SettingValue = systemSetting.ReportPrintName;
-            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportHealthline).ToString()).SettingValue = systemSetting.ReportHealthline;
-            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportWebSiteUrl).ToString()).SettingValue = systemSetting.ReportWebSiteUrl;
-            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.DefaultMemberCardPW).ToString()).SettingValue = systemSetting.DefaultMemberCardPW;
+            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.MemberPointsRate).ToString()).SettingValue = _systemSetting.MemberPointsRate;
+            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.SOProduceGeneralMangerMaxDiscountPrice).ToString()).SettingValue = _systemSetting.SOProduceGeneralMangerMaxDiscountPrice;
+            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportMerchantsName).ToString()).SettingValue = _systemSetting.ReportMerchantsName;
+            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportPhone).ToString()).SettingValue = _systemSetting.ReportPhone;
+            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportAddress).ToString()).SettingValue = _systemSetting.ReportAddress;
+            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportPrintName).ToString()).SettingValue = _systemSetting.ReportPrintName;
+            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportHealthline).ToString()).SettingValue = _systemSetting.ReportHealthline;
+            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportWebSiteUrl).ToString()).SettingValue = _systemSetting.ReportWebSiteUrl;
+            setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.DefaultMemberCardPW).ToString()).SettingValue = _systemSetting.DefaultMemberCardPW;
             _unitOfWork.Commit();
         }
 
@@ -69,16 +69,16 @@ namespace SmallHoneybee.Wpf.Views
 
             setting = _systemSettingRepository.Query().Where(x => x.IsEnable).ToList();
 
-            systemSetting.MemberPointsRate =
+            _systemSetting.MemberPointsRate =
                 setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.MemberPointsRate).ToString()).SettingValue;
-            systemSetting.SOProduceGeneralMangerMaxDiscountPrice = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.SOProduceGeneralMangerMaxDiscountPrice).ToString()).SettingValue;
-            systemSetting.ReportMerchantsName = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportMerchantsName).ToString()).SettingValue;
-            systemSetting.ReportPhone = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportPhone).ToString()).SettingValue;
-            systemSetting.ReportAddress = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportAddress).ToString()).SettingValue;
-            systemSetting.ReportPrintName = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportPrintName).ToString()).SettingValue;
-            systemSetting.ReportHealthline = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportHealthline).ToString()).SettingValue;
-            systemSetting.ReportWebSiteUrl = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportWebSiteUrl).ToString()).SettingValue;
-            systemSetting.DefaultMemberCardPW = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.DefaultMemberCardPW).ToString()).SettingValue;
+            _systemSetting.SOProduceGeneralMangerMaxDiscountPrice = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.SOProduceGeneralMangerMaxDiscountPrice).ToString()).SettingValue;
+            _systemSetting.ReportMerchantsName = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportMerchantsName).ToString()).SettingValue;
+            _systemSetting.ReportPhone = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportPhone).ToString()).SettingValue;
+            _systemSetting.ReportAddress = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportAddress).ToString()).SettingValue;
+            _systemSetting.ReportPrintName = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportPrintName).ToString()).SettingValue;
+            _systemSetting.ReportHealthline = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportHealthline).ToString()).SettingValue;
+            _systemSetting.ReportWebSiteUrl = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.ReportWebSiteUrl).ToString()).SettingValue;
+            _systemSetting.DefaultMemberCardPW = setting.Single(x => x.SettingCode == ((short)DataType.SystemSettingCode.DefaultMemberCardPW).ToString()).SettingValue;
         }
     }
 

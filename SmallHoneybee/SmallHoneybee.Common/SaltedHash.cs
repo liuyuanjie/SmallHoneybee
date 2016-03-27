@@ -46,7 +46,6 @@ namespace SmallHoneybee.Common
             }
         }
 
-
         public bool Verify(string password)
         {
             return _hash.Equals(ComputeHash(_salt, password));

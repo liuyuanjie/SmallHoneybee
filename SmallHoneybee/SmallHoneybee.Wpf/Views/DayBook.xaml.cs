@@ -92,18 +92,24 @@ namespace SmallHoneybee.Wpf.Views
 
             IQueryable<DataModel.Model.DayBook> dayBooks = _dayBookRepository.Query();
 
+            DateTime? startDate = DateStartDate.SelectedDate;
+            DateTime? endDate = DateEndDate.SelectedDate;
+
             if (DateStartDate.SelectedDate.HasValue && DateEndDate.SelectedDate.HasValue)
             {
-                dayBooks = dayBooks.Where(x => x.DayBookDate >= DateStartDate.SelectedDate.Value &&
-                    x.DayBookDate < DateEndDate.SelectedDate.Value);
+                endDate = endDate.Value.AddDays(1);
+                dayBooks = dayBooks.Where(x => x.DayBookDate >= startDate &&
+                    x.DayBookDate < endDate);
             }
             else if (DateStartDate.SelectedDate.HasValue)
             {
-                dayBooks = dayBooks.Where(x => x.DayBookDate >= DateStartDate.SelectedDate.Value);
+                dayBooks = dayBooks.Where(x => x.DayBookDate >= startDate);
             }
             else if (DateEndDate.SelectedDate.HasValue)
             {
-                dayBooks = dayBooks.Where(x => x.DayBookDate < DateEndDate.SelectedDate.Value);
+                endDate = endDate.Value.AddDays(1);
+
+                dayBooks = dayBooks.Where(x => x.DayBookDate < endDate);
             }
 
             dayBooks
@@ -134,7 +140,7 @@ namespace SmallHoneybee.Wpf.Views
             ExecuteSearchText();
         }
 
-        private void ButDeleteDayBook_Click(object sender, MouseButtonEventArgs e)
+        private void ButDeleteDayBook_Click(object sender, RoutedEventArgs e)
         {
             var dayBook = gridDayBooks.SelectedItem as DataModel.Model.DayBook;
             if (dayBook != null)
@@ -169,10 +175,13 @@ namespace SmallHoneybee.Wpf.Views
                 MessageBox.Show("保存成功！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
                     MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Log4NetHelper.WriteLog(ex.ToString());
+
                 MessageBox.Show("保存失败！", SmallHoneybee.Wpf.Properties.Resources.SystemName,
                  MessageBoxButton.OK, MessageBoxImage.Error);
+                ExecuteSearchText();
             }
         }
 
@@ -195,15 +204,18 @@ namespace SmallHoneybee.Wpf.Views
 
         private void InitBlankRow()
         {
-            _dayBooks.Add(new DataModel.Model.DayBook
+            for (int i = 0; i < 5; i++)
             {
-                DayBookType = 1,
-                DayBookDate = DateTime.Now,
-                CreatedBy = ResourcesHelper.CurrentUser.Name,
-                CreatedOn = DateTime.Now,
-                LastModifiedBy = ResourcesHelper.CurrentUser.Name,
-                LastModifiedOn = DateTime.Now,
-            });
+                _dayBooks.Add(new DataModel.Model.DayBook
+                {
+                    DayBookType = 1,
+                    DayBookDate = DateTime.Now,
+                    CreatedBy = ResourcesHelper.CurrentUser.Name,
+                    CreatedOn = DateTime.Now,
+                    LastModifiedBy = ResourcesHelper.CurrentUser.Name,
+                    LastModifiedOn = DateTime.Now,
+                });
+            }
         }
 
         private void DataGrid_CellGotFocus(object sender, RoutedEventArgs e)

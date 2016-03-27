@@ -36,7 +36,7 @@
                     <ColumnDefinition Width="250"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="会员卡号/电话号码：" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="0" Text="购物卡号/电话号码：" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="" Name="UserNoOrPhone" TextChanged="UserNoOrPhone_OnTextChanged"></TextBox>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="会员基本信息：" HorizontalAlignment="Right"></TextBlock>
                 <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Path=DataContext.BalanceDomainModel.UserBaseInfo,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBlock>
@@ -81,7 +81,7 @@
             <TabItem Name="TabItemCard">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <RadioButton Width="150" x:Name="RadBanlanceModeCard" GroupName="BanlanceMode" DataContext="2"  Content="会员卡计算"></RadioButton>
+                        <RadioButton Width="150" x:Name="RadBanlanceModeCard" GroupName="BanlanceMode" DataContext="2"  Content="购物卡计算"></RadioButton>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>

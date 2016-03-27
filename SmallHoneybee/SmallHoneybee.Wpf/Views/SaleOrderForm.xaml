@@ -33,19 +33,20 @@
                     <RowDefinition Height="40"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="250"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="会员卡号/电话号码：" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="0" Text="购物卡号/会员编号/电话号码：" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
                 <TextBox Grid.Row="0" Grid.Column="1" Text="" Name="TxtUserNoOrPhone" TextChanged="TxtUserNoOrPhone_OnTextChanged" ></TextBox>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="会员基本信息：" HorizontalAlignment="Right"></TextBlock>
                 <TextBlock Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding Path=DataContext.BalanceDomainModel.UserBaseInfo,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBlock>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="当前会员积分：" HorizontalAlignment="Right"></TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"  Text="{Binding Path=DataContext.BalanceDomainModel.UserMemberInfo,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBlock>
-            </Grid>
+             </Grid>
         </GroupBox>
         <Grid Grid.Column="0" Grid.Row="1" Visibility="Hidden">
             <Grid.RowDefinitions>
@@ -96,11 +97,13 @@
                 <DataGridTemplateColumn Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Label MouseDoubleClick="ButDeleteSaleOrder_Click" Cursor="Hand"   Width="16" Height="16">
-                                <Label.Background>
-                                    <ImageBrush ImageSource="/SmallHoneybee.Wpf;component/images/icoDelete.png"/>
-                                </Label.Background>
-                            </Label>
+                            <Button Click="ButDeleteSaleOrder_Click" ToolTip="删除" Cursor="Hand"  Width="16" Height="16">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="{x:Type Button}">
+                                        <Image Source="/SmallHoneybee.Wpf;component/images/icoDelete.png" Stretch="Fill" />
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -108,7 +111,8 @@
                 <DataGridTemplateColumn Header="产品条形码"  Width="150">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBox Text="{Binding SOProduce.Produce.BarCode}" Name="TxtBarCode" KeyDown="TxtBarCode_OnKeyDown"></TextBox>
+                            <TextBox Text="{Binding SOProduce.Produce.BarCode}" Name="TxtBarCode" 
+                                     KeyDown="TxtBarCode_OnKeyDown"></TextBox>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -216,7 +220,7 @@
             <TabItem Name="TabItemCard">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
-                        <RadioButton Width="150" x:Name="RadBanlanceModeCard" GroupName="BanlanceMode" DataContext="1"  Content="会员卡结算"></RadioButton>
+                        <RadioButton Width="150" x:Name="RadBanlanceModeCard" GroupName="BanlanceMode" DataContext="1"  Content="购物卡结算"></RadioButton>
                     </StackPanel>
                 </TabItem.Header>
                 <Grid>

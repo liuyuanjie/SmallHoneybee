@@ -31,6 +31,8 @@ Project("{6141683F-8A12-4E36-9623-2EB02B2C2303}") = "SmallHoneybee.Setup", "Smal
 		{8A5C527B-3BC7-4E52-AB83-DF148BF07D89} = {8A5C527B-3BC7-4E52-AB83-DF148BF07D89}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmallHoneybee.UpdateDataModelEdmx", "SmallHoneybee.UpdateDataModelEdmx\SmallHoneybee.UpdateDataModelEdmx.csproj", "{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		CD_ROM|Any CPU = CD_ROM|Any CPU
@@ -107,6 +109,16 @@ Global
 		{35F1F2AF-181C-4BEA-9E75-DA22574B9A2D}.Release|Any CPU.Build.0 = SingleImage
 		{35F1F2AF-181C-4BEA-9E75-DA22574B9A2D}.SingleImage|Any CPU.ActiveCfg = SingleImage
 		{35F1F2AF-181C-4BEA-9E75-DA22574B9A2D}.SingleImage|Any CPU.Build.0 = SingleImage
+		{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}.CD_ROM|Any CPU.ActiveCfg = Release|Any CPU
+		{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}.CD_ROM|Any CPU.Build.0 = Release|Any CPU
+		{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}.DVD-5|Any CPU.ActiveCfg = Debug|Any CPU
+		{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}.DVD-5|Any CPU.Build.0 = Debug|Any CPU
+		{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}.SingleImage|Any CPU.ActiveCfg = Release|Any CPU
+		{7ADF5A2C-D953-46CA-8E96-5D5C34861E17}.SingleImage|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

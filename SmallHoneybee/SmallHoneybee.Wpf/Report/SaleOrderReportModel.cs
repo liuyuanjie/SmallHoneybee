@@ -37,6 +37,7 @@ namespace SmallHoneybee.Wpf.Report
         public float ProduceTotalCount { get; set; }
         public float ProduceTotalOriginal { get; set; }
         public float ProduceTotalDiscountAndFavorableCost { get; set; }
+        public float ProduceCost { get; set; }
         public float TotalCost { get; set; }
         public string HowBalanceName { get; set; }
         public string Phone { get; set; }
@@ -46,6 +47,7 @@ namespace SmallHoneybee.Wpf.Report
         public byte HowBalance { get; set; }
         public float RealPrice { get; set; }
         public float ReturnedPrice { get; set; }
+        public float MemberCardCashTotal { get; set; }
 
     }
 }
