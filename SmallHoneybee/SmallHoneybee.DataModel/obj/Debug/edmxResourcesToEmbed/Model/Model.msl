@@ -33,6 +33,50 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="MemberCards">
+      <EntityTypeMapping TypeName="SmallHoneybeeModel.MemberCard">
+        <MappingFragment StoreEntitySet="MemberCard">
+          <ScalarProperty Name="MemberCardId" ColumnName="MemberCardId" />
+          <ScalarProperty Name="MemberCardNo" ColumnName="MemberCardNo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="MemberType" ColumnName="MemberType" />
+          <ScalarProperty Name="MemberMoney" ColumnName="MemberMoney" />
+          <ScalarProperty Name="DispatchDate" ColumnName="DispatchDate" />
+          <ScalarProperty Name="DispatchUserId" ColumnName="DispatchUserId" />
+          <ScalarProperty Name="PrincipalSurplusMoney" ColumnName="PrincipalSurplusMoney" />
+          <ScalarProperty Name="IsEnable" ColumnName="IsEnable" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="MemberCardStatus" ColumnName="MemberCardStatus" />
+          <ScalarProperty Name="Descript" ColumnName="Descript" />
+          <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastModifiedOn" ColumnName="LastModifiedOn" />
+          <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="TotalSurplusMoney" ColumnName="TotalSurplusMoney" />
+          <ScalarProperty Name="FavorableSurplusMoney" ColumnName="FavorableSurplusMoney" />
+          <ScalarProperty Name="RelateUserId" ColumnName="RelateUserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MemberCardLogs">
+      <EntityTypeMapping TypeName="SmallHoneybeeModel.MemberCardLog">
+        <MappingFragment StoreEntitySet="MemberCardlog">
+          <ScalarProperty Name="MemberCardLogId" ColumnName="MemberCardLogId" />
+          <ScalarProperty Name="MemberCardId" ColumnName="MemberCardId" />
+          <ScalarProperty Name="OldValue" ColumnName="OldValue" />
+          <ScalarProperty Name="NewValue" ColumnName="NewValue" />
+          <ScalarProperty Name="DateChanged" ColumnName="DateChanged" />
+          <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
+          <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="LogType" ColumnName="LogType" />
+          <ScalarProperty Name="HowBalance" ColumnName="HowBalance" />
+          <ScalarProperty Name="FavorableMoney" ColumnName="FavorableMoney" />
+          <ScalarProperty Name="PrincipalMoney" ColumnName="PrincipalMoney" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="POItems">
       <EntityTypeMapping TypeName="SmallHoneybeeModel.POItem">
         <MappingFragment StoreEntitySet="POItem">
@@ -96,6 +140,7 @@
           <ScalarProperty Name="DateChanged" ColumnName="DateChanged" />
           <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
           <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="LogType" ColumnName="LogType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -150,6 +195,8 @@
           <ScalarProperty Name="ProduceTotalCount" ColumnName="ProduceTotalCount" />
           <ScalarProperty Name="ProduceTotalOriginal" ColumnName="ProduceTotalOriginal" />
           <ScalarProperty Name="ProduceTotalDiscount" ColumnName="ProduceTotalDiscount" />
+          <ScalarProperty Name="UserRealPrice" ColumnName="UserRealPrice" />
+          <ScalarProperty Name="UserReturnedPrice" ColumnName="UserReturnedPrice" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -245,6 +292,7 @@
           <ScalarProperty Name="DateChanged" ColumnName="DateChanged" />
           <ScalarProperty Name="ChangedBy" ColumnName="ChangedBy" />
           <ScalarProperty Name="RowVersion" ColumnName="RowVersion" />
+          <ScalarProperty Name="LogType" ColumnName="LogType" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

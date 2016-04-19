@@ -8,7 +8,7 @@ namespace SmallHoneybee.Wpf.Views.Shared
     /// </summary>
     public partial class ChooseMassagebox : Window
     {
-        private Window _mainWindow;
+        private MainWindow _mainWindow;
         public ChooseMassagebox(MainWindow mainWindow)
         {
             _mainWindow = mainWindow;
@@ -21,6 +21,7 @@ namespace SmallHoneybee.Wpf.Views.Shared
             {
                 this.Close();
                 _mainWindow.WindowState = WindowState.Minimized;
+                _mainWindow.IsExitWindow = false;
             }
             else
             {

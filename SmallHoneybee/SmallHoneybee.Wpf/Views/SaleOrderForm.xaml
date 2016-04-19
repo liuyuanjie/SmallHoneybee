@@ -234,12 +234,12 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Grid.Row="0"  Text="扣除金额：" HorizontalAlignment="Right"></TextBlock>
-                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="0" FontSize="20" Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBox>
+                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="0" Style="{StaticResource MarkedTextStyle}"  Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBox>
                     <TextBlock Grid.Column="0" Grid.Row="1"  Text="剩余金额：" HorizontalAlignment="Right"></TextBlock>
-                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="1"     Style="{StaticResource MarkedTextStyle}" Text="{Binding Path=DataContext.BalanceDomainModel.SurplusPrice,Mode=OneWay,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
+                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="1"  FontSize="20" FontWeight="Bold"  Text="{Binding Path=DataContext.BalanceDomainModel.SurplusPrice,Mode=OneWay,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"/>
                 </Grid>
             </TabItem>
-            <TabItem Name="TabItemUnionPay" Visibility="Hidden">
+            <TabItem Name="TabItemUnionPay">
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
                         <RadioButton Width="150" x:Name="RadBanlanceModeUnionPay" GroupName="BanlanceMode" DataContext="2"  Content="银联卡结算"></RadioButton>
@@ -256,7 +256,7 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Grid.Column="0" Grid.Row="0"  Text="扣除金额：" HorizontalAlignment="Right"></TextBlock>
-                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="0" FontSize="20"   Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBox>
+                    <TextBox Grid.Column="1" IsEnabled="False" Grid.Row="0" Style="{StaticResource MarkedTextStyle}"  Text="{Binding Path=DataContext.BalanceDomainModel.ReceivedPrice,UpdateSourceTrigger=PropertyChanged, StringFormat=F2,Mode=OneWay,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></TextBox>
                 </Grid>
             </TabItem>
         </TabControl>

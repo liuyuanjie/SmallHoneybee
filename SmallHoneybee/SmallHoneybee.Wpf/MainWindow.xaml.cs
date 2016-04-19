@@ -1,20 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using SmallHoneybee.Common;
-using SmallHoneybee.DataModel.Model;
 using SmallHoneybee.Wpf.Common;
 using SmallHoneybee.Wpf.Views.Shared;
 using Produce = SmallHoneybee.Wpf.Views.Produce;
@@ -28,6 +16,8 @@ namespace SmallHoneybee.Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        public bool IsExitWindow = true;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -132,8 +122,8 @@ namespace SmallHoneybee.Wpf
 
         private void MainWindow_OnClosing(object sender, CancelEventArgs e)
         {
-            ChooseMassagebox chooseMassagebox = new ChooseMassagebox(this);
-            chooseMassagebox.Show();
+            //ChooseMassagebox chooseMassagebox = new ChooseMassagebox(this);
+            //chooseMassagebox.Show();
         }
 
         private void SamllHoneybeeMemberCardLogMenu_OnClick(object sender, RoutedEventArgs e)
@@ -143,6 +133,14 @@ namespace SmallHoneybee.Wpf
             frame_run.Content = new Views.MemberCardDetail();
             var menuItem = (MenuItem)sender;
             menuItem.IsChecked = true;
+        }
+
+        private void MainWindow_OnClosed(object sender, EventArgs e)
+        {
+            //if (!IsExitWindow)
+            //{
+            //    return;
+            //}
         }
     }
 }

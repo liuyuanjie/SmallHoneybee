@@ -38,6 +38,7 @@ namespace SmallHoneybee.Wpf.Views
             var howBalances = new List<KeyValuePair<sbyte?, string>>();
             howBalances.AddRange(CommonHelper.Enumerate<DataType.SaleOrderBalancedMode>()
                 .Select(x => new KeyValuePair<sbyte?, string>((sbyte)x.Key, x.Value)));
+            howBalances.RemoveAll(x => x.Key == (sbyte)DataType.SaleOrderBalancedMode.MemberCard);
 
             DataContext = new
             {

@@ -27,7 +27,6 @@ namespace SmallHoneybee.Wpf.Views
         private IMemberCardLogRepository _memberCardLogRepository;
         private IUserRepository _userRepository;
 
-
         private ObservableCollection<MemberCardDetailModel> _memberCardDetails = new ObservableCollection<MemberCardDetailModel>();
 
         public ObservableCollection<MemberCardDetailModel> MemberCardDetails
@@ -55,12 +54,16 @@ namespace SmallHoneybee.Wpf.Views
             var logTypeTexts = new List<KeyValuePair<sbyte, string>>();
             logTypeTexts.AddRange(CommonHelper.Enumerate<DataType.MemberCardLogType>().Select(x => new KeyValuePair<sbyte, string>((sbyte)x.Key, x.Value)));
 
+            var howBalances = new List<KeyValuePair<sbyte?, string>> { new KeyValuePair<sbyte?, string>(null, string.Empty) };
+            howBalances.AddRange(CommonHelper.Enumerate<DataType.SaleOrderBalancedMode>().Select(x => new KeyValuePair<sbyte?, string>((sbyte)x.Key, x.Value)));
+
             ExecuteSearchText();
 
             DataContext = new
             {
                 LogTypeTexts = logTypeTexts,
-                MemberCardDetailModel = _memberCardDetails
+                MemberCardDetailModel = _memberCardDetails,
+                HowBalanceTexts = howBalances
             };
         }
 
@@ -96,7 +99,7 @@ namespace SmallHoneybee.Wpf.Views
             }
             else if (startDate.HasValue)
             {
-                endDate=DateTime.MaxValue;
+                endDate = DateTime.MaxValue;
             }
             else if (endDate.HasValue)
             {
@@ -133,10 +136,27 @@ namespace SmallHoneybee.Wpf.Views
                     LogType = memberCardLog.LogType,
                 };
 
+            if (ComboTransactionType.SelectedValue != null)
+            {
+                sbyte transactionType = (sbyte)ComboTransactionType.SelectedValue;
+                memberCardDetails = memberCardDetails.Where(x => x.LogType == transactionType);
+            }
+
+            if (ComboHowBalance.SelectedValue != null)
+            {
+                memberCardDetails = memberCardDetails.Where(x => x.Description.Contains(ComboHowBalance.Text));
+            }
+
             memberCardDetails
                 .OrderByDescending(x => x.DateChanged)
                 .ToList()
                 .ForEach(x => _memberCardDetails.Add(x));
+
+            TxtTotalInfo.Text = string.Format("共计 {0} 条记录, 交易本金: {1}, 交易赠送金额: {2}，交易总金额: {3}",
+                memberCardDetails.Count(),
+                (memberCardDetails.Sum(x => (float?)x.PrincipalMoney) ?? 0).ToString("F2"),
+                (memberCardDetails.Sum(x => (float?)x.FavorableMoney) ?? 0).ToString("F2"),
+                (memberCardDetails.Sum(x => (float?)x.FavorableMoney + (float?)x.PrincipalMoney) ?? 0).ToString("F2"));
         }
 
         private void CommandBinding_ClearSearchText_CanExecute(object sender, CanExecuteRoutedEventArgs e)

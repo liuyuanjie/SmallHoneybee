@@ -303,6 +303,16 @@ namespace SmallHoneybee.Wpf.Views
                 InitBlankRow();
             }
         }
+
+        private void ButShowLog_Click(object sender, RoutedEventArgs e)
+        {
+            var user = gridUsers.SelectedItem as UserModel;
+            if (user != null)
+            {
+                SmallHoneybee.Wpf.Views.UserLog userLog = new SmallHoneybee.Wpf.Views.UserLog(user.User.UserId);
+                userLog.ShowDialog();
+            }
+        }
     }
 
     public class UserModel

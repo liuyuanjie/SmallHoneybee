@@ -6,7 +6,7 @@
         BorderBrush="#FF293955" WindowStartupLocation="CenterScreen" 
         Icon="/SmallHoneybee.Wpf;component/images/ico_samllhoneybee.ico" 
         xmlns:convert="clr-namespace:SmallHoneybee.Wpf.Common.PropertyConvert" 
-        FontWeight="Normal" WindowState="Maximized" Closing="MainWindow_OnClosing" >
+        FontWeight="Normal" WindowState="Maximized" Closing="MainWindow_OnClosing" Closed="MainWindow_OnClosed">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

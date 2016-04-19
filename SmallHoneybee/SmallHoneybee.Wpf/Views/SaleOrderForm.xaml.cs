@@ -119,10 +119,15 @@ namespace SmallHoneybee.Wpf.Views
                 TabItemCash.IsSelected = true;
                 RadBanlanceModeCash.IsChecked = true;
             }
-            else if (_saleOrder.HowBalance == (sbyte)DataType.SaleOrderBalancedMode.MemberCard)
+            else if (_saleOrder.HowBalance == (sbyte) DataType.SaleOrderBalancedMode.MemberCard)
             {
                 RadBanlanceModeCard.IsChecked = true;
                 TabItemCard.IsSelected = true;
+            }
+            else
+            {
+                RadBanlanceModeUnionPay.IsChecked = true;
+                TabItemUnionPay.IsSelected = true;
             }
 
             _balanceDomainModel = new BalanceDomainModel
@@ -157,6 +162,10 @@ namespace SmallHoneybee.Wpf.Views
             RadBanlanceModeCash.Click += (s, e) =>
             {
                 TabItemCash.IsSelected = true;
+            };
+            RadBanlanceModeUnionPay.Click += (s, e) =>
+            {
+                TabItemUnionPay.IsSelected = true;
             };
         }
 
@@ -196,6 +205,7 @@ namespace SmallHoneybee.Wpf.Views
                     x.SOProduce.RetailPrice = x.SOProduce.Produce.RetailPrice;
                     x.SOProduce.SOProduceStatusCategory = (sbyte)saleOrderStatus;
                 });
+            _saleOrder.FavorableCost = _balanceDomainModel.DiscountPrice;
             _saleOrder.UserRealPrice = _balanceDomainModel.RealPrice;
             _saleOrder.UserReturnedPrice = _balanceDomainModel.ReturnedPrice;
             _saleOrder.ProduceCost = _soProduceDomainModels.Sum(x => x.SOProduce.Quantity * x.CostPerUnit);
@@ -513,6 +523,7 @@ namespace SmallHoneybee.Wpf.Views
                         return;
                     }
                 }
+
                 if (_balanceDomainModel.DiscountPrice > 0)
                 {
                     if (!ResourcesHelper.CurrentUserRolePermission.SaleOrderFavorableCost &&
@@ -545,6 +556,7 @@ namespace SmallHoneybee.Wpf.Views
                         _user.Userlogs.Add(new Userlog
                         {
                             ChangedBy = ResourcesHelper.CurrentUser.Name,
+                            LogType = (sbyte)DataType.MemberCardLogType.Consumption,
                             DateChanged = DateTime.Now,
                             NewValue = string.Format(
                                 ResourcesHelper.UserLogSaleOrderFormat,
@@ -562,15 +574,8 @@ namespace SmallHoneybee.Wpf.Views
                         _userRepository.Update(_user);
                     }
                 }
-                else
+                else if (RadBanlanceModeCard.IsChecked != null && (bool) RadBanlanceModeCard.IsChecked)
                 {
-                    InputPassword inputPassword = new InputPassword(_memberCard.MemberCardId);
-                    inputPassword.ShowDialog();
-                    if (!inputPassword.IsCheckOK)
-                    {
-                        return;
-                    }
-
                     if (_memberCard.MemberCardId > 0)
                     {
                         if (_balanceDomainModel.SurplusPrice < 0 ||
@@ -581,23 +586,41 @@ namespace SmallHoneybee.Wpf.Views
                             return;
                         }
 
-                        float saveMoney = _balanceDomainModel.ReceivedPrice *
-                                                  (_memberCard.PrincipalSurplusMoney / _memberCard.TotalSurplusMoney);
+                        InputPassword inputPassword = new InputPassword(_memberCard.MemberCardId);
+                        inputPassword.ShowDialog();
+                        if (!inputPassword.IsCheckOK)
+                        {
+                            return;
+                        }
 
+                        float saveMoney = _balanceDomainModel.ReceivedPrice*
+                                          (_memberCard.PrincipalSurplusMoney/_memberCard.TotalSurplusMoney);
+
+                        if (_memberCard.FavorableSurplusMoney >= (_balanceDomainModel.ReceivedPrice - saveMoney))
+                        {
+                            _memberCard.FavorableSurplusMoney -= (_balanceDomainModel.ReceivedPrice - saveMoney);
+                            _memberCard.PrincipalSurplusMoney -= saveMoney;
+                        }
+                        else
+                        {
+                            _memberCard.PrincipalSurplusMoney -= _balanceDomainModel.ReceivedPrice -
+                                                                 _memberCard.FavorableSurplusMoney;
+                            _memberCard.FavorableSurplusMoney -= _memberCard.FavorableSurplusMoney;
+                        }
                         _memberCard.TotalSurplusMoney -= _balanceDomainModel.ReceivedPrice;
-                        _memberCard.PrincipalSurplusMoney -= saveMoney;
-                        _memberCard.FavorableSurplusMoney -= (_balanceDomainModel.ReceivedPrice - saveMoney);
 
                         _memberCard.MemberCardlogs.Add(new MemberCardLog
                         {
                             FavorableMoney = (_balanceDomainModel.ReceivedPrice - saveMoney),
                             PrincipalMoney = saveMoney,
-                            LogType = (sbyte)DataType.MemberCardLogType.Consumption,
+                            LogType = (sbyte) DataType.MemberCardLogType.Consumption,
                             ChangedBy = ResourcesHelper.CurrentUser.Name,
                             DateChanged = DateTime.Now,
                             NewValue = string.Format(ResourcesHelper.MemberCardLogSaleOrderFormat,
                                 _saleOrder.SaleOrderNo,
-                                CommonHelper.Enumerate<DataType.SaleOrderBalancedMode>().First(x => x.Key == _saleOrder.HowBalance).Value,
+                                CommonHelper.Enumerate<DataType.SaleOrderBalancedMode>()
+                                    .First(x => x.Key == _saleOrder.HowBalance)
+                                    .Value,
                                 _balanceDomainModel.ReceivedPrice.ToString("F2"),
                                 _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
                                 (_balanceDomainModel.SurplusPrice > 0 ? _balanceDomainModel.SurplusPrice : 0)
@@ -610,21 +633,63 @@ namespace SmallHoneybee.Wpf.Views
 
                     if (_user.UserId > 0)
                     {
-                        float saveMoney = _balanceDomainModel.ReceivedPrice *
-                          (_user.CashBalance / _user.CashTotal);
+                        float saveMoney = _balanceDomainModel.ReceivedPrice*
+                                          (_user.CashBalance/_user.CashTotal);
 
+                        if (_user.CashFee >= (_balanceDomainModel.ReceivedPrice - saveMoney))
+                        {
+                            _user.CashFee -= (_balanceDomainModel.ReceivedPrice - saveMoney);
+                            _user.CashBalance -= saveMoney;
+                        }
+                        else
+                        {
+                            _user.CashBalance -= _balanceDomainModel.ReceivedPrice - _user.CashFee;
+                            _user.CashFee -= _user.CashFee;
+                        }
                         _user.CashTotal -= _balanceDomainModel.ReceivedPrice;
-                        _user.CashBalance -= saveMoney;
-                        _user.CashFee -= (_balanceDomainModel.ReceivedPrice - saveMoney);
 
                         _user.Userlogs.Add(new Userlog
                         {
                             ChangedBy = ResourcesHelper.CurrentUser.Name,
                             DateChanged = DateTime.Now,
+                            LogType = (sbyte)DataType.MemberCardLogType.Consumption,
                             NewValue = string.Format(
                                 ResourcesHelper.UserLogSaleOrderFormat,
                                 _saleOrder.SaleOrderNo,
-                                CommonHelper.Enumerate<DataType.MemberCardStatus>().First(x => x.Key == _saleOrder.HowBalance).Value,
+                                CommonHelper.Enumerate<DataType.SaleOrderBalancedMode>()
+                                    .First(x => x.Key == _saleOrder.HowBalance)
+                                    .Value,
+                                _balanceDomainModel.ReceivedPrice.ToString("F2"),
+                                _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
+                                (_balanceDomainModel.SurplusPrice > 0 ? _balanceDomainModel.SurplusPrice : 0).ToString(
+                                    "F2"),
+                                (_balanceDomainModel.CurrentMemberPoints + _balanceDomainModel.MemberPoints).ToString(
+                                    "F2"))
+                        });
+
+                        _saleOrder.PurchaseOrderUserId = _user.UserId == 0 ? (int?) null : _user.UserId;
+                        _user.MemberPoints += _balanceDomainModel.ReceivedPrice*
+                                              float.Parse(
+                                                  ResourcesHelper.SystemSettings[
+                                                      (short) DataType.SystemSettingCode.MemberPointsRate]);
+
+                        _userRepository.Update(_user);
+                    }
+                }
+                else
+                {
+                    _balanceDomainModel.RealPrice = _balanceDomainModel.ReceivedPrice;
+                    if (_user.UserId > 0)
+                    {
+                        _user.Userlogs.Add(new Userlog
+                        {
+                            ChangedBy = ResourcesHelper.CurrentUser.Name,
+                            DateChanged = DateTime.Now,
+                            LogType = (sbyte)DataType.MemberCardLogType.Consumption,
+                            NewValue = string.Format(
+                                ResourcesHelper.UserLogSaleOrderFormat,
+                                _saleOrder.SaleOrderNo,
+                                CommonHelper.Enumerate<DataType.SaleOrderBalancedMode>().First(x => x.Key == _saleOrder.HowBalance).Value,
                                 _balanceDomainModel.ReceivedPrice.ToString("F2"),
                                 _balanceDomainModel.CurrentMemberPoints.ToString("F2"),
                                 (_balanceDomainModel.SurplusPrice > 0 ? _balanceDomainModel.SurplusPrice : 0).ToString("F2"),

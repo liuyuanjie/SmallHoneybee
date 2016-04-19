@@ -91,7 +91,7 @@
                 <DataGridTemplateColumn  Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button  ToolTip="消费记录" Cursor="Hand"  Width="16" Height="16">
+                            <Button Click="ButShowLog_Click"   ToolTip="消费记录" Cursor="Hand"  Width="16" Height="16">
                                 <Button.Template>
                                     <ControlTemplate TargetType="{x:Type Button}">
                                         <Image Source="/SmallHoneybee.Wpf;component/images/icoLog.png" Stretch="Fill" />
@@ -154,7 +154,7 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <DatePicker Name="DateOfBirth"
-                                    SelectedDate="{Binding DateOfBirth,StringFormat='yyyy-MM-dd', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
+                                SelectedDate="{Binding User.DateOfBirth,StringFormat='yyyy-MM-dd', UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></DatePicker>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

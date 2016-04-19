@@ -1,0 +1,34 @@
+﻿<Window x:Class="SmallHoneybee.Wpf.Views.UserLog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:propertyConvert="clr-namespace:SmallHoneybee.Wpf.Common.PropertyConvert"
+        BorderBrush="#FF293955"  WindowStartupLocation="CenterScreen" 
+        Icon="/SmallHoneybee.Wpf;component/images/ico_samllhoneybee.ico"
+        Title="会员交易明细" Height="420" Width="800" WindowStyle="SingleBorderWindow" ResizeMode="NoResize" >
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Style.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <propertyConvert:VisibilityConverter x:Key="VisibilityConverter"></propertyConvert:VisibilityConverter>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1010*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" FontSize="16" FontWeight="Bold" HorizontalAlignment="Left" Margin="10,5,0,0">||会员交易明细</TextBlock>
+        <DataGrid Grid.Row="1" Name="GridUserLogs" AutoGenerateColumns="False" 
+                  ItemsSource="{Binding Path=DataContext.UserLogs,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"  
+                  IsReadOnly="True"  FontWeight="Medium">
+            <DataGrid.Columns>
+            <DataGridTextColumn Header="交易日期" Binding="{Binding DateChanged, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
+            <DataGridTextColumn Header="交易记录" Binding="{Binding NewValue}"/>
+                </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

@@ -116,10 +116,16 @@ namespace SmallHoneybee.Wpf.Views
                 saleOrders = saleOrders.Where(x => x.DateOriginated < endDate);
             }
 
+            if (ComboHowBalance.SelectedValue!=null)
+            {
+                sbyte howBalance=(sbyte)ComboHowBalance.SelectedValue;
+                saleOrders = saleOrders.Where(x => x.HowBalance == howBalance);
+            }
+
             saleOrders
                 .OrderByDescending(x => x.DateOriginated)
                 .Where(x => x.SaleOrderNo.Contains(TxtSearchBox.Text) ||
-                    x.Name.Contains(TxtSearchBox.Text))
+                    x.Name.Contains(TxtSearchBox.Text))  
                 .ToList()
                 .ForEach(x => _saleOrders.Add(x));
 
@@ -212,7 +218,6 @@ namespace SmallHoneybee.Wpf.Views
                 }
                 else
                 {
-
                     _saleOrders.Remove(saleOrder);
                     _saleOrderRepository.Delete(saleOrder);
                     _unitOfWork.Commit();
@@ -220,7 +225,7 @@ namespace SmallHoneybee.Wpf.Views
             }
         }
 
-        private void ButEditSaleOrder_Click(object sender,  RoutedEventArgs e)
+        private void ButEditSaleOrder_Click(object sender, RoutedEventArgs e)
         {
             var saleOrderForm = new SaleOrderForm(this, (DataModel.Model.SaleOrder)GridSaleOrders.SelectedItem);
             saleOrderForm.ShowDialog();

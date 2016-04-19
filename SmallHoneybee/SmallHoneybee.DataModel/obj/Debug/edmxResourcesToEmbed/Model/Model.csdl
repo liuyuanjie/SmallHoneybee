@@ -31,6 +31,52 @@
     <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
     <Property Name="SettlementMen" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="MemberCard">
+    <Key>
+      <PropertyRef Name="MemberCardId" />
+    </Key>
+    <Property Name="MemberCardId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberCardNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="MemberType" Type="SByte" Nullable="false" />
+    <Property Name="MemberMoney" Type="Single" Nullable="false" />
+    <Property Name="DispatchDate" Type="DateTime" Nullable="false" />
+    <Property Name="DispatchUserId" Type="Int32" />
+    <Property Name="PrincipalSurplusMoney" Type="Single" Nullable="false" />
+    <Property Name="IsEnable" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="MemberCardStatus" Type="SByte" Nullable="false" />
+    <Property Name="Descript" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="LastModifiedOn" Type="DateTime" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="TotalSurplusMoney" Type="Single" Nullable="false" />
+    <Property Name="FavorableSurplusMoney" Type="Single" Nullable="false" />
+    <Property Name="RelateUserId" Type="Int32" />
+    <NavigationProperty Name="DispatchUserUser" Relationship="Self.FK_MemberCard_User_DispatchUserId_UserId" FromRole="MemberCard" ToRole="User" />
+    <NavigationProperty Name="RelateUserUser" Relationship="Self.FK_MemberCard_User_RelateUserId_UserId" FromRole="MemberCard" ToRole="User" />
+    <NavigationProperty Name="MemberCardlogs" Relationship="Self.FK_MemberCardLog_MemberCard_MemberCardId_MemberCardd" FromRole="MemberCard" ToRole="MemberCardlog" />
+  </EntityType>
+  <EntityType Name="MemberCardLog">
+    <Key>
+      <PropertyRef Name="MemberCardLogId" />
+    </Key>
+    <Property Name="MemberCardLogId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MemberCardId" Type="Int32" Nullable="false" />
+    <Property Name="OldValue" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="NewValue" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" />
+    <Property Name="DateChanged" Type="DateTime" Nullable="false" />
+    <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="LogType" Type="SByte" />
+    <Property Name="HowBalance" Type="SByte" Nullable="false" />
+    <Property Name="FavorableMoney" Type="Single" Nullable="false" />
+    <Property Name="PrincipalMoney" Type="Single" Nullable="false" />
+    <NavigationProperty Name="MemberCard" Relationship="Self.FK_MemberCardLog_MemberCard_MemberCardId_MemberCardd" FromRole="MemberCardlog" ToRole="MemberCard" />
+  </EntityType>
   <EntityType Name="POItem">
     <Key>
       <PropertyRef Name="POItemId" />
@@ -99,6 +145,7 @@
     <Property Name="DateChanged" Type="DateTime" Nullable="false" />
     <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="LogType" Type="SByte" />
     <NavigationProperty Name="Produce" Relationship="Self.FK_ProduceLog_Produce_ProduceId_ProduceId" FromRole="Producelog" ToRole="Produce" />
   </EntityType>
   <EntityType Name="PurchaseOrder">
@@ -154,6 +201,8 @@
     <Property Name="ProduceTotalCount" Type="Single" />
     <Property Name="ProduceTotalOriginal" Type="Single" />
     <Property Name="ProduceTotalDiscount" Type="Single" />
+    <Property Name="UserRealPrice" Type="Single" />
+    <Property Name="UserReturnedPrice" Type="Single" />
     <NavigationProperty Name="OriginUserUser" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="SaleOrder" ToRole="User" />
     <NavigationProperty Name="PrucahseOrderUserUser" Relationship="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" FromRole="SaleOrder" ToRole="User" />
     <NavigationProperty Name="SOLogs" Relationship="Self.FK_SaleOrder_SOLog_SaleOrderId_SaleOrderId" FromRole="SaleOrder" ToRole="SOLog" />
@@ -239,6 +288,8 @@
     <Property Name="Sex" Type="SByte" Nullable="false" />
     <Property Name="DateOfBirth" Type="DateTime" />
     <Property Name="MemberType" Type="SByte" />
+    <NavigationProperty Name="MemberCardsDispatchUser" Relationship="Self.FK_MemberCard_User_DispatchUserId_UserId" FromRole="User" ToRole="MemberCard" />
+    <NavigationProperty Name="MemberCardsRelateUser" Relationship="Self.FK_MemberCard_User_RelateUserId_UserId" FromRole="User" ToRole="MemberCard" />
     <NavigationProperty Name="PurchaseOrders" Relationship="Self.FK_PurchaseOrder_User_OriginatorId_UserId" FromRole="User" ToRole="PurchaseOrder" />
     <NavigationProperty Name="SaleOrdersOriginUser" Relationship="Self.FK_Produce_SaleOrder_OriginUserId_UserId" FromRole="User" ToRole="SaleOrder" />
     <NavigationProperty Name="SaleOrdersPurchaseOrderUser" Relationship="Self.FK_Produce_SaleOrder_PurchaseOrderUserId_UserId" FromRole="User" ToRole="SaleOrder" />
@@ -255,6 +306,7 @@
     <Property Name="DateChanged" Type="DateTime" Nullable="false" />
     <Property Name="ChangedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="RowVersion" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+    <Property Name="LogType" Type="SByte" />
     <NavigationProperty Name="User" Relationship="Self.FK_UserLog_User_UserId_UserId" FromRole="Userlog" ToRole="User" />
   </EntityType>
   <Association Name="FK_Produce_Category_CategoryId_CategoryId">
@@ -266,6 +318,42 @@
       </Principal>
       <Dependent Role="Produce">
         <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberCard_User_DispatchUserId_UserId">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="MemberCard" Type="Self.MemberCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="MemberCard">
+        <PropertyRef Name="DispatchUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberCard_User_RelateUserId_UserId">
+    <End Role="User" Type="Self.User" Multiplicity="0..1" />
+    <End Role="MemberCard" Type="Self.MemberCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="MemberCard">
+        <PropertyRef Name="RelateUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MemberCardLog_MemberCard_MemberCardId_MemberCardd">
+    <End Role="MemberCard" Type="Self.MemberCard" Multiplicity="1" />
+    <End Role="MemberCardlog" Type="SmallHoneybeeModel.MemberCardLog" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MemberCard">
+        <PropertyRef Name="MemberCardId" />
+      </Principal>
+      <Dependent Role="MemberCardlog">
+        <PropertyRef Name="MemberCardId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -402,6 +490,8 @@
   <EntityContainer Name="SmallHoneybeeEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Categories" EntityType="Self.Category" />
     <EntitySet Name="DayBooks" EntityType="Self.DayBook" />
+    <EntitySet Name="MemberCards" EntityType="Self.MemberCard" />
+    <EntitySet Name="MemberCardLogs" EntityType="SmallHoneybeeModel.MemberCardLog" />
     <EntitySet Name="POItems" EntityType="Self.POItem" />
     <EntitySet Name="Produces" EntityType="Self.Produce" />
     <EntitySet Name="Producelogs" EntityType="Self.Producelog" />
@@ -415,6 +505,18 @@
     <AssociationSet Name="FK_Produce_Category_CategoryId_CategoryId" Association="Self.FK_Produce_Category_CategoryId_CategoryId">
       <End Role="Category" EntitySet="Categories" />
       <End Role="Produce" EntitySet="Produces" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberCard_User_DispatchUserId_UserId" Association="Self.FK_MemberCard_User_DispatchUserId_UserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="MemberCard" EntitySet="MemberCards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberCard_User_RelateUserId_UserId" Association="Self.FK_MemberCard_User_RelateUserId_UserId">
+      <End Role="User" EntitySet="Users" />
+      <End Role="MemberCard" EntitySet="MemberCards" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MemberCardLog_MemberCard_MemberCardId_MemberCardd" Association="Self.FK_MemberCardLog_MemberCard_MemberCardId_MemberCardd">
+      <End Role="MemberCard" EntitySet="MemberCards" />
+      <End Role="MemberCardlog" EntitySet="MemberCardLogs" />
     </AssociationSet>
     <AssociationSet Name="FK_POItem_Produce_ProduceId_ProduceId" Association="Self.FK_POItem_Produce_ProduceId_ProduceId">
       <End Role="Produce" EntitySet="Produces" />

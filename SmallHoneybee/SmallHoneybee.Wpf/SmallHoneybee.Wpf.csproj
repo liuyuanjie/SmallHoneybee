@@ -160,6 +160,9 @@
     <Compile Include="Views\MemberCardDetail.xaml.cs">
       <DependentUpon>MemberCardDetail.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserLog.xaml.cs">
+      <DependentUpon>UserLog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PrintWindow.xaml.cs">
       <DependentUpon>PrintWindow.xaml</DependentUpon>
     </Compile>
@@ -328,6 +331,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MemberCardDetail.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UserLog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

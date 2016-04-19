@@ -19,9 +19,10 @@
     <Grid Resources="{StaticResource CommonStyle}">
         <Grid.RowDefinitions>
             <RowDefinition Height="25"></RowDefinition>
-            <RowDefinition Height="50"></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
             <RowDefinition Height="5"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="50"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1000*"/>
@@ -34,23 +35,37 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="50"></RowDefinition>
-                <RowDefinition></RowDefinition>
+                <RowDefinition Height="50"></RowDefinition>
                 <RowDefinition></RowDefinition>
             </Grid.RowDefinitions>
             <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center">
-            <TextBlock Text="购物卡编号/姓名/电话：" HorizontalAlignment="Right" VerticalAlignment="Center" ></TextBlock>
-            <TextBox Name="TxtSearchBox" Width="200" ></TextBox>
-            <TextBlock Text="时间范围：" VerticalAlignment="Center"></TextBlock>
-            <DatePicker Name="DateStartDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long"></DatePicker>
-            <TextBlock VerticalAlignment="Center">～</TextBlock>
-            <DatePicker Name="DateEndDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
-            <Button Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
-            <Button Content="清空" Click="BtnClear_Click" />
-                </StackPanel>
+                <TextBlock Text="购物卡编号/姓名/电话：" HorizontalAlignment="Right" VerticalAlignment="Center" ></TextBlock>
+                <TextBox Name="TxtSearchBox" Width="200" ></TextBox>
+                <TextBlock Text="时间范围：" VerticalAlignment="Center"></TextBlock>
+                <DatePicker Name="DateStartDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long"></DatePicker>
+                <TextBlock VerticalAlignment="Center">～</TextBlock>
+                <DatePicker Name="DateEndDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+                <TextBlock Text="交易类别："  VerticalAlignment="Center"></TextBlock>
+                <ComboBox Name="ComboTransactionType" Height="30" Width="120"
+                    ItemsSource="{Binding Path=DataContext.LogTypeTexts,
+                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"
+                    DisplayMemberPath="Value" SelectedValuePath="Key">
+                </ComboBox>
+                <TextBlock Text="交易方式："  VerticalAlignment="Center"></TextBlock>
+                <ComboBox Name="ComboHowBalance" Height="30" Width="120"
+                    ItemsSource="{Binding Path=DataContext.HowBalanceTexts,
+                            RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"
+                    DisplayMemberPath="Value" SelectedValuePath="Key">
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Center">
+                <Button Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
+                <Button Content="清空" Click="BtnClear_Click" />
+            </StackPanel>
         </Grid>
         <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
         <DataGrid Grid.Row="3" Name="gridMemberCardLogs"
-                  CanUserAddRows="True"
+                  IsReadOnly="True"
                   AutoGenerateColumns="False"
                   DataGridCell.GotFocus="DataGrid_CellGotFocus" 
                   ItemsSource="{Binding Path=DataContext.MemberCardDetailModel, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}" 
@@ -94,11 +109,12 @@
                         </Style>
                     </DataGridComboBoxColumn.ElementStyle>
                 </DataGridComboBoxColumn>
-                <DataGridTextColumn Header="备注" Width="250*" Binding="{Binding Description}">
+                <DataGridTextColumn Header="备注"  Binding="{Binding Description}">
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="MemberCardId" Binding="{Binding MemberCard.MemberCardId}" Visibility="Hidden"/>
             </DataGrid.Columns>
         </DataGrid>
+        <TextBlock  Grid.Column="0" Grid.Row="4" Name="TxtTotalInfo" FontWeight="Bold" HorizontalAlignment="Right"/>
     </Grid>
     <Page.InputBindings>
         <KeyBinding Gesture="Esc" Command="{StaticResource ClearSearchText}"/>

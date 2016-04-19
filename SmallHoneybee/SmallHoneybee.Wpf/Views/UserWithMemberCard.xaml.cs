@@ -56,11 +56,11 @@ namespace SmallHoneybee.Wpf.Views
                 SetMemberCardInfo();
 
                 txtMemberCardNo.IsEnabled = false;
-                txtMemberCardNo.Focus();
+                txtFirstPassWord.Focus();
             }
             else
             {
-                txtFirstPassWord.Focus();
+                txtMemberCardNo.Focus();
             }
         }
 
@@ -99,7 +99,7 @@ namespace SmallHoneybee.Wpf.Views
                         {
                             ChangedBy = ResourcesHelper.CurrentUser.Name,
                             DateChanged = DateTime.Now,
-                            NewValue = string.Format("会员:{0}与购物卡:{1}重新设置密码！", bindingUser.Name, _memberCard.MemberCardNo)
+                            NewValue = string.Format("会员: {0}与购物卡: {1}重新设置密码！", bindingUser.Name, _memberCard.MemberCardNo)
                         });
 
                         _memberCardRepository.Update(_memberCard);
@@ -133,7 +133,13 @@ namespace SmallHoneybee.Wpf.Views
                         {
                             ChangedBy = ResourcesHelper.CurrentUser.Name,
                             DateChanged = DateTime.Now,
-                            NewValue = string.Format("会员:{0}与购物卡:{1}绑定成功", bindingUser.Name, _memberCard.MemberCardNo)
+                            PrincipalMoney = _memberCard.PrincipalSurplusMoney,
+                            FavorableMoney = _memberCard.FavorableSurplusMoney,
+                            LogType = (sbyte)DataType.MemberCardLogType.Saved,
+                            NewValue = string.Format(ResourcesHelper.MemberCardLogUserFormat,
+                            bindingUser.Name,
+                            _memberCard.MemberCardNo,
+                            _memberCard.PrincipalSurplusMoney.ToString("F2"))
                         });
                         _memberCardRepository.Update(_memberCard);
 

@@ -49,6 +49,12 @@
                 <DatePicker Name="DateStartDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long"></DatePicker>
                 <TextBlock VerticalAlignment="Center">～</TextBlock>
                 <DatePicker Name="DateEndDate" Width="160" Language="zh-CN"  SelectedDateFormat="Long" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+                <TextBlock Text="结算方式："  VerticalAlignment="Center"></TextBlock>
+                <ComboBox Name="ComboHowBalance" Height="30" Width="120"
+                          ItemsSource="{Binding Path=DataContext.HowBalanceTexts,
+                                    RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}}"
+                          DisplayMemberPath="Value" SelectedValuePath="Key">
+                </ComboBox>
             </StackPanel>
             <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" Margin="5,0">
                 <Button Content="{x:Static props:Resources.Search}" Click="BtnSearch_Click"/>
@@ -103,7 +109,7 @@
                 <DataGridTextColumn Header="PurchaseOrderId" Binding="{Binding PurchaseOrderId}" Visibility="Hidden"/>
                 <DataGridTextColumn Header="单据编号" Binding="{Binding SaleOrderNo}"/>
                 <DataGridTextColumn Header="购买日期" Binding="{Binding DateOriginated, StringFormat='yyyy-MM-dd HH:mm:ss'}"/>
-                <DataGridComboBoxColumn Header="状态">
+                <DataGridComboBoxColumn Header="状态"  SelectedValueBinding="{Binding SaleOrderStatus}">
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="Foreground" Value="{Binding SaleOrderStatus,Converter={StaticResource StatusConverter}}"></Setter>
@@ -160,7 +166,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="购买人" Binding="{Binding PrucahseOrderUserUser.Name}"/>
-                <DataGridComboBoxColumn Header="结算方式">
+                <DataGridComboBoxColumn Header="结算方式" SelectedValueBinding="{Binding HowBalance}" >
                     <DataGridComboBoxColumn.ElementStyle>
                         <Style TargetType="ComboBox">
                             <Setter Property="ItemsSource" Value="{Binding Path=DataContext.HowBalanceTexts,
@@ -173,7 +179,6 @@
                 </DataGridComboBoxColumn>
                 <DataGridTextColumn Header="结算人" Binding="{Binding OriginUserUser.Name}"/>
                 <DataGridTextColumn Header="备注" Binding="{Binding Description}"/>
-
             </DataGrid.Columns>
         </DataGrid>
         <TextBlock  Grid.Column="0" Grid.Row="4" Name="TxtTotalInfo" FontWeight="Bold" HorizontalAlignment="Right"/>
