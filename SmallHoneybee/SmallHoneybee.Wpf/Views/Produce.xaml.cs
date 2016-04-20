@@ -301,5 +301,15 @@ namespace SmallHoneybee.Wpf.Views
                 });
             }
         }
+
+        private void ButShowLog_Click(object sender, RoutedEventArgs e)
+        {
+            var produce = gridProduces.SelectedItem as DataModel.Model.Produce;
+            if (produce != null)
+            {
+                SmallHoneybee.Wpf.Views.ProduceLog produceLog = new SmallHoneybee.Wpf.Views.ProduceLog(produce.ProduceId);
+                produceLog.ShowDialog();
+            }
+        }
     }
 }

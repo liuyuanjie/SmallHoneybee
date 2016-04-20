@@ -137,10 +137,17 @@ namespace SmallHoneybee.Wpf.Views
                     TotalCount = m.Count(),
                     TotalQuantity = m.Sum(y => y.x.SOProduces.Sum(s => s.Quantity)),
                     TotalPrice = m.Sum(y => y.x.TotalCost),
+                    TotalMemberCardPrice = m.Where(y => y.x.HowBalance == (sbyte)DataType.SaleOrderBalancedMode.MemberCard).Sum(s=>s.x.TotalCost),
+                    TotalCashPrice = m.Where(y => y.x.HowBalance == (sbyte)DataType.SaleOrderBalancedMode.Cash).Sum(s => s.x.TotalCost),
+                    TotalUnitUnionPayPrice = m.Where(y => y.x.HowBalance == (sbyte)DataType.SaleOrderBalancedMode.UnitUnionPay).Sum(s=>s.x.TotalCost)
+
                 }).FirstOrDefault();
-            TxtTotalInfo.Text = string.Format("共计 {0} 条记录, 共计 {1} 件商品，总计 {2}",
+            TxtTotalInfo.Text = string.Format("共计 {0} 条记录, 共计 {1} 件商品, 现金: {2}, 银联: {3}, 购物卡: {4}, 总计 {5}",
                 totalInfo != null ? totalInfo.TotalCount : 0,
                 (totalInfo != null ? totalInfo.TotalQuantity ?? 0.0F : 0.0F).ToString("F2"),
+                (totalInfo != null ? totalInfo.TotalCashPrice ?? 0.0F : 0.0F).ToString("F2"),
+                (totalInfo != null ? totalInfo.TotalUnitUnionPayPrice ?? 0.0F : 0.0F).ToString("F2"),
+                (totalInfo != null ? totalInfo.TotalMemberCardPrice ?? 0.0F : 0.0F).ToString("F2"),
                 (totalInfo != null ? totalInfo.TotalPrice ?? 0.0F : 0.0F).ToString("F2"));
         }
 

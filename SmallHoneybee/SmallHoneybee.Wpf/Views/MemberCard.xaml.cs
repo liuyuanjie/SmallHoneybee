@@ -132,7 +132,7 @@ namespace SmallHoneybee.Wpf.Views
 
         private void ButDeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            var memberCard = gridUsers.SelectedItem as MemberCardModel;
+            var memberCard = gridMemberCards.SelectedItem as MemberCardModel;
             if (memberCard != null)
             {
                 _memberCards.Remove(memberCard);
@@ -266,6 +266,16 @@ namespace SmallHoneybee.Wpf.Views
                     return castedProp;
             }
             return null;
+        }
+
+        private void ButShowLog_Click(object sender, RoutedEventArgs e)
+        {
+            var memberCard = gridMemberCards.SelectedItem as MemberCardModel;
+            if (memberCard != null)
+            {
+                SmallHoneybee.Wpf.Views.MemberCardLog memberCardLog = new SmallHoneybee.Wpf.Views.MemberCardLog(memberCard.MemberCard.MemberCardId);
+                memberCardLog.ShowDialog();
+            }
         }
     }
 

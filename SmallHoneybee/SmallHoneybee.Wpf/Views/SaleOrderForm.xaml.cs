@@ -609,7 +609,7 @@ namespace SmallHoneybee.Wpf.Views
                         }
                         _memberCard.TotalSurplusMoney -= _balanceDomainModel.ReceivedPrice;
 
-                        _memberCard.MemberCardlogs.Add(new MemberCardLog
+                        _memberCard.MemberCardlogs.Add(new DataModel.Model.MemberCardLog
                         {
                             FavorableMoney = (_balanceDomainModel.ReceivedPrice - saveMoney),
                             PrincipalMoney = saveMoney,

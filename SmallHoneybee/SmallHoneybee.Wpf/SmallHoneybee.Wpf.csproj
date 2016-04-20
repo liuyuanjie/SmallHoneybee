@@ -157,6 +157,12 @@
     <Compile Include="Views\Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ProduceLog.xaml.cs">
+      <DependentUpon>ProduceLog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MemberCardLog.xaml.cs">
+      <DependentUpon>MemberCardLog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MemberCardDetail.xaml.cs">
       <DependentUpon>MemberCardDetail.xaml</DependentUpon>
     </Compile>
@@ -327,6 +333,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Login.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProduceLog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MemberCardLog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

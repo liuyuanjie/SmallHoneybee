@@ -47,7 +47,7 @@
             <Button  Grid.Column="4" Grid.Row="0" Content="保存" Click="BtnSave_Click" />
         </Grid>
         <GridSplitter HorizontalAlignment="Stretch" Grid.Row="2" Background="#FF1D1F1C" />
-        <DataGrid Grid.Row="3" Name="gridUsers"
+        <DataGrid Grid.Row="3" Name="gridMemberCards"
                   CanUserAddRows="True"
                   AutoGenerateColumns="False"
                   DataGridCell.GotFocus="DataGrid_CellGotFocus" 
@@ -65,7 +65,7 @@
                 <DataGridTemplateColumn  Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button  ToolTip="消费记录" Cursor="Hand"  Width="16" Height="16">
+                            <Button  ToolTip="消费记录" Click="ButShowLog_Click" Cursor="Hand"  Width="16" Height="16">
                                 <Button.Template>
                                     <ControlTemplate TargetType="{x:Type Button}">
                                         <Image Source="/SmallHoneybee.Wpf;component/images/icoLog.png" Stretch="Fill" />

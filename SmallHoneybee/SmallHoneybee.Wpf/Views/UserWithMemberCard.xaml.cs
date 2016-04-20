@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -95,7 +96,7 @@ namespace SmallHoneybee.Wpf.Views
                         _memberCard.PasswordHash = saltedHash.Hash;
                         _memberCard.PasswordSalt = saltedHash.Salt;
 
-                        _memberCard.MemberCardlogs.Add(new MemberCardLog
+                        _memberCard.MemberCardlogs.Add(new DataModel.Model.MemberCardLog
                         {
                             ChangedBy = ResourcesHelper.CurrentUser.Name,
                             DateChanged = DateTime.Now,
@@ -129,7 +130,7 @@ namespace SmallHoneybee.Wpf.Views
                         _memberCard.RelateUserId = _userId;
                         _memberCard.MemberCardStatus = (sbyte) DataType.MemberCardStatus.Active;
 
-                        _memberCard.MemberCardlogs.Add(new MemberCardLog
+                        _memberCard.MemberCardlogs.Add(new DataModel.Model.MemberCardLog
                         {
                             ChangedBy = ResourcesHelper.CurrentUser.Name,
                             DateChanged = DateTime.Now,

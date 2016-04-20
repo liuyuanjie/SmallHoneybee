@@ -85,7 +85,7 @@ namespace SmallHoneybee.Wpf.Views
                 bindingUser.CashBalance = _memberCard.PrincipalSurplusMoney += _savedMoneyModel.SavedMoney;
                 bindingUser.CashFee = _memberCard.FavorableSurplusMoney += _savedMoneyModel.PresentedMoney;
 
-                _memberCard.MemberCardlogs.Add(new MemberCardLog
+                _memberCard.MemberCardlogs.Add(new DataModel.Model.MemberCardLog
                 {
                     FavorableMoney = _savedMoneyModel.PresentedMoney,
                     PrincipalMoney = _savedMoneyModel.SavedMoney,

@@ -78,7 +78,7 @@
                 <DataGridTemplateColumn  Width="30">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Button  ToolTip="进销记录" Cursor="Hand"  Width="16" Height="16">
+                            <Button  ToolTip="进销记录" Click="ButShowLog_Click" Cursor="Hand"  Width="16" Height="16">
                                 <Button.Template>
                                     <ControlTemplate TargetType="{x:Type Button}">
                                         <Image Source="/SmallHoneybee.Wpf;component/images/icoLog.png" Stretch="Fill" />

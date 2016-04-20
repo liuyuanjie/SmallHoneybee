@@ -47,6 +47,7 @@
     <Style TargetType="{x:Type TextBox}" BasedOn="{StaticResource BaseStyle}">
         <Setter Property="Background" Value="#FFF0FDFC"/>
         <Setter Property="BorderBrush" Value="#FF9DCD19"/>
+        <Setter Property="IsUndoEnabled" Value="False"/>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="Control.Foreground" Value="#000000"/>
